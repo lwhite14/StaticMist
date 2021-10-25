@@ -4,10 +4,19 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public CharacterController controller;
-    public float speed = 12f;
+    float speed;
+    public float walkingSpeed = 5f;
+    public float runningSpeed = 10f;
     public float gravity = -9.81f;
     public float jumpHeight = 3f;
+    public float walkingFov = 70f;
+    public float runningFov = 80f;
+    [Range(10f, 400f)]
+    public float fovChangeSpeed = 100f;
+
+    [Header("Other Objects/Componenets")]
+    public CharacterController controller;
+    public Camera cam;
 
     [Header("Ground Check Variables")]
     public Transform groundCheck;
@@ -16,20 +25,23 @@ public class PlayerMovement : MonoBehaviour
 
     Vector3 velocity;
     bool isGrounded;
+    float x;
+    float z;
+    Vector3 move;
+
+    void Start()
+    {
+        speed = walkingSpeed;
+    }
 
     void Update()
     {
-        isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
+        CheckGrounded(); 
 
-        if (isGrounded && velocity.y < 0) 
-        {
-            velocity.y = -2f;
-        }
+        x = Input.GetAxis("Horizontal");
+        z = Input.GetAxis("Vertical");
 
-        float x = Input.GetAxis("Horizontal");
-        float z = Input.GetAxis("Vertical");
-
-        Vector3 move = transform.right * x + transform.forward * z;
+        move = transform.right * x + transform.forward * z;
 
         controller.Move(move * speed * Time.deltaTime);
 
@@ -41,5 +53,44 @@ public class PlayerMovement : MonoBehaviour
         velocity.y += gravity * Time.deltaTime;
 
         controller.Move(velocity * Time.deltaTime);
+
+        ChangeRunning();
+    }
+
+    void CheckGrounded()
+    {
+        isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
+        if (isGrounded && velocity.y < 0)
+        {
+            velocity.y = -2f;
+        }
+    }
+
+    void ChangeRunning() 
+    {
+        if (Input.GetButton("Fire3"))
+        {
+            speed = runningSpeed;
+            if (cam.fieldOfView < runningFov)
+            {
+                cam.fieldOfView += fovChangeSpeed * Time.deltaTime;
+            }
+            else 
+            {
+                cam.fieldOfView = runningFov;
+            }
+        }
+        else 
+        {
+            speed = walkingSpeed;
+            if (cam.fieldOfView > walkingFov)
+            {
+                cam.fieldOfView -= fovChangeSpeed * Time.deltaTime;
+            }
+            else
+            {
+                cam.fieldOfView = walkingFov;
+            }
+        }
     }
 }
