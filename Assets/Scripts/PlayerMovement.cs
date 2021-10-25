@@ -19,6 +19,7 @@ public class PlayerMovement : MonoBehaviour
     public CharacterController controller;
     public Camera cam;
     public JumpCoolDownSlider jumpCoolDownSlider;
+    public PlayerAnimations playerAnimations;
 
     [Header("Ground Check Variables")]
     public Transform groundCheck;
@@ -148,10 +149,12 @@ public class PlayerMovement : MonoBehaviour
             if (Input.GetButton("Fire3"))
             {
                 isRunning = true;
+                playerAnimations.SetIsRunning(true);
             }
             else
             {
                 isRunning = false;
+                playerAnimations.SetIsRunning(false);
             }
         }
 
