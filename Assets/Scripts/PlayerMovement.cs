@@ -13,6 +13,7 @@ public class PlayerMovement : MonoBehaviour
     public float runningFov = 80f;
     [Range(10f, 400f)]
     public float fovChangeSpeed = 100f;
+    public float jumpCoolDown = 1f;
 
     [Header("Other Objects/Componenets")]
     public CharacterController controller;
@@ -24,28 +25,83 @@ public class PlayerMovement : MonoBehaviour
     public LayerMask groundMask;
 
     Vector3 velocity;
+    Vector3 move;
     bool isGrounded;
+    bool hasLanded = false;
+    bool isRunning = false;
     float x;
     float z;
-    Vector3 move;
+    float jumpCoolDownCounter;
 
     void Start()
     {
         speed = walkingSpeed;
+        jumpCoolDownCounter = jumpCoolDown;
     }
 
     void Update()
     {
-        CheckGrounded(); 
+        CheckGrounded();
+        JumpCoolDown();
+        Move();
+        Jump();
+        ChangeRunning();
+    }
 
-        x = Input.GetAxis("Horizontal");
-        z = Input.GetAxis("Vertical");
+    void CheckGrounded()
+    {
+        bool tempGrounded = isGrounded;
+        isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
 
-        move = transform.right * x + transform.forward * z;
+        if ((tempGrounded == false) && (isGrounded == true)) 
+        {
+            hasLanded = true;
+        }
+
+        if (isGrounded && velocity.y < 0)
+        {
+            velocity.y = -2f;
+        }
+    }
+
+    void JumpCoolDown() 
+    {
+        if (hasLanded) 
+        {
+            jumpCoolDownCounter -= Time.deltaTime;
+            if (jumpCoolDownCounter <= 0) 
+            {
+                hasLanded = false;
+                jumpCoolDownCounter = jumpCoolDown;
+            }
+        }
+    }
+
+    void Move()
+    {
+        if (isGrounded)
+        {
+            if (hasLanded)
+            {
+                x = 0;
+                z = 0;
+            }
+            else 
+            {
+                x = Input.GetAxis("Horizontal");
+                z = Input.GetAxis("Vertical");
+            }
+
+            move = transform.right * x + transform.forward * z;
+        }
 
         controller.Move(move * speed * Time.deltaTime);
+    }
 
-        if (Input.GetButtonDown("Jump") && isGrounded) 
+    void Jump() 
+    {
+
+        if (Input.GetButtonDown("Jump") && isGrounded && (CheckMovingForward() || CheckNotMoving()))
         {
             velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
         }
@@ -53,22 +109,48 @@ public class PlayerMovement : MonoBehaviour
         velocity.y += gravity * Time.deltaTime;
 
         controller.Move(velocity * Time.deltaTime);
-
-        ChangeRunning();
     }
 
-    void CheckGrounded()
+    bool CheckMovingForward() 
     {
-        isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
-        if (isGrounded && velocity.y < 0)
+        if ((z > 0) && (x == 0))
         {
-            velocity.y = -2f;
+            return true;
+        }
+        else 
+        {
+            return false;
+        }
+    }
+
+    bool CheckNotMoving() 
+    {
+        if ((z == 0) && (x == 0)) 
+        {
+            return true;
+        }
+        else
+        {
+            return false;
         }
     }
 
     void ChangeRunning() 
     {
-        if (Input.GetButton("Fire3"))
+        if (isGrounded)
+        {
+            if (Input.GetButton("Fire3"))
+            {
+                isRunning = true;
+            }
+            else
+            {
+                isRunning = false;
+            }
+        }
+
+
+        if (isRunning && CheckMovingForward())
         {
             speed = runningSpeed;
             if (cam.fieldOfView < runningFov)

@@ -3664,7 +3664,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1944714059}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 2, z: 0}
+  m_LocalPosition: {x: 0, y: 0.8, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1780763193}
@@ -3692,6 +3692,7 @@ MonoBehaviour:
   walkingFov: 70
   runningFov: 80
   fovChangeSpeed: 75
+  jumpCoolDown: 0.6
   controller: {fileID: 1944714060}
   cam: {fileID: 1490457397}
   groundCheck: {fileID: 1819481320}
