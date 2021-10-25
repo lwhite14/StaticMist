@@ -18,6 +18,7 @@ public class PlayerMovement : MonoBehaviour
     [Header("Other Objects/Componenets")]
     public CharacterController controller;
     public Camera cam;
+    public JumpCoolDownSlider jumpCoolDownSlider;
 
     [Header("Ground Check Variables")]
     public Transform groundCheck;
@@ -26,7 +27,7 @@ public class PlayerMovement : MonoBehaviour
 
     Vector3 velocity;
     Vector3 move;
-    bool isGrounded;
+    bool isGrounded = true;
     bool hasLanded = false;
     bool isRunning = false;
     float x;
@@ -37,6 +38,7 @@ public class PlayerMovement : MonoBehaviour
     {
         speed = walkingSpeed;
         jumpCoolDownCounter = jumpCoolDown;
+        jumpCoolDownSlider.SetMaxValue(jumpCoolDown);
     }
 
     void Update()
@@ -56,6 +58,7 @@ public class PlayerMovement : MonoBehaviour
         if ((tempGrounded == false) && (isGrounded == true)) 
         {
             hasLanded = true;
+            jumpCoolDownSlider.SetSliding(true);
         }
 
         if (isGrounded && velocity.y < 0)
@@ -69,9 +72,12 @@ public class PlayerMovement : MonoBehaviour
         if (hasLanded) 
         {
             jumpCoolDownCounter -= Time.deltaTime;
+            jumpCoolDownSlider.ChangeValue(jumpCoolDownCounter);
             if (jumpCoolDownCounter <= 0) 
             {
                 hasLanded = false;
+                jumpCoolDownSlider.SetSliding(false);
+                jumpCoolDownSlider.ChangeValue(jumpCoolDown);
                 jumpCoolDownCounter = jumpCoolDown;
             }
         }
