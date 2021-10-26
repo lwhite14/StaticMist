@@ -149,12 +149,10 @@ public class PlayerMovement : MonoBehaviour
             if (Input.GetButton("Fire3"))
             {
                 isRunning = true;
-                playerAnimations.SetIsRunning(true);
             }
             else
             {
                 isRunning = false;
-                playerAnimations.SetIsRunning(false);
             }
         }
 
@@ -162,6 +160,7 @@ public class PlayerMovement : MonoBehaviour
         if (isRunning && CheckMovingForward())
         {
             speed = runningSpeed;
+            playerAnimations.SetIsRunning(true);
             if (cam.fieldOfView < runningFov)
             {
                 cam.fieldOfView += fovChangeSpeed * Time.deltaTime;
@@ -174,6 +173,7 @@ public class PlayerMovement : MonoBehaviour
         else 
         {
             speed = walkingSpeed;
+            playerAnimations.SetIsRunning(false);
             if (cam.fieldOfView > walkingFov)
             {
                 cam.fieldOfView -= fovChangeSpeed * Time.deltaTime;
