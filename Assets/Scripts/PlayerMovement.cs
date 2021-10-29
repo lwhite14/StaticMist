@@ -13,6 +13,7 @@ public class PlayerMovement : MonoBehaviour
     public CharacterController controller;
     public JumpCoolDownSlider jumpCoolDownSlider;
     public PlayerSprinting playerSprinting;
+    public PlayerCrouching playerCrouching;
 
     [Header("Ground Check Variables")]
     public Transform groundCheck;
@@ -44,7 +45,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Ground()
     {
-        if ((previousGrounded == false) && (CheckGrounded() == true)) 
+        if (!previousGrounded && CheckGrounded()) 
         {
             hasLanded = true;
             jumpCoolDownSlider.SetSliding(true);
@@ -96,7 +97,7 @@ public class PlayerMovement : MonoBehaviour
     void Jump() 
     {
 
-        if (Input.GetButtonDown("Jump") && CheckGrounded() && (CheckMovingForward() || CheckNotMoving()) && !hasLanded)
+        if (Input.GetButtonDown("Jump") && CheckGrounded() && (CheckMovingForward() || CheckNotMoving()) && !hasLanded && !playerCrouching.GetIsCrouching())
         {
             velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
         }

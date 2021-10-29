@@ -4,13 +4,20 @@ using UnityEngine;
 
 public class PlayerCrouching : MonoBehaviour
 {
+    [Header("Adjustable Variables")]
     [Range(1.2f, 4f)]public float standingHeight = 1.6f;
     [Range(0.4f, 2f)]public float crouchingHeight = 0.8f;
     public float crouchChangeSpeed = 1f;
 
+    [Header("Other Objects/Components")]
     public PlayerMovement playerMovement;
     public CharacterController controller;
     public Transform groundChecker;
+
+    [Header("Celing Check Variables")]
+    public Transform ceilingCheck;
+    public float ceilingDistance = 0.4f;
+    public LayerMask ceilingMask;
 
     bool isCrouching = false;
 
@@ -24,13 +31,13 @@ public class PlayerCrouching : MonoBehaviour
     {
         if (Input.GetButtonDown("Movement3"))
         {
-            if (!isCrouching)
+            if (isCrouching && !CheckHeadClear())
             {
-                isCrouching = true;
+                isCrouching = false;
             }
             else
             {
-                isCrouching = false;
+                isCrouching = true;
             }
         } 
     }
@@ -68,6 +75,11 @@ public class PlayerCrouching : MonoBehaviour
     public bool GetIsCrouching() 
     {
         return isCrouching;
+    }
+
+    bool CheckHeadClear()
+    {
+        return Physics.CheckSphere(ceilingCheck.position, ceilingDistance, ceilingMask);
     }
 
 }

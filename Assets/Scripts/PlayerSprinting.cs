@@ -5,10 +5,10 @@ using UnityEngine;
 public class PlayerSprinting : MonoBehaviour
 {
     [Header("Adjustable Variables")]
+    public float crouchingSpeed = 3f;
     public float walkingSpeed = 5f;
     public float runningSpeed = 10f;
-    public float crouchingSpeed = 3f;
-    public float walkingFov = 70f;
+    public float normalFov = 70f;
     public float runningFov = 80f;
     [Range(10f, 400f)]public float fovChangeSpeed = 100f;
     public float runningMeter = 8f;
@@ -131,13 +131,13 @@ public class PlayerSprinting : MonoBehaviour
 
     void ChangeFovToLow()
     {
-        if (cam.fieldOfView > walkingFov)
+        if (cam.fieldOfView > normalFov)
         {
             cam.fieldOfView -= fovChangeSpeed * Time.deltaTime;
         }
         else
         {
-            cam.fieldOfView = walkingFov;
+            cam.fieldOfView = normalFov;
         }
     }
 
