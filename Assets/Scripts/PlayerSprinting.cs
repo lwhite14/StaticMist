@@ -7,9 +7,10 @@ public class PlayerSprinting : MonoBehaviour
     [Header("Adjustable Variables")]
     public float walkingSpeed = 5f;
     public float runningSpeed = 10f;
+    public float crouchingSpeed = 3f;
     public float walkingFov = 70f;
     public float runningFov = 80f;
-    [Range(10f, 400f)] public float fovChangeSpeed = 100f;
+    [Range(10f, 400f)]public float fovChangeSpeed = 100f;
     public float runningMeter = 8f;
     public float fatiguedCooldown = 2f;
     public float runningMeterFillSpeed = 4f;
@@ -19,16 +20,16 @@ public class PlayerSprinting : MonoBehaviour
     public Camera cam;
     public PlayerAnimations playerAnimations;
     public PlayerMovement playerMovement;
+    public PlayerCrouching playerCrouching;
 
     bool isRunning = false;
     bool runCounterDepleted = false;
-    [HideInInspector] public float speed;
     float runningMeterCounter;
     float fatiguedCooldownCounter;
 
     void Start()
     {
-        speed = walkingSpeed;
+        playerMovement.ChangeSpeed(walkingSpeed);
         runningMeterCounter = runningMeter;
         runSlider.SetMaxValue(runningMeter);
         fatiguedCooldownCounter = fatiguedCooldown;
@@ -57,7 +58,7 @@ public class PlayerSprinting : MonoBehaviour
 
     void ChangeRunning()
     {
-        if (isRunning && playerMovement.CheckMovingForward() && !runCounterDepleted)
+        if (isRunning && playerMovement.CheckMovingForward() && !runCounterDepleted && !playerCrouching.GetIsCrouching())
         {
             ChangeSpeedToHigh();
 
@@ -95,7 +96,7 @@ public class PlayerSprinting : MonoBehaviour
 
     void ChangeSpeedToHigh() 
     {
-        speed = runningSpeed;
+        playerMovement.ChangeSpeed(runningSpeed);
         playerAnimations.SetIsRunning(true);
         ChangeFovToHigh();
 
@@ -104,7 +105,14 @@ public class PlayerSprinting : MonoBehaviour
     
     void ChangeSpeedToLow() 
     {
-        speed = walkingSpeed;
+        if (playerCrouching.GetIsCrouching())
+        {
+            playerMovement.ChangeSpeed(crouchingSpeed);
+        }
+        else
+        {
+            playerMovement.ChangeSpeed(walkingSpeed);
+        }
         playerAnimations.SetIsRunning(false);
         ChangeFovToLow();
     }

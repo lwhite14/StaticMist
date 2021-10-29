@@ -23,6 +23,7 @@ public class PlayerMovement : MonoBehaviour
     Vector3 move;
     bool previousGrounded = true;
     bool hasLanded = false;
+    float speed;
     float x;
     float z;
     float jumpCoolDownCounter;
@@ -89,7 +90,7 @@ public class PlayerMovement : MonoBehaviour
             }
             move = transform.right * x + transform.forward * z;
         }
-        controller.Move(move * playerSprinting.speed * Time.deltaTime);
+        controller.Move(move * speed * Time.deltaTime);
     }
 
     void Jump() 
@@ -130,5 +131,10 @@ public class PlayerMovement : MonoBehaviour
         {
             return false;
         }
+    }
+
+    public void ChangeSpeed(float newSpeed) 
+    {
+        speed = newSpeed;
     }
 }
