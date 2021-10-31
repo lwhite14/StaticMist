@@ -14,7 +14,7 @@ public class InteractableNPC : MonoBehaviour, IInteractable
         }
         else 
         {
-            FindObjectOfType<DialogueManager>().DisplayNextSentence();
+            tempDialogueTrigger.TriggerNextSentence();
         }
     }
 }

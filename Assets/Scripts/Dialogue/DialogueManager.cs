@@ -21,6 +21,7 @@ public class DialogueManager : MonoBehaviour
     public void StartDialogue(Dialogue dialogue, DialogueTrigger usedDialogueTrigger) 
     {
         dialogueTrigger = usedDialogueTrigger;
+        dialogueTrigger.SetIsTriggered(true);
 
         animator.SetBool("isOpen", true);
 
@@ -59,10 +60,13 @@ public class DialogueManager : MonoBehaviour
         }
     }
 
-    void EndDialogue() 
+    public void EndDialogue() 
     {
         animator.SetBool("isOpen", false);
-        dialogueTrigger.SetIsTriggered(false);
+        if (dialogueTrigger != null)
+        {
+            dialogueTrigger.SetIsTriggered(false);
+        }
     }
 
 }

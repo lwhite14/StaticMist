@@ -11,7 +11,11 @@ public class DialogueTrigger : MonoBehaviour
     public void TriggerDialogue()
     {
         FindObjectOfType<DialogueManager>().StartDialogue(dialogue, this);
-        isTriggered = true;
+    }
+
+    public void TriggerNextSentence() 
+    {
+        FindObjectOfType<DialogueManager>().DisplayNextSentence();
     }
 
     public void SetIsTriggered(bool newIsTriggered) 

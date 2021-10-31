@@ -23,5 +23,9 @@ public class Interact : MonoBehaviour
                 hitObject.GetComponent<IInteractable>().Interact();
             }
         }
+        else 
+        {
+            FindObjectOfType<DialogueManager>().EndDialogue();
+        }
     }
 }
