@@ -138,4 +138,11 @@ public class PlayerMovement : MonoBehaviour
     {
         speed = newSpeed;
     }
+
+    public void WarpToPosition(Vector3 newPosition)
+    {
+        controller.enabled = false;
+        transform.position = newPosition;
+        controller.enabled = true;
+    } //   ---   Movement Demo Only
 }
