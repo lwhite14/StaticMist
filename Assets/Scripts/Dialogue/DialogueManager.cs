@@ -36,6 +36,7 @@ public class DialogueManager : MonoBehaviour
 
         DisplayNextSentence();
     }
+    // Queues every line in the given dialogue class and sets the NPCs name on the UI.
 
     public void DisplayNextSentence() 
     {
@@ -49,6 +50,7 @@ public class DialogueManager : MonoBehaviour
         StopAllCoroutines();
         StartCoroutine(TypeSentence(sentence));
     }
+    // Ends dialogue if no lines left, and runs a coroutine with the line as a parameter. 
 
     IEnumerator TypeSentence(string sentence) 
     {
@@ -59,6 +61,7 @@ public class DialogueManager : MonoBehaviour
             yield return new WaitForSeconds(textScrollTime);
         }
     }
+    // Displays the sentence letter by letter, with the time between each letter given by a adjustable variable.
 
     public void EndDialogue() 
     {
@@ -68,5 +71,6 @@ public class DialogueManager : MonoBehaviour
             dialogueTrigger.SetIsTriggered(false);
         }
     }
+    // Ends the dialogue.
 
 }

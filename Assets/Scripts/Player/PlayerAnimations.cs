@@ -9,6 +9,6 @@ public class PlayerAnimations : MonoBehaviour
     public void SetIsRunning(bool isRunning)
     {
         anim.SetBool("isRunning", isRunning);
-    }   
-
+    }
+    // Seperated animations into a different script so the other player scripts are less convoluted.
 }

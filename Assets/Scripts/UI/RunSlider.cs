@@ -15,11 +15,15 @@ public class RunSlider : MonoBehaviour
     {
         slider.maxValue = value;
     }
+    // Used to set the max value as it can change in the inspector.
+
 
     void SetIsAppeared(bool isAppear)
     {
         anim.SetBool("isAppeared", isAppear);
     }
+    // Changes animation state.
+
 
     public void ChangeValue(float value)
     {
@@ -30,4 +34,6 @@ public class RunSlider : MonoBehaviour
             SetIsAppeared(false);
         }
     }
+    // Changes raw value. 
+    // Also manages the animation, if the run meter is full the animation state is changed. 
 }

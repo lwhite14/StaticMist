@@ -54,6 +54,7 @@ public class PlayerSprinting : MonoBehaviour
                 isRunning = false;
             }
         }
+        // Nested if statements as I don't want the isRunning value to change if the player is in the air. 
     }
 
     void ChangeRunning()
@@ -68,7 +69,9 @@ public class PlayerSprinting : MonoBehaviour
             {
                 runCounterDepleted = true;
             }
-        }
+        } 
+        // Can change to high if player isn't crouching or the run meter isn't depleted.
+        // If the run meter runs out, the appropriate bool is changed to false. 
         else
         {
             ChangeSpeedToLow();
@@ -92,6 +95,9 @@ public class PlayerSprinting : MonoBehaviour
                 runningMeterCounter = runningMeter;
             }
         }
+        // Has to walk whilst the fatiguedCooldownCounter is above 0.
+        // When is goes below, the running meter begins to fill again, and the player is allowed to run again.
+        // When its full, all the if statements stop running altogether. 
     }
 
     void ChangeSpeedToHigh() 
@@ -101,7 +107,8 @@ public class PlayerSprinting : MonoBehaviour
         ChangeFovToHigh();
 
         fatiguedCooldownCounter = fatiguedCooldown;
-    }    
+    }
+    // Run commands when the speed is increased.
     
     void ChangeSpeedToLow() 
     {
@@ -116,6 +123,7 @@ public class PlayerSprinting : MonoBehaviour
         playerAnimations.SetIsRunning(false);
         ChangeFovToLow();
     }
+    // Run commands when the speed is decreased.
 
     void ChangeFovToHigh()
     {
@@ -128,6 +136,7 @@ public class PlayerSprinting : MonoBehaviour
             cam.fieldOfView = runningFov;
         }
     }
+    // Game-feel FOV change.
 
     void ChangeFovToLow()
     {
@@ -140,5 +149,6 @@ public class PlayerSprinting : MonoBehaviour
             cam.fieldOfView = normalFov;
         }
     }
+    // Game-feel FOV change.
 
 }

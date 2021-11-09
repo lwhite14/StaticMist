@@ -10,3 +10,4 @@ public class Dialogue
     [TextArea(3, 10)]
     public string[] sentences;
 }
+// Basic dialogue class, holds an array of strings and a name string. 

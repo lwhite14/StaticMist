@@ -62,3 +62,5 @@ public class Waypoint : MonoBehaviour
         meter.text = distance.ToString() + "m";
     }
 }
+// Scripts keeps the waypoint image on a target transform. 
+// (May not be used in the final version)

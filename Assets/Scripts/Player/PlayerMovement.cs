@@ -49,7 +49,8 @@ public class PlayerMovement : MonoBehaviour
         {
             hasLanded = true;
             jumpCoolDownSlider.SetSliding(true);
-        }
+        } 
+        // Checks if there is a change in 'grounded' state and changes the hasLanded boolean accordingly.
 
         if (CheckGrounded() && velocity.y < 0)
         {
@@ -57,6 +58,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
         previousGrounded = CheckGrounded();
+        // Stores the last frames grounded state. 
     }
 
     void JumpCoolDown() 
@@ -73,6 +75,9 @@ public class PlayerMovement : MonoBehaviour
                 jumpCoolDownCounter = jumpCoolDown;
             }
         }
+        // hasLanded is true when the player just lands. hasLanded will be true as long as the jump cooldown meter is above 0.
+        // This is important as the hasLanded bool stops moving or jumping will the cooldown is up.
+        // UI elements and counters are reset when 'jumpCoolDownCounter <= 0'. 
     }
 
     void Move()
@@ -92,6 +97,9 @@ public class PlayerMovement : MonoBehaviour
             move = transform.right * x + transform.forward * z;
         }
         controller.Move(move * speed * Time.deltaTime);
+        // If grounded and isn't on jump cooldown; the player moves according to input.
+        // If mid-air, the player continues their trajectory.
+        // If the player is on jump cooldown; they are rooted for the time being.
     }
 
     void Jump() 
@@ -103,6 +111,8 @@ public class PlayerMovement : MonoBehaviour
         }
         velocity.y += gravity * Time.deltaTime;
         controller.Move(velocity * Time.deltaTime);
+        // Added vertical velocity as long as the player is grounded, either moving forward or completely still, isnt on cooldown, and isn't crouching.
+        // Note: Gravity is added manually.
     }
 
     public bool CheckGrounded()

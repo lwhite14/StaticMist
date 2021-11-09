@@ -10,5 +10,6 @@ public class KillZone : MonoBehaviour
     {
         other.gameObject.GetComponent<PlayerMovement>().WarpToPosition(start.position);
     }
-
 }
+// Resets the player when they hit a collider. 
+// (May not be used in the final version)

@@ -28,4 +28,6 @@ public class Interact : MonoBehaviour
             FindObjectOfType<DialogueManager>().EndDialogue();
         }
     }
+    // If the raycast hits, the interactable object has its interact() funtion invoked. 
+    // If not the enddialogue method is invoked (used if the player turns away from a conversation).
 }

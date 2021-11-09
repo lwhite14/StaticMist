@@ -13,15 +13,18 @@ public class JumpCoolDownSlider : MonoBehaviour
     {
         slider.maxValue = value;
     }
+    // Used to set the max value as it can change in the inspector.
 
     public void SetSliding(bool isSliding)
     {
         anim.SetBool("isSliding", isSliding);
     }
+    // Changes animation state.
 
     public void ChangeValue(float value) 
     {
         slider.value = value;
     }
+    // Changes raw value. 
 
 }

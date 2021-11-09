@@ -26,3 +26,5 @@ public class SetNextNPC : MonoBehaviour
         previousIsTriggered = dialogueTrigger.isTriggered;
     }
 }
+// Used on NPCs, changes the target of the waypoint marker. 
+// (May not be used in the final version)

@@ -70,6 +70,7 @@ public class PlayerCrouching : MonoBehaviour
                 groundChecker.localPosition = new Vector3(groundChecker.localPosition.x, -(standingHeight / 2), groundChecker.localPosition.z);
             }
         }
+        // Changes the height slowly, so it feels more natural. 
     }
 
     public bool GetIsCrouching() 
