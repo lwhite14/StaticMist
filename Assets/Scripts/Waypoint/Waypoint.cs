@@ -11,16 +11,25 @@ public class Waypoint : MonoBehaviour
     public Vector3 offset;
     public Animator anim;
 
+    public int maxDistance = 8;
+
     int distance;
+    float minX;
+    float maxX;
+    float minY;
+    float maxY;
+
+    void Start()
+    {
+        minX = -(img.GetPixelAdjustedRect().width / 2);
+        maxX = Screen.width - minX;
+
+        minY = -(img.GetPixelAdjustedRect().height / 2);
+        maxY = Screen.height - minY;       
+    }
 
     private void Update()
     {
-        float minX = img.GetPixelAdjustedRect().width / 2;
-        float maxX = Screen.width - minX;
-
-        float minY = img.GetPixelAdjustedRect().height / 2;
-        float maxY = Screen.height - minY;
-
         Vector2 pos = Camera.main.WorldToScreenPoint(target.position + offset);
 
         if (Vector3.Dot((target.position - transform.position), transform.forward) <= 0)
@@ -39,7 +48,7 @@ public class Waypoint : MonoBehaviour
         pos.y = Mathf.Clamp(pos.y, minY, maxY);
 
         distance = (int)Vector3.Distance(target.position, transform.position);
-        if (distance < 8)
+        if (distance < maxDistance)
         {
             anim.SetBool("isAppeared", true);
             anim.SetBool("disappearQuick", false);
