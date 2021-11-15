@@ -18,7 +18,6 @@ public class PlayerSprinting : MonoBehaviour
     [Header("Other Objects/Components")]
     public RunSlider runSlider;
     public Camera cam;
-    public PlayerAnimations playerAnimations;
     public PlayerMovement playerMovement;
     public PlayerCrouching playerCrouching;
 
@@ -103,7 +102,6 @@ public class PlayerSprinting : MonoBehaviour
     void ChangeSpeedToHigh() 
     {
         playerMovement.ChangeSpeed(runningSpeed);
-        playerAnimations.SetIsRunning(true);
         ChangeFovToHigh();
 
         fatiguedCooldownCounter = fatiguedCooldown;
@@ -120,7 +118,6 @@ public class PlayerSprinting : MonoBehaviour
         {
             playerMovement.ChangeSpeed(walkingSpeed);
         }
-        playerAnimations.SetIsRunning(false);
         ChangeFovToLow();
     }
     // Run commands when the speed is decreased.
