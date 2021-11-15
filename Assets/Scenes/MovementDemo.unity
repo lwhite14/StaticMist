@@ -15116,7 +15116,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1944714059}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.75, y: 0.88, z: -12.5}
+  m_LocalPosition: {x: 1, y: 0.88, z: -14}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1780763193}
@@ -15201,14 +15201,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6cb7b67bad275e46bad4c716787d235, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  standingHeight: 1.6
-  crouchingHeight: 0.8
-  crouchChangeSpeed: 3
-  playerMovement: {fileID: 1944714062}
-  controller: {fileID: 1944714060}
-  groundChecker: {fileID: 1819481320}
+  groundCheckTransform: {fileID: 1819481320}
+  crouchFactor: 0.5
+  crouchSpeed: 5
   ceilingCheck: {fileID: 257614789}
-  ceilingDistance: 0.25
+  ceilingDistance: 0.4
   ceilingMask:
     serializedVersion: 2
     m_Bits: 64

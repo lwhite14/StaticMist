@@ -4,74 +4,78 @@ using UnityEngine;
 
 public class PlayerCrouching : MonoBehaviour
 {
-    [Header("Adjustable Variables")]
-    [Range(1.2f, 4f)]public float standingHeight = 1.6f;
-    [Range(0.4f, 2f)]public float crouchingHeight = 0.8f;
-    public float crouchChangeSpeed = 1f;
+    public Transform groundCheckTransform;
+    [Range(0f, 1f)] public float crouchFactor = 0.5f;
+    public float crouchSpeed = 5f;
 
-    [Header("Other Objects/Components")]
-    public PlayerMovement playerMovement;
-    public CharacterController controller;
-    public Transform groundChecker;
+    CharacterController controller;
+    float startHeight;
+    float newHeight;
+    bool isCrouching = false;
 
     [Header("Celing Check Variables")]
     public Transform ceilingCheck;
     public float ceilingDistance = 0.4f;
     public LayerMask ceilingMask;
 
-    bool isCrouching = false;
+    private void Start()
+    {
+        controller = GetComponent<CharacterController>();
+        startHeight = controller.height;
+        newHeight = startHeight;
+    }
 
     void Update()
     {
-        CheckCrouchingInput();
-        ChangeCrouching();
-    }
+        //float newH = startHeight;
 
-    void CheckCrouchingInput()
-    {
         if (Input.GetButtonDown("Movement3"))
         {
             if (isCrouching && !CheckHeadClear())
             {
+                newHeight = startHeight;
                 isCrouching = false;
             }
             else
             {
+                newHeight = crouchFactor * startHeight;
                 isCrouching = true;
             }
-        } 
-    }
+        }     
 
-    void ChangeCrouching() 
-    {
-        if (isCrouching)
+        float lastHeight = controller.height;
+
+        if (controller.height > newHeight)
         {
-            if (controller.height > crouchingHeight)
+            if ((controller.height - 0.02) <= newHeight)
             {
-                controller.height -= Time.deltaTime * crouchChangeSpeed;
-                groundChecker.localPosition = new Vector3(groundChecker.localPosition.x, groundChecker.localPosition.y + ((Time.deltaTime * crouchChangeSpeed)/2), groundChecker.localPosition.z);
+                controller.height = newHeight;
             }
-            else 
+            else
             {
-                controller.height = crouchingHeight;
-                groundChecker.localPosition = new Vector3(groundChecker.localPosition.x, -(crouchingHeight / 2), groundChecker.localPosition.z);
+                controller.height = Mathf.Lerp(controller.height, newHeight, crouchSpeed * Time.deltaTime);
             }
         }
-        else 
+        else if (controller.height < newHeight) 
         {
-            if (controller.height < standingHeight)
+            if ((controller.height + 0.02) >= newHeight)
             {
-                controller.height += Time.deltaTime * crouchChangeSpeed;
-                groundChecker.localPosition = new Vector3(groundChecker.localPosition.x, groundChecker.localPosition.y - ((Time.deltaTime * crouchChangeSpeed) / 2), groundChecker.localPosition.z);
+                controller.height = newHeight;
             }
-            else 
+            else
             {
-                controller.height = standingHeight;
-                groundChecker.localPosition = new Vector3(groundChecker.localPosition.x, -(standingHeight / 2), groundChecker.localPosition.z);
+                controller.height = Mathf.Lerp(controller.height, newHeight, crouchSpeed * Time.deltaTime);
             }
         }
-        // Changes the height slowly, so it feels more natural. 
+
+
+        // fix vertical position
+        //transform.position.y += (ch.height - lastHeight) * 0.5;
+        //transform.position += new Vector3(0, (controller.height - lastHeight) * 0.5f, 0);
+        controller.Move(new Vector3(0, (controller.height - lastHeight) * 0.5f, 0));
+        groundCheckTransform.position += new Vector3(0, -(controller.height - lastHeight) * 0.5f, 0);
     }
+    // Changes the height slowly, so it feels more natural. 
 
     public bool GetIsCrouching() 
     {
@@ -82,5 +86,4 @@ public class PlayerCrouching : MonoBehaviour
     {
         return Physics.CheckSphere(ceilingCheck.position, ceilingDistance, ceilingMask);
     }
-
 }
