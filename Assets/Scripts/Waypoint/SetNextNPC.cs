@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class SetNextNPC : MonoBehaviour
 {
@@ -8,6 +9,8 @@ public class SetNextNPC : MonoBehaviour
     public Transform nextTarget;
     public Waypoint waypoint;
     public Animator imageAnim;
+
+    public UnityEvent dialogueEnd;
 
     bool previousIsTriggered = false;
 
@@ -20,10 +23,15 @@ public class SetNextNPC : MonoBehaviour
     {
         if (previousIsTriggered && !dialogueTrigger.isTriggered) 
         {
-            imageAnim.SetBool("disappearQuick", true);
-            waypoint.target = nextTarget;
+            dialogueEnd.Invoke();
         }
         previousIsTriggered = dialogueTrigger.isTriggered;
+    }
+
+    public void SetNextWaypoint() 
+    {
+        imageAnim.SetBool("disappearQuick", true);
+        waypoint.target = nextTarget;
     }
 }
 // Used on NPCs, changes the target of the waypoint marker. 
