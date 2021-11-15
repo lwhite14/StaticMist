@@ -23,6 +23,11 @@ public class MouseLook : MonoBehaviour
 
         transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
         playerBody.Rotate(Vector3.up * mouseX);
-    } 
+    }
     // Rotates the camera and parent gameobject to the cursor.
+
+    public void SetMouseSensitivity(float newSens) 
+    {
+        mouseSensitivity = newSens;
+    }
 }
