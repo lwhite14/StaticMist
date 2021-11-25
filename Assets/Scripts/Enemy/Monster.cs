@@ -30,7 +30,7 @@ public class Monster : MonoBehaviour
             waypoints[i] = new Vector3(waypoints[i].x, transform.position.y, waypoints[i].z);
         }
 
-        StartCoroutine(FollowPath(waypoints));
+        StartPatrolling(waypoints);
     }
 
     void Update()
@@ -96,6 +96,11 @@ public class Monster : MonoBehaviour
             transform.eulerAngles = Vector3.up * angle;
             yield return null;
         }
+    }
+
+    void StartPatrolling(Vector3[] points) 
+    {
+        StartCoroutine(FollowPath(points));
     }
 
     void OnDrawGizmos()
