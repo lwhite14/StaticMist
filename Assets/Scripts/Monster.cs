@@ -38,6 +38,7 @@ public class Monster : MonoBehaviour
         if (CanSeePlayer())
         {
             spotLight.color = Color.red;
+            StopAllCoroutines();
         }
         else 
         {
@@ -45,7 +46,7 @@ public class Monster : MonoBehaviour
         }
     }
 
-    bool CanSeePlayer() 
+    public bool CanSeePlayer() 
     {
         if (Vector3.Distance(transform.position, player.position) < viewDistance) 
         {
