@@ -1,48 +1,75 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class Monster : MonoBehaviour
 {
+    [Header("Patrol Variables/Objects")]
+    public Transform pathHolder;
     public float speed = 5;
     public float waitTime = 0.3f;
     public float turnSpeed = 90f;
 
-    public Light spotLight;
+    [Header("Sight Variables/Objects")]
+    public float spotAngle = 80f;
     public float viewDistance;
     public LayerMask viewMask;
-    float viewAngle;
 
-    public Transform pathHolder;
+    [Header("Nav Variables/Objects")]
+    public NavMeshAgent navMeshAgent;
+    public float notVisibleTime = 2f;
+
     Transform player;
-    Color originalSpotlightColor;
+    Vector3[] waypoints;
+    Vector3 startWaypoint;
+    bool isChasing = false;
+    float notVisibleTimeCounter;
 
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
-        viewAngle = spotLight.spotAngle;
-        originalSpotlightColor = spotLight.color;
+        notVisibleTimeCounter = notVisibleTime;
 
-        Vector3[] waypoints = new Vector3[pathHolder.childCount];
+        waypoints = new Vector3[pathHolder.childCount];
         for (int i = 0; i < waypoints.Length; i++) 
         {
             waypoints[i] = pathHolder.GetChild(i).position;
             waypoints[i] = new Vector3(waypoints[i].x, transform.position.y, waypoints[i].z);
         }
+        startWaypoint = waypoints[0];
 
-        StartPatrolling(waypoints);
+        StartCoroutine(FollowPath());
     }
 
     void Update()
     {
+        Debug.Log(navMeshAgent.pathStatus);
+
         if (CanSeePlayer())
         {
-            spotLight.color = Color.red;
             StopAllCoroutines();
+            isChasing = true;
         }
-        else 
+
+        if (isChasing) 
         {
-            spotLight.color = originalSpotlightColor;
+            navMeshAgent.destination = player.position;
+
+            if (CanSeePlayer())
+            {
+                notVisibleTimeCounter = notVisibleTime;
+            }
+            else 
+            {
+                notVisibleTimeCounter -= Time.deltaTime;
+                if (notVisibleTimeCounter <= 0) 
+                {
+                    isChasing = false;
+                    notVisibleTimeCounter = notVisibleTime;
+                    StartCoroutine(ReturnToPatrol());
+                }
+            }
         }
     }
 
@@ -52,7 +79,7 @@ public class Monster : MonoBehaviour
         {
             Vector3 dirToPlayer = (player.position - transform.position).normalized;
             float angleBetweenGuardAndPlayer = Vector3.Angle(transform.forward, dirToPlayer);
-            if (angleBetweenGuardAndPlayer < viewAngle / 2f) 
+            if (angleBetweenGuardAndPlayer < spotAngle / 2f) 
             {
                 if (!Physics.Linecast(transform.position, player.position, viewMask)) 
                 {
@@ -63,7 +90,7 @@ public class Monster : MonoBehaviour
         return false;
     }
 
-    IEnumerator FollowPath(Vector3[] waypoints) 
+    IEnumerator FollowPath() 
     {
         transform.position = waypoints[0];
 
@@ -98,16 +125,34 @@ public class Monster : MonoBehaviour
         }
     }
 
-    void StartPatrolling(Vector3[] points) 
+    IEnumerator ReturnToPatrol() 
     {
-        StartCoroutine(FollowPath(points));
+        navMeshAgent.destination = startWaypoint;
+
+        while (true)
+        {
+            float dist = navMeshAgent.remainingDistance;
+            if (!navMeshAgent.pathPending)
+            {
+                if (navMeshAgent.remainingDistance <= navMeshAgent.stoppingDistance)
+                {
+                    if (!navMeshAgent.hasPath || navMeshAgent.velocity.sqrMagnitude == 0f)
+                    {
+                        Debug.Log("Arrived!");
+                        navMeshAgent.isStopped = true;
+                        yield return StartCoroutine(FollowPath());
+                    }
+                }
+            }
+            yield return null;
+        }     
     }
 
     void OnDrawGizmos()
     {
         Vector3 startPos = pathHolder.GetChild(0).position;
         Vector3 prevPos = startPos;
-        foreach (Transform waypoint in pathHolder) 
+        foreach (Transform waypoint in pathHolder)
         {
             Gizmos.DrawSphere(waypoint.position, 0.3f);
             Gizmos.DrawLine(prevPos, waypoint.position);
@@ -117,5 +162,12 @@ public class Monster : MonoBehaviour
 
         Gizmos.color = Color.red;
         Gizmos.DrawRay(transform.position, transform.forward * viewDistance);
+
+        Quaternion leftRayRotation = Quaternion.AngleAxis(-(spotAngle / 2.0f), Vector3.up);
+        Quaternion rightRayRotation = Quaternion.AngleAxis((spotAngle / 2.0f), Vector3.up);
+        Vector3 leftRayDirection = leftRayRotation * transform.forward;
+        Vector3 rightRayDirection = rightRayRotation * transform.forward;
+        Gizmos.DrawRay(transform.position, leftRayDirection * viewDistance);
+        Gizmos.DrawRay(transform.position, rightRayDirection * viewDistance);
     }
 }
