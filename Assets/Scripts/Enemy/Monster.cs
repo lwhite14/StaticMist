@@ -23,7 +23,7 @@ public class Monster : MonoBehaviour
     Transform player;
     Vector3[] waypoints;
     Vector3 startWaypoint;
-    [HideInInspector]public bool isChasing = false;
+    bool isChasing = false;
     bool isDead = false;
     float notVisibleTimeCounter;
 
@@ -48,6 +48,7 @@ public class Monster : MonoBehaviour
         if (CanSeePlayer() && !isDead)
         {
             StopAllCoroutines();
+            navMeshAgent.isStopped = false;
             isChasing = true;
         }
 
@@ -152,6 +153,11 @@ public class Monster : MonoBehaviour
     public void OnDeath(bool newIsDeath) 
     {
         isDead = newIsDeath;
+    }
+
+    public bool GetIsChasing() 
+    {
+        return isChasing;
     }
 
     void OnDrawGizmos()

@@ -33,7 +33,7 @@ public class MonsterAttack : MonoBehaviour
             {
                 if (navMeshAgent.remainingDistance <= (navMeshAgent.stoppingDistance + strikingDistanceBuffer))
                 {
-                    if (monster.isChasing)
+                    if (monster.GetIsChasing())
                     {
                         if (attackCooldownCounter < 0) 
                         {

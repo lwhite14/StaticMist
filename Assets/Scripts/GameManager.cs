@@ -27,7 +27,6 @@ public class GameManager : MonoBehaviour
     {
         GameObject.Find("YouDiedPanel").GetComponent<Animator>().SetBool("isDead", true);
 
-        Debug.Log("Kill!!");
         Monster[] monsters = FindObjectsOfType<Monster>();
         foreach (Monster monster in monsters) 
         {
