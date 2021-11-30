@@ -18,12 +18,13 @@ public class PlayerMovement : MonoBehaviour
     [Header("Ground Check Variables")]
     public Transform groundCheck;
     public float groundDistance = 0.4f;
-    public LayerMask groundMask;
+    public LayerMask groundMask;   
 
     Vector3 velocity;
     Vector3 move;
     bool previousGrounded = true;
     bool hasLanded = false;
+    bool isDead = false;
     float speed;
     float x;
     float z;
@@ -84,7 +85,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (CheckGrounded())
         {
-            if (hasLanded)
+            if (hasLanded || isDead)
             {
                 x = 0;
                 z = 0;
@@ -105,7 +106,7 @@ public class PlayerMovement : MonoBehaviour
     void Jump() 
     {
 
-        if (Input.GetButtonDown("Jump") && CheckGrounded() && (CheckMovingForward() || CheckNotMoving()) && !hasLanded && !playerCrouching.GetIsCrouching())
+        if (Input.GetButtonDown("Jump") && CheckGrounded() && (CheckMovingForward() || CheckNotMoving()) && !hasLanded && !playerCrouching.GetIsCrouching() && !isDead)
         {
             velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
         }
@@ -147,6 +148,12 @@ public class PlayerMovement : MonoBehaviour
     public void ChangeSpeed(float newSpeed) 
     {
         speed = newSpeed;
+    }
+
+    public void OnDeath(bool newIsDead) 
+    {
+        isDead = newIsDead;
+        playerCrouching.OnDeath(newIsDead);
     }
 
     public void WarpToPosition(Vector3 newPosition)

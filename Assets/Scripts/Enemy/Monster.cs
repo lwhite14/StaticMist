@@ -24,6 +24,7 @@ public class Monster : MonoBehaviour
     Vector3[] waypoints;
     Vector3 startWaypoint;
     [HideInInspector]public bool isChasing = false;
+    bool isDead = false;
     float notVisibleTimeCounter;
 
     void Start()
@@ -44,7 +45,7 @@ public class Monster : MonoBehaviour
 
     void Update()
     {
-        if (CanSeePlayer())
+        if (CanSeePlayer() && !isDead)
         {
             StopAllCoroutines();
             isChasing = true;
@@ -63,8 +64,8 @@ public class Monster : MonoBehaviour
                 notVisibleTimeCounter -= Time.deltaTime;
                 if (notVisibleTimeCounter <= 0) 
                 {
-                    isChasing = false;
-                    notVisibleTimeCounter = notVisibleTime;
+                    //isChasing = false;
+                    //notVisibleTimeCounter = notVisibleTime;
                     StartCoroutine(ReturnToPatrol());
                 }
             }
@@ -123,8 +124,11 @@ public class Monster : MonoBehaviour
         }
     }
 
-    IEnumerator ReturnToPatrol() 
+    public IEnumerator ReturnToPatrol() 
     {
+        isChasing = false;
+        notVisibleTimeCounter = notVisibleTime;
+
         navMeshAgent.destination = startWaypoint;
 
         while (true)
@@ -143,6 +147,11 @@ public class Monster : MonoBehaviour
             }
             yield return null;
         }     
+    }
+
+    public void OnDeath(bool newIsDeath) 
+    {
+        isDead = newIsDeath;
     }
 
     void OnDrawGizmos()

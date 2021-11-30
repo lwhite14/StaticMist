@@ -13,6 +13,7 @@ public class MonsterAttack : MonoBehaviour
     public float attackCooldown = 0.5f;
     float attackCooldownCounter;
     public UnityEvent<float> attack;
+
     void Start()
     {
         attackCooldownCounter = attackCooldown;
