@@ -23,7 +23,7 @@ public class Monster : MonoBehaviour
     Transform player;
     Vector3[] waypoints;
     Vector3 startWaypoint;
-    bool isChasing = false;
+    [HideInInspector]public bool isChasing = false;
     float notVisibleTimeCounter;
 
     void Start()
@@ -44,8 +44,6 @@ public class Monster : MonoBehaviour
 
     void Update()
     {
-        Debug.Log(navMeshAgent.pathStatus);
-
         if (CanSeePlayer())
         {
             StopAllCoroutines();
@@ -138,7 +136,6 @@ public class Monster : MonoBehaviour
                 {
                     if (!navMeshAgent.hasPath || navMeshAgent.velocity.sqrMagnitude == 0f)
                     {
-                        Debug.Log("Arrived!");
                         navMeshAgent.isStopped = true;
                         yield return StartCoroutine(FollowPath());
                     }
