@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.AI;
 
 public class Monster : MonoBehaviour
@@ -24,11 +25,15 @@ public class Monster : MonoBehaviour
     public NavMeshAgent navMeshAgent;
     public float notVisibleTime = 2f;
 
+    public UnityEvent playerSpotted;
+    public UnityEvent playerLost;
+
     Transform player;
     Vector3[] waypoints;
     Vector3 startWaypoint;
     bool isChasing = false;
     bool isDead = false;
+    bool isCalled = false;
     float notVisibleTimeCounter;
 
     void Start()
@@ -54,6 +59,11 @@ public class Monster : MonoBehaviour
             StopAllCoroutines();
             navMeshAgent.isStopped = false;
             isChasing = true;
+            if (!isCalled) // Makes sure 'playerSpotted' is only invoked once.
+            {
+                playerSpotted.Invoke();
+                isCalled = true;
+            }
         }
 
         if (isChasing) 
@@ -148,6 +158,8 @@ public class Monster : MonoBehaviour
         notVisibleTimeCounter = notVisibleTime;
         navMeshAgent.isStopped = true;
         yield return new WaitForSeconds(afterChaseWaitTime);
+        playerLost.Invoke();
+        isCalled = false; // Resets 'icCalled' so that Unity event is only called once in update.
         yield return StartCoroutine(ReturnToPatrol());
     }
 
