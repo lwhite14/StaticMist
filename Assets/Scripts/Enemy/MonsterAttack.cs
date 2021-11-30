@@ -8,6 +8,7 @@ public class MonsterAttack : MonoBehaviour
 {
     public NavMeshAgent navMeshAgent;
     public Monster monster;
+    public GameObject stabSound;
     public float damage = 4f;
     public float strikingDistanceBuffer = 0.2f;
     public float attackCooldown = 0.5f;
@@ -54,6 +55,11 @@ public class MonsterAttack : MonoBehaviour
     public void Attack() 
     {
         attack.Invoke(damage);
+    }
+
+    public void AttackSound() 
+    {
+        Instantiate(stabSound, transform.position, Quaternion.identity);
     }
 
 }

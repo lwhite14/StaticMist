@@ -7,6 +7,7 @@ public class Health : MonoBehaviour
 {
     public float health = 4f;
     public Animator anim;
+    public GameObject deathSound;
     public UnityEvent onDeath;
 
     public void TakeDamage(float damage) 
@@ -35,5 +36,10 @@ public class Health : MonoBehaviour
     public void PlayDeathAnimation() 
     {
         anim.SetBool("isDead", true);
+    }
+
+    public void DeathSound() 
+    {
+        Instantiate(deathSound, transform.position, Quaternion.identity);
     }
 }

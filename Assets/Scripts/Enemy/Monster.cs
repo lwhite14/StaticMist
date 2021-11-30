@@ -191,34 +191,41 @@ public class Monster : MonoBehaviour
 
     void OnDrawGizmos()
     {
-        Vector3 startPos = pathHolder.GetChild(0).position;
-        Vector3 prevPos = startPos;
-        foreach (Transform waypoint in pathHolder)
+        try
         {
-            Gizmos.DrawSphere(waypoint.position, 0.3f);
-            Gizmos.DrawLine(prevPos, waypoint.position);
-            prevPos = waypoint.position;
+            Vector3 startPos = pathHolder.GetChild(0).position;
+            Vector3 prevPos = startPos;
+            foreach (Transform waypoint in pathHolder)
+            {
+                Gizmos.DrawSphere(waypoint.position, 0.3f);
+                Gizmos.DrawLine(prevPos, waypoint.position);
+                prevPos = waypoint.position;
+            }
+            Gizmos.DrawLine(prevPos, startPos);
+
+            Gizmos.color = Color.red;
+            Gizmos.DrawRay(transform.position, transform.forward * viewDistanceLong);
+
+            Quaternion leftRayRotationLong = Quaternion.AngleAxis(-(spotAngleLong / 2.0f), Vector3.up);
+            Quaternion rightRayRotationLong = Quaternion.AngleAxis((spotAngleLong / 2.0f), Vector3.up);
+            Vector3 leftRayDirectionLong = leftRayRotationLong * transform.forward;
+            Vector3 rightRayDirectionLong = rightRayRotationLong * transform.forward;
+            Gizmos.DrawRay(transform.position, leftRayDirectionLong * viewDistanceLong);
+            Gizmos.DrawRay(transform.position, rightRayDirectionLong * viewDistanceLong);
+
+            Gizmos.color = Color.blue;
+            //Gizmos.DrawRay(transform.position, transform.forward * viewDistanceShort);
+
+            Quaternion leftRayRotationShort = Quaternion.AngleAxis(-(spotAngleShort / 2.0f), Vector3.up);
+            Quaternion rightRayRotationShort = Quaternion.AngleAxis((spotAngleShort / 2.0f), Vector3.up);
+            Vector3 leftRayDirectionShort = leftRayRotationShort * transform.forward;
+            Vector3 rightRayDirectionShort = rightRayRotationShort * transform.forward;
+            Gizmos.DrawRay(transform.position, leftRayDirectionShort * viewDistanceShort);
+            Gizmos.DrawRay(transform.position, rightRayDirectionShort * viewDistanceShort);
         }
-        Gizmos.DrawLine(prevPos, startPos);
-
-        Gizmos.color = Color.red;
-        Gizmos.DrawRay(transform.position, transform.forward * viewDistanceLong);
-
-        Quaternion leftRayRotationLong = Quaternion.AngleAxis(-(spotAngleLong / 2.0f), Vector3.up);
-        Quaternion rightRayRotationLong = Quaternion.AngleAxis((spotAngleLong / 2.0f), Vector3.up);
-        Vector3 leftRayDirectionLong = leftRayRotationLong * transform.forward;
-        Vector3 rightRayDirectionLong = rightRayRotationLong * transform.forward;
-        Gizmos.DrawRay(transform.position, leftRayDirectionLong * viewDistanceLong);
-        Gizmos.DrawRay(transform.position, rightRayDirectionLong * viewDistanceLong);
-
-        Gizmos.color = Color.blue;
-        //Gizmos.DrawRay(transform.position, transform.forward * viewDistanceShort);
-
-        Quaternion leftRayRotationShort = Quaternion.AngleAxis(-(spotAngleShort / 2.0f), Vector3.up);
-        Quaternion rightRayRotationShort = Quaternion.AngleAxis((spotAngleShort / 2.0f), Vector3.up);
-        Vector3 leftRayDirectionShort = leftRayRotationShort * transform.forward;
-        Vector3 rightRayDirectionShort = rightRayRotationShort * transform.forward;
-        Gizmos.DrawRay(transform.position, leftRayDirectionShort * viewDistanceShort);
-        Gizmos.DrawRay(transform.position, rightRayDirectionShort * viewDistanceShort);
+        catch 
+        {
+            Debug.Log("Gizmos only work within the scene view, not the prefab view!");
+        }
     }
 }

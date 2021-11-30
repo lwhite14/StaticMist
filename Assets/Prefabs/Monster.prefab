@@ -139,6 +139,7 @@ MonoBehaviour:
   speed: 4
   patrolTurnWaitTime: 0.3
   turnSpeed: 135
+  buffer: 0.05
   spotAngleLong: 80
   viewDistanceLong: 12
   spotAngleShort: 180
@@ -148,7 +149,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   navMeshAgent: {fileID: 6264049532401000901}
-  notVisibleTime: 2
+  notVisibleTime: 4
 --- !u!114 &6264049532401000900
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -163,6 +164,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   navMeshAgent: {fileID: 6264049532401000901}
   monster: {fileID: 6264049532401000763}
+  stabSound: {fileID: 1771327624571480702, guid: 4484e3d9225f46a40967c3d84486c19e, type: 3}
   damage: 4
   strikingDistanceBuffer: 0.2
   attackCooldown: 2
@@ -173,6 +175,18 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: Health, Assembly-CSharp
         m_MethodName: TakeDamage
         m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 6264049532401000900}
+        m_TargetAssemblyTypeName: MonsterAttack, Assembly-CSharp
+        m_MethodName: AttackSound
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
