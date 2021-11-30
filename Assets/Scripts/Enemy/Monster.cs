@@ -12,8 +12,10 @@ public class Monster : MonoBehaviour
     public float turnSpeed = 90f;
 
     [Header("Sight Variables/Objects")]
-    public float spotAngle = 80f;
-    public float viewDistance;
+    public float spotAngleLong = 80f;
+    public float viewDistanceLong;
+    public float spotAngleShort = 180f;
+    public float viewDistanceShort;
     public float afterChaseWaitTime = 4f;
     public LayerMask viewMask;
 
@@ -76,13 +78,26 @@ public class Monster : MonoBehaviour
 
     public bool CanSeePlayer() 
     {
-        if (Vector3.Distance(transform.position, player.position) < viewDistance) 
+        if (Vector3.Distance(transform.position, player.position) < viewDistanceLong) 
         {
             Vector3 dirToPlayer = (player.position - transform.position).normalized;
             float angleBetweenGuardAndPlayer = Vector3.Angle(transform.forward, dirToPlayer);
-            if (angleBetweenGuardAndPlayer < spotAngle / 2f) 
+            if (angleBetweenGuardAndPlayer < spotAngleLong / 2f) 
             {
                 if (!Physics.Linecast(transform.position, player.position, viewMask)) 
+                {
+                    return true;
+                }
+            }
+        }
+
+        if (Vector3.Distance(transform.position, player.position) < viewDistanceShort)
+        {
+            Vector3 dirToPlayer = (player.position - transform.position).normalized;
+            float angleBetweenGuardAndPlayer = Vector3.Angle(transform.forward, dirToPlayer);
+            if (angleBetweenGuardAndPlayer < spotAngleShort / 2f)
+            {
+                if (!Physics.Linecast(transform.position, player.position, viewMask))
                 {
                     return true;
                 }
@@ -181,13 +196,23 @@ public class Monster : MonoBehaviour
         Gizmos.DrawLine(prevPos, startPos);
 
         Gizmos.color = Color.red;
-        Gizmos.DrawRay(transform.position, transform.forward * viewDistance);
+        Gizmos.DrawRay(transform.position, transform.forward * viewDistanceLong);
 
-        Quaternion leftRayRotation = Quaternion.AngleAxis(-(spotAngle / 2.0f), Vector3.up);
-        Quaternion rightRayRotation = Quaternion.AngleAxis((spotAngle / 2.0f), Vector3.up);
-        Vector3 leftRayDirection = leftRayRotation * transform.forward;
-        Vector3 rightRayDirection = rightRayRotation * transform.forward;
-        Gizmos.DrawRay(transform.position, leftRayDirection * viewDistance);
-        Gizmos.DrawRay(transform.position, rightRayDirection * viewDistance);
+        Quaternion leftRayRotationLong = Quaternion.AngleAxis(-(spotAngleLong / 2.0f), Vector3.up);
+        Quaternion rightRayRotationLong = Quaternion.AngleAxis((spotAngleLong / 2.0f), Vector3.up);
+        Vector3 leftRayDirectionLong = leftRayRotationLong * transform.forward;
+        Vector3 rightRayDirectionLong = rightRayRotationLong * transform.forward;
+        Gizmos.DrawRay(transform.position, leftRayDirectionLong * viewDistanceLong);
+        Gizmos.DrawRay(transform.position, rightRayDirectionLong * viewDistanceLong);
+
+        Gizmos.color = Color.blue;
+        //Gizmos.DrawRay(transform.position, transform.forward * viewDistanceShort);
+
+        Quaternion leftRayRotationShort = Quaternion.AngleAxis(-(spotAngleShort / 2.0f), Vector3.up);
+        Quaternion rightRayRotationShort = Quaternion.AngleAxis((spotAngleShort / 2.0f), Vector3.up);
+        Vector3 leftRayDirectionShort = leftRayRotationShort * transform.forward;
+        Vector3 rightRayDirectionShort = rightRayRotationShort * transform.forward;
+        Gizmos.DrawRay(transform.position, leftRayDirectionShort * viewDistanceShort);
+        Gizmos.DrawRay(transform.position, rightRayDirectionShort * viewDistanceShort);
     }
 }

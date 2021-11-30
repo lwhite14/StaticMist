@@ -5551,16 +5551,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pathHolder: {fileID: 2130458279}
   speed: 4
-  waitTime: 1
+  patrolTurnWaitTime: 0.3
   turnSpeed: 135
-  spotAngle: 110
-  viewDistance: 10
+  spotAngleLong: 80
+  viewDistanceLong: 12
+  spotAngleShort: 180
+  viewDistanceShort: 6
+  afterChaseWaitTime: 4
   viewMask:
     serializedVersion: 2
     m_Bits: 64
   navMeshAgent: {fileID: 1683696003}
   notVisibleTime: 2
-  isChasing: 0
 --- !u!136 &1683695998
 CapsuleCollider:
   m_ObjectHideFlags: 0
