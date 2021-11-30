@@ -8,12 +8,13 @@ public class Monster : MonoBehaviour
     [Header("Patrol Variables/Objects")]
     public Transform pathHolder;
     public float speed = 5;
-    public float waitTime = 0.3f;
+    public float patrolTurnWaitTime = 0.3f;
     public float turnSpeed = 90f;
 
     [Header("Sight Variables/Objects")]
     public float spotAngle = 80f;
     public float viewDistance;
+    public float afterChaseWaitTime = 4f;
     public LayerMask viewMask;
 
     [Header("Nav Variables/Objects")]
@@ -67,7 +68,7 @@ public class Monster : MonoBehaviour
                 {
                     //isChasing = false;
                     //notVisibleTimeCounter = notVisibleTime;
-                    StartCoroutine(ReturnToPatrol());
+                    StartCoroutine(WaitForTime());
                 }
             }
         }
@@ -105,7 +106,7 @@ public class Monster : MonoBehaviour
             {
                 targetWaypointIndex = (targetWaypointIndex + 1) % waypoints.Length;
                 targetWaypoint = waypoints[targetWaypointIndex];
-                yield return new WaitForSeconds(waitTime);
+                yield return new WaitForSeconds(patrolTurnWaitTime);
                 yield return StartCoroutine(TurnToFace(targetWaypoint));
             }
             yield return null;
@@ -125,11 +126,18 @@ public class Monster : MonoBehaviour
         }
     }
 
-    public IEnumerator ReturnToPatrol() 
+    IEnumerator WaitForTime()
     {
         isChasing = false;
         notVisibleTimeCounter = notVisibleTime;
+        navMeshAgent.isStopped = true;
+        yield return new WaitForSeconds(afterChaseWaitTime);
+        yield return StartCoroutine(ReturnToPatrol());
+    }
 
+    public IEnumerator ReturnToPatrol() 
+    {
+        navMeshAgent.isStopped = false;
         navMeshAgent.destination = startWaypoint;
 
         while (true)
