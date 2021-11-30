@@ -10,6 +10,7 @@ public class Monster : MonoBehaviour
     public float speed = 5;
     public float patrolTurnWaitTime = 0.3f;
     public float turnSpeed = 90f;
+    public float buffer = 0.05f;
 
     [Header("Sight Variables/Objects")]
     public float spotAngleLong = 80f;
@@ -117,7 +118,7 @@ public class Monster : MonoBehaviour
         while (true)
         {
             transform.position = Vector3.MoveTowards(transform.position, targetWaypoint, speed * Time.deltaTime);
-            if (transform.position == targetWaypoint)
+            if (Vector3.Distance(transform.position, targetWaypoint) <= buffer)
             {
                 targetWaypointIndex = (targetWaypointIndex + 1) % waypoints.Length;
                 targetWaypoint = waypoints[targetWaypointIndex];
@@ -176,6 +177,11 @@ public class Monster : MonoBehaviour
     public void OnDeath(bool newIsDeath) 
     {
         isDead = newIsDeath;
+        if (newIsDeath) 
+        {
+            isChasing = false;
+            notVisibleTimeCounter = notVisibleTime;
+        }
     }
 
     public bool GetIsChasing() 
