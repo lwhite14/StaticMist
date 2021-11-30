@@ -20,6 +20,7 @@ public class PlayerSprinting : MonoBehaviour
     public Camera cam;
     public PlayerMovement playerMovement;
     public PlayerCrouching playerCrouching;
+    public Footsteps footsteps;
 
     bool isRunning = false;
     bool runCounterDepleted = false;
@@ -103,6 +104,7 @@ public class PlayerSprinting : MonoBehaviour
     {
         playerMovement.ChangeSpeed(runningSpeed);
         ChangeFovToHigh();
+        footsteps.SpeedUpSteps();
 
         fatiguedCooldownCounter = fatiguedCooldown;
     }
@@ -118,6 +120,7 @@ public class PlayerSprinting : MonoBehaviour
         {
             playerMovement.ChangeSpeed(walkingSpeed);
         }
+        footsteps.SlowDownSteps();
         ChangeFovToLow();
     }
     // Run commands when the speed is decreased.

@@ -133,7 +133,7 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    bool CheckNotMoving() 
+    public bool CheckNotMoving() 
     {
         if ((z == 0) && (x == 0)) 
         {
