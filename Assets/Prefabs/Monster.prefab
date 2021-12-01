@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 6264049532401000901}
   - component: {fileID: 6264049532401000763}
   - component: {fileID: 6264049532401000900}
+  - component: {fileID: 560558588472678213}
   m_Layer: 0
   m_Name: Monster
   m_TagString: Monster
@@ -216,6 +217,41 @@ MonoBehaviour:
       - m_Target: {fileID: 6264049532401000900}
         m_TargetAssemblyTypeName: MonsterAttack, Assembly-CSharp
         m_MethodName: AttackSound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &560558588472678213
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6264049532401000762}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d0d63bbda356b94288f9ad6d29cfc8b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rayRange: 14
+  spotAngle: 40
+  musicalStabResetTime: 60
+  player: {fileID: 0}
+  musicalStabSound: {fileID: 6699714942986620224, guid: 64e8e42ad39da4646b66ba08c3d58772, type: 3}
+  obstacleMask:
+    serializedVersion: 2
+    m_Bits: 64
+  enemySpotted:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 560558588472678213}
+        m_TargetAssemblyTypeName: PlayerSpotted, Assembly-CSharp
+        m_MethodName: SpottedStab
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

@@ -5425,6 +5425,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: MonsterPatrolPath (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 6116290047399877349, guid: 1409bb80aeb940c42a1d12f643c07695, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6116290047842329074, guid: 1409bb80aeb940c42a1d12f643c07695, type: 3}
       propertyPath: m_LocalPosition.x
       value: -9.25
@@ -6618,7 +6622,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -9289,9 +9293,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 560558588472678213, guid: 4cbc8bb68055254428c35c2fbc474c9e, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1944714061}
     - target: {fileID: 6264049532401000762, guid: 4cbc8bb68055254428c35c2fbc474c9e, type: 3}
       propertyPath: m_Name
       value: Monster (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6264049532401000762, guid: 4cbc8bb68055254428c35c2fbc474c9e, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6264049532401000763, guid: 4cbc8bb68055254428c35c2fbc474c9e, type: 3}
       propertyPath: pathHolder
@@ -13608,6 +13620,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 560558588472678213, guid: 4cbc8bb68055254428c35c2fbc474c9e, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1944714061}
     - target: {fileID: 6264049532401000762, guid: 4cbc8bb68055254428c35c2fbc474c9e, type: 3}
       propertyPath: m_Name
       value: Monster
