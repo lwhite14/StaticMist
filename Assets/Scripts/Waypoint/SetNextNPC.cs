@@ -33,6 +33,11 @@ public class SetNextNPC : MonoBehaviour
         imageAnim.SetBool("disappearQuick", true);
         waypoint.target = nextTarget;
     }
+
+    public void WaypointDissappear() 
+    {
+        waypoint.target = null;
+    }
 }
 // Used on NPCs, changes the target of the waypoint marker. 
 // (May not be used in the final version)
