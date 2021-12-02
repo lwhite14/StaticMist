@@ -16,6 +16,7 @@ public class MonsterAnimation : MonoBehaviour
         anim.SetBool("isChase", true);
         anim.SetBool("isPatrol", false);
         anim.SetBool("isIdle", false);
+        anim.SetBool("isAttack", false);
     }
 
     public void SetPatrol() 
@@ -23,6 +24,7 @@ public class MonsterAnimation : MonoBehaviour
         anim.SetBool("isChase", false);
         anim.SetBool("isPatrol", true);
         anim.SetBool("isIdle", false);
+        anim.SetBool("isAttack", false);
     }
 
     public void SetIdle() 
@@ -30,7 +32,13 @@ public class MonsterAnimation : MonoBehaviour
         anim.SetBool("isChase", false);
         anim.SetBool("isPatrol", false);
         anim.SetBool("isIdle", true);
+        anim.SetBool("isAttack", false);
     }
-    
+
+    public void SetAttack()
+    {
+        anim.Play("MonsterStab");
+    }
+
 
 }
