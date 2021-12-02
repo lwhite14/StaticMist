@@ -28,6 +28,11 @@ public class Monster : MonoBehaviour
     public UnityEvent playerSpotted;
     public UnityEvent playerLost;
 
+
+    public UnityEvent idle;
+    public UnityEvent patrol;
+    public UnityEvent chase;
+
     Transform player;
     Vector3[] waypoints;
     Vector3 startWaypoint;
@@ -62,6 +67,7 @@ public class Monster : MonoBehaviour
             if (!isCalled) // Makes sure 'playerSpotted' is only invoked once.
             {
                 playerSpotted.Invoke();
+                chase.Invoke();
                 isCalled = true;
             }
         }
@@ -119,6 +125,7 @@ public class Monster : MonoBehaviour
 
     IEnumerator FollowPath() 
     {
+
         transform.position = waypoints[0];
 
         int targetWaypointIndex = 1;
@@ -154,11 +161,13 @@ public class Monster : MonoBehaviour
 
     IEnumerator WaitForTime()
     {
+        idle.Invoke();
         isChasing = false;
         notVisibleTimeCounter = notVisibleTime;
         navMeshAgent.isStopped = true;
         yield return new WaitForSeconds(afterChaseWaitTime);
         playerLost.Invoke();
+        patrol.Invoke();
         isCalled = false; // Resets 'icCalled' so that Unity event is only called once in update.
         yield return StartCoroutine(ReturnToPatrol());
     }
