@@ -12,6 +12,7 @@ public class PlayerCrouching : MonoBehaviour
     float startHeight;
     float newHeight;
     bool isCrouching = false;
+    bool isDead = false;
 
     [Header("Celing Check Variables")]
     public Transform ceilingCheck;
@@ -29,7 +30,7 @@ public class PlayerCrouching : MonoBehaviour
     {
         //float newH = startHeight;
 
-        if (Input.GetButtonDown("Movement3"))
+        if (Input.GetButtonDown("Movement3") && !isDead)
         {
             if (isCrouching && !CheckHeadClear())
             {
@@ -85,5 +86,10 @@ public class PlayerCrouching : MonoBehaviour
     bool CheckHeadClear()
     {
         return Physics.CheckSphere(ceilingCheck.position, ceilingDistance, ceilingMask);
+    }
+
+    public void OnDeath(bool newIsDead)
+    {
+        isDead = newIsDead;
     }
 }

@@ -30,36 +30,45 @@ public class Waypoint : MonoBehaviour
 
     private void Update()
     {
-        Vector2 pos = Camera.main.WorldToScreenPoint(target.position + offset);
-
-        if (Vector3.Dot((target.position - transform.position), transform.forward) <= 0)
+        if (target != null)
         {
-            if (pos.x < Screen.width / 2)
+            Vector2 pos = Camera.main.WorldToScreenPoint(target.position + offset);
+
+            if (Vector3.Dot((target.position - transform.position), transform.forward) <= 0)
             {
-                pos.x = maxX;
+                if (pos.x < Screen.width / 2)
+                {
+                    pos.x = maxX;
+                }
+                else
+                {
+                    pos.x = minX;
+                }
+            }
+
+            pos.x = Mathf.Clamp(pos.x, minX, maxX);
+            pos.y = Mathf.Clamp(pos.y, minY, maxY);
+
+            distance = (int)Vector3.Distance(target.position, transform.position);
+            if (distance < maxDistance)
+            {
+                anim.SetBool("isAppeared", true);
+                anim.SetBool("disappearQuick", false);
             }
             else
             {
-                pos.x = minX;
+                anim.SetBool("isAppeared", false);
             }
-        }
 
-        pos.x = Mathf.Clamp(pos.x, minX, maxX);
-        pos.y = Mathf.Clamp(pos.y, minY, maxY);
-
-        distance = (int)Vector3.Distance(target.position, transform.position);
-        if (distance < maxDistance)
-        {
-            anim.SetBool("isAppeared", true);
-            anim.SetBool("disappearQuick", false);
+            img.transform.position = pos;
+            meter.text = distance.ToString() + "m";
         }
-        else 
+        else
         {
             anim.SetBool("isAppeared", false);
+            anim.SetBool("disappearQuick", true);
         }
 
-        img.transform.position = pos;
-        meter.text = distance.ToString() + "m";
     }
 }
 // Scripts keeps the waypoint image on a target transform. 

@@ -17,4 +17,22 @@ public class GameManager : MonoBehaviour
     {
         Application.Quit();
     }
+
+    public void Restart() 
+    {
+        SceneManager.LoadScene(0, LoadSceneMode.Single);
+    }
+
+    public void OnDeath() 
+    {
+        GameObject.Find("YouDiedPanel").GetComponent<Animator>().SetBool("isDead", true);
+
+        Monster[] monsters = FindObjectsOfType<Monster>();
+        foreach (Monster monster in monsters) 
+        {
+            monster.OnDeath(true);
+            monster.StopAllCoroutines();
+            monster.StartCoroutine(monster.ReturnToPatrol());
+        }
+    }
 }
