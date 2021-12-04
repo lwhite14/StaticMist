@@ -22,9 +22,9 @@ public class Monster : MonoBehaviour
     public LayerMask viewMask;
 
     [Header("Nav Variables/Objects")]
-    public NavMeshAgent navMeshAgent;
     public float notVisibleTime = 2f;
 
+    [Header("Unity Events")]
     public UnityEvent playerSpotted;
     public UnityEvent playerLost;
 
@@ -33,6 +33,7 @@ public class Monster : MonoBehaviour
     public UnityEvent patrol;
     public UnityEvent chase;
 
+    NavMeshAgent navMeshAgent;
     Transform player;
     Vector3[] waypoints;
     Vector3 startWaypoint;
@@ -43,6 +44,7 @@ public class Monster : MonoBehaviour
 
     void Start()
     {
+        navMeshAgent = GetComponent<NavMeshAgent>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
         notVisibleTimeCounter = notVisibleTime;
 

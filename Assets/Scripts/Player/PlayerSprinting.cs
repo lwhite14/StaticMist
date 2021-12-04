@@ -104,7 +104,10 @@ public class PlayerSprinting : MonoBehaviour
     {
         playerMovement.ChangeSpeed(runningSpeed);
         ChangeFovToHigh();
-        footsteps.SpeedUpSteps();
+        if (footsteps != null)
+        {
+            footsteps.SpeedUpSteps();
+        }
 
         fatiguedCooldownCounter = fatiguedCooldown;
     }
@@ -120,7 +123,10 @@ public class PlayerSprinting : MonoBehaviour
         {
             playerMovement.ChangeSpeed(walkingSpeed);
         }
-        footsteps.SlowDownSteps();
+        if (footsteps != null)
+        {
+            footsteps.SlowDownSteps();
+        }
         ChangeFovToLow();
     }
     // Run commands when the speed is decreased.
