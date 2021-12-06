@@ -1051,7 +1051,7 @@ NavMeshAgent:
   m_AutoBraking: 1
   m_AutoRepath: 1
   m_Height: 2
-  m_BaseOffset: 1
+  m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
 --- !u!82 &5724888924900498940
@@ -1175,7 +1175,6 @@ MonoBehaviour:
   viewMask:
     serializedVersion: 2
     m_Bits: 64
-  navMeshAgent: {fileID: 5724888924900498943}
   notVisibleTime: 4
   playerSpotted:
     m_PersistentCalls:
@@ -1240,8 +1239,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a6b35dedc5c6694b960b28db9e31b16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  navMeshAgent: {fileID: 5724888924900498943}
-  monster: {fileID: 5724888924900498941}
   stabSound: {fileID: 1771327624571480702, guid: 4484e3d9225f46a40967c3d84486c19e, type: 3}
   damage: 4
   strikingDistanceBuffer: 0.2
