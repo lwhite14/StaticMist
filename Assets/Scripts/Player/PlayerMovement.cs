@@ -173,22 +173,21 @@ public class PlayerMovement : MonoBehaviour
         {
             if (!hasLanded && !isDead)
             {
-                if (x < newX) 
+                x = Mathf.Lerp(x, newX, movementSliding * Time.deltaTime);
+                if (x < newX)
                 {
-                    x += Time.deltaTime * movementSliding;
                     if ((x + 0.05) > newX)
                     {
                         x = newX;
                     }
                 }
-                if (x > newX) 
+                if (x > newX)
                 {
-                    x -= Time.deltaTime * movementSliding;
                     if ((x - 0.05) < newX)
                     {
                         x = newX;
                     }
-                }              
+                }
             }
         }
     }
@@ -199,17 +198,16 @@ public class PlayerMovement : MonoBehaviour
         {
             if (!hasLanded && !isDead)
             {
+                z = Mathf.Lerp(z, newZ, movementSliding * Time.deltaTime);
                 if (z < newZ)
                 {
-                    z += Time.deltaTime * movementSliding;
-                    if ((z + 0.05) > newZ) 
+                    if ((z + 0.05) > newZ)
                     {
                         z = newZ;
                     }
                 }
                 if (z > newZ)
                 {
-                    z -= Time.deltaTime * movementSliding;
                     if ((z - 0.05) < newZ)
                     {
                         z = newZ;
