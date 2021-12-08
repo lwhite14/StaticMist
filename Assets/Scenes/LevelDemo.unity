@@ -20177,6 +20177,7 @@ GameObject:
   - component: {fileID: 1944714061}
   - component: {fileID: 1944714060}
   - component: {fileID: 1944714067}
+  - component: {fileID: 1944714069}
   - component: {fileID: 1944714062}
   - component: {fileID: 1944714064}
   - component: {fileID: 1944714065}
@@ -20241,10 +20242,6 @@ MonoBehaviour:
   gravity: -19.62
   jumpHeight: 1.2
   jumpCoolDown: 0.35
-  controller: {fileID: 1944714060}
-  jumpCoolDownSlider: {fileID: 1845108588}
-  playerSprinting: {fileID: 1944714064}
-  playerCrouching: {fileID: 1944714065}
   groundCheck: {fileID: 1819481320}
   groundDistance: 0.2
   groundMask:
@@ -20263,7 +20260,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 4
-  anim: {fileID: 1084113752}
   deathSound: {fileID: 242124223350886573, guid: 98ebab4c0817db0489951efdf984bee2, type: 3}
   onDeath:
     m_PersistentCalls:
@@ -20349,11 +20345,6 @@ MonoBehaviour:
   runningMeter: 6
   fatiguedCooldown: 6
   runningMeterFillSpeed: 1.25
-  runSlider: {fileID: 1213230919}
-  cam: {fileID: 1490457397}
-  playerMovement: {fileID: 1944714062}
-  playerCrouching: {fileID: 1944714065}
-  footsteps: {fileID: 1944714068}
 --- !u!114 &1944714065
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20498,6 +20489,18 @@ MonoBehaviour:
   stepInterval: 0.75
   stepOne: {fileID: 1189258544278772527, guid: 982ee5d8373646644bd33de28354f37b, type: 3}
   stepTwo: {fileID: 8231615488466554110, guid: 5d9cb1f25ad62ed48beb34286614ae2e, type: 3}
+--- !u!114 &1944714069
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1944714059}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9c03cd789325b54b8beec96518cbbeb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1951199442
 GameObject:
   m_ObjectHideFlags: 0

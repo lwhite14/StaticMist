@@ -6,9 +6,15 @@ using UnityEngine.Events;
 public class Health : MonoBehaviour
 {
     public float health = 4f;
-    public Animator anim;
     public GameObject deathSound;
     public UnityEvent onDeath;
+
+    Animator anim;
+
+    void Start()
+    {
+        anim = GameObject.Find("DeathPanel").GetComponent<Animator>();
+    }
 
     public void TakeDamage(float damage) 
     {

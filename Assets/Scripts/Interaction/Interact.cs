@@ -5,10 +5,21 @@ using UnityEngine;
 public class Interact : MonoBehaviour
 {
     public float rayRange = 4f;
+    bool isInteracting = false;
 
     void Update()
     {
         CastRay();
+    }
+
+    void LateUpdate()
+    {
+        isInteracting = false;
+    }
+
+    public void InteractInput() 
+    {
+        isInteracting = true;
     }
 
     void CastRay()
@@ -18,9 +29,13 @@ public class Interact : MonoBehaviour
         if (hit)
         {
             GameObject hitObject = hitInfo.transform.gameObject;
-            if (Input.GetButtonDown("Interact"))
+            if (isInteracting)
             {
-                hitObject.GetComponent<IInteractable>().Interact();
+                try
+                {
+                    hitObject.GetComponent<IInteractable>().Interact();
+                }
+                catch { }
             }
         }
         else 
