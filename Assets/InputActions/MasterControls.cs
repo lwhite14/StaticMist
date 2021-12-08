@@ -19,6 +19,14 @@ public class @MasterControls : IInputActionCollection, IDisposable
             ""id"": ""6b450546-5d95-49cf-893b-c33afa4d9c45"",
             ""actions"": [
                 {
+                    ""name"": ""Look"",
+                    ""type"": ""Value"",
+                    ""id"": ""b29e5428-fcc6-497b-bf5a-52e9ee947704"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
                     ""name"": ""Walk_ForwardBackwards"",
                     ""type"": ""Button"",
                     ""id"": ""f8a14057-a023-40ef-86b6-503de3e62663"",
@@ -243,6 +251,17 @@ public class @MasterControls : IInputActionCollection, IDisposable
                     ""action"": ""Interact"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3e179981-684a-4e64-a649-5f27dbc9c386"",
+                    ""path"": ""<Mouse>/delta"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Look"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -335,6 +354,7 @@ public class @MasterControls : IInputActionCollection, IDisposable
 }");
         // Player
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
+        m_Player_Look = m_Player.FindAction("Look", throwIfNotFound: true);
         m_Player_Walk_ForwardBackwards = m_Player.FindAction("Walk_ForwardBackwards", throwIfNotFound: true);
         m_Player_Walk_Laterally = m_Player.FindAction("Walk_Laterally", throwIfNotFound: true);
         m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
@@ -396,6 +416,7 @@ public class @MasterControls : IInputActionCollection, IDisposable
     // Player
     private readonly InputActionMap m_Player;
     private IPlayerActions m_PlayerActionsCallbackInterface;
+    private readonly InputAction m_Player_Look;
     private readonly InputAction m_Player_Walk_ForwardBackwards;
     private readonly InputAction m_Player_Walk_Laterally;
     private readonly InputAction m_Player_Jump;
@@ -406,6 +427,7 @@ public class @MasterControls : IInputActionCollection, IDisposable
     {
         private @MasterControls m_Wrapper;
         public PlayerActions(@MasterControls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Look => m_Wrapper.m_Player_Look;
         public InputAction @Walk_ForwardBackwards => m_Wrapper.m_Player_Walk_ForwardBackwards;
         public InputAction @Walk_Laterally => m_Wrapper.m_Player_Walk_Laterally;
         public InputAction @Jump => m_Wrapper.m_Player_Jump;
@@ -421,6 +443,9 @@ public class @MasterControls : IInputActionCollection, IDisposable
         {
             if (m_Wrapper.m_PlayerActionsCallbackInterface != null)
             {
+                @Look.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLook;
+                @Look.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLook;
+                @Look.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLook;
                 @Walk_ForwardBackwards.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnWalk_ForwardBackwards;
                 @Walk_ForwardBackwards.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnWalk_ForwardBackwards;
                 @Walk_ForwardBackwards.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnWalk_ForwardBackwards;
@@ -443,6 +468,9 @@ public class @MasterControls : IInputActionCollection, IDisposable
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
             {
+                @Look.started += instance.OnLook;
+                @Look.performed += instance.OnLook;
+                @Look.canceled += instance.OnLook;
                 @Walk_ForwardBackwards.started += instance.OnWalk_ForwardBackwards;
                 @Walk_ForwardBackwards.performed += instance.OnWalk_ForwardBackwards;
                 @Walk_ForwardBackwards.canceled += instance.OnWalk_ForwardBackwards;
@@ -524,6 +552,7 @@ public class @MasterControls : IInputActionCollection, IDisposable
     public UIActions @UI => new UIActions(this);
     public interface IPlayerActions
     {
+        void OnLook(InputAction.CallbackContext context);
         void OnWalk_ForwardBackwards(InputAction.CallbackContext context);
         void OnWalk_Laterally(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);

@@ -7,9 +7,11 @@ using UnityEngine.InputSystem;
 public class ControlsHandler : MonoBehaviour
 {
     MasterControls controls;
+    InputAction look;
     InputAction forwardBackward;
     InputAction lateral;
 
+    MouseLook mouseLook;
     PlayerMovement playerMovement;
     PlayerSprinting playerSprinting;
     PlayerCrouching playerCrouching;
@@ -22,6 +24,7 @@ public class ControlsHandler : MonoBehaviour
 
     void Start()
     {
+        mouseLook = GetComponentInChildren<MouseLook>();
         playerMovement = GetComponent<PlayerMovement>();
         playerSprinting = GetComponent<PlayerSprinting>();
         playerCrouching = GetComponent<PlayerCrouching>();
@@ -30,6 +33,8 @@ public class ControlsHandler : MonoBehaviour
 
     void OnEnable()
     {
+        look = controls.Player.Look;
+        look.Enable();
         forwardBackward = controls.Player.Walk_ForwardBackwards;
         forwardBackward.Enable();
         lateral = controls.Player.Walk_Laterally;
@@ -58,6 +63,7 @@ public class ControlsHandler : MonoBehaviour
 
     void OnDisable()
     {
+        look.Disable();
         forwardBackward.Disable();
         lateral.Disable();
         controls.Player.Sprint.Disable();
@@ -120,6 +126,8 @@ public class ControlsHandler : MonoBehaviour
     {
         playerMovement.SetX(lateral.ReadValue<float>());
         playerMovement.SetZ(forwardBackward.ReadValue<float>());
+        mouseLook.SetMouseX(look.ReadValue<Vector2>().x);
+        mouseLook.SetMouseY(look.ReadValue<Vector2>().y);
     }
 
 }

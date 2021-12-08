@@ -35,7 +35,7 @@ public class ControlsTab : MonoBehaviour
             sens = 0;
         }
         sensSlider.value = sens;
-        mouseLook.SetMouseSensitivity((sens + 1) * 50);
+        mouseLook.SetMouseSensitivity((sens + 1) * 5);
     }
 
     public void SensitivityUp() 
@@ -46,6 +46,6 @@ public class ControlsTab : MonoBehaviour
             sens = 5;
         }
         sensSlider.value = sens;
-        mouseLook.SetMouseSensitivity((sens + 1) * 50);
+        mouseLook.SetMouseSensitivity((sens + 1) * 5);
     }
 }

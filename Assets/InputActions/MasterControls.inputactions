@@ -6,6 +6,14 @@
             "id": "6b450546-5d95-49cf-893b-c33afa4d9c45",
             "actions": [
                 {
+                    "name": "Look",
+                    "type": "Value",
+                    "id": "b29e5428-fcc6-497b-bf5a-52e9ee947704",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
                     "name": "Walk_ForwardBackwards",
                     "type": "Button",
                     "id": "f8a14057-a023-40ef-86b6-503de3e62663",
@@ -228,6 +236,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "Interact",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "3e179981-684a-4e64-a649-5f27dbc9c386",
+                    "path": "<Mouse>/delta",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Look",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
