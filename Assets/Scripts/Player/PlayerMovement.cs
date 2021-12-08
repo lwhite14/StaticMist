@@ -9,6 +9,7 @@ public class PlayerMovement : MonoBehaviour
     public float gravity = -9.81f;
     public float jumpHeight = 3f;
     public float jumpCoolDown = 1f;
+    public float movementSliding = 4f;
 
     [Header("Ground Check Variables")]
     public Transform groundCheck;
@@ -172,7 +173,22 @@ public class PlayerMovement : MonoBehaviour
         {
             if (!hasLanded && !isDead)
             {
-                x = newX;
+                if (x < newX) 
+                {
+                    x += Time.deltaTime * movementSliding;
+                    if ((x + 0.05) > newX)
+                    {
+                        x = newX;
+                    }
+                }
+                if (x > newX) 
+                {
+                    x -= Time.deltaTime * movementSliding;
+                    if ((x - 0.05) < newX)
+                    {
+                        x = newX;
+                    }
+                }              
             }
         }
     }
@@ -183,7 +199,22 @@ public class PlayerMovement : MonoBehaviour
         {
             if (!hasLanded && !isDead)
             {
-                z = newZ;
+                if (z < newZ)
+                {
+                    z += Time.deltaTime * movementSliding;
+                    if ((z + 0.05) > newZ) 
+                    {
+                        z = newZ;
+                    }
+                }
+                if (z > newZ)
+                {
+                    z -= Time.deltaTime * movementSliding;
+                    if ((z - 0.05) < newZ)
+                    {
+                        z = newZ;
+                    }
+                }
             }
         }
     }
