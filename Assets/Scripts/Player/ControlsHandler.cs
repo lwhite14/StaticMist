@@ -47,7 +47,7 @@ public class ControlsHandler : MonoBehaviour
         controls.Player.Sprint.Enable();
         controls.Player.Crouch.performed += Crouch;
         controls.Player.Crouch.Enable();
-        controls.Player.Interact.performed += Interact;
+        controls.Player.Interact.started += Interact;
         controls.Player.Interact.Enable();
 
         controls.UI.Exit.performed += Exit;
