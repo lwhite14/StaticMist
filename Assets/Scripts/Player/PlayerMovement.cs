@@ -37,8 +37,7 @@ public class PlayerMovement : MonoBehaviour
         playerCrouching = GetComponent<PlayerCrouching>();
 
         jumpCoolDownCounter = jumpCoolDown;
-        jumpCoolDownSlider.SetMaxValue(jumpCoolDown);
-        
+        jumpCoolDownSlider.SetMaxValue(jumpCoolDown);  
     }
 
     void Update()

@@ -2,11 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using NUnit.Framework;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.TestTools;
 
-
-public class PlayerMovementTests
+[TestFixture]
+public class PlayerMovementPlayTests
 {
     [SetUp]
     public void SetUp() 
