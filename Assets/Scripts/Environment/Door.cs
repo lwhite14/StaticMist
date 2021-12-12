@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class Door : MonoBehaviour, IInteractable
 {
+    public GameObject squeekyDoorSound;
     Animator anim;
     bool isOpen = false;
+    bool canInteract = true;
 
     void Start() 
     {
@@ -14,11 +16,15 @@ public class Door : MonoBehaviour, IInteractable
 
     public void Interact() 
     {
-        ChangeOpenState();
+        if (canInteract)
+        {
+            ChangeOpenState();
+        }
     }
 
     void ChangeOpenState() 
     {
+        SetCanInteract(false);
         if (!isOpen)
         {
             isOpen = true;
@@ -33,5 +39,16 @@ public class Door : MonoBehaviour, IInteractable
     void Open(bool newOpen) 
     {
         anim.SetBool("isOpen", newOpen);
+        Instantiate(squeekyDoorSound, transform.position, Quaternion.identity);
+    }
+
+    void SetCanInteract(bool newCanInteract) 
+    {
+        canInteract = newCanInteract;
+    }
+
+    void EndOfAnimation() 
+    {
+        SetCanInteract(true);
     }
 }
