@@ -247,7 +247,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 3304
+  m_VersionIndex: 3310
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -298,7 +298,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 162ce65b65a817d42b6070e8cb322792, type: 2}
+  - {fileID: 2100000, guid: 2d8ab2c42ad496142b090ee344d82829, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -352,6 +352,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6012860656545982959}
   - component: {fileID: 6012860656545982957}
+  - component: {fileID: 1128830208}
   - component: {fileID: 6012860656545982958}
   - component: {fileID: 6012860656545982956}
   m_Layer: 0
@@ -389,6 +390,22 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 3, z: 2.75}
   m_Center: {x: 0, y: 0.125, z: -1}
+--- !u!208 &1128830208
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6012860656545982953}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.125, y: 1.125, z: 1}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 0
+  m_Center: {x: 0, y: 0.125, z: -1}
+  m_TimeToStationary: 0.5
 --- !u!95 &6012860656545982958
 Animator:
   serializedVersion: 3

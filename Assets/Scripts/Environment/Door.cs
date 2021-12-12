@@ -11,7 +11,7 @@ public class Door : MonoBehaviour, IInteractable
 
     void Start() 
     {
-        anim = GetComponent<Animator>();
+        anim = GetComponentInChildren<Animator>();
     }
 
     public void Interact() 
@@ -39,7 +39,7 @@ public class Door : MonoBehaviour, IInteractable
     void Open(bool newOpen) 
     {
         anim.SetBool("isOpen", newOpen);
-        Instantiate(squeekyDoorSound, transform.position, Quaternion.identity);
+        Instantiate(squeekyDoorSound, transform.GetChild(0).position, Quaternion.identity);
     }
 
     void SetCanInteract(bool newCanInteract) 
