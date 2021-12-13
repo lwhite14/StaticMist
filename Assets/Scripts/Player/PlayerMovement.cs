@@ -26,8 +26,8 @@ public class PlayerMovement : MonoBehaviour
     bool hasLanded = false;
     bool isDead = false;
     float speed;
-    float x;
-    float z;
+    float x = 0;
+    float z = 0;
     float jumpCoolDownCounter;
 
     void Start()
@@ -36,8 +36,10 @@ public class PlayerMovement : MonoBehaviour
         jumpCoolDownSlider = GameObject.FindObjectOfType<JumpCoolDownSlider>();
         playerCrouching = GetComponent<PlayerCrouching>();
 
+
         jumpCoolDownCounter = jumpCoolDown;
-        jumpCoolDownSlider.SetMaxValue(jumpCoolDown);  
+        jumpCoolDownSlider.SetMaxValue(jumpCoolDown);
+        
     }
 
     void Update()
@@ -128,7 +130,14 @@ public class PlayerMovement : MonoBehaviour
 
     public bool CheckGrounded()
     {
-        return Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
+        if (groundCheck)
+        {
+            return Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
+        }
+        else 
+        {
+            return true;
+        }
     }
 
     public bool CheckMovingForward() 
@@ -166,7 +175,7 @@ public class PlayerMovement : MonoBehaviour
         playerCrouching.OnDeath(newIsDead);
     }
 
-    public void SetX(float newX) 
+    public void MovementSlideX(float newX) 
     {
         if (CheckGrounded())
         {
@@ -191,7 +200,7 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    public void SetZ(float newZ)
+    public void MovementSlideZ(float newZ)
     {
         if (CheckGrounded())
         {
@@ -214,6 +223,26 @@ public class PlayerMovement : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void SetX(float newX) 
+    {
+        x = newX;
+    }
+
+    public void SetZ(float newZ) 
+    {
+        z = newZ;
+    }
+
+    public float GetX() 
+    {
+        return x;
+    }
+    
+    public float GetZ() 
+    {
+        return z;
     }
 
     public void WarpToPosition(Vector3 newPosition)

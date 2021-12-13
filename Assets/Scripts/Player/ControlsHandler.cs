@@ -124,8 +124,8 @@ public class ControlsHandler : MonoBehaviour
 
     void Update()
     {
-        playerMovement.SetX(lateral.ReadValue<float>());
-        playerMovement.SetZ(forwardBackward.ReadValue<float>());
+        playerMovement.MovementSlideX(lateral.ReadValue<float>());
+        playerMovement.MovementSlideZ(forwardBackward.ReadValue<float>());
         mouseLook.SetMouseX(look.ReadValue<Vector2>().x);
         mouseLook.SetMouseY(look.ReadValue<Vector2>().y);
     }
