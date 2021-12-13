@@ -8,26 +8,35 @@ public class Interact : MonoBehaviour
 
     void Update()
     {
-        CastRay();
+        CastDialogueRays();
     }
 
-    void CastRay()
+    public void InteractInput() 
+    {
+        CastInteractRay();
+    }
+
+    void CastInteractRay()
     {
         RaycastHit hitInfo = new RaycastHit();
         bool hit = Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hitInfo, rayRange);
         if (hit)
         {
             GameObject hitObject = hitInfo.transform.gameObject;
-            if (Input.GetButtonDown("Interact"))
+            try
             {
                 hitObject.GetComponent<IInteractable>().Interact();
             }
+            catch { }      
         }
-        else 
+    }
+
+    void CastDialogueRays()
+    {
+        bool hit = Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), rayRange);
+        if (!hit)
         {
             FindObjectOfType<DialogueManager>().EndDialogue();
         }
     }
-    // If the raycast hits, the interactable object has its interact() funtion invoked. 
-    // If not the enddialogue method is invoked (used if the player turns away from a conversation).
 }

@@ -22,9 +22,9 @@ public class Monster : MonoBehaviour
     public LayerMask viewMask;
 
     [Header("Nav Variables/Objects")]
-    public NavMeshAgent navMeshAgent;
     public float notVisibleTime = 2f;
 
+    [Header("Unity Events")]
     public UnityEvent playerSpotted;
     public UnityEvent playerLost;
 
@@ -33,16 +33,20 @@ public class Monster : MonoBehaviour
     public UnityEvent patrol;
     public UnityEvent chase;
 
+    NavMeshAgent navMeshAgent;
     Transform player;
     Vector3[] waypoints;
     Vector3 startWaypoint;
+    Vector3 lastPosition;
     bool isChasing = false;
     bool isDead = false;
     bool isCalled = false;
     float notVisibleTimeCounter;
+    float readOnlySpeed = 0f;
 
     void Start()
     {
+        navMeshAgent = GetComponent<NavMeshAgent>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
         notVisibleTimeCounter = notVisibleTime;
 
@@ -89,6 +93,23 @@ public class Monster : MonoBehaviour
                     //notVisibleTimeCounter = notVisibleTime;
                     StartCoroutine(WaitForTime());
                 }
+            }
+        }
+    }
+
+    void FixedUpdate()
+    {
+        if (isChasing)
+        {
+            readOnlySpeed = Mathf.Lerp(readOnlySpeed, (transform.position - lastPosition).magnitude / Time.deltaTime, 0.75f);
+            lastPosition = transform.position;
+            if (readOnlySpeed <= 0.25f)
+            {
+                idle.Invoke();
+            }
+            else 
+            {
+                chase.Invoke();
             }
         }
     }

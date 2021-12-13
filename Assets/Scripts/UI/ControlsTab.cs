@@ -15,32 +15,19 @@ public class ControlsTab : MonoBehaviour
         sensSlider.value = sens;
     }
 
-    void Update()
+    public void InstructionsInput()
     {
-        if (Input.GetKeyDown(KeyCode.Tab)) 
+        if (controlsTab.activeSelf)
         {
-            if (controlsTab.activeSelf)
-            {
-                controlsTab.SetActive(false);
-            }
-            else 
-            { 
-                controlsTab.SetActive(true);
-            }
+            controlsTab.SetActive(false);
         }
-
-        if (Input.GetKeyDown(KeyCode.LeftBracket)) 
+        else
         {
-            SensitivityDown();
-        }
-
-        if (Input.GetKeyDown(KeyCode.RightBracket))
-        {
-            SensitivityUp();
+            controlsTab.SetActive(true);
         }
     }
 
-    void SensitivityDown()
+    public void SensitivityDown()
     {
         sens--;
         if (sens < 0)
@@ -48,10 +35,10 @@ public class ControlsTab : MonoBehaviour
             sens = 0;
         }
         sensSlider.value = sens;
-        mouseLook.SetMouseSensitivity((sens + 1) * 50);
+        mouseLook.SetMouseSensitivity((sens + 1) * 5);
     }
 
-    void SensitivityUp() 
+    public void SensitivityUp() 
     {
         sens++;
         if (sens > 5) 
@@ -59,6 +46,6 @@ public class ControlsTab : MonoBehaviour
             sens = 5;
         }
         sensSlider.value = sens;
-        mouseLook.SetMouseSensitivity((sens + 1) * 50);
+        mouseLook.SetMouseSensitivity((sens + 1) * 5);
     }
 }

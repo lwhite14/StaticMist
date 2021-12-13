@@ -5,13 +5,13 @@ using UnityEngine.UI;
 
 public class Waypoint : MonoBehaviour
 {
-    public Image img;
-    public Transform target;
-    public Text meter;
     public Vector3 offset;
-    public Animator anim;
-
+    public Transform target;
     public int maxDistance = 8;
+
+    Image img;
+    Text meter;
+    Animator anim;
 
     int distance;
     float minX;
@@ -21,6 +21,10 @@ public class Waypoint : MonoBehaviour
 
     void Start()
     {
+        img = GameObject.Find("Waypoint").GetComponent<Image>();
+        meter = GameObject.Find("DistanceText").GetComponent<Text>();
+        anim = GameObject.Find("Waypoint").GetComponent<Animator>();
+
         minX = -(img.GetPixelAdjustedRect().width / 2);
         maxX = Screen.width - minX;
 
@@ -30,7 +34,7 @@ public class Waypoint : MonoBehaviour
 
     private void Update()
     {
-        if (target != null)
+        if ((target != null) && (img != null) && (meter != null) && (anim != null))
         {
             Vector2 pos = Camera.main.WorldToScreenPoint(target.position + offset);
 

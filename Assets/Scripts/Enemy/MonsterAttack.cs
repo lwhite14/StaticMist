@@ -6,17 +6,19 @@ using UnityEngine.Events;
 
 public class MonsterAttack : MonoBehaviour
 {
-    public NavMeshAgent navMeshAgent;
-    public Monster monster;
     public GameObject stabSound;
     public float damage = 4f;
     public float strikingDistanceBuffer = 0.2f;
     public float attackCooldown = 0.5f;
     float attackCooldownCounter;
     public UnityEvent<float> attack;
+    NavMeshAgent navMeshAgent;
+    Monster monster;
 
     void Start()
     {
+        navMeshAgent = GetComponent<NavMeshAgent>();
+        monster = GetComponent<Monster>();
         attackCooldownCounter = attackCooldown;
     }
 

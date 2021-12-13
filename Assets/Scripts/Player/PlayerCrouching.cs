@@ -8,16 +8,16 @@ public class PlayerCrouching : MonoBehaviour
     [Range(0f, 1f)] public float crouchFactor = 0.5f;
     public float crouchSpeed = 5f;
 
+    [Header("Ceilng Check Variables")]
+    public Transform ceilingCheck;
+    public float ceilingDistance = 0.4f;
+    public LayerMask ceilingMask;
+
     CharacterController controller;
     float startHeight;
     float newHeight;
     bool isCrouching = false;
     bool isDead = false;
-
-    [Header("Celing Check Variables")]
-    public Transform ceilingCheck;
-    public float ceilingDistance = 0.4f;
-    public LayerMask ceilingMask;
 
     private void Start()
     {
@@ -27,25 +27,8 @@ public class PlayerCrouching : MonoBehaviour
     }
 
     void Update()
-    {
-        //float newH = startHeight;
-
-        if (Input.GetButtonDown("Movement3") && !isDead)
-        {
-            if (isCrouching && !CheckHeadClear())
-            {
-                newHeight = startHeight;
-                isCrouching = false;
-            }
-            else
-            {
-                newHeight = crouchFactor * startHeight;
-                isCrouching = true;
-            }
-        }     
-
+    {  
         float lastHeight = controller.height;
-
         if (controller.height > newHeight)
         {
             if ((controller.height - 0.02) <= newHeight)
@@ -69,14 +52,29 @@ public class PlayerCrouching : MonoBehaviour
             }
         }
 
-
         // fix vertical position
-        //transform.position.y += (ch.height - lastHeight) * 0.5;
-        //transform.position += new Vector3(0, (controller.height - lastHeight) * 0.5f, 0);
         controller.Move(new Vector3(0, (controller.height - lastHeight) * 0.5f, 0));
         groundCheckTransform.position += new Vector3(0, -(controller.height - lastHeight) * 0.5f, 0);
     }
     // Changes the height slowly, so it feels more natural. 
+
+    public void CrouchInput() 
+    {
+        if (!isDead)
+        {
+            if (isCrouching && !CheckHeadClear())
+            {
+                newHeight = startHeight;
+                isCrouching = false;
+            }
+            else
+            {
+                newHeight = crouchFactor * startHeight;
+                isCrouching = true;
+            }
+        }
+    }
+    // Triggered by new input system.
 
     public bool GetIsCrouching() 
     {

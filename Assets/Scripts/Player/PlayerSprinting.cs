@@ -15,13 +15,13 @@ public class PlayerSprinting : MonoBehaviour
     public float fatiguedCooldown = 2f;
     public float runningMeterFillSpeed = 4f;
 
-    [Header("Other Objects/Components")]
-    public RunSlider runSlider;
-    public Camera cam;
-    public PlayerMovement playerMovement;
-    public PlayerCrouching playerCrouching;
-    public Footsteps footsteps;
+    RunSlider runSlider;
+    Camera cam;
+    PlayerMovement playerMovement;
+    PlayerCrouching playerCrouching;
+    Footsteps footsteps;
 
+    bool inputPressed = false;
     bool isRunning = false;
     bool runCounterDepleted = false;
     float runningMeterCounter;
@@ -29,12 +29,17 @@ public class PlayerSprinting : MonoBehaviour
 
     void Start()
     {
+        runSlider = GameObject.FindObjectOfType<RunSlider>();
+        cam = GameObject.Find("Main Camera").GetComponent<Camera>();
+        playerMovement = GetComponent<PlayerMovement>();
+        playerCrouching = GetComponent<PlayerCrouching>();
+        footsteps = GetComponent<Footsteps>();
+
         playerMovement.ChangeSpeed(walkingSpeed);
         runningMeterCounter = runningMeter;
         runSlider.SetMaxValue(runningMeter);
         fatiguedCooldownCounter = fatiguedCooldown;
     }
-
     void Update()
     {
         CheckRunningInput();
@@ -45,7 +50,7 @@ public class PlayerSprinting : MonoBehaviour
     {
         if (playerMovement.CheckGrounded())
         {
-            if (Input.GetButton("Fire3"))
+            if (inputPressed)
             {
                 isRunning = true;
             }
@@ -104,7 +109,10 @@ public class PlayerSprinting : MonoBehaviour
     {
         playerMovement.ChangeSpeed(runningSpeed);
         ChangeFovToHigh();
-        footsteps.SpeedUpSteps();
+        if (footsteps != null)
+        {
+            footsteps.SpeedUpSteps();
+        }
 
         fatiguedCooldownCounter = fatiguedCooldown;
     }
@@ -120,7 +128,10 @@ public class PlayerSprinting : MonoBehaviour
         {
             playerMovement.ChangeSpeed(walkingSpeed);
         }
-        footsteps.SlowDownSteps();
+        if (footsteps != null)
+        {
+            footsteps.SlowDownSteps();
+        }
         ChangeFovToLow();
     }
     // Run commands when the speed is decreased.
@@ -150,5 +161,10 @@ public class PlayerSprinting : MonoBehaviour
         }
     }
     // Game-feel FOV change.
+
+    public void SprintInput(bool newInputPressed) 
+    {
+        inputPressed = newInputPressed;
+    }
 
 }

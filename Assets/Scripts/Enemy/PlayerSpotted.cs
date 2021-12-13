@@ -51,16 +51,21 @@ public class PlayerSpotted : MonoBehaviour
 
     void OnDrawGizmos()
     {
+        try
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawRay(player.position, player.forward * rayRange);
 
-        Gizmos.color = Color.red;
-        Gizmos.DrawRay(player.position, player.forward * rayRange);
-
-        Quaternion leftRayRotationShort = Quaternion.AngleAxis(-(spotAngle / 2.0f), Vector3.up);
-        Quaternion rightRayRotationShort = Quaternion.AngleAxis((spotAngle / 2.0f), Vector3.up);
-        Vector3 leftRayDirectionShort = leftRayRotationShort * player.forward;
-        Vector3 rightRayDirectionShort = rightRayRotationShort * player.forward;
-        Gizmos.DrawRay(player.position, leftRayDirectionShort * rayRange);
-        Gizmos.DrawRay(player.position, rightRayDirectionShort * rayRange);
-        
+            Quaternion leftRayRotationShort = Quaternion.AngleAxis(-(spotAngle / 2.0f), Vector3.up);
+            Quaternion rightRayRotationShort = Quaternion.AngleAxis((spotAngle / 2.0f), Vector3.up);
+            Vector3 leftRayDirectionShort = leftRayRotationShort * player.forward;
+            Vector3 rightRayDirectionShort = rightRayRotationShort * player.forward;
+            Gizmos.DrawRay(player.position, leftRayDirectionShort * rayRange);
+            Gizmos.DrawRay(player.position, rightRayDirectionShort * rayRange);
+        }
+        catch 
+        {
+            Debug.Log("Gizmos only work within the scene view, not the prefab view!");
+        }
     }
 }

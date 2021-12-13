@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -8,17 +9,16 @@ public class PlayerMovement : MonoBehaviour
     public float gravity = -9.81f;
     public float jumpHeight = 3f;
     public float jumpCoolDown = 1f;
-
-    [Header("Other Objects/Components")]
-    public CharacterController controller;
-    public JumpCoolDownSlider jumpCoolDownSlider;
-    public PlayerSprinting playerSprinting;
-    public PlayerCrouching playerCrouching;
+    public float movementSliding = 4f;
 
     [Header("Ground Check Variables")]
     public Transform groundCheck;
     public float groundDistance = 0.4f;
-    public LayerMask groundMask;   
+    public LayerMask groundMask;
+
+    CharacterController controller;
+    JumpCoolDownSlider jumpCoolDownSlider;
+    PlayerCrouching playerCrouching;
 
     Vector3 velocity;
     Vector3 move;
@@ -32,8 +32,12 @@ public class PlayerMovement : MonoBehaviour
 
     void Start()
     {
+        controller = GetComponent<CharacterController>();
+        jumpCoolDownSlider = GameObject.FindObjectOfType<JumpCoolDownSlider>();
+        playerCrouching = GetComponent<PlayerCrouching>();
+
         jumpCoolDownCounter = jumpCoolDown;
-        jumpCoolDownSlider.SetMaxValue(jumpCoolDown);
+        jumpCoolDownSlider.SetMaxValue(jumpCoolDown);  
     }
 
     void Update()
@@ -41,7 +45,7 @@ public class PlayerMovement : MonoBehaviour
         Ground();
         JumpCoolDown();
         Move();
-        Jump();
+        Fall();
     }
 
     void Ground()
@@ -90,11 +94,11 @@ public class PlayerMovement : MonoBehaviour
                 x = 0;
                 z = 0;
             }
-            else 
-            {
-                x = Input.GetAxis("Horizontal");
-                z = Input.GetAxis("Vertical");
-            }
+            //else 
+            //{
+            //    x = Input.GetAxis("Horizontal");
+            //    z = Input.GetAxis("Vertical");
+            //}
             move = transform.right * x + transform.forward * z;
         }
         controller.Move(move * speed * Time.deltaTime);
@@ -103,17 +107,23 @@ public class PlayerMovement : MonoBehaviour
         // If the player is on jump cooldown; they are rooted for the time being.
     }
 
+    void Fall()
+    {
+        velocity.y += gravity * Time.deltaTime;
+        controller.Move(velocity * Time.deltaTime);
+    }
+
+    public void JumpInput() 
+    {
+        Jump();
+    }
+
     void Jump() 
     {
-
-        if (Input.GetButtonDown("Jump") && CheckGrounded() && (CheckMovingForward() || CheckNotMoving()) && !hasLanded && !playerCrouching.GetIsCrouching() && !isDead)
+        if (CheckGrounded() && (CheckMovingForward() || CheckNotMoving()) && !hasLanded && !playerCrouching.GetIsCrouching() && !isDead)
         {
             velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
         }
-        velocity.y += gravity * Time.deltaTime;
-        controller.Move(velocity * Time.deltaTime);
-        // Added vertical velocity as long as the player is grounded, either moving forward or completely still, isnt on cooldown, and isn't crouching.
-        // Note: Gravity is added manually.
     }
 
     public bool CheckGrounded()
@@ -154,6 +164,56 @@ public class PlayerMovement : MonoBehaviour
     {
         isDead = newIsDead;
         playerCrouching.OnDeath(newIsDead);
+    }
+
+    public void SetX(float newX) 
+    {
+        if (CheckGrounded())
+        {
+            if (!hasLanded && !isDead)
+            {
+                x = Mathf.Lerp(x, newX, movementSliding * Time.deltaTime);
+                if (x < newX)
+                {
+                    if ((x + 0.05) > newX)
+                    {
+                        x = newX;
+                    }
+                }
+                if (x > newX)
+                {
+                    if ((x - 0.05) < newX)
+                    {
+                        x = newX;
+                    }
+                }
+            }
+        }
+    }
+
+    public void SetZ(float newZ)
+    {
+        if (CheckGrounded())
+        {
+            if (!hasLanded && !isDead)
+            {
+                z = Mathf.Lerp(z, newZ, movementSliding * Time.deltaTime);
+                if (z < newZ)
+                {
+                    if ((z + 0.05) > newZ)
+                    {
+                        z = newZ;
+                    }
+                }
+                if (z > newZ)
+                {
+                    if ((z - 0.05) < newZ)
+                    {
+                        z = newZ;
+                    }
+                }
+            }
+        }
     }
 
     public void WarpToPosition(Vector3 newPosition)
