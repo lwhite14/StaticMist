@@ -30,6 +30,24 @@ public class GameManager : MonoBehaviour
 
     public void Goal() 
     {
-        print("Reached the end!");
+        GameObject[] monsters = GameObject.FindGameObjectsWithTag("Monster");
+        foreach (GameObject monster in monsters) 
+        {
+            Destroy(monster);
+        }
+        GameObject.Find("LevelCompletePanel").GetComponent<Animator>().SetBool("isComplete", true);
+        FindObjectOfType<MouseLook>().SetCursorMode(false);
+        FindObjectOfType<MouseLook>().SetIsInMenu(true);
+        FindObjectOfType<PlayerMovement>().SetIsInMenu(true);
+    }
+
+    public void NextLevel() 
+    {
+        print("loading next level...");
+    }
+
+    void GameComplete() 
+    {
+    
     }
 }
