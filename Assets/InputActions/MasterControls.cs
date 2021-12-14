@@ -306,7 +306,7 @@ public class @MasterControls : IInputActionCollection, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""19bef19f-a246-4ce4-b460-fa4b14c9a97d"",
-                    ""path"": ""<Keyboard>/tab"",
+                    ""path"": ""<Keyboard>/f1"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard"",
