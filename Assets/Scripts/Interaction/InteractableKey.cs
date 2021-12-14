@@ -4,12 +4,7 @@ using UnityEngine;
 
 public class InteractableKey : MonoBehaviour, IInteractable
 {
-    Key key;
-
-    void Start() 
-    {
-        key = GetComponent<Key>();
-    }
+    public Key key;
 
     public void Interact() 
     {

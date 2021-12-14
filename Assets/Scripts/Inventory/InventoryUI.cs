@@ -19,14 +19,16 @@ public class InventoryUI : MonoBehaviour
         {
             anim.SetBool("isOn", true);
             FindObjectOfType<MouseLook>().SetCursorMode(false);
-            FindObjectOfType<MouseLook>().SetCanMove(false);
+            FindObjectOfType<MouseLook>().SetIsInMenu(true);
+            FindObjectOfType<PlayerMovement>().SetIsInMenu(true);
             isOn = true;
         }
         else 
         {
             anim.SetBool("isOn", false);
             FindObjectOfType<MouseLook>().SetCursorMode(true);
-            FindObjectOfType<MouseLook>().SetCanMove(true);
+            FindObjectOfType<MouseLook>().SetIsInMenu(false);
+            FindObjectOfType<PlayerMovement>().SetIsInMenu(false);
             isOn = false;
         }
     }

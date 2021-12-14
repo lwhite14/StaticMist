@@ -5,8 +5,15 @@ using UnityEngine.UI;
 
 public class Key : MonoBehaviour, IItem
 {
-    public GameObject invIconObj;
+    public void Use()
+    {
 
+    }
+
+    public void Examine()
+    {
+
+    }
     public void Equip() 
     {
     
@@ -17,19 +24,9 @@ public class Key : MonoBehaviour, IItem
     
     }
 
-    public void Use() 
-    { 
-    
-    }
-
-    public void Examine() 
-    {
-    
-    }
-
     public GameObject GetInvIcon() 
     {
-        return invIconObj;
+        return gameObject;
     }
 
 }

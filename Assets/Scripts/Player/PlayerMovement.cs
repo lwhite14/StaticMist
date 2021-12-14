@@ -25,6 +25,7 @@ public class PlayerMovement : MonoBehaviour
     bool previousGrounded = true;
     bool hasLanded = false;
     bool isDead = false;
+    bool isInMenu = false;
     float speed;
     float x = 0;
     float z = 0;
@@ -91,7 +92,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (CheckGrounded())
         {
-            if (hasLanded || isDead)
+            if (hasLanded || isDead || isInMenu)
             {
                 x = 0;
                 z = 0;
@@ -122,7 +123,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Jump() 
     {
-        if (CheckGrounded() && (CheckMovingForward() || CheckNotMoving()) && !hasLanded && !playerCrouching.GetIsCrouching() && !isDead)
+        if (CheckGrounded() && (CheckMovingForward() || CheckNotMoving()) && !hasLanded && !playerCrouching.GetIsCrouching() && !isDead && !isInMenu)
         {
             velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
         }
@@ -179,7 +180,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (CheckGrounded())
         {
-            if (!hasLanded && !isDead)
+            if (!hasLanded && !isDead && !isInMenu)
             {
                 x = Mathf.Lerp(x, newX, movementSliding * Time.deltaTime);
                 if (x < newX)
@@ -204,7 +205,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (CheckGrounded())
         {
-            if (!hasLanded && !isDead)
+            if (!hasLanded && !isDead && !isInMenu)
             {
                 z = Mathf.Lerp(z, newZ, movementSliding * Time.deltaTime);
                 if (z < newZ)
@@ -243,6 +244,11 @@ public class PlayerMovement : MonoBehaviour
     public float GetZ() 
     {
         return z;
+    }
+
+    public void SetIsInMenu(bool newIsInMenu) 
+    {
+        isInMenu = newIsInMenu;
     }
 
     public void WarpToPosition(Vector3 newPosition)

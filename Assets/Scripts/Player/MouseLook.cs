@@ -10,7 +10,7 @@ public class MouseLook : MonoBehaviour
     float mouseX = 0f;
     float mouseY = 0f;
     bool isDead = false;
-    bool canMove = true;
+    bool isInMenu = false;
 
     void Start()
     {
@@ -19,7 +19,7 @@ public class MouseLook : MonoBehaviour
 
     void Update()
     {
-        if (!isDead && canMove)
+        if (!isDead && !isInMenu)
         {
             xRotation -= mouseY;
             xRotation = Mathf.Clamp(xRotation, -90f, 90f);
@@ -66,9 +66,9 @@ public class MouseLook : MonoBehaviour
         mouseY = newY * mouseSensitivity * Time.deltaTime;
     }
 
-    public void SetCanMove(bool newCanMove) 
+    public void SetIsInMenu(bool newCanMove) 
     {
-        canMove = newCanMove;
+        isInMenu = newCanMove;
     }
 
 }
