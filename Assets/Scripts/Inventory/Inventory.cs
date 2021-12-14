@@ -7,6 +7,7 @@ using UnityEngine;
 public class Inventory
 {
     public List<IItem> items = new List<IItem>();
+    int maxItems = 16;
 
     public Inventory() { }
 
@@ -31,7 +32,10 @@ public class Inventory
 
     public void SetAllItems(List<IItem> newItems)
     {
-        items = newItems;
+        if (!(newItems.Count > 16))
+        {
+            items = newItems;
+        }
     }
 
     public void SetItem(IItem newItem, int index)
@@ -44,7 +48,10 @@ public class Inventory
 
     public void AddItem(IItem newItem)
     {
-        items.Add(newItem);
+        if (!(items.Count == 16))
+        {
+            items.Add(newItem);
+        }
     }
 
     public void RemoveItem(int index)

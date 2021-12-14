@@ -13,7 +13,7 @@ public class InteractableKey : MonoBehaviour, IInteractable
 
     public void Interact() 
     {
-        print("Interacting with the key...");
         FindObjectOfType<PlayerInventory>().Add(key);
+        Destroy(gameObject);
     }
 }
