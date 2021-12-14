@@ -9,7 +9,7 @@ public class PlayerInventory : MonoBehaviour
     public void Add(IItem newItem)
     {
         inventory.AddItem(newItem);
-        RefreshUI();
+        //RefreshUI();
     }
 
     void RefreshUI() 

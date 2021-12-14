@@ -30,7 +30,7 @@ public class ControlsHandler : MonoBehaviour
         playerSprinting = GetComponent<PlayerSprinting>();
         playerCrouching = GetComponent<PlayerCrouching>();
         interact = GetComponent<Interact>();
-        inventoryUI = FindObjectOfType<InventoryUI>();
+        //inventoryUI = FindObjectOfType<InventoryUI>();
     }
 
     void OnEnable()
@@ -130,7 +130,7 @@ public class ControlsHandler : MonoBehaviour
 
     void Inventory(InputAction.CallbackContext obj)
     {
-        inventoryUI.InventoryInput();
+        //inventoryUI.InventoryInput();
     }
 
     void Update()

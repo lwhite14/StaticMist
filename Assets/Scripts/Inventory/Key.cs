@@ -5,6 +5,10 @@ using UnityEngine.UI;
 
 public class Key : MonoBehaviour, IItem
 {
+    bool canUse = true;
+    bool canEquip = false;
+    bool canReload = false;
+
     public void Use()
     {
 

@@ -27,4 +27,9 @@ public class GameManager : MonoBehaviour
             monster.StartCoroutine(monster.ReturnToPatrol());
         }
     }
+
+    public void Goal() 
+    {
+        print("Reached the end!");
+    }
 }
