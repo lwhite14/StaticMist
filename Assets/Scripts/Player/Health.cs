@@ -7,14 +7,8 @@ public class Health : MonoBehaviour
 {
     public float health = 4f;
     public GameObject deathSound;
+    public GameObject deathFlash;
     public UnityEvent onDeath;
-
-    Animator anim;
-
-    void Start()
-    {
-        anim = GameObject.Find("DeathPanel").GetComponent<Animator>();
-    }
 
     public void TakeDamage(float damage) 
     {
@@ -39,13 +33,13 @@ public class Health : MonoBehaviour
         onDeath.Invoke();
     }
 
-    public void PlayDeathAnimation() 
-    {
-        anim.SetBool("isDead", true);
-    }
-
     public void DeathSound() 
     {
         Instantiate(deathSound, transform.position, Quaternion.identity);
+    }
+
+    public void PlayDeathFlash() 
+    {
+        Instantiate(deathFlash, GameObject.Find("FlashTarget").transform);
     }
 }

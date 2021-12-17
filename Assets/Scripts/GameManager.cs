@@ -5,6 +5,9 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    public GameObject deathUIPanel;
+    public GameObject levelCompleteUIPanel;
+
     public void ExitGame() 
     {
         Application.Quit();
@@ -17,7 +20,7 @@ public class GameManager : MonoBehaviour
 
     public void OnDeath() 
     {
-        GameObject.Find("YouDiedPanel").GetComponent<Animator>().SetBool("isDead", true);
+        Instantiate(deathUIPanel, GameObject.Find("WinLoseConditionTarget").transform);
 
         Monster[] monsters = FindObjectsOfType<Monster>();
         foreach (Monster monster in monsters) 
@@ -35,7 +38,7 @@ public class GameManager : MonoBehaviour
         {
             Destroy(monster);
         }
-        GameObject.Find("LevelCompletePanel").GetComponent<Animator>().SetBool("isComplete", true);
+        Instantiate(levelCompleteUIPanel, GameObject.Find("WinLoseConditionTarget").transform);
         FindObjectOfType<MouseLook>().SetCursorMode(false);
         FindObjectOfType<MouseLook>().SetIsInMenu(true);
         FindObjectOfType<PlayerMovement>().SetIsInMenu(true);

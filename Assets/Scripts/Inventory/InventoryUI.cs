@@ -7,6 +7,7 @@ public class InventoryUI : MonoBehaviour
     public GameObject[] itemSlots = new GameObject[16];
     Animator anim;
     bool isOn = false;
+    bool isDead = false;
 
     void Start()
     {
@@ -15,21 +16,24 @@ public class InventoryUI : MonoBehaviour
 
     public void InventoryInput() 
     {
-        if (!isOn)
+        if (!isDead)
         {
-            anim.SetBool("isOn", true);
-            FindObjectOfType<MouseLook>().SetCursorMode(false);
-            FindObjectOfType<MouseLook>().SetIsInMenu(true);
-            FindObjectOfType<PlayerMovement>().SetIsInMenu(true);
-            isOn = true;
-        }
-        else 
-        {
-            anim.SetBool("isOn", false);
-            FindObjectOfType<MouseLook>().SetCursorMode(true);
-            FindObjectOfType<MouseLook>().SetIsInMenu(false);
-            FindObjectOfType<PlayerMovement>().SetIsInMenu(false);
-            isOn = false;
+            if (!isOn)
+            {
+                anim.SetBool("isOn", true);
+                FindObjectOfType<MouseLook>().SetCursorMode(false);
+                FindObjectOfType<MouseLook>().SetIsInMenu(true);
+                FindObjectOfType<PlayerMovement>().SetIsInMenu(true);
+                isOn = true;
+            }
+            else
+            {
+                anim.SetBool("isOn", false);
+                FindObjectOfType<MouseLook>().SetCursorMode(true);
+                FindObjectOfType<MouseLook>().SetIsInMenu(false);
+                FindObjectOfType<PlayerMovement>().SetIsInMenu(false);
+                isOn = false;
+            }
         }
     }
 
@@ -40,5 +44,10 @@ public class InventoryUI : MonoBehaviour
             itemSlots[i].GetComponent<ItemSlot>().currentInvIcon = items[i].GetInvIcon();
             itemSlots[i].GetComponent<ItemSlot>().Refresh();
         }
+    }
+
+    public void SetIsDead(bool newIsDead) 
+    {
+        isDead = newIsDead;
     }
 }

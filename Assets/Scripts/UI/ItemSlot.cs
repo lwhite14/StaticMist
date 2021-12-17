@@ -7,6 +7,7 @@ public class ItemSlot : MonoBehaviour
 {
     [HideInInspector]
     public GameObject currentInvIcon = null;
+    public int itemIndex;
 
     public void Refresh() 
     {

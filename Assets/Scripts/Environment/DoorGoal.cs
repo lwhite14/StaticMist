@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GateGoal : MonoBehaviour, IInteractable
+public class DoorGoal : MonoBehaviour, IInteractable
 {
     public void Interact()
     {

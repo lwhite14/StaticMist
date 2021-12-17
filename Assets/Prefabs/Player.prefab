@@ -124,7 +124,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1
   m_VolumeTrigger: {fileID: 0}
-  m_RenderPostProcessing: 0
+  m_RenderPostProcessing: 1
   m_Antialiasing: 0
   m_AntialiasingQuality: 2
   m_StopNaN: 0
@@ -515,21 +515,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 4
   deathSound: {fileID: 242124223350886573, guid: 98ebab4c0817db0489951efdf984bee2, type: 3}
+  deathFlash: {fileID: 6337739780713771725, guid: 068487c537ce3404eb912829056876d9, type: 3}
   onDeath:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4518023453328408846}
-        m_TargetAssemblyTypeName: Health, Assembly-CSharp
-        m_MethodName: PlayDeathAnimation
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 4518023453328408847}
         m_TargetAssemblyTypeName: PlayerMovement, Assembly-CSharp
         m_MethodName: OnDeath
@@ -570,6 +559,30 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: GameManager, Scripts
         m_MethodName: OnDeath
         m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 4518023453328408846}
+        m_TargetAssemblyTypeName: Health, Scripts
+        m_MethodName: PlayDeathFlash
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: InventoryUI, Scripts
+        m_MethodName: SetIsDead
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
