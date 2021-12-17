@@ -6,14 +6,27 @@ using UnityEngine.UI;
 public class ItemSlot : MonoBehaviour
 {
     [HideInInspector]
-    public GameObject currentInvIcon = null;
+    public GameObject currentItem = null;
     public int itemIndex;
+    InventoryUI inventoryUI;
+
+    void Start() 
+    {
+        inventoryUI = FindObjectOfType<InventoryUI>();
+    }
 
     public void Refresh() 
     {
-        if (currentInvIcon != null) 
+        if (currentItem != null) 
         {
-            Instantiate(currentInvIcon, gameObject.transform.GetChild(0));
+            Instantiate(currentItem, gameObject.transform.GetChild(0));
         }
     }
+
+    public void Select() 
+    {
+        inventoryUI.SetViewedItem(currentItem);  
+    }
+
+
 }

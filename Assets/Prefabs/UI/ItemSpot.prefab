@@ -89,7 +89,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45dc9389ad64856439e94dde8a84960b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentInvIcon: {fileID: 0}
+  currentItem: {fileID: 0}
   itemIndex: 0
 --- !u!1 &2423829922485751839
 GameObject:
@@ -210,4 +210,16 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 188528036282203229}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 5021417823662552339}
+        m_TargetAssemblyTypeName: ItemSlot, Scripts
+        m_MethodName: Select
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
