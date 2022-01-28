@@ -59,7 +59,6 @@ public class GameManager : MonoBehaviour
     {
         int nextLevel = level + 1;
         string nextLevelName = "Level" + nextLevel;
-        Debug.Log(nextLevelName);
         SceneManager.LoadScene(nextLevelName, LoadSceneMode.Single);
     }
 
