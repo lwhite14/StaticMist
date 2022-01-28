@@ -4,8 +4,14 @@ using UnityEngine;
 
 public class LevelCompletePanel : MonoBehaviour
 {
-    public void LevelComplete() 
+    public void LevelComplete()
     {
         FindObjectOfType<GameManager>().NextLevel();
+
+    }
+
+    public void GameComplete()
+    {
+        FindObjectOfType<GameManager>().GameComplete();
     }
 }

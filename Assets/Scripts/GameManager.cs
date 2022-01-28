@@ -7,6 +7,10 @@ public class GameManager : MonoBehaviour
 {
     public GameObject deathUIPanel;
     public GameObject levelCompleteUIPanel;
+    public GameObject gameCompleteUIPanel;
+
+    public int level;
+    public bool isLastLevel = false;
 
     public void ExitGame() 
     {
@@ -38,7 +42,14 @@ public class GameManager : MonoBehaviour
         {
             Destroy(monster);
         }
-        Instantiate(levelCompleteUIPanel, GameObject.Find("WinLoseConditionTarget").transform);
+        if (!isLastLevel)
+        {
+            Instantiate(levelCompleteUIPanel, GameObject.Find("WinLoseConditionTarget").transform);
+        }
+        else 
+        {
+            Instantiate(gameCompleteUIPanel, GameObject.Find("WinLoseConditionTarget").transform);
+        }
         FindObjectOfType<MouseLook>().SetCursorMode(false);
         FindObjectOfType<MouseLook>().SetIsInMenu(true);
         FindObjectOfType<PlayerMovement>().SetIsInMenu(true);
@@ -46,11 +57,15 @@ public class GameManager : MonoBehaviour
 
     public void NextLevel() 
     {
-        print("loading next level...");
+        int nextLevel = level + 1;
+        string nextLevelName = "Level" + nextLevel;
+        Debug.Log(nextLevelName);
+        SceneManager.LoadScene(nextLevelName, LoadSceneMode.Single);
     }
 
-    void GameComplete() 
+    public void GameComplete() 
     {
-    
+        string nextLevelName = "Level1";
+        SceneManager.LoadScene(nextLevelName, LoadSceneMode.Single);
     }
 }
