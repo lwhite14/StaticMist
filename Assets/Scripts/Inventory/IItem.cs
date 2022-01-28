@@ -1,9 +1,10 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public interface IItem
 {
     void Use();
-    void Examine();
+    void Examine(Text examineText);
     void Equip();
     void Reload();
     GameObject GetInvIcon();

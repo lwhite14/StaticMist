@@ -88,22 +88,22 @@ public class InventoryUI : MonoBehaviour
     }
 
     public void Use() 
-    { 
-    
+    {
+        viewedItem.GetComponent<IItem>().Use();
     }
 
     public void Examine() 
-    { 
-    
+    {
+        viewedItem.GetComponent<IItem>().Examine(descriptionText);
     }
 
     public void Equip() 
-    { 
-    
+    {
+        viewedItem.GetComponent<IItem>().Equip();
     }
 
     public void Reload() 
-    { 
-    
+    {
+        viewedItem.GetComponent<IItem>().Reload();
     }
 }
