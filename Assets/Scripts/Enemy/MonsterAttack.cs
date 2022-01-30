@@ -11,14 +11,14 @@ public class MonsterAttack : MonoBehaviour
     public float strikingDistanceBuffer = 0.2f;
     public float attackCooldown = 0.5f;
     float attackCooldownCounter;
-    public UnityEvent<float> attack;
+    public UnityEvent attack;
     NavMeshAgent navMeshAgent;
-    Monster monster;
+    MonsterPathfinding monster;
 
     void Start()
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
-        monster = GetComponent<Monster>();
+        monster = GetComponent<MonsterPathfinding>();
         attackCooldownCounter = attackCooldown;
     }
 
@@ -56,7 +56,8 @@ public class MonsterAttack : MonoBehaviour
 
     public void Attack() 
     {
-        attack.Invoke(damage);
+        attack.Invoke();
+        FindObjectOfType<Health>().TakeDamage(damage);
     }
 
     public void AttackSound() 

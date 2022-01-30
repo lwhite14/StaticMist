@@ -31,8 +31,8 @@ public class GameManager : MonoBehaviour
     {
         Instantiate(deathUIPanel, GameObject.Find("WinLoseConditionTarget").transform);
 
-        Monster[] monsters = FindObjectsOfType<Monster>();
-        foreach (Monster monster in monsters)
+        MonsterPathfinding[] monsters = FindObjectsOfType<MonsterPathfinding>();
+        foreach (MonsterPathfinding monster in monsters)
         {
             monster.OnDeath(true);
             monster.StopAllCoroutines();

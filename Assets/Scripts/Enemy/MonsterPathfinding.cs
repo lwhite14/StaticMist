@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.AI;
 
-public class Monster : MonoBehaviour
+public class MonsterPathfinding : MonoBehaviour
 {
     [Header("Patrol Variables/Objects")]
     public Transform pathHolder;
@@ -25,10 +25,6 @@ public class Monster : MonoBehaviour
     public float notVisibleTime = 2f;
 
     [Header("Unity Events")]
-    public UnityEvent playerSpotted;
-    public UnityEvent playerLost;
-
-
     public UnityEvent idle;
     public UnityEvent patrol;
     public UnityEvent chase;
@@ -70,7 +66,7 @@ public class Monster : MonoBehaviour
             isChasing = true;
             if (!isCalled) // Makes sure 'playerSpotted' is only invoked once.
             {
-                playerSpotted.Invoke();
+                FindObjectOfType<MusicManager>().SwitchToChase();
                 chase.Invoke();
                 isCalled = true;
             }
@@ -89,8 +85,6 @@ public class Monster : MonoBehaviour
                 notVisibleTimeCounter -= Time.deltaTime;
                 if (notVisibleTimeCounter <= 0) 
                 {
-                    //isChasing = false;
-                    //notVisibleTimeCounter = notVisibleTime;
                     StartCoroutine(WaitForTime());
                 }
             }
@@ -187,7 +181,7 @@ public class Monster : MonoBehaviour
         notVisibleTimeCounter = notVisibleTime;
         navMeshAgent.isStopped = true;
         yield return new WaitForSeconds(afterChaseWaitTime);
-        playerLost.Invoke();
+        FindObjectOfType<MusicManager>().SwitchToTense();
         patrol.Invoke();
         isCalled = false; // Resets 'icCalled' so that Unity event is only called once in update.
         yield return StartCoroutine(ReturnToPatrol());
@@ -256,7 +250,6 @@ public class Monster : MonoBehaviour
             Gizmos.DrawRay(transform.position, rightRayDirectionLong * viewDistanceLong);
 
             Gizmos.color = Color.blue;
-            //Gizmos.DrawRay(transform.position, transform.forward * viewDistanceShort);
 
             Quaternion leftRayRotationShort = Quaternion.AngleAxis(-(spotAngleShort / 2.0f), Vector3.up);
             Quaternion rightRayRotationShort = Quaternion.AngleAxis((spotAngleShort / 2.0f), Vector3.up);

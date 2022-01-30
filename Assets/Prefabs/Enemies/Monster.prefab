@@ -1176,12 +1176,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   notVisibleTime: 4
-  playerSpotted:
-    m_PersistentCalls:
-      m_Calls: []
-  playerLost:
-    m_PersistentCalls:
-      m_Calls: []
   idle:
     m_PersistentCalls:
       m_Calls:
@@ -1282,10 +1276,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d0d63bbda356b94288f9ad6d29cfc8b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rayRange: 14
+  rayRange: 20
   spotAngle: 40
   musicalStabResetTime: 60
-  player: {fileID: 0}
   musicalStabSound: {fileID: 6699714942986620224, guid: 64e8e42ad39da4646b66ba08c3d58772, type: 3}
   obstacleMask:
     serializedVersion: 2
