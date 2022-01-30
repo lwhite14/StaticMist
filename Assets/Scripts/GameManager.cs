@@ -17,9 +17,14 @@ public class GameManager : MonoBehaviour
         Application.Quit();
     }
 
-    public void RestartGame() 
+    public void LoadFirstLevel() 
     {
         SceneManager.LoadScene("Level1", LoadSceneMode.Single);
+    }
+
+    public void RestartGame() 
+    {
+        LoadFirstLevel();
     }
 
     public void RestartLevel()    
