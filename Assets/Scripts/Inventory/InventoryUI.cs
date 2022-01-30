@@ -68,6 +68,8 @@ public class InventoryUI : MonoBehaviour
             equipButton.interactable = viewedItem.GetComponent<IItem>().GetCanEquip();
             reloadButton.interactable = viewedItem.GetComponent<IItem>().GetCanReload();
             nameText.text = viewedItem.GetComponent<IItem>().GetName();
+            FindObjectOfType<CoroutineHelper>().HelperStopCoroutine();
+            descriptionText.text = "";
             examineButton.interactable = true;
         }
         else 
@@ -76,6 +78,7 @@ public class InventoryUI : MonoBehaviour
             equipButton.interactable = false;
             reloadButton.interactable = false;
             nameText.text = "SELECT AN ITEM";
+            FindObjectOfType<CoroutineHelper>().HelperStopCoroutine();
             descriptionText.text = "";
             examineButton.interactable = false;
         }

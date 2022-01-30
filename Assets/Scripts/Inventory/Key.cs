@@ -7,11 +7,9 @@ public class Key : MonoBehaviour, IItem
 {
     string displayName = "KEY";
     string description = "THIS SHOULD OPEN THE GATE TO GET AWAY FROM THIS PLACE...";
-    bool canUse = true;
+    bool canUse = false;
     bool canEquip = false;
     bool canReload = false;
-
-    bool runningRoutine = false;
 
     public void Use()
     {
@@ -20,10 +18,7 @@ public class Key : MonoBehaviour, IItem
 
     public void Examine(Text examineText)
     {
-        if (!runningRoutine)
-        {
-            FindObjectOfType<CoroutineHelper>().HelperStartCoroutine(TypeSentence(description, examineText));
-        }
+        FindObjectOfType<CoroutineHelper>().HelperStartExamining(description, examineText);
     }
 
     public void Equip() 
@@ -65,20 +60,20 @@ public class Key : MonoBehaviour, IItem
         return description;
     }
 
-    IEnumerator TypeSentence(string sentence, Text examineText)
-    {
-        runningRoutine = true;
+    //IEnumerator TypeSentence(string sentence, Text examineText)
+    //{
+    //    runningRoutine = true;
 
-        examineText.text = "";
-        foreach (char letter in sentence.ToCharArray())
-        {
-            examineText.text += letter;
-            yield return new WaitForSeconds(0.05f);
-        }
-        yield return new WaitForSeconds(2.0f);
-        examineText.text = "";
+    //    examineText.text = "";
+    //    foreach (char letter in sentence.ToCharArray())
+    //    {
+    //        examineText.text += letter;
+    //        yield return new WaitForSeconds(0.05f);
+    //    }
+    //    yield return new WaitForSeconds(2.0f);
+    //    examineText.text = "";
 
-        runningRoutine = false;
-    }
+    //    runningRoutine = false;
+    //}
 
 }
