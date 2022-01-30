@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UI;
 
 public class Health : MonoBehaviour
 {
@@ -10,22 +11,48 @@ public class Health : MonoBehaviour
     public GameObject deathFlash;
     public UnityEvent onDeath;
 
-    public void TakeDamage(float damage) 
+    Slider healthSlider;
+    float maxHealth;
+
+    void Start()
     {
-        health -= damage;
-        if (IsDead()) 
+        healthSlider = GameObject.Find("HealthSlider").GetComponent<Slider>();
+        maxHealth = health;
+        healthSlider.maxValue = maxHealth;
+        healthSlider.value = health;
+    }
+
+    public void TakeDamage(float damage)
+    {
+        SetHealth(health - damage);
+        if (IsDead())
         {
             Die();
         }
     }
 
-    bool IsDead() 
+    public void Heal(int extraHealth)
     {
-        if (health <= 0) 
+        SetHealth(health + extraHealth);
+    }
+
+    bool IsDead()
+    {
+        if (health <= 0)
         {
             return true;
         }
         return false;
+    }
+
+    void SetHealth(float newHealth) 
+    {
+        health = newHealth;
+        if (health > maxHealth)
+        {
+            health = maxHealth;
+        }
+        healthSlider.value = health;
     }
 
     void Die() 
