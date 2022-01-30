@@ -12,22 +12,27 @@ public class GameManager : MonoBehaviour
     public int level;
     public bool isLastLevel = false;
 
-    public void ExitGame() 
+    public void ExitGame()
     {
         Application.Quit();
     }
 
-    public void Restart() 
+    public void LoadFirstLevel()
     {
-        SceneManager.LoadScene(0, LoadSceneMode.Single);
+        SceneManager.LoadScene("Level1", LoadSceneMode.Single);
     }
 
-    public void OnDeath() 
+    public void Restart() 
+    {
+        LoadFirstLevel();
+    }
+
+    public void OnDeath()
     {
         Instantiate(deathUIPanel, GameObject.Find("WinLoseConditionTarget").transform);
 
         Monster[] monsters = FindObjectsOfType<Monster>();
-        foreach (Monster monster in monsters) 
+        foreach (Monster monster in monsters)
         {
             monster.OnDeath(true);
             monster.StopAllCoroutines();
@@ -35,10 +40,10 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void Goal() 
+    public void Goal()
     {
         GameObject[] monsters = GameObject.FindGameObjectsWithTag("Monster");
-        foreach (GameObject monster in monsters) 
+        foreach (GameObject monster in monsters)
         {
             Destroy(monster);
         }
@@ -46,7 +51,7 @@ public class GameManager : MonoBehaviour
         {
             Instantiate(levelCompleteUIPanel, GameObject.Find("WinLoseConditionTarget").transform);
         }
-        else 
+        else
         {
             Instantiate(gameCompleteUIPanel, GameObject.Find("WinLoseConditionTarget").transform);
         }
@@ -55,16 +60,10 @@ public class GameManager : MonoBehaviour
         FindObjectOfType<PlayerMovement>().SetIsInMenu(true);
     }
 
-    public void NextLevel() 
+    public void NextLevel()
     {
         int nextLevel = level + 1;
         string nextLevelName = "Level" + nextLevel;
-        SceneManager.LoadScene(nextLevelName, LoadSceneMode.Single);
-    }
-
-    public void GameComplete() 
-    {
-        string nextLevelName = "Level1";
         SceneManager.LoadScene(nextLevelName, LoadSceneMode.Single);
     }
 }
