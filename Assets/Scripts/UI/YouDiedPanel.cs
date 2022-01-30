@@ -6,6 +6,6 @@ public class YouDiedPanel : MonoBehaviour
 {
     public void YouDied() 
     {
-        FindObjectOfType<GameManager>().Restart();
+        FindObjectOfType<GameManager>().RestartLevel();
     }
 }

@@ -12,6 +12,6 @@ public class LevelCompletePanel : MonoBehaviour
 
     public void GameComplete()
     {
-        FindObjectOfType<GameManager>().Restart();
+        FindObjectOfType<GameManager>().RestartGame();
     }
 }

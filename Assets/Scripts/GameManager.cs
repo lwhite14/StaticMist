@@ -17,14 +17,15 @@ public class GameManager : MonoBehaviour
         Application.Quit();
     }
 
-    public void LoadFirstLevel()
+    public void RestartGame() 
     {
         SceneManager.LoadScene("Level1", LoadSceneMode.Single);
     }
 
-    public void Restart() 
+    public void RestartLevel()    
     {
-        LoadFirstLevel();
+        string currentLevelName = "Level" + level;
+        SceneManager.LoadScene(currentLevelName, LoadSceneMode.Single);
     }
 
     public void OnDeath()
