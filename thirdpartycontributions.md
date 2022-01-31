@@ -7,6 +7,7 @@
 ## Models
  - Bastien Genbrugge on TURBOSQUID, [Key](https://www.turbosquid.com/3d-models/old-key-3ds-free/1099143)
  - Vertici on TURBOSQUID, [Med Kit](https://www.turbosquid.com/3d-models/military-aid-kit-model-1284968)
+ - Aleksn09 on TURBOSQUID, [Flashlight](https://www.turbosquid.com/3d-models/3d-flashlight-topex-1165829)
 ## Everything Else
  - Ciathyza, [Grid Box Textures](https://assetstore.unity.com/packages/2d/textures-materials/gridbox-prototype-materials-129127) 
  - Wello Soft, [Skybox Materials](https://assetstore.unity.com/packages/2d/textures-materials/sky/10-skyboxes-pack-day-night-32236) 

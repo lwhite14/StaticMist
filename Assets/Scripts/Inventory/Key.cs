@@ -59,21 +59,4 @@ public class Key : MonoBehaviour, IItem
     {
         return description;
     }
-
-    //IEnumerator TypeSentence(string sentence, Text examineText)
-    //{
-    //    runningRoutine = true;
-
-    //    examineText.text = "";
-    //    foreach (char letter in sentence.ToCharArray())
-    //    {
-    //        examineText.text += letter;
-    //        yield return new WaitForSeconds(0.05f);
-    //    }
-    //    yield return new WaitForSeconds(2.0f);
-    //    examineText.text = "";
-
-    //    runningRoutine = false;
-    //}
-
 }
