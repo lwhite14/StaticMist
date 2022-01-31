@@ -9,7 +9,6 @@ public class InteractableFlashlight : MonoBehaviour, IInteractable
 
     public void Interact()
     {
-        Debug.Log("Working");
         FindObjectOfType<PlayerInventory>().Add(flashlight);
         PickUpSound();
         Destroy(gameObject);

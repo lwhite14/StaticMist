@@ -5,12 +5,11 @@
  - SOUNDFISHING, [Slash and Death](https://www.soundfishing.eu/sound-effect/fight)
  - FreeSoundEffects.com, [Passive Monster](https://www.freesoundeffects.com/free-sounds/monster-sounds-10093/)
 ## Models
- - Bastien Genbrugge on TURBOSQUID, [Key](https://www.turbosquid.com/3d-models/old-key-3ds-free/1099143)
- - Vertici on TURBOSQUID, [Med Kit](https://www.turbosquid.com/3d-models/military-aid-kit-model-1284968)
- - Aleksn09 on TURBOSQUID, [Flashlight](https://www.turbosquid.com/3d-models/3d-flashlight-topex-1165829)
+ - TURBOSQUID, [Key](https://www.turbosquid.com/3d-models/old-key-3ds-free/1099143)
+ - TURBOSQUID, [Med Kit](https://www.turbosquid.com/3d-models/military-aid-kit-model-1284968)
+ - TURBOSQUID, [Flashlight](https://www.turbosquid.com/3d-models/3d-flashlight-topex-1165829)
 ## Everything Else
- - Ciathyza, [Grid Box Textures](https://assetstore.unity.com/packages/2d/textures-materials/gridbox-prototype-materials-129127) 
- - Wello Soft, [Skybox Materials](https://assetstore.unity.com/packages/2d/textures-materials/sky/10-skyboxes-pack-day-night-32236) 
  - PixelMush, [Pixel Font](https://assetstore.unity.com/packages/2d/fonts/pixel-font-tripfive-64734)
  - Logocreator.io, [Logo](https://logocreator.io/)  
  - Mixamo, [Model Animations](https://www.mixamo.com/)
+ - textures.com, [Textures](https://www.textures.com/library)
