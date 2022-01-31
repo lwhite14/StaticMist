@@ -12,6 +12,8 @@ public class MedKit : MonoBehaviour, IItem
     bool canEquip = false;
     bool canReload = false;
 
+    public GameObject healSound;
+
     public void Use() 
     {
         float currentHealth = FindObjectOfType<Health>().GetHealth();
@@ -22,6 +24,7 @@ public class MedKit : MonoBehaviour, IItem
             FindObjectOfType<Health>().Heal(2.0f);
             FindObjectOfType<PlayerInventory>().inventory.RemoveItem(this);
             FindObjectOfType<PlayerInventory>().RefreshUI();
+            Instantiate(healSound);
         }
     }
 
