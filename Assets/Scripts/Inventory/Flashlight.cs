@@ -11,16 +11,27 @@ public class Flashlight : MonoBehaviour, IItem
     bool canEquip = true;
     bool canReload = false;
 
+    public GameObject flashlight;
+    bool isEquiped = false;
+
     public void Use() { }
 
-    public void Examine(Text examineText)
+    public void Examine()
     {
-        FindObjectOfType<CoroutineHelper>().HelperStartExamining(description, examineText);
+        FindObjectOfType<CoroutineHelper>().HelperStartExamining(description);
     }
 
     public void Equip() 
     {
-        Debug.Log("*Equip the flashlight*");
+        if (!isEquiped)
+        {
+            Instantiate(flashlight, GameObject.Find("ViewmodelTargetPos").transform.position, Quaternion.identity);
+            isEquiped = true;
+        }
+        else 
+        {
+            FindObjectOfType<CoroutineHelper>().HelperStartExamining("I'M ALREADY USING THIS.");
+        }
     }
 
     public void Reload() { }

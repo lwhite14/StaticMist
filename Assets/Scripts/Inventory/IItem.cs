@@ -4,7 +4,7 @@ using UnityEngine.UI;
 public interface IItem
 {
     void Use();
-    void Examine(Text examineText);
+    void Examine();
     void Equip();
     void Reload();
     GameObject GetInvIcon();

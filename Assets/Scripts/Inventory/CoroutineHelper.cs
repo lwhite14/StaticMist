@@ -5,13 +5,14 @@ using UnityEngine.UI;
 
 public class CoroutineHelper : MonoBehaviour
 {
+    public Text examineText;
     bool runningRoutine = false;
 
-    public void HelperStartExamining(string sentence, Text examineText) 
+    public void HelperStartExamining(string sentence) 
     {
         if (!runningRoutine)
         {
-            StartCoroutine(TypeSentence(sentence, examineText));
+            StartCoroutine(TypeSentence(sentence));
         }
     }
 
@@ -21,7 +22,7 @@ public class CoroutineHelper : MonoBehaviour
         StopAllCoroutines();
     }
 
-    IEnumerator TypeSentence(string sentence, Text examineText)
+    IEnumerator TypeSentence(string sentence)
     {
         runningRoutine = true;
 

@@ -30,9 +30,9 @@ public class MedKit : MonoBehaviour, IItem
         }
     }
 
-    public void Examine(Text examineText) 
+    public void Examine() 
     {
-        FindObjectOfType<CoroutineHelper>().HelperStartExamining(description, examineText);
+        FindObjectOfType<CoroutineHelper>().HelperStartExamining(description);
     }
 
     public void Equip() { }

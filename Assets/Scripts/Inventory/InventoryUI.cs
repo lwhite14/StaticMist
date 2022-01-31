@@ -108,7 +108,7 @@ public class InventoryUI : MonoBehaviour
 
     public void Examine() 
     {
-        viewedItem.GetComponent<IItem>().Examine(descriptionText);
+        viewedItem.GetComponent<IItem>().Examine();
     }
 
     public void Equip() 
