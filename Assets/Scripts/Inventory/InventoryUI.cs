@@ -81,15 +81,19 @@ public class InventoryUI : MonoBehaviour
         }
         else 
         {
-            useButton.interactable = false;
-            equipButton.interactable = false;
-            reloadButton.interactable = false;
-            nameText.text = "SELECT AN ITEM";
-            FindObjectOfType<CoroutineHelper>().HelperStopCoroutine();
-            descriptionText.text = "";
-            examineButton.interactable = false;
+            ResetSelection();
         }
+    }
 
+    public void ResetSelection()
+    {
+        useButton.interactable = false;
+        equipButton.interactable = false;
+        reloadButton.interactable = false;
+        nameText.text = "SELECT AN ITEM";
+        FindObjectOfType<CoroutineHelper>().HelperStopCoroutine();
+        descriptionText.text = "";
+        examineButton.interactable = false;
     }
 
     public GameObject GetViewedItem() 

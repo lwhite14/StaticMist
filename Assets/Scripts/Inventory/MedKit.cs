@@ -25,6 +25,8 @@ public class MedKit : MonoBehaviour, IItem
             FindObjectOfType<PlayerInventory>().inventory.RemoveItem(this);
             FindObjectOfType<PlayerInventory>().RefreshUI();
             Instantiate(healSound);
+            FindObjectOfType<InventoryUI>().ResetSelection();
+
         }
     }
 
