@@ -6,6 +6,7 @@ public class MusicManager : MonoBehaviour
 {
     public AudioClip tenseMusic;
     public AudioClip chaseMusic;
+    public AudioClip goalMusic;
     AudioSource audioSource;
 
     void Start()
@@ -17,12 +18,21 @@ public class MusicManager : MonoBehaviour
     public void SwitchToTense() 
     {
         audioSource.clip = tenseMusic;
+        audioSource.loop = true;
         audioSource.Play(); 
     }
 
     public void SwitchToChase()
     {
         audioSource.clip = chaseMusic;
+        audioSource.loop = true;
+        audioSource.Play();
+    }
+
+    public void SwitchToGoal() 
+    {
+        audioSource.clip = goalMusic;
+        audioSource.loop = false;
         audioSource.Play();
     }
 
