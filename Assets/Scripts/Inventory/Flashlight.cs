@@ -11,8 +11,6 @@ public class Flashlight : MonoBehaviour, IItem
     bool canEquip = true;
     bool canReload = false;
 
-    bool runningRoutine = false;
-
     public void Use() { }
 
     public void Examine(Text examineText)

@@ -9,8 +9,10 @@ public class GameManager : MonoBehaviour
     public GameObject levelCompleteUIPanel;
     public GameObject gameCompleteUIPanel;
 
+    [Header("Current Level Information")]
     public int level;
     public bool isLastLevel = false;
+    public string levelException;
 
     public void ExitGame()
     {
@@ -29,8 +31,15 @@ public class GameManager : MonoBehaviour
 
     public void RestartLevel()    
     {
-        string currentLevelName = "Level" + level;
-        SceneManager.LoadScene(currentLevelName, LoadSceneMode.Single);
+        if (levelException == null || levelException == "")
+        {
+            string currentLevelName = "Level" + level;
+            SceneManager.LoadScene(currentLevelName, LoadSceneMode.Single);
+        }
+        else 
+        {
+            SceneManager.LoadScene(levelException, LoadSceneMode.Single);
+        }
     }
 
     public void OnDeath()

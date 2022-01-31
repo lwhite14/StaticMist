@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -17,9 +18,13 @@ public class ItemSlot : MonoBehaviour
 
     public void Refresh() 
     {
-        if (currentItem != null) 
+        if (transform.GetChild(0).childCount > 0) 
         {
-            Instantiate(currentItem, gameObject.transform.GetChild(0));
+            Destroy(transform.GetChild(0).GetChild(0).gameObject);
+        }
+        if (currentItem != null)
+        {
+            Instantiate(currentItem, transform.GetChild(0));
         }
     }
 

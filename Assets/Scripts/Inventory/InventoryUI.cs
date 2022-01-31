@@ -45,11 +45,18 @@ public class InventoryUI : MonoBehaviour
         }
     }
 
-    public void RefreshUI(List<IItem> items) 
+    public void RefreshUI(List<IItem> items)
     {
-        for (int i = 0; i < items.Count; i++)
+        for (int i = 0; i < itemSlots.Length; i++)
         {
-            itemSlots[i].GetComponent<ItemSlot>().currentItem = items[i].GetInvIcon();
+            if (i < items.Count)
+            {
+                itemSlots[i].GetComponent<ItemSlot>().currentItem = items[i].GetInvIcon();
+            }
+            else
+            {
+                itemSlots[i].GetComponent<ItemSlot>().currentItem = null;
+            }
             itemSlots[i].GetComponent<ItemSlot>().Refresh();
         }
     }

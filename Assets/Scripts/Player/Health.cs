@@ -31,7 +31,7 @@ public class Health : MonoBehaviour
         }
     }
 
-    public void Heal(int extraHealth)
+    public void Heal(float extraHealth)
     {
         SetHealth(health + extraHealth);
     }
@@ -68,5 +68,15 @@ public class Health : MonoBehaviour
     public void PlayDeathFlash() 
     {
         Instantiate(deathFlash, GameObject.Find("FlashTarget").transform);
+    }
+
+    public float GetHealth() 
+    {
+        return health;
+    }
+
+    public float GetMaxHealth()
+    {
+        return maxHealth;
     }
 }

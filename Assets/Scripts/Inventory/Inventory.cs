@@ -7,7 +7,7 @@ using UnityEngine;
 public class Inventory
 {
     public List<IItem> items = new List<IItem>();
-    int maxItems = 16;
+    const int maxItems = 16;
 
     public Inventory() { }
 

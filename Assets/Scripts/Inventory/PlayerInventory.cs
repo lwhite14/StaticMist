@@ -12,7 +12,7 @@ public class PlayerInventory : MonoBehaviour
         RefreshUI();
     }
 
-    void RefreshUI() 
+    public void RefreshUI() 
     {
         FindObjectOfType<InventoryUI>().RefreshUI(inventory.GetAllItems());
     }

@@ -6,16 +6,23 @@ using UnityEngine.UI;
 public class MedKit : MonoBehaviour, IItem
 {
     string displayName = "MED KIT";
-    string description = "THIS SHOULD PATCH ME UP IF I GET HURT.";
+    string description = "THIS SHOULD PATCH ME UP IF I GET HURT."; 
+    int InventorySpace = -1;
     bool canUse = true;
     bool canEquip = false;
     bool canReload = false;
 
-    bool runningRoutine = false;
-
     public void Use() 
     {
-    
+        float currentHealth = FindObjectOfType<Health>().GetHealth();
+        float maxHealth = FindObjectOfType<Health>().GetMaxHealth();
+
+        if (maxHealth != currentHealth)
+        {
+            FindObjectOfType<Health>().Heal(2.0f);
+            FindObjectOfType<PlayerInventory>().inventory.RemoveItem(this);
+            FindObjectOfType<PlayerInventory>().RefreshUI();
+        }
     }
 
     public void Examine(Text examineText) 
@@ -55,5 +62,10 @@ public class MedKit : MonoBehaviour, IItem
     public string GetDescription()
     {
         return description;
+    }
+
+    public int GetInventorySpace()
+    {
+        return InventorySpace;
     }
 }
