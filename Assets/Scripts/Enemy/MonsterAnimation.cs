@@ -4,12 +4,7 @@ using UnityEngine;
 
 public class MonsterAnimation : MonoBehaviour
 {
-    Animator anim;
-
-    void Start() 
-    {
-        anim = GetComponentInChildren<Animator>();
-    }
+    public Animator anim;
 
     public void SetChase() 
     {
@@ -37,7 +32,7 @@ public class MonsterAnimation : MonoBehaviour
 
     public void SetAttack()
     {
-        anim.Play("MonsterStab");
+        anim.Play("Attack");
     }
 
 
