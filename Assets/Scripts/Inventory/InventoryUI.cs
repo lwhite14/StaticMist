@@ -15,7 +15,7 @@ public class InventoryUI : MonoBehaviour
     GameObject viewedItem = null;
     Animator anim;
     bool isOn = false;
-    bool isDead = false;
+    bool canUse = true;
 
     void Start()
     {
@@ -24,7 +24,7 @@ public class InventoryUI : MonoBehaviour
 
     public void InventoryInput() 
     {
-        if (!isDead)
+        if (canUse)
         {
             if (!isOn)
             {
@@ -61,9 +61,9 @@ public class InventoryUI : MonoBehaviour
         }
     }
 
-    public void SetIsDead(bool newIsDead) 
+    public void SetCanUse(bool newCanUse) 
     {
-        isDead = newIsDead;
+        canUse = newCanUse;
     }
 
     public void SetViewedItem(GameObject newViewedItem) 

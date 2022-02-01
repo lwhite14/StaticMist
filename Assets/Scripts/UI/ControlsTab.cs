@@ -19,12 +19,18 @@ public class ControlsTab : MonoBehaviour
     {
         if (controlsTab.activeSelf)
         {
-            controlsTab.SetActive(false);
+            SetOn(false);
         }
         else
         {
-            controlsTab.SetActive(true);
+            SetOn(true);
         }
+    }
+
+    public void SetOn(bool status) 
+    {
+        controlsTab.SetActive(status);
+        StateManager.Instructions = status;
     }
 
     public void SensitivityDown()
@@ -34,6 +40,7 @@ public class ControlsTab : MonoBehaviour
         {
             sens = 0;
         }
+        StateManager.Sensitivity = sens;
         sensSlider.value = sens;
         mouseLook.SetMouseSensitivity((sens + 1) * 5);
     }
@@ -45,6 +52,15 @@ public class ControlsTab : MonoBehaviour
         {
             sens = 5;
         }
+        StateManager.Sensitivity = sens;
+        sensSlider.value = sens;
+        mouseLook.SetMouseSensitivity((sens + 1) * 5);
+    }
+
+    public void SetSens(float newSens) 
+    {
+        sens = newSens;
+        StateManager.Sensitivity = sens;
         sensSlider.value = sens;
         mouseLook.SetMouseSensitivity((sens + 1) * 5);
     }
