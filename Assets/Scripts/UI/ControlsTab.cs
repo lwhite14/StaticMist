@@ -8,16 +8,21 @@ public class ControlsTab : MonoBehaviour
     public GameObject controlsTab;
     public Slider sensSlider;
     public float sens = 5;
-    public MouseLook mouseLook;
+
+    MouseLook mouseLook;
+    Animator anim;
+    bool isOn = true;
 
     void Start()
     {
         sensSlider.value = sens;
+        mouseLook = FindObjectOfType<MouseLook>();
+        anim = GetComponent<Animator>();
     }
 
     public void InstructionsInput()
     {
-        if (controlsTab.activeSelf)
+        if (isOn)
         {
             SetOn(false);
         }
@@ -29,7 +34,9 @@ public class ControlsTab : MonoBehaviour
 
     public void SetOn(bool status) 
     {
-        controlsTab.SetActive(status);
+        //controlsTab.SetActive(status);
+        isOn = status;
+        anim.SetBool("isOn", status);
         StateManager.Instructions = status;
     }
 
