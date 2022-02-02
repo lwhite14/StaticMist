@@ -145,10 +145,7 @@ public class MonsterPathfinding : MonoBehaviour
                 targetWaypointIndex = (targetWaypointIndex + 1) % waypoints.Length;
                 targetWaypoint = waypoints[targetWaypointIndex];
                 yield return new WaitForSeconds(patrolTurnWaitTime);
-
-                monsterAnimation.SetIsTurning(true);
                 yield return StartCoroutine(TurnToFace(targetWaypoint));
-                monsterAnimation.SetIsTurning(false);
             }
             yield return null;
         }
