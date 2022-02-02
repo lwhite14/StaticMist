@@ -9,7 +9,7 @@ public class MonsterPathfinding : MonoBehaviour
 {
     [Header("Patrol Variables/Objects")]
     public Transform pathHolder;
-    public float speed = 5;
+    public float patrolSpeed = 5;
     public float patrolTurnWaitTime = 0.3f;
     public float turnSpeed = 90f;
     public float buffer = 0.05f;
@@ -24,10 +24,11 @@ public class MonsterPathfinding : MonoBehaviour
 
     [Header("Nav Variables/Objects")]
     public float notVisibleTime = 2f;
+    public float chaseSpeed = 6f;
 
     NavMeshAgent navMeshAgent;
-    Transform player;
     MonsterAnimation monsterAnimation;
+    Transform player;
     Vector3[] waypoints;
     Vector3 startWaypoint;
     Vector3 lastPosition;
@@ -35,13 +36,14 @@ public class MonsterPathfinding : MonoBehaviour
     bool isDead = false;
     bool isCalled = false;
     float notVisibleTimeCounter;
-    float readOnlySpeed = 0f;
+    float speed = 0f;
 
     void Start()
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
-        player = GameObject.FindGameObjectWithTag("Player").transform;
+        navMeshAgent.speed = chaseSpeed;
         monsterAnimation = GetComponent<MonsterAnimation>();
+        player = GameObject.FindGameObjectWithTag("Player").transform;
         notVisibleTimeCounter = notVisibleTime;
 
         waypoints = new Vector3[pathHolder.childCount];
@@ -92,8 +94,9 @@ public class MonsterPathfinding : MonoBehaviour
 
     void UpdateSpeed()
     {
-        readOnlySpeed = Mathf.Lerp(readOnlySpeed, (transform.position - lastPosition).magnitude / Time.deltaTime, 0.75f);
+        speed = Mathf.Lerp(speed, (transform.position - lastPosition).magnitude / Time.deltaTime, 0.75f);
         lastPosition = transform.position;
+        monsterAnimation.SetSpeed(speed);
     }
 
     public bool CanSeePlayer() 
@@ -128,7 +131,6 @@ public class MonsterPathfinding : MonoBehaviour
 
     IEnumerator FollowPath() 
     {
-
         transform.position = waypoints[0];
 
         int targetWaypointIndex = 1;
@@ -137,13 +139,16 @@ public class MonsterPathfinding : MonoBehaviour
 
         while (true)
         {
-            transform.position = Vector3.MoveTowards(transform.position, targetWaypoint, speed * Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, targetWaypoint, patrolSpeed * Time.deltaTime);
             if (Vector3.Distance(transform.position, targetWaypoint) <= buffer)
             {
                 targetWaypointIndex = (targetWaypointIndex + 1) % waypoints.Length;
                 targetWaypoint = waypoints[targetWaypointIndex];
                 yield return new WaitForSeconds(patrolTurnWaitTime);
+
+                monsterAnimation.SetIsTurning(true);
                 yield return StartCoroutine(TurnToFace(targetWaypoint));
+                monsterAnimation.SetIsTurning(false);
             }
             yield return null;
         }
@@ -213,7 +218,7 @@ public class MonsterPathfinding : MonoBehaviour
 
     public float GetSpeed()
     {
-        return readOnlySpeed;
+        return speed;
     }
 
     void OnDrawGizmos()
