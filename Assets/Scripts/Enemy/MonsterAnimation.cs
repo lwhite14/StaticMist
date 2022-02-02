@@ -4,36 +4,22 @@ using UnityEngine;
 
 public class MonsterAnimation : MonoBehaviour
 {
-    public Animator anim;
+    Animator anim;
+    MonsterPathfinding monsterPathfinding;
 
-    public void SetChase() 
+    void Start()
     {
-        anim.SetBool("isChase", true);
-        anim.SetBool("isPatrol", false);
-        anim.SetBool("isIdle", false);
-        anim.SetBool("isAttack", false);
+        anim = GetComponent<Animator>();
+        monsterPathfinding = GetComponent<MonsterPathfinding>();
     }
 
-    public void SetPatrol() 
+    void Update()
     {
-        anim.SetBool("isChase", false);
-        anim.SetBool("isPatrol", true);
-        anim.SetBool("isIdle", false);
-        anim.SetBool("isAttack", false);
+        SetSpeed(monsterPathfinding.GetSpeed());
     }
 
-    public void SetIdle() 
+    void SetSpeed(float newSpeed) 
     {
-        anim.SetBool("isChase", false);
-        anim.SetBool("isPatrol", false);
-        anim.SetBool("isIdle", true);
-        anim.SetBool("isAttack", false);
+        anim.SetFloat("speed", newSpeed);
     }
-
-    public void SetAttack()
-    {
-        anim.Play("Attack");
-    }
-
-
 }

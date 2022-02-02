@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -24,13 +25,9 @@ public class MonsterPathfinding : MonoBehaviour
     [Header("Nav Variables/Objects")]
     public float notVisibleTime = 2f;
 
-    [Header("Unity Events")]
-    public UnityEvent idle;
-    public UnityEvent patrol;
-    public UnityEvent chase;
-
     NavMeshAgent navMeshAgent;
     Transform player;
+    MonsterAnimation monsterAnimation;
     Vector3[] waypoints;
     Vector3 startWaypoint;
     Vector3 lastPosition;
@@ -44,6 +41,7 @@ public class MonsterPathfinding : MonoBehaviour
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
+        monsterAnimation = GetComponent<MonsterAnimation>();
         notVisibleTimeCounter = notVisibleTime;
 
         waypoints = new Vector3[pathHolder.childCount];
@@ -67,7 +65,6 @@ public class MonsterPathfinding : MonoBehaviour
             if (!isCalled) // Makes sure 'playerSpotted' is only invoked once.
             {
                 FindObjectOfType<MusicManager>().SwitchToChase();
-                chase.Invoke();
                 isCalled = true;
             }
         }
@@ -89,23 +86,14 @@ public class MonsterPathfinding : MonoBehaviour
                 }
             }
         }
+
+        UpdateSpeed();
     }
 
-    void FixedUpdate()
+    void UpdateSpeed()
     {
-        if (isChasing)
-        {
-            readOnlySpeed = Mathf.Lerp(readOnlySpeed, (transform.position - lastPosition).magnitude / Time.deltaTime, 0.75f);
-            lastPosition = transform.position;
-            if (readOnlySpeed <= 0.25f)
-            {
-                idle.Invoke();
-            }
-            else 
-            {
-                chase.Invoke();
-            }
-        }
+        readOnlySpeed = Mathf.Lerp(readOnlySpeed, (transform.position - lastPosition).magnitude / Time.deltaTime, 0.75f);
+        lastPosition = transform.position;
     }
 
     public bool CanSeePlayer() 
@@ -176,13 +164,11 @@ public class MonsterPathfinding : MonoBehaviour
 
     IEnumerator WaitForTime()
     {
-        idle.Invoke();
         isChasing = false;
         notVisibleTimeCounter = notVisibleTime;
         navMeshAgent.isStopped = true;
         yield return new WaitForSeconds(afterChaseWaitTime);
         FindObjectOfType<MusicManager>().SwitchToTense();
-        patrol.Invoke();
         isCalled = false; // Resets 'icCalled' so that Unity event is only called once in update.
         yield return StartCoroutine(ReturnToPatrol());
     }
@@ -223,6 +209,11 @@ public class MonsterPathfinding : MonoBehaviour
     public bool GetIsChasing() 
     {
         return isChasing;
+    }
+
+    public float GetSpeed()
+    {
+        return readOnlySpeed;
     }
 
     void OnDrawGizmos()
