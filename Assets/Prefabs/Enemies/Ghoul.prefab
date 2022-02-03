@@ -1127,9 +1127,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pathHolder: {fileID: 0}
   patrolSpeed: 3.5
-  patrolTurnWaitTime: 0.3
+  patrolTurnWaitTime: 0.2
   turnSpeed: 135
-  buffer: 0.25
+  buffer: 0.85
   spotAngleLong: 80
   viewDistanceLong: 12
   spotAngleShort: 180
@@ -1139,6 +1139,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   notVisibleTime: 4
+  chaseSpeed: 6
 --- !u!114 &6542828658346494641
 MonoBehaviour:
   m_ObjectHideFlags: 0

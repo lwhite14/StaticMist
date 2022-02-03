@@ -41,7 +41,8 @@ public class MonsterPathfinding : MonoBehaviour
     void Start()
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
-        navMeshAgent.speed = chaseSpeed;
+        navMeshAgent.speed = patrolSpeed;
+        navMeshAgent.isStopped = false;
         monsterAnimation = GetComponent<MonsterAnimation>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
         notVisibleTimeCounter = notVisibleTime;
@@ -62,8 +63,8 @@ public class MonsterPathfinding : MonoBehaviour
         if (CanSeePlayer() && !isDead)
         {
             StopAllCoroutines();
-            navMeshAgent.isStopped = false;
             isChasing = true;
+            navMeshAgent.speed = chaseSpeed;
             if (!isCalled) // Makes sure 'playerSpotted' is only invoked once.
             {
                 FindObjectOfType<MusicManager>().SwitchToChase();
@@ -132,34 +133,17 @@ public class MonsterPathfinding : MonoBehaviour
     IEnumerator FollowPath() 
     {
         transform.position = waypoints[0];
-
         int targetWaypointIndex = 1;
         Vector3 targetWaypoint = waypoints[targetWaypointIndex];
-        transform.LookAt(targetWaypoint);
 
         while (true)
         {
-            transform.position = Vector3.MoveTowards(transform.position, targetWaypoint, patrolSpeed * Time.deltaTime);
+            navMeshAgent.destination = targetWaypoint;
             if (Vector3.Distance(transform.position, targetWaypoint) <= buffer)
             {
                 targetWaypointIndex = (targetWaypointIndex + 1) % waypoints.Length;
                 targetWaypoint = waypoints[targetWaypointIndex];
-                yield return new WaitForSeconds(patrolTurnWaitTime);
-                yield return StartCoroutine(TurnToFace(targetWaypoint));
             }
-            yield return null;
-        }
-    }
-
-    IEnumerator TurnToFace(Vector3 lookTarget) 
-    {
-        Vector3 dirToLookTarget = (lookTarget - transform.position).normalized;
-        float targetAngle = 90 - Mathf.Atan2(dirToLookTarget.z, dirToLookTarget.x) * Mathf.Rad2Deg;
-
-        while (Mathf.Abs(Mathf.Abs(Mathf.DeltaAngle(transform.eulerAngles.y, targetAngle))) > 0.05f)
-        {
-            float angle = Mathf.MoveTowardsAngle(transform.eulerAngles.y, targetAngle, turnSpeed * Time.deltaTime);
-            transform.eulerAngles = Vector3.up * angle;
             yield return null;
         }
     }
@@ -179,6 +163,7 @@ public class MonsterPathfinding : MonoBehaviour
     {
         navMeshAgent.isStopped = false;
         navMeshAgent.destination = startWaypoint;
+        navMeshAgent.speed = patrolSpeed;
 
         while (true)
         {
@@ -189,7 +174,6 @@ public class MonsterPathfinding : MonoBehaviour
                 {
                     if (!navMeshAgent.hasPath || navMeshAgent.velocity.sqrMagnitude == 0f)
                     {
-                        navMeshAgent.isStopped = true;
                         yield return StartCoroutine(FollowPath());
                     }
                 }
