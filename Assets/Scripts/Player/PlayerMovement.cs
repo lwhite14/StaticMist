@@ -25,9 +25,10 @@ public class PlayerMovement : MonoBehaviour
     bool previousGrounded = true;
     bool hasLanded = false;
     bool isDead = false;
+    bool isInMenu = false;
     float speed;
-    float x;
-    float z;
+    float x = 0;
+    float z = 0;
     float jumpCoolDownCounter;
 
     void Start()
@@ -36,8 +37,10 @@ public class PlayerMovement : MonoBehaviour
         jumpCoolDownSlider = GameObject.FindObjectOfType<JumpCoolDownSlider>();
         playerCrouching = GetComponent<PlayerCrouching>();
 
+
         jumpCoolDownCounter = jumpCoolDown;
-        jumpCoolDownSlider.SetMaxValue(jumpCoolDown);  
+        jumpCoolDownSlider.SetMaxValue(jumpCoolDown);
+        
     }
 
     void Update()
@@ -89,7 +92,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (CheckGrounded())
         {
-            if (hasLanded || isDead)
+            if (hasLanded || isDead || isInMenu)
             {
                 x = 0;
                 z = 0;
@@ -120,7 +123,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Jump() 
     {
-        if (CheckGrounded() && (CheckMovingForward() || CheckNotMoving()) && !hasLanded && !playerCrouching.GetIsCrouching() && !isDead)
+        if (CheckGrounded() && (CheckMovingForward() || CheckNotMoving()) && !hasLanded && !playerCrouching.GetIsCrouching() && !isDead && !isInMenu)
         {
             velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
         }
@@ -128,7 +131,14 @@ public class PlayerMovement : MonoBehaviour
 
     public bool CheckGrounded()
     {
-        return Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
+        if (groundCheck)
+        {
+            return Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
+        }
+        else 
+        {
+            return true;
+        }
     }
 
     public bool CheckMovingForward() 
@@ -166,11 +176,11 @@ public class PlayerMovement : MonoBehaviour
         playerCrouching.OnDeath(newIsDead);
     }
 
-    public void SetX(float newX) 
+    public void MovementSlideX(float newX) 
     {
         if (CheckGrounded())
         {
-            if (!hasLanded && !isDead)
+            if (!hasLanded && !isDead && !isInMenu)
             {
                 x = Mathf.Lerp(x, newX, movementSliding * Time.deltaTime);
                 if (x < newX)
@@ -191,11 +201,11 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    public void SetZ(float newZ)
+    public void MovementSlideZ(float newZ)
     {
         if (CheckGrounded())
         {
-            if (!hasLanded && !isDead)
+            if (!hasLanded && !isDead && !isInMenu)
             {
                 z = Mathf.Lerp(z, newZ, movementSliding * Time.deltaTime);
                 if (z < newZ)
@@ -214,6 +224,31 @@ public class PlayerMovement : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void SetX(float newX) 
+    {
+        x = newX;
+    }
+
+    public void SetZ(float newZ) 
+    {
+        z = newZ;
+    }
+
+    public float GetX() 
+    {
+        return x;
+    }
+    
+    public float GetZ() 
+    {
+        return z;
+    }
+
+    public void SetIsInMenu(bool newIsInMenu) 
+    {
+        isInMenu = newIsInMenu;
     }
 
     public void WarpToPosition(Vector3 newPosition)

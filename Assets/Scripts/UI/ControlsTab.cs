@@ -8,23 +8,36 @@ public class ControlsTab : MonoBehaviour
     public GameObject controlsTab;
     public Slider sensSlider;
     public float sens = 5;
-    public MouseLook mouseLook;
+
+    MouseLook mouseLook;
+    Animator anim;
+    bool isOn = true;
 
     void Start()
     {
         sensSlider.value = sens;
+        mouseLook = FindObjectOfType<MouseLook>();
+        anim = GetComponent<Animator>();
     }
 
     public void InstructionsInput()
     {
-        if (controlsTab.activeSelf)
+        if (isOn)
         {
-            controlsTab.SetActive(false);
+            SetOn(false);
         }
         else
         {
-            controlsTab.SetActive(true);
+            SetOn(true);
         }
+    }
+
+    public void SetOn(bool status) 
+    {
+        //controlsTab.SetActive(status);
+        isOn = status;
+        anim.SetBool("isOn", status);
+        StateManager.Instructions = status;
     }
 
     public void SensitivityDown()
@@ -34,6 +47,7 @@ public class ControlsTab : MonoBehaviour
         {
             sens = 0;
         }
+        StateManager.Sensitivity = sens;
         sensSlider.value = sens;
         mouseLook.SetMouseSensitivity((sens + 1) * 5);
     }
@@ -45,6 +59,15 @@ public class ControlsTab : MonoBehaviour
         {
             sens = 5;
         }
+        StateManager.Sensitivity = sens;
+        sensSlider.value = sens;
+        mouseLook.SetMouseSensitivity((sens + 1) * 5);
+    }
+
+    public void SetSens(float newSens) 
+    {
+        sens = newSens;
+        StateManager.Sensitivity = sens;
         sensSlider.value = sens;
         mouseLook.SetMouseSensitivity((sens + 1) * 5);
     }

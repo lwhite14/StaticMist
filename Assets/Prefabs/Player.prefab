@@ -124,7 +124,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1
   m_VolumeTrigger: {fileID: 0}
-  m_RenderPostProcessing: 0
+  m_RenderPostProcessing: 1
   m_Antialiasing: 0
   m_AntialiasingQuality: 2
   m_StopNaN: 0
@@ -274,6 +274,7 @@ GameObject:
   - component: {fileID: 4518023453328408851}
   - component: {fileID: 4518023453328408846}
   - component: {fileID: 4518023453328408853}
+  - component: {fileID: 7965430791670242069}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -514,21 +515,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 4
   deathSound: {fileID: 242124223350886573, guid: 98ebab4c0817db0489951efdf984bee2, type: 3}
+  deathFlash: {fileID: 6337739780713771725, guid: 068487c537ce3404eb912829056876d9, type: 3}
+  hurtFlash: {fileID: 6031256301756062100, guid: a57f093643ca24949aeb5ffee380f7d5, type: 3}
   onDeath:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4518023453328408846}
-        m_TargetAssemblyTypeName: Health, Assembly-CSharp
-        m_MethodName: PlayDeathAnimation
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 4518023453328408847}
         m_TargetAssemblyTypeName: PlayerMovement, Assembly-CSharp
         m_MethodName: OnDeath
@@ -577,6 +568,30 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+      - m_Target: {fileID: 4518023453328408846}
+        m_TargetAssemblyTypeName: Health, Scripts
+        m_MethodName: PlayDeathFlash
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: InventoryUI, Scripts
+        m_MethodName: SetIsDead
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
 --- !u!114 &4518023453328408853
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -592,6 +607,18 @@ MonoBehaviour:
   stepInterval: 0.75
   stepOne: {fileID: 1189258544278772527, guid: 982ee5d8373646644bd33de28354f37b, type: 3}
   stepTwo: {fileID: 8231615488466554110, guid: 5d9cb1f25ad62ed48beb34286614ae2e, type: 3}
+--- !u!114 &7965430791670242069
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4518023453328408842}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d39880449b1d884d91fbfeea328492c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4518023453371854502
 GameObject:
   m_ObjectHideFlags: 0

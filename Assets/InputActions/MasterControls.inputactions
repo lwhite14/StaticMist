@@ -287,13 +287,21 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "Inventory",
+                    "type": "Button",
+                    "id": "76a46294-a6ea-4f7a-aacb-f98a78722836",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
                 }
             ],
             "bindings": [
                 {
                     "name": "",
                     "id": "19bef19f-a246-4ce4-b460-fa4b14c9a97d",
-                    "path": "<Keyboard>/tab",
+                    "path": "<Keyboard>/f1",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard",
@@ -331,6 +339,17 @@
                     "processors": "",
                     "groups": "Keyboard",
                     "action": "SensDown",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c10ef42e-24f7-4ef1-ae9a-0de25ecd50e1",
+                    "path": "<Keyboard>/tab",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Inventory",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

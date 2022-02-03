@@ -16,6 +16,7 @@ public class ControlsHandler : MonoBehaviour
     PlayerSprinting playerSprinting;
     PlayerCrouching playerCrouching;
     Interact interact;
+    InventoryUI inventoryUI;
 
     void Awake()
     {
@@ -29,6 +30,7 @@ public class ControlsHandler : MonoBehaviour
         playerSprinting = GetComponent<PlayerSprinting>();
         playerCrouching = GetComponent<PlayerCrouching>();
         interact = GetComponent<Interact>();
+        inventoryUI = FindObjectOfType<InventoryUI>();
     }
 
     void OnEnable()
@@ -58,6 +60,9 @@ public class ControlsHandler : MonoBehaviour
         controls.UI.SensUp.Enable();
         controls.UI.SensDown.performed += SensDown;
         controls.UI.SensDown.Enable();
+        controls.UI.Inventory.performed += Inventory;
+        controls.UI.Inventory.Enable();
+        
 
     }
 
@@ -75,6 +80,7 @@ public class ControlsHandler : MonoBehaviour
         controls.UI.Instructions.Disable();
         controls.UI.SensUp.Disable();
         controls.UI.SensDown.Disable();
+        controls.UI.Inventory.Disable();
     }
 
     void Jump(InputAction.CallbackContext obj)
@@ -102,30 +108,35 @@ public class ControlsHandler : MonoBehaviour
         interact.InteractInput();
     }
 
-    private void Exit(InputAction.CallbackContext obj)
+    void Exit(InputAction.CallbackContext obj)
     {
         GameObject.FindObjectOfType<GameManager>().ExitGame();
     }
 
-    private void Instructions(InputAction.CallbackContext obj)
+    void Instructions(InputAction.CallbackContext obj)
     {
         GameObject.FindObjectOfType<ControlsTab>().InstructionsInput();
     }
 
-    private void SensUp(InputAction.CallbackContext obj)
+    void SensUp(InputAction.CallbackContext obj)
     {
         GameObject.FindObjectOfType<ControlsTab>().SensitivityUp();
     }
 
-    private void SensDown(InputAction.CallbackContext obj)
+    void SensDown(InputAction.CallbackContext obj)
     {
         GameObject.FindObjectOfType<ControlsTab>().SensitivityDown();
     }
 
+    void Inventory(InputAction.CallbackContext obj)
+    {
+        inventoryUI.InventoryInput();
+    }
+
     void Update()
     {
-        playerMovement.SetX(lateral.ReadValue<float>());
-        playerMovement.SetZ(forwardBackward.ReadValue<float>());
+        playerMovement.MovementSlideX(lateral.ReadValue<float>());
+        playerMovement.MovementSlideZ(forwardBackward.ReadValue<float>());
         mouseLook.SetMouseX(look.ReadValue<Vector2>().x);
         mouseLook.SetMouseY(look.ReadValue<Vector2>().y);
     }

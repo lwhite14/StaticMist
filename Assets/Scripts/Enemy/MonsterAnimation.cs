@@ -6,39 +6,18 @@ public class MonsterAnimation : MonoBehaviour
 {
     Animator anim;
 
-    void Start() 
+    void Start()
     {
-        anim = GetComponentInChildren<Animator>();
+        anim = GetComponent<Animator>();
     }
 
-    public void SetChase() 
+    public void SetSpeed(float newSpeed) 
     {
-        anim.SetBool("isChase", true);
-        anim.SetBool("isPatrol", false);
-        anim.SetBool("isIdle", false);
-        anim.SetBool("isAttack", false);
+        anim.SetFloat("speed", newSpeed);
     }
 
-    public void SetPatrol() 
+    public void PlayAttack() 
     {
-        anim.SetBool("isChase", false);
-        anim.SetBool("isPatrol", true);
-        anim.SetBool("isIdle", false);
-        anim.SetBool("isAttack", false);
+        anim.Play("Attack");
     }
-
-    public void SetIdle() 
-    {
-        anim.SetBool("isChase", false);
-        anim.SetBool("isPatrol", false);
-        anim.SetBool("isIdle", true);
-        anim.SetBool("isAttack", false);
-    }
-
-    public void SetAttack()
-    {
-        anim.Play("MonsterStab");
-    }
-
-
 }

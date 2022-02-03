@@ -2,36 +2,62 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UI;
 
 public class Health : MonoBehaviour
 {
     public float health = 4f;
     public GameObject deathSound;
+    public GameObject deathFlash;
+    public GameObject hurtFlash;
     public UnityEvent onDeath;
 
-    Animator anim;
+    Slider healthSlider;
+    float maxHealth;
 
     void Start()
     {
-        anim = GameObject.Find("DeathPanel").GetComponent<Animator>();
+        healthSlider = GameObject.Find("HealthSlider").GetComponent<Slider>();
+        maxHealth = health;
+        healthSlider.maxValue = maxHealth;
+        healthSlider.value = health;
     }
 
-    public void TakeDamage(float damage) 
+    public void TakeDamage(float damage)
     {
-        health -= damage;
-        if (IsDead()) 
+        SetHealth(health - damage);
+        if (IsDead())
         {
             Die();
         }
+        else 
+        {
+            PlayHurtFlash();
+        }
     }
 
-    bool IsDead() 
+    public void Heal(float extraHealth)
     {
-        if (health <= 0) 
+        SetHealth(health + extraHealth);
+    }
+
+    bool IsDead()
+    {
+        if (health <= 0)
         {
             return true;
         }
         return false;
+    }
+
+    void SetHealth(float newHealth) 
+    {
+        health = newHealth;
+        if (health > maxHealth)
+        {
+            health = maxHealth;
+        }
+        healthSlider.value = health;
     }
 
     void Die() 
@@ -39,13 +65,28 @@ public class Health : MonoBehaviour
         onDeath.Invoke();
     }
 
-    public void PlayDeathAnimation() 
-    {
-        anim.SetBool("isDead", true);
-    }
-
     public void DeathSound() 
     {
         Instantiate(deathSound, transform.position, Quaternion.identity);
+    }
+
+    public void PlayDeathFlash() 
+    {
+        Instantiate(deathFlash, GameObject.Find("FlashTarget").transform);
+    }
+
+    public void PlayHurtFlash() 
+    {
+        Instantiate(hurtFlash, GameObject.Find("FlashTarget").transform);
+    }
+
+    public float GetHealth() 
+    {
+        return health;
+    }
+
+    public float GetMaxHealth()
+    {
+        return maxHealth;
     }
 }

@@ -8,11 +8,16 @@ public class PlayerSpotted : MonoBehaviour
     public float rayRange = 12f;
     public float spotAngle = 40f;
     public float musicalStabResetTime = 60f;
-    public Transform player;
     public GameObject musicalStabSound;
     public LayerMask obstacleMask;
     public UnityEvent enemySpotted;
     float musicalStabResetTimeCounter = 0;
+    Transform player;
+
+    void Start()
+    {
+        player = GameObject.FindGameObjectWithTag("Player").transform;
+    }
 
     void Update()
     {
@@ -63,9 +68,6 @@ public class PlayerSpotted : MonoBehaviour
             Gizmos.DrawRay(player.position, leftRayDirectionShort * rayRange);
             Gizmos.DrawRay(player.position, rightRayDirectionShort * rayRange);
         }
-        catch 
-        {
-            Debug.Log("Gizmos only work within the scene view, not the prefab view!");
-        }
+        catch { }
     }
 }
