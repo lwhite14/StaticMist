@@ -9,24 +9,35 @@ public class MusicManager : MonoBehaviour
     public AudioClip goalMusic;
     AudioSource audioSource;
 
+    int chaseCounter = 0;
+
     void Start()
     {
         audioSource = GetComponent<AudioSource>();
-        SwitchToTense();
+        audioSource.clip = tenseMusic;
+        audioSource.Play();
     }
 
     public void SwitchToTense() 
     {
-        audioSource.clip = tenseMusic;
-        audioSource.loop = true;
-        audioSource.Play(); 
+        chaseCounter--;
+        if (chaseCounter == 0)
+        {
+            audioSource.clip = tenseMusic;
+            audioSource.loop = true;
+            audioSource.Play();
+        }
     }
 
     public void SwitchToChase()
     {
-        audioSource.clip = chaseMusic;
-        audioSource.loop = true;
-        audioSource.Play();
+        chaseCounter++;
+        if (chaseCounter == 1)
+        {
+            audioSource.clip = chaseMusic;
+            audioSource.loop = true;
+            audioSource.Play();
+        }
     }
 
     public void SwitchToGoal() 
