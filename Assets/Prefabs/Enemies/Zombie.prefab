@@ -1248,7 +1248,7 @@ Animator:
   m_GameObject: {fileID: 2983786062763353377}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 8f7380da49034cd488ddff94b1ac35d1, type: 3}
-  m_Controller: {fileID: 9100000, guid: cccc8283b04dab94e9b248544fdb32da, type: 2}
+  m_Controller: {fileID: 9100000, guid: 1ef6e5835557245478cb180bda9fc9e7, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 1
@@ -1282,9 +1282,9 @@ NavMeshAgent:
   m_AgentTypeID: 0
   m_Radius: 0.5
   m_Speed: 6
-  m_Acceleration: 8
+  m_Acceleration: 10
   avoidancePriority: 50
-  m_AngularSpeed: 120
+  m_AngularSpeed: 200
   m_StoppingDistance: 1.6
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
@@ -1402,7 +1402,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pathHolder: {fileID: 0}
-  patrolSpeed: 3.5
+  patrolSpeed: 5
   patrolTurnWaitTime: 0.2
   turnSpeed: 135
   buffer: 1
@@ -1415,7 +1415,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   notVisibleTime: 4
-  chaseSpeed: 6
+  chaseSpeed: 9
 --- !u!114 &2983786062763353378
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1429,24 +1429,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stabSound: {fileID: 1771327624571480702, guid: 4484e3d9225f46a40967c3d84486c19e, type: 3}
-  damage: 4
+  damage: 1
   strikingDistanceBuffer: 0.2
   attackCooldown: 2
-  attack:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2983786062763353378}
-        m_TargetAssemblyTypeName: MonsterAttack, Assembly-CSharp
-        m_MethodName: AttackSound
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &2983786062763353379
 MonoBehaviour:
   m_ObjectHideFlags: 0

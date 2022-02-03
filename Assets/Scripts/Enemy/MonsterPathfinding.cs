@@ -202,6 +202,11 @@ public class MonsterPathfinding : MonoBehaviour
         return speed;
     }
 
+    public void SetPathfindingOn(bool isOn) 
+    {
+        navMeshAgent.isStopped = isOn;
+    }
+
     void OnDrawGizmos()
     {
         try

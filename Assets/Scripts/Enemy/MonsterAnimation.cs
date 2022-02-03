@@ -16,8 +16,8 @@ public class MonsterAnimation : MonoBehaviour
         anim.SetFloat("speed", newSpeed);
     }
 
-    public void SetIsTurning(bool newIsTurning) 
+    public void PlayAttack() 
     {
-        anim.SetBool("isTurning", newIsTurning);
+        anim.Play("Attack");
     }
 }

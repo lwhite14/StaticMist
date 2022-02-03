@@ -11,15 +11,18 @@ public class MonsterAttack : MonoBehaviour
     public float strikingDistanceBuffer = 0.2f;
     public float attackCooldown = 0.5f;
     float attackCooldownCounter;
-    public UnityEvent attack;
     NavMeshAgent navMeshAgent;
-    MonsterPathfinding monster;
+    MonsterPathfinding monsterPathfinding;
+    MonsterAnimation monsterAnimation;
+
+    bool standingAttack = false;
 
     void Start()
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
-        monster = GetComponent<MonsterPathfinding>();
-        attackCooldownCounter = attackCooldown;
+        monsterPathfinding = GetComponent<MonsterPathfinding>();
+        monsterAnimation = GetComponent<MonsterAnimation>();
+        //attackCooldownCounter = attackCooldown;
     }
 
     void Update()
@@ -29,14 +32,13 @@ public class MonsterAttack : MonoBehaviour
 
     void CheckStrikingDistance() 
     {
-        if (monster.CanSeePlayer()) 
+        if (monsterPathfinding.CanSeePlayer()) 
         {
-            float dist = navMeshAgent.remainingDistance;
             if (!navMeshAgent.pathPending)
             {
                 if (navMeshAgent.remainingDistance <= (navMeshAgent.stoppingDistance + strikingDistanceBuffer))
                 {
-                    if (monster.GetIsChasing())
+                    if (monsterPathfinding.GetIsChasing())
                     {
                         if (attackCooldownCounter < 0) 
                         {
@@ -52,15 +54,27 @@ public class MonsterAttack : MonoBehaviour
         {
             attackCooldownCounter -= Time.deltaTime;
         }
+        else 
+        {
+            if (standingAttack) // Don't want this code segment triggering when not concerned with attacking.
+            {
+                standingAttack = false;
+                monsterPathfinding.SetPathfindingOn(false);
+            }
+        }
     }
 
     public void Attack() 
     {
-        attack.Invoke();
+        AttackSound();
         FindObjectOfType<Health>().TakeDamage(damage);
+        monsterAnimation.PlayAttack();
+
+        standingAttack = true;
+        monsterPathfinding.SetPathfindingOn(true);
     }
 
-    public void AttackSound() 
+    void AttackSound() 
     {
         Instantiate(stabSound, transform.position, Quaternion.identity);
     }
