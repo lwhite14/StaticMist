@@ -9,6 +9,7 @@ public class Health : MonoBehaviour
     public float health = 4f;
     public GameObject deathSound;
     public GameObject deathFlash;
+    public GameObject hurtFlash;
     public UnityEvent onDeath;
 
     Slider healthSlider;
@@ -28,6 +29,10 @@ public class Health : MonoBehaviour
         if (IsDead())
         {
             Die();
+        }
+        else 
+        {
+            PlayHurtFlash();
         }
     }
 
@@ -68,6 +73,11 @@ public class Health : MonoBehaviour
     public void PlayDeathFlash() 
     {
         Instantiate(deathFlash, GameObject.Find("FlashTarget").transform);
+    }
+
+    public void PlayHurtFlash() 
+    {
+        Instantiate(hurtFlash, GameObject.Find("FlashTarget").transform);
     }
 
     public float GetHealth() 
