@@ -12,10 +12,12 @@ public class GameManager : MonoBehaviour
     [Header("Current Level Information")]
     public int level;
     public bool isLastLevel = false;
+    public bool isFirstLevel = false;
     public string levelException;
 
     void Start()
     {
+        InitialSetUp();
         SetUp();
     }
     public void ExitGame()
@@ -99,6 +101,17 @@ public class GameManager : MonoBehaviour
         int nextLevel = level + 1;
         string nextLevelName = "Level" + nextLevel;
         SceneManager.LoadScene(nextLevelName, LoadSceneMode.Single);
+    }
+
+    void InitialSetUp() 
+    {
+        if (isFirstLevel)
+        {
+            StateManager.Instructions = true;
+            StateManager.Sensitivity = 5.0f;
+            StateManager.Items = new List<IItem>();
+            StateManager.Health = 4.0f;
+        }
     }
 
     void SetUp() 
