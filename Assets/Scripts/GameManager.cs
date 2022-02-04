@@ -91,6 +91,7 @@ public class GameManager : MonoBehaviour
         {
             StateManager.Items.Add(item);
         }
+        StateManager.Health = FindObjectOfType<Health>().GetHealth();
     }
 
     public void NextLevel()
@@ -104,6 +105,7 @@ public class GameManager : MonoBehaviour
     {
         ControlsTab controlsTab = FindObjectOfType<ControlsTab>();
         PlayerInventory playerInventory = FindObjectOfType<PlayerInventory>();
+        Health health = FindObjectOfType<Health>();
         if (controlsTab != null)
         {
             controlsTab.SetOn(StateManager.Instructions);
@@ -113,6 +115,10 @@ public class GameManager : MonoBehaviour
         {
             playerInventory.inventory.SetAllItems(StateManager.Items);
             playerInventory.RefreshUI();
+        }
+        if (health != null) 
+        {
+            health.SetHealth(StateManager.Health);
         }
     }
 }
