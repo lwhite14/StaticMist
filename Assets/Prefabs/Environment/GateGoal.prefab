@@ -355,6 +355,7 @@ GameObject:
   - component: {fileID: 9076663315115911584}
   - component: {fileID: 3352703257781556558}
   - component: {fileID: 3346399379450354862}
+  - component: {fileID: 6498783101530812538}
   m_Layer: 0
   m_Name: GateGoal
   m_TagString: Untagged
@@ -437,3 +438,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac62f17737effeb45b6d8276ddc7555d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &6498783101530812538
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3352703257781556553}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 023c49512b0b38b44bd3481900fccdd4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogue:
+    name: ME
+    sentences:
+    - IT'S LOCKED... I NEED A KEY...
+  isTriggered: 0
