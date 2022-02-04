@@ -35,7 +35,7 @@ public class Inventory
         if (!(newItems.Count > 16))
         {
             items = new List<IItem>();
-            foreach (IItem item in newItems) 
+            foreach (IItem item in newItems)
             {
                 items.Add(item);
             }

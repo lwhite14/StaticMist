@@ -9,13 +9,13 @@ public class DoorGoal : MonoBehaviour, IInteractable
         CheckIfKey();
     }
 
-    void CheckIfKey() 
+    void CheckIfKey()
     {
         bool hasKey = false;
         PlayerInventory playerInventory = FindObjectOfType<PlayerInventory>();
-        foreach (IItem item in playerInventory.inventory.GetAllItems()) 
+        foreach (IItem item in playerInventory.inventory.GetAllItems())
         {
-            if (item is Key) 
+            if (item is Key)
             {
                 hasKey = true;
                 FindObjectOfType<PlayerInventory>().inventory.RemoveItem(item);
@@ -23,14 +23,24 @@ public class DoorGoal : MonoBehaviour, IInteractable
                 Goal();
             }
         }
-        if (!hasKey) 
+        if (!hasKey)
         {
-            print("you dont have a key");
+            FindObjectOfType<DialogueManager>().EndDialogue();
+            StopAllCoroutines();
+            StartCoroutine(NoKeyDialgoue());
         }
     }
 
-    void Goal() 
+    void Goal()
     {
         FindObjectOfType<GameManager>().Goal();
+    }
+
+    IEnumerator NoKeyDialgoue() 
+    {
+        GetComponent<DialogueTrigger>().TriggerDialogue();
+        yield return new WaitForSeconds(5.0f);
+        GetComponent<DialogueTrigger>().TriggerNextSentence();
+        yield return null;
     }
 }

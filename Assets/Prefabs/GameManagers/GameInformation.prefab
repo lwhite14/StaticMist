@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &79040910229849425
+--- !u!1 &3880652998451699085
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,22 +8,22 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 79040910229849438}
-  - component: {fileID: 79040910229849439}
+  - component: {fileID: 6916978639820302388}
+  - component: {fileID: 4217412334737823748}
   m_Layer: 0
-  m_Name: GameManager
+  m_Name: GameInformation
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &79040910229849438
+--- !u!4 &6916978639820302388
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 79040910229849425}
+  m_GameObject: {fileID: 3880652998451699085}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -31,22 +31,15 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &79040910229849439
+--- !u!114 &4217412334737823748
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 79040910229849425}
+  m_GameObject: {fileID: 3880652998451699085}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3e536c91830174249bc5ced4a7943add, type: 3}
+  m_Script: {fileID: 11500000, guid: 187b0f41e300f2d43bd8d01e8699c363, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathUIPanel: {fileID: 1981972954180065208, guid: 33203851e217c244bbb287ee4f8b679d, type: 3}
-  levelCompleteUIPanel: {fileID: 7545755739347346962, guid: ea06c7a499cf8bf47bc8adb39a6c0b95, type: 3}
-  gameCompleteUIPanel: {fileID: 2092325282857209482, guid: 707f82e4e804cce4088b43dcaba18a71, type: 3}
-  GameInformationObj: {fileID: 3880652998451699085, guid: 5d767f4496c5ba94c9fbd95d0c99aa8c, type: 3}
-  level: 1
-  isLastLevel: 0
-  levelException: 

@@ -6,19 +6,18 @@ using UnityEngine.UI;
 
 public class Health : MonoBehaviour
 {
-    public float health = 4f;
     public GameObject deathSound;
     public GameObject deathFlash;
     public GameObject hurtFlash;
     public UnityEvent onDeath;
+    public float health = 4.0f;
+    public float maxHealth = 4.0f; 
 
     Slider healthSlider;
-    float maxHealth;
 
     void Start()
     {
         healthSlider = GameObject.Find("HealthSlider").GetComponent<Slider>();
-        maxHealth = health;
         healthSlider.maxValue = maxHealth;
         healthSlider.value = health;
     }
@@ -50,7 +49,7 @@ public class Health : MonoBehaviour
         return false;
     }
 
-    void SetHealth(float newHealth) 
+    public void SetHealth(float newHealth) 
     {
         health = newHealth;
         if (health > maxHealth)
@@ -58,6 +57,19 @@ public class Health : MonoBehaviour
             health = maxHealth;
         }
         healthSlider.value = health;
+    }
+
+    public void InitSetHealth(float newHealth) 
+    {
+        health = newHealth;
+        if (healthSlider != null)
+        {
+            healthSlider.value = health;
+        }
+        else 
+        { 
+            GameObject.Find("HealthSlider").GetComponent<Slider>().value = health;
+        }
     }
 
     void Die() 
