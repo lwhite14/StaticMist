@@ -8,16 +8,16 @@ public class GameManager : MonoBehaviour
     public GameObject deathUIPanel;
     public GameObject levelCompleteUIPanel;
     public GameObject gameCompleteUIPanel;
+    public GameObject GameInformationObj;
 
     [Header("Current Level Information")]
     public int level;
-    public bool isLastLevel = false;
     public bool isFirstLevel = false;
+    public bool isLastLevel = false;
     public string levelException;
 
     void Start()
     {
-        InitialSetUp();
         SetUp();
     }
     public void ExitGame()
@@ -88,12 +88,15 @@ public class GameManager : MonoBehaviour
         FindObjectOfType<MusicManager>().SwitchToGoal();
         FindObjectOfType<InventoryUI>().SetCanUse(false);
 
-        StateManager.Items = new List<IItem>();
-        foreach (IItem item in FindObjectOfType<PlayerInventory>().inventory.GetAllItems()) 
+
+
+        GameInformation.instance.Items = new List<IItem>();
+        foreach (IItem item in FindObjectOfType<PlayerInventory>().inventory.GetAllItems())
         {
-            StateManager.Items.Add(item);
+            GameInformation.instance.Items.Add(item);
         }
-        StateManager.Health = FindObjectOfType<Health>().GetHealth();
+        GameInformation.instance.Health = FindObjectOfType<Health>().GetHealth();
+        
     }
 
     public void NextLevel()
@@ -103,35 +106,35 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(nextLevelName, LoadSceneMode.Single);
     }
 
-    void InitialSetUp() 
+    void SetUp()
     {
+        if (FindObjectOfType<GameInformation>() == null)
+        {
+            Instantiate(GameInformationObj, new Vector3(0, 0, 0), Quaternion.identity);
+        }
+
         if (isFirstLevel)
         {
-            StateManager.Instructions = true;
-            StateManager.Sensitivity = 5.0f;
-            StateManager.Items = new List<IItem>();
-            StateManager.Health = 4.0f;
+            GameInformation.instance.Health = 4.0f;
+            GameInformation.instance.Items = new List<IItem>();
         }
-    }
 
-    void SetUp() 
-    {
         ControlsTab controlsTab = FindObjectOfType<ControlsTab>();
         PlayerInventory playerInventory = FindObjectOfType<PlayerInventory>();
         Health health = FindObjectOfType<Health>();
         if (controlsTab != null)
         {
-            controlsTab.SetOn(StateManager.Instructions);
-            controlsTab.SetSens(StateManager.Sensitivity);
+            controlsTab.SetOn(GameInformation.instance.Instructions);
+            controlsTab.SetSens(GameInformation.instance.Sensitivity);
         }
         if (playerInventory != null)
         {
-            playerInventory.inventory.SetAllItems(StateManager.Items);
+            playerInventory.inventory.SetAllItems(GameInformation.instance.Items);
             playerInventory.RefreshUI();
         }
-        if (health != null) 
+        if (health != null)
         {
-            health.SetHealth(StateManager.Health);
+            health.InitSetHealth(GameInformation.instance.Health);
         }
     }
 }

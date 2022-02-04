@@ -10,17 +10,16 @@ public class Health : MonoBehaviour
     public GameObject deathFlash;
     public GameObject hurtFlash;
     public UnityEvent onDeath;
+    public float health = 4.0f;
+    public float maxHealth = 4.0f; 
 
     Slider healthSlider;
-    float health;
-    float maxHealth;
 
     void Start()
     {
         healthSlider = GameObject.Find("HealthSlider").GetComponent<Slider>();
-        maxHealth = 4.0f;
         healthSlider.maxValue = maxHealth;
-        //healthSlider.value = health;
+        healthSlider.value = health;
     }
 
     public void TakeDamage(float damage)
@@ -58,6 +57,19 @@ public class Health : MonoBehaviour
             health = maxHealth;
         }
         healthSlider.value = health;
+    }
+
+    public void InitSetHealth(float newHealth) 
+    {
+        health = newHealth;
+        if (healthSlider != null)
+        {
+            healthSlider.value = health;
+        }
+        else 
+        { 
+            GameObject.Find("HealthSlider").GetComponent<Slider>().value = health;
+        }
     }
 
     void Die() 
