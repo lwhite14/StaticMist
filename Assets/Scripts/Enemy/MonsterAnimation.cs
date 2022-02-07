@@ -8,7 +8,7 @@ public class MonsterAnimation : MonoBehaviour
 
     void Start()
     {
-        anim = GetComponent<Animator>();
+        anim = GetComponentInChildren<Animator>();
     }
 
     public void SetSpeed(float newSpeed) 

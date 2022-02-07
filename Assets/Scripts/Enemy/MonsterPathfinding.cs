@@ -10,8 +10,6 @@ public class MonsterPathfinding : MonoBehaviour
     [Header("Patrol Variables/Objects")]
     public Transform pathHolder;
     public float patrolSpeed = 5;
-    public float patrolTurnWaitTime = 0.3f;
-    public float turnSpeed = 90f;
     public float buffer = 0.05f;
 
     [Header("Sight Variables/Objects")]
