@@ -18,6 +18,7 @@ public class DoorGoal : MonoBehaviour, IInteractable
             if (item is Key)
             {
                 hasKey = true;
+                item.Use();
                 FindObjectOfType<PlayerInventory>().inventory.RemoveItem(item);
                 FindObjectOfType<PlayerInventory>().RefreshUI();
                 Goal();

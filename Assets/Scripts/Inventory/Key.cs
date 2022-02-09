@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Services.Analytics;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,7 +14,7 @@ public class Key : MonoBehaviour, IItem
 
     public void Use()
     {
-
+        SendDataToAnalytics();
     }
 
     public void Examine()
@@ -58,5 +59,22 @@ public class Key : MonoBehaviour, IItem
     public string GetDescription() 
     {
         return description;
+    }
+
+    void SendDataToAnalytics() 
+    {
+        if (InitServices.isRecording)
+        {
+            Dictionary<string, object> parameters = new Dictionary<string, object>()
+            {
+                { "itemType", "Key" },
+            };
+            Events.CustomData("ItemUtilise", parameters);
+            Events.Flush();
+        }
+        else
+        {
+            Debug.Log("Sending Event: 'ItemUtilise' with: itemType = " + "Key");
+        }
     }
 }

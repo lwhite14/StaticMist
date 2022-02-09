@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Services.Analytics;
 using UnityEngine;
+using UnityEngine.Analytics;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
@@ -22,12 +24,12 @@ public class Health : MonoBehaviour
         healthSlider.value = health;
     }
 
-    public void TakeDamage(float damage)
+    public void TakeDamage(float damage, string monsterType)
     {
         SetHealth(health - damage);
         if (IsDead())
         {
-            Die();
+            Die(monsterType);
         }
         else 
         {
@@ -72,8 +74,10 @@ public class Health : MonoBehaviour
         }
     }
 
-    void Die() 
+    void Die(string monsterType) 
     {
+        // At this point the player has died, and so I send an event to Unity Analytics.
+        SendDataToAnalytics(monsterType);
         onDeath.Invoke();
     }
 
@@ -100,5 +104,23 @@ public class Health : MonoBehaviour
     public float GetMaxHealth()
     {
         return maxHealth;
+    }
+
+    void SendDataToAnalytics(string monsterType) 
+    {
+        if (InitServices.isRecording)
+        {
+            Dictionary<string, object> parameters = new Dictionary<string, object>()
+            {
+                { "Monster", monsterType },
+                { "userLevel", FindObjectOfType<GameManager>().level }
+            };
+            Events.CustomData("Died", parameters);
+            Events.Flush();
+        }
+        else
+        {
+            Debug.Log("Sending Event: 'Died' with: Monster = " + monsterType + ", and userLevel = " + FindObjectOfType<GameManager>().level.ToString());
+        }
     }
 }

@@ -2482,7 +2482,7 @@ GameObject:
   - component: {fileID: 6117697170515415813}
   m_Layer: 0
   m_Name: Ghoul
-  m_TagString: Untagged
+  m_TagString: Monster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2646,6 +2646,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d633f06a19b1cb642a065aca13bbb1a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  monsterName: Ghoul
   pathHolder: {fileID: 0}
   patrolSpeed: 2
   buffer: 1.6
@@ -2657,7 +2658,7 @@ MonoBehaviour:
   viewMask:
     serializedVersion: 2
     m_Bits: 64
-  notVisibleTime: 4
+  notVisibleTime: 3.2
   chaseSpeed: 6
 --- !u!114 &6117697170515415819
 MonoBehaviour:

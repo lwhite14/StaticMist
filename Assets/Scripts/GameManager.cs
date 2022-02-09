@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Services.Analytics;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -88,7 +89,7 @@ public class GameManager : MonoBehaviour
         FindObjectOfType<MusicManager>().SwitchToGoal();
         FindObjectOfType<InventoryUI>().SetCanUse(false);
 
-
+        SendDataToAnalytics();
 
         GameInformation.instance.Items = new List<IItem>();
         foreach (IItem item in FindObjectOfType<PlayerInventory>().inventory.GetAllItems())
@@ -135,6 +136,23 @@ public class GameManager : MonoBehaviour
         if (health != null)
         {
             health.InitSetHealth(GameInformation.instance.Health);
+        }
+    }
+
+    void SendDataToAnalytics() 
+    {
+        if (InitServices.isRecording)
+        {
+            Dictionary<string, object> parameters = new Dictionary<string, object>()
+            {
+                { "userLevel", level }
+            };
+            Events.CustomData("LevelCompleted", parameters);
+            Events.Flush();
+        }
+        else
+        {
+            Debug.Log("Sending Event: 'LevelCompleted' with: Level = " + level.ToString());
         }
     }
 }

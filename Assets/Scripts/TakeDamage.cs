@@ -6,7 +6,7 @@ public class TakeDamage : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.P)) 
         {
-            FindObjectOfType<Health>().TakeDamage(1.0f);
+            FindObjectOfType<Health>().TakeDamage(1.0f, "World");
         }
         if (Input.GetKeyDown(KeyCode.O))
         {
