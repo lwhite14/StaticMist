@@ -29,7 +29,7 @@ public class MonsterPathfinding : MonoBehaviour
     public float chaseSpeed = 6f;
 
     NavMeshAgent navMeshAgent;
-    MonsterAnimation monsterAnimation;
+    MonsterAnimationAndSound monsterAnimationSound;
     Transform player;
     Vector3[] waypoints;
     Vector3 startWaypoint;
@@ -47,7 +47,7 @@ public class MonsterPathfinding : MonoBehaviour
         navMeshAgent = GetComponent<NavMeshAgent>();
         navMeshAgent.speed = patrolSpeed;
         navMeshAgent.isStopped = false;
-        monsterAnimation = GetComponent<MonsterAnimation>();
+        monsterAnimationSound = GetComponent<MonsterAnimationAndSound>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
         notVisibleTimeCounter = notVisibleTime;
 
@@ -72,6 +72,7 @@ public class MonsterPathfinding : MonoBehaviour
             if (!isCalled) // Makes sure 'playerSpotted' is only invoked once.
             {
                 FindObjectOfType<MusicManager>().SwitchToChase();
+                monsterAnimationSound.SwitchToChase();
                 isCalled = true;
             }
         }
@@ -101,7 +102,7 @@ public class MonsterPathfinding : MonoBehaviour
     {
         speed = Mathf.Lerp(speed, (transform.position - lastPosition).magnitude / Time.deltaTime, 0.75f);
         lastPosition = transform.position;
-        monsterAnimation.SetSpeed(speed);
+        monsterAnimationSound.SetSpeed(speed);
     }
 
     public bool CanSeePlayer() 
@@ -157,6 +158,7 @@ public class MonsterPathfinding : MonoBehaviour
         isChasing = false;
         notVisibleTimeCounter = notVisibleTime;
         navMeshAgent.isStopped = true;
+        monsterAnimationSound.SwitchToPassive();
         yield return new WaitForSeconds(afterChaseWaitTime);
         FindObjectOfType<MusicManager>().SwitchToTense();
         isCalled = false; // Resets 'icCalled' so that Unity event is only called once in update.

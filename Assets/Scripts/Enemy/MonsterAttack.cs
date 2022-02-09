@@ -13,7 +13,7 @@ public class MonsterAttack : MonoBehaviour
     float attackCooldownCounter;
     NavMeshAgent navMeshAgent;
     MonsterPathfinding monsterPathfinding;
-    MonsterAnimation monsterAnimation;
+    MonsterAnimationAndSound monsterAnimationSound;
 
     bool standingAttack = false;
 
@@ -21,7 +21,7 @@ public class MonsterAttack : MonoBehaviour
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
         monsterPathfinding = GetComponent<MonsterPathfinding>();
-        monsterAnimation = GetComponent<MonsterAnimation>();
+        monsterAnimationSound = GetComponent<MonsterAnimationAndSound>();
     }
 
     void Update()
@@ -67,7 +67,7 @@ public class MonsterAttack : MonoBehaviour
     {
         AttackSound();
         FindObjectOfType<Health>().TakeDamage(damage, GetComponent<MonsterPathfinding>().monsterInformation.GetName());
-        monsterAnimation.PlayAttack();
+        monsterAnimationSound.PlayAttack();
 
         standingAttack = true;
         monsterPathfinding.SetPathfindingOn(true);

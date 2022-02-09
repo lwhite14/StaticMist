@@ -115,7 +115,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: -6647491729309499794, guid: 565043e579be11c4da9f55126f49ee6f, type: 2}
-  m_audioClip: {fileID: 8300000, guid: 9ab7570a02c74164c91d4f2623097f47, type: 3}
+  m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -125,7 +125,7 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 1
+  MinDistance: 0.75
   MaxDistance: 500
   Pan2D: 0
   rolloffMode: 0
@@ -289,6 +289,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2fe339e130f7ecf4cae3cc8dfaf107b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  passiveSound: {fileID: 8300000, guid: 9ab7570a02c74164c91d4f2623097f47, type: 3}
+  chaseSound: {fileID: 8300000, guid: b3926d0acba8c224ea054da6ee83a47d, type: 3}
 --- !u!1 &353215230143753424
 GameObject:
   m_ObjectHideFlags: 0
