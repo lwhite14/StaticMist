@@ -9,7 +9,8 @@ public class GameManager : MonoBehaviour
     public GameObject deathUIPanel;
     public GameObject levelCompleteUIPanel;
     public GameObject gameCompleteUIPanel;
-    public GameObject GameInformationObj;
+    public GameObject gameInformationObj;
+    public GameObject startPanel;
 
     [Header("Current Level Information")]
     public int level;
@@ -21,6 +22,7 @@ public class GameManager : MonoBehaviour
     {
         SetUp();
     }
+
     public void ExitGame()
     {
         Application.Quit();
@@ -111,7 +113,7 @@ public class GameManager : MonoBehaviour
     {
         if (FindObjectOfType<GameInformation>() == null)
         {
-            Instantiate(GameInformationObj, new Vector3(0, 0, 0), Quaternion.identity);
+            Instantiate(gameInformationObj, new Vector3(0, 0, 0), Quaternion.identity);
         }
 
         if (isFirstLevel)
@@ -136,6 +138,11 @@ public class GameManager : MonoBehaviour
         if (health != null)
         {
             health.InitSetHealth(GameInformation.instance.Health);
+        }
+
+        if (level != 0)
+        {
+            Instantiate(startPanel, GameObject.Find("WinLoseConditionTarget").transform);
         }
     }
 
