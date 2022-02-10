@@ -4,15 +4,16 @@ using UnityEngine;
 
 public class LevelCompletePanel : MonoBehaviour
 {
+    public GameObject endPanelLevel;
+    public GameObject endPanelGame;
+
     public void LevelComplete()
     {
-        FindObjectOfType<GameManager>().NextLevel();
-
+        Instantiate(endPanelLevel, GameObject.Find("WinLoseConditionTarget").transform);
     }
 
     public void GameComplete()
     {
-        //FindObjectOfType<GameManager>().RestartGame();
-        FindObjectOfType<GameManager>().ReturnToMenu();
+        Instantiate(endPanelGame, GameObject.Find("WinLoseConditionTarget").transform);
     }
 }

@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
     public GameObject gameCompleteUIPanel;
     public GameObject gameInformationObj;
     public GameObject startPanel;
+    public GameObject firstLevelPanel;
 
     [Header("Current Level Information")]
     public int level;
@@ -30,12 +31,7 @@ public class GameManager : MonoBehaviour
 
     public void LoadFirstLevel() 
     {
-        SceneManager.LoadScene("Level1", LoadSceneMode.Single);
-    }
-
-    public void RestartGame() 
-    {
-        LoadFirstLevel();
+        Instantiate(firstLevelPanel, GameObject.Find("WinLoseConditionTarget").transform);
     }
 
     public void ReturnToMenu() 
@@ -140,10 +136,7 @@ public class GameManager : MonoBehaviour
             health.InitSetHealth(GameInformation.instance.Health);
         }
 
-        if (level != 0)
-        {
-            Instantiate(startPanel, GameObject.Find("WinLoseConditionTarget").transform);
-        }
+        Instantiate(startPanel, GameObject.Find("WinLoseConditionTarget").transform);      
     }
 
     void SendDataToAnalytics() 

@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 8654658468000840261}
   - component: {fileID: 3514822137881642757}
   - component: {fileID: 1518509726463197816}
-  - component: {fileID: 603145445637654263}
+  - component: {fileID: -3116128879762474389}
   m_Layer: 5
-  m_Name: StartPanel
+  m_Name: PanelEndLevel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -60,7 +60,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -87,7 +87,7 @@ Animator:
   m_GameObject: {fileID: 3125757336545386802}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 04817f8d03be43a4dad3330a71d303f7, type: 2}
+  m_Controller: {fileID: 9100000, guid: fb80b51e7ee722f42b2db7c8a1ff6e9c, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -96,7 +96,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &603145445637654263
+--- !u!114 &-3116128879762474389
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -105,6 +105,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 3125757336545386802}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c51fe977914c59b4d8491f8d5ef5037c, type: 3}
+  m_Script: {fileID: 11500000, guid: b17dfab60d951864f8ccd1212f1cdb6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

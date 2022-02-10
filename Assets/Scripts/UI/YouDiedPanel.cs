@@ -4,8 +4,11 @@ using UnityEngine;
 
 public class YouDiedPanel : MonoBehaviour
 {
+    public GameObject diedPanel;
+
     public void YouDied() 
     {
-        FindObjectOfType<GameManager>().RestartLevel();
+        Instantiate(diedPanel, GameObject.Find("WinLoseConditionTarget").transform);
+        //FindObjectOfType<GameManager>().RestartLevel();
     }
 }
