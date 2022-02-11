@@ -4,15 +4,15 @@ using Unity.Services.Analytics;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Flashlight : MonoBehaviour, IItem
+public class Bat : MonoBehaviour, IItem
 {
-    string displayName = "FLASHLIGHT";
-    string description = "A FLASHLIGHT... TO HELP ME SEE...";
+    string displayName = "BAT";
+    string description = "IF I NEED TO DEFEND MYSELF AGAINST THOSE MONSTERS...";
     bool canUse = false;
     bool canEquip = true;
     bool canReload = false;
 
-    public GameObject flashlight;
+    public GameObject bat;
     public GameObject rummageSound;
     public GameObject zippingUpSound;
 
@@ -23,19 +23,19 @@ public class Flashlight : MonoBehaviour, IItem
         FindObjectOfType<CoroutineHelper>().HelperStartExamining(description);
     }
 
-    public void Equip() 
+    public void Equip()
     {
         GameObject viewmodel = GameObject.FindWithTag("Viewmodel");
         if (viewmodel == null)
         {
-            Instantiate(flashlight, GameObject.Find("ViewmodelTargetPos").transform.position, Quaternion.identity);
+            Instantiate(bat, GameObject.Find("ViewmodelTargetPos").transform.position, Quaternion.identity);
             Instantiate(rummageSound, transform.position, Quaternion.identity);
             FindObjectOfType<CoroutineHelper>().HelperStopCoroutine();
-            FindObjectOfType<CoroutineHelper>().HelperStartExamining("IT WOULD BE BETTER IF I COULD SEE...");
+            FindObjectOfType<CoroutineHelper>().HelperStartExamining("MIGHT BE SAFER TO KEEP THIS OUT...");
 
             SendDataToAnalytics();
         }
-        else 
+        else
         {
             if (viewmodel.GetComponent<Viewmodel>().itemName == displayName)
             {
@@ -47,7 +47,7 @@ public class Flashlight : MonoBehaviour, IItem
             else
             {
                 FindObjectOfType<CoroutineHelper>().HelperStopCoroutine();
-                FindObjectOfType<CoroutineHelper>().HelperStartExamining("NEED TO PUT AWAY MY " + viewmodel.GetComponent<Viewmodel>().itemName + " FIRST ...");
+                FindObjectOfType<CoroutineHelper>().HelperStartExamining("NEED TO PUT AWAY MY " + viewmodel.GetComponent<Viewmodel>().itemName + " FIRST...");
             }
         }
     }
@@ -84,20 +84,20 @@ public class Flashlight : MonoBehaviour, IItem
         return description;
     }
 
-    void SendDataToAnalytics() 
+    void SendDataToAnalytics()
     {
         if (InitServices.isRecording)
         {
             Dictionary<string, object> parameters = new Dictionary<string, object>()
             {
-                { "itemType", "Flashlight" },
+                { "itemType", "Bat" },
             };
             Events.CustomData("ItemUtilise", parameters);
             Events.Flush();
         }
         else
         {
-            Debug.Log("Sending Event: 'ItemUtilise' with: itemType = " + "Flashlight");
+            Debug.Log("Sending Event: 'ItemUtilise' with: itemType = " + "Bat");
         }
     }
 }
