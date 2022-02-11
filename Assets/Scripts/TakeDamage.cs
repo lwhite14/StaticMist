@@ -10,7 +10,7 @@ public class TakeDamage : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.O))
         {
-            FindObjectOfType<GameManager>().RestartLevel();
+            GameManager.instance.RestartLevel();
         }
     }
 }

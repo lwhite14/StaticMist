@@ -34,7 +34,7 @@ public class DoorGoal : MonoBehaviour, IInteractable
 
     void Goal()
     {
-        FindObjectOfType<GameManager>().Goal();
+        GameManager.instance.Goal();
     }
 
     IEnumerator NoKeyDialgoue() 

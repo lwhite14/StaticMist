@@ -6,6 +6,8 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    public static GameManager instance = null; 
+
     public GameObject deathUIPanel;
     public GameObject levelCompleteUIPanel;
     public GameObject gameCompleteUIPanel;
@@ -16,6 +18,18 @@ public class GameManager : MonoBehaviour
     public bool isFirstLevel = false;
     public bool isLastLevel = false;
     public string levelException;
+
+    void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else if (instance != this)
+        {
+            Destroy(gameObject);
+        }
+    }
 
     void Start()
     {

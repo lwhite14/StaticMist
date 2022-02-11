@@ -79,6 +79,7 @@ public class Health : MonoBehaviour
         // At this point the player has died, and so I send an event to Unity Analytics.
         SendDataToAnalytics(monsterType);
         onDeath.Invoke();
+        GameManager.instance.OnDeath();
     }
 
     public void DeathSound() 

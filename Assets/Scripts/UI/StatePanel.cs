@@ -40,16 +40,16 @@ public class StatePanel : MonoBehaviour
 
     public void ManagerNextLevel() 
     {
-        FindObjectOfType<GameManager>().NextLevel();
+        GameManager.instance.NextLevel();
     } // Function animator triggers.
 
     public void ManagerFinishGame() 
     {
-        FindObjectOfType<GameManager>().ReturnToMenu();
+        GameManager.instance.ReturnToMenu();
     } // Function animator triggers.
 
     public void ManagerRestartLevel()
     {
-        FindObjectOfType<GameManager>().RestartLevel();
+        GameManager.instance.RestartLevel();
     } // Function animator triggers.
 }
