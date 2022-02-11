@@ -6,6 +6,7 @@ public class YouDiedPanel : MonoBehaviour
 {
     public void YouDied() 
     {
-        FindObjectOfType<GameManager>().RestartLevel();
+        StatePanel.instance.RestartLevel();
+        //Instantiate(diedPanel, GameObject.Find("WinLoseConditionTarget").transform);
     }
 }

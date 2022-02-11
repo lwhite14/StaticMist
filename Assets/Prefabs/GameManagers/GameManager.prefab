@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 79040910229849438}
   - component: {fileID: 79040910229849439}
+  - component: {fileID: 641836256562006556}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -46,7 +47,21 @@ MonoBehaviour:
   deathUIPanel: {fileID: 1981972954180065208, guid: 33203851e217c244bbb287ee4f8b679d, type: 3}
   levelCompleteUIPanel: {fileID: 7545755739347346962, guid: ea06c7a499cf8bf47bc8adb39a6c0b95, type: 3}
   gameCompleteUIPanel: {fileID: 2092325282857209482, guid: 707f82e4e804cce4088b43dcaba18a71, type: 3}
-  GameInformationObj: {fileID: 3880652998451699085, guid: 5d767f4496c5ba94c9fbd95d0c99aa8c, type: 3}
+  gameInformationObj: {fileID: 3880652998451699085, guid: 5d767f4496c5ba94c9fbd95d0c99aa8c, type: 3}
+  statePanel: {fileID: 3125757336545386802, guid: 31bd08bc2b74c2146b961bf6f603449c, type: 3}
   level: 1
+  isFirstLevel: 0
   isLastLevel: 0
   levelException: 
+--- !u!114 &641836256562006556
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 79040910229849425}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 595397fe6aa84464c8d5969d25b9a602, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

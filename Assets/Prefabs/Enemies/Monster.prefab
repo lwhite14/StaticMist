@@ -1064,7 +1064,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: -6647491729309499794, guid: 565043e579be11c4da9f55126f49ee6f, type: 2}
-  m_audioClip: {fileID: 8300000, guid: 9ab7570a02c74164c91d4f2623097f47, type: 3}
+  m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -1162,10 +1162,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d633f06a19b1cb642a065aca13bbb1a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  monsterName: Monster
   pathHolder: {fileID: 0}
-  speed: 4
-  patrolTurnWaitTime: 0.3
-  turnSpeed: 135
+  patrolSpeed: 5
   buffer: 0.25
   spotAngleLong: 80
   viewDistanceLong: 12
@@ -1176,51 +1175,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   notVisibleTime: 4
-  idle:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 5724888924900498939}
-        m_TargetAssemblyTypeName: MonsterAnimation, Assembly-CSharp
-        m_MethodName: SetIdle
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  patrol:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 5724888924900498939}
-        m_TargetAssemblyTypeName: MonsterAnimation, Assembly-CSharp
-        m_MethodName: SetPatrol
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  chase:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 5724888924900498939}
-        m_TargetAssemblyTypeName: MonsterAnimation, Assembly-CSharp
-        m_MethodName: SetChase
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+  chaseSpeed: 6
 --- !u!114 &5724888924900498917
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1237,33 +1192,6 @@ MonoBehaviour:
   damage: 4
   strikingDistanceBuffer: 0.2
   attackCooldown: 2
-  attack:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 5724888924900498917}
-        m_TargetAssemblyTypeName: MonsterAttack, Assembly-CSharp
-        m_MethodName: AttackSound
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 5724888924900498939}
-        m_TargetAssemblyTypeName: MonsterAnimation, Assembly-CSharp
-        m_MethodName: SetAttack
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &5724888924900498938
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1310,7 +1238,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2fe339e130f7ecf4cae3cc8dfaf107b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  anim: {fileID: 5724888924900498937}
+  passiveSound: {fileID: 8300000, guid: 9ab7570a02c74164c91d4f2623097f47, type: 3}
+  chaseSound: {fileID: 8300000, guid: b3926d0acba8c224ea054da6ee83a47d, type: 3}
 --- !u!1 &5724888924981106985
 GameObject:
   m_ObjectHideFlags: 0

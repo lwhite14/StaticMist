@@ -1,14 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Services.Analytics;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    public static GameManager instance = null; 
+
     public GameObject deathUIPanel;
     public GameObject levelCompleteUIPanel;
     public GameObject gameCompleteUIPanel;
-    public GameObject GameInformationObj;
+    public GameObject gameInformationObj;
 
     [Header("Current Level Information")]
     public int level;
@@ -16,10 +19,23 @@ public class GameManager : MonoBehaviour
     public bool isLastLevel = false;
     public string levelException;
 
+    void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else if (instance != this)
+        {
+            Destroy(gameObject);
+        }
+    }
+
     void Start()
     {
         SetUp();
     }
+
     public void ExitGame()
     {
         Application.Quit();
@@ -27,12 +43,7 @@ public class GameManager : MonoBehaviour
 
     public void LoadFirstLevel() 
     {
-        SceneManager.LoadScene("Level1", LoadSceneMode.Single);
-    }
-
-    public void RestartGame() 
-    {
-        LoadFirstLevel();
+        StatePanel.instance.NextLevel();
     }
 
     public void ReturnToMenu() 
@@ -88,7 +99,7 @@ public class GameManager : MonoBehaviour
         FindObjectOfType<MusicManager>().SwitchToGoal();
         FindObjectOfType<InventoryUI>().SetCanUse(false);
 
-
+        SendDataToAnalytics();
 
         GameInformation.instance.Items = new List<IItem>();
         foreach (IItem item in FindObjectOfType<PlayerInventory>().inventory.GetAllItems())
@@ -110,7 +121,7 @@ public class GameManager : MonoBehaviour
     {
         if (FindObjectOfType<GameInformation>() == null)
         {
-            Instantiate(GameInformationObj, new Vector3(0, 0, 0), Quaternion.identity);
+            Instantiate(gameInformationObj, new Vector3(0, 0, 0), Quaternion.identity);
         }
 
         if (isFirstLevel)
@@ -135,6 +146,23 @@ public class GameManager : MonoBehaviour
         if (health != null)
         {
             health.InitSetHealth(GameInformation.instance.Health);
+        }
+    }
+
+    void SendDataToAnalytics() 
+    {
+        if (InitServices.isRecording)
+        {
+            Dictionary<string, object> parameters = new Dictionary<string, object>()
+            {
+                { "userLevel", level }
+            };
+            Events.CustomData("LevelCompleted", parameters);
+            Events.Flush();
+        }
+        else
+        {
+            Debug.Log("Sending Event: 'LevelCompleted' with: Level = " + level.ToString());
         }
     }
 }

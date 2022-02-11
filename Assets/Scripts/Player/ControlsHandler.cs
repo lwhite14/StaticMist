@@ -110,22 +110,22 @@ public class ControlsHandler : MonoBehaviour
 
     void Exit(InputAction.CallbackContext obj)
     {
-        GameObject.FindObjectOfType<GameManager>().ExitGame();
+        GameManager.instance.ExitGame();
     }
 
     void Instructions(InputAction.CallbackContext obj)
     {
-        GameObject.FindObjectOfType<ControlsTab>().InstructionsInput();
+        FindObjectOfType<ControlsTab>().InstructionsInput();
     }
 
     void SensUp(InputAction.CallbackContext obj)
     {
-        GameObject.FindObjectOfType<ControlsTab>().SensitivityUp();
+        FindObjectOfType<ControlsTab>().SensitivityUp();
     }
 
     void SensDown(InputAction.CallbackContext obj)
     {
-        GameObject.FindObjectOfType<ControlsTab>().SensitivityDown();
+        FindObjectOfType<ControlsTab>().SensitivityDown();
     }
 
     void Inventory(InputAction.CallbackContext obj)

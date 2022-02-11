@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Services.Analytics;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -27,6 +28,7 @@ public class MedKit : MonoBehaviour, IItem
             Instantiate(healSound);
             FindObjectOfType<InventoryUI>().ResetSelection();
 
+            SendDataToAnalytics();
         }
     }
 
@@ -72,5 +74,22 @@ public class MedKit : MonoBehaviour, IItem
     public int GetInventorySpace()
     {
         return InventorySpace;
+    }
+
+    void SendDataToAnalytics() 
+    {
+        if (InitServices.isRecording)
+        {
+            Dictionary<string, object> parameters = new Dictionary<string, object>()
+            {
+                { "itemType", "MedKit" },
+            };
+            Events.CustomData("ItemUtilise", parameters);
+            Events.Flush();
+        }
+        else
+        {
+            Debug.Log("Sending Event: 'ItemUtilise' with: itemType = " + "MedKit");
+        }
     }
 }

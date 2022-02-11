@@ -6,13 +6,13 @@ public class LevelCompletePanel : MonoBehaviour
 {
     public void LevelComplete()
     {
-        FindObjectOfType<GameManager>().NextLevel();
-
+        StatePanel.instance.NextLevel();
+        //Instantiate(endPanelLevel, GameObject.Find("WinLoseConditionTarget").transform);
     }
 
     public void GameComplete()
     {
-        //FindObjectOfType<GameManager>().RestartGame();
-        FindObjectOfType<GameManager>().ReturnToMenu();
+        StatePanel.instance.FinishGame();
+        //Instantiate(endPanelGame, GameObject.Find("WinLoseConditionTarget").transform);
     }
 }

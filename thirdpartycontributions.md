@@ -4,6 +4,7 @@
  - fesliyanSTUDIOS, [Squeeky Door](https://www.fesliyanstudios.com/royalty-free-sound-effects-download/door-squeaking-50)
  - SOUNDFISHING, [Slash and Death](https://www.soundfishing.eu/sound-effect/fight)
  - FreeSoundEffects.com, [Passive Monster](https://www.freesoundeffects.com/free-sounds/monster-sounds-10093/)
+ - FreeSoundEffects.com, [Attacking Monster](https://www.freesoundeffects.com/free-sounds/monster-sounds-10093/)
 ## Models
  - TURBOSQUID, [Key](https://www.turbosquid.com/3d-models/old-key-3ds-free/1099143)
  - TURBOSQUID, [Med Kit](https://www.turbosquid.com/3d-models/military-aid-kit-model-1284968)

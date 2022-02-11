@@ -4,14 +4,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.AI;
+using Unity.Services.Analytics;
 
 public class MonsterPathfinding : MonoBehaviour
 {
+    public string monsterName;
+    public Monster monsterInformation = new Monster();
+
     [Header("Patrol Variables/Objects")]
     public Transform pathHolder;
     public float patrolSpeed = 5;
-    public float patrolTurnWaitTime = 0.3f;
-    public float turnSpeed = 90f;
     public float buffer = 0.05f;
 
     [Header("Sight Variables/Objects")]
@@ -27,7 +29,7 @@ public class MonsterPathfinding : MonoBehaviour
     public float chaseSpeed = 6f;
 
     NavMeshAgent navMeshAgent;
-    MonsterAnimation monsterAnimation;
+    MonsterAnimationAndSound monsterAnimationSound;
     Transform player;
     Vector3[] waypoints;
     Vector3 startWaypoint;
@@ -40,10 +42,12 @@ public class MonsterPathfinding : MonoBehaviour
 
     void Start()
     {
+        monsterInformation.SetName(monsterName);
+
         navMeshAgent = GetComponent<NavMeshAgent>();
         navMeshAgent.speed = patrolSpeed;
         navMeshAgent.isStopped = false;
-        monsterAnimation = GetComponent<MonsterAnimation>();
+        monsterAnimationSound = GetComponent<MonsterAnimationAndSound>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
         notVisibleTimeCounter = notVisibleTime;
 
@@ -68,6 +72,7 @@ public class MonsterPathfinding : MonoBehaviour
             if (!isCalled) // Makes sure 'playerSpotted' is only invoked once.
             {
                 FindObjectOfType<MusicManager>().SwitchToChase();
+                monsterAnimationSound.SwitchToChase();
                 isCalled = true;
             }
         }
@@ -97,7 +102,7 @@ public class MonsterPathfinding : MonoBehaviour
     {
         speed = Mathf.Lerp(speed, (transform.position - lastPosition).magnitude / Time.deltaTime, 0.75f);
         lastPosition = transform.position;
-        monsterAnimation.SetSpeed(speed);
+        monsterAnimationSound.SetSpeed(speed);
     }
 
     public bool CanSeePlayer() 
@@ -153,6 +158,7 @@ public class MonsterPathfinding : MonoBehaviour
         isChasing = false;
         notVisibleTimeCounter = notVisibleTime;
         navMeshAgent.isStopped = true;
+        monsterAnimationSound.SwitchToPassive();
         yield return new WaitForSeconds(afterChaseWaitTime);
         FindObjectOfType<MusicManager>().SwitchToTense();
         isCalled = false; // Resets 'icCalled' so that Unity event is only called once in update.
@@ -161,6 +167,9 @@ public class MonsterPathfinding : MonoBehaviour
 
     public IEnumerator ReturnToPatrol() 
     {
+        // At this point the player has evaded the monster, and so I send an event to Unity Analytics.
+        SendDataToAnalytics();
+
         navMeshAgent.isStopped = false;
         navMeshAgent.destination = startWaypoint;
         navMeshAgent.speed = patrolSpeed;
@@ -205,6 +214,23 @@ public class MonsterPathfinding : MonoBehaviour
     public void SetPathfindingOn(bool isOn) 
     {
         navMeshAgent.isStopped = isOn;
+    }
+
+    void SendDataToAnalytics() 
+    {
+        if (InitServices.isRecording)
+        {
+            Dictionary<string, object> parameters = new Dictionary<string, object>()
+            {
+                { "Monster", GetComponent<MonsterPathfinding>().monsterInformation.GetName() }
+            };
+            Events.CustomData("PlayerEscape", parameters);
+            Events.Flush();
+        }
+        else
+        {
+            Debug.Log("Sending Event: 'PlayerEscape' with: Monster = " + GetComponent<MonsterPathfinding>().monsterInformation.GetName());
+        }
     }
 
     void OnDrawGizmos()
