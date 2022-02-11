@@ -10,8 +10,6 @@ public class GameManager : MonoBehaviour
     public GameObject levelCompleteUIPanel;
     public GameObject gameCompleteUIPanel;
     public GameObject gameInformationObj;
-    public GameObject startPanel;
-    public GameObject firstLevelPanel;
 
     [Header("Current Level Information")]
     public int level;
@@ -31,7 +29,7 @@ public class GameManager : MonoBehaviour
 
     public void LoadFirstLevel() 
     {
-        Instantiate(firstLevelPanel, GameObject.Find("WinLoseConditionTarget").transform);
+        StatePanel.instance.NextLevel();
     }
 
     public void ReturnToMenu() 
@@ -135,8 +133,6 @@ public class GameManager : MonoBehaviour
         {
             health.InitSetHealth(GameInformation.instance.Health);
         }
-
-        Instantiate(startPanel, GameObject.Find("WinLoseConditionTarget").transform);      
     }
 
     void SendDataToAnalytics() 
