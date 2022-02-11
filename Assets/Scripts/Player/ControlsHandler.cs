@@ -51,6 +51,8 @@ public class ControlsHandler : MonoBehaviour
         controls.Player.Crouch.Enable();
         controls.Player.Interact.started += Interact;
         controls.Player.Interact.Enable();
+        controls.Player.Action.started += Action;
+        controls.Player.Action.Enable();
 
         controls.UI.Exit.performed += Exit;
         controls.UI.Exit.Enable();
@@ -106,6 +108,15 @@ public class ControlsHandler : MonoBehaviour
     void Interact(InputAction.CallbackContext obj) 
     {
         interact.InteractInput();
+    }
+
+    void Action(InputAction.CallbackContext obj)
+    {
+        Attack attack = FindObjectOfType<Attack>();
+        if (attack != null) 
+        {
+            attack.Strike();
+        }
     }
 
     void Exit(InputAction.CallbackContext obj)
