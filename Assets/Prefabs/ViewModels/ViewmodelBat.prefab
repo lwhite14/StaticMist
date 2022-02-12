@@ -206,9 +206,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3297504838313627958}
+  - component: {fileID: 3852472891313597908}
   - component: {fileID: 3297504838313627959}
   - component: {fileID: 3297504838313627956}
   - component: {fileID: 3297504838313627957}
+  - component: {fileID: 6839491574619401475}
   m_Layer: 0
   m_Name: ViewmodelBat
   m_TagString: Viewmodel
@@ -231,6 +233,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!54 &3852472891313597908
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3297504838313627946}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!95 &3297504838313627959
 Animator:
   serializedVersion: 3
@@ -276,6 +294,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cee32989e18ba9048ac446f20d94a0de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damage: 1
+  strikeSound: {fileID: 8020974089627917183, guid: 70348f0944662c641aa45c4cebdb8433, type: 3}
+--- !u!65 &6839491574619401475
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3297504838313627946}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.1, y: 0.1, z: 0.8}
+  m_Center: {x: -0.25, y: 0, z: 0.2}
 --- !u!1 &6348660841617350176
 GameObject:
   m_ObjectHideFlags: 0

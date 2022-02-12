@@ -2,7 +2,8 @@
 ## Sounds
  - fesliyanSTUDIOS, [Footsteps](https://www.fesliyanstudios.com/royalty-free-sound-effects-download/footsteps-31)
  - fesliyanSTUDIOS, [Squeeky Door](https://www.fesliyanstudios.com/royalty-free-sound-effects-download/door-squeaking-50)
- - SOUNDFISHING, [Slash and Death](https://www.soundfishing.eu/sound-effect/fight)
+ - SOUNDFISHING, [Monster Slash, Player Death, and Bat](https://www.soundfishing.eu/sound-effect/fight)
+ - SOUNDFISHING, [Enemy Death](https://www.soundfishing.eu/sound-effect/wild-animal)
  - FreeSoundEffects.com, [Passive Monster](https://www.freesoundeffects.com/free-sounds/monster-sounds-10093/)
  - FreeSoundEffects.com, [Attacking Monster](https://www.freesoundeffects.com/free-sounds/monster-sounds-10093/)
 ## Models

@@ -9,6 +9,7 @@ public class MonsterAnimationAndSound : MonoBehaviour
 
     public AudioClip passiveSound;
     public AudioClip chaseSound;
+    public AudioClip deathSound;
 
     void Start()
     {
@@ -26,6 +27,11 @@ public class MonsterAnimationAndSound : MonoBehaviour
     public void PlayAttack() 
     {
         anim.Play("Attack");
+    }
+
+    public void PlayDeath() 
+    {
+        anim.Play("Death");
     }
 
     void RandomisePassiveSound() 
@@ -46,5 +52,12 @@ public class MonsterAnimationAndSound : MonoBehaviour
     {
         audioSource.clip = chaseSound;
         audioSource.Play();
+    }
+
+    public void SwitchToDeath() 
+    {
+        audioSource.clip = deathSound;
+        audioSource.Play();
+        audioSource.loop = false;
     }
 }

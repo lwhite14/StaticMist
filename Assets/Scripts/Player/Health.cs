@@ -16,6 +16,7 @@ public class Health : MonoBehaviour
     public float maxHealth = 4.0f; 
 
     Slider healthSlider;
+    [HideInInspector] public bool isDead = false;
 
     void Start()
     {
@@ -80,6 +81,7 @@ public class Health : MonoBehaviour
         SendDataToAnalytics(monsterType);
         onDeath.Invoke();
         GameManager.instance.OnDeath();
+        isDead = true;
     }
 
     public void DeathSound() 
