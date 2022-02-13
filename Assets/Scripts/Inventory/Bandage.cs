@@ -1,21 +1,21 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using Unity.Services.Analytics;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class MedKit : MonoBehaviour, IItem
+public class Bandage : MonoBehaviour, IItem
 {
-    string displayName = "MED KIT";
-    string description = "THIS SHOULD PATCH ME UP IF I GET HURT."; 
+    string displayName = "BANDAGE";
+    string description = "THIS SHOULD COVER ONE OF MY WOUNDS.";
     bool canUse = true;
     bool canEquip = false;
     bool canReload = false;
 
     public GameObject healSound;
-    public float healValue = 2.0f;
+    public float healValue = 1.0f;
 
-    public void Use() 
+    public void Use()
     {
         float currentHealth = FindObjectOfType<Health>().GetHealth();
         float maxHealth = FindObjectOfType<Health>().GetMaxHealth();
@@ -32,7 +32,7 @@ public class MedKit : MonoBehaviour, IItem
         }
     }
 
-    public void Examine() 
+    public void Examine()
     {
         FindObjectOfType<CoroutineHelper>().HelperStartExamining(description);
     }
@@ -71,13 +71,13 @@ public class MedKit : MonoBehaviour, IItem
         return description;
     }
 
-    void SendDataToAnalytics() 
+    void SendDataToAnalytics()
     {
         if (InitServices.isRecording)
         {
             Dictionary<string, object> parameters = new Dictionary<string, object>()
             {
-                { "itemType", "MedKit" },
+                { "itemType", "Bandage" },
             };
             Events.CustomData("ItemUtilise", parameters);
             Events.Flush();
