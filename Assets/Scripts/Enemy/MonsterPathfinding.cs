@@ -28,6 +28,10 @@ public class MonsterPathfinding : MonoBehaviour
     public float notVisibleTime = 2f;
     public float chaseSpeed = 6f;
 
+    [Header("Investigating Variables")]
+    public float investigatingTime = 2.5f;
+    public float outOfSightTime = 3.5f;
+
     NavMeshAgent navMeshAgent;
     MonsterAnimationAndSound monsterAnimationSound;
     Transform player;
@@ -38,6 +42,8 @@ public class MonsterPathfinding : MonoBehaviour
     bool isDead = false;
     float notVisibleTimeCounter;
     float speed = 0f;
+    float investigatingTimerCounter;
+    float outOfSightTimeCounter;
     int targetWaypointIndex;
     Vector3 targetWaypoint;
 
@@ -51,6 +57,8 @@ public class MonsterPathfinding : MonoBehaviour
         monsterAnimationSound = GetComponent<MonsterAnimationAndSound>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
         notVisibleTimeCounter = notVisibleTime;
+        investigatingTimerCounter = investigatingTime;
+        outOfSightTimeCounter = outOfSightTime;
 
         waypoints = new Vector3[pathHolder.childCount];
         for (int i = 0; i < waypoints.Length; i++)
@@ -115,6 +123,8 @@ public class MonsterPathfinding : MonoBehaviour
 
     IEnumerator FollowPath()
     {
+        navMeshAgent.isStopped = false;
+
         while (true)
         {
             navMeshAgent.destination = targetWaypoint;
@@ -126,16 +136,51 @@ public class MonsterPathfinding : MonoBehaviour
 
                 if (CanSeePlayer() && !isDead)
                 {
-                    yield return StartCoroutine(ChasePlayer());
+                    yield return StartCoroutine(Investigating());
                 }
             }
             yield return null;
         }
     }
 
+    IEnumerator Investigating() 
+    {
+        navMeshAgent.isStopped = true;
+
+        while (true) 
+        {
+            if (CanSeePlayer())
+            {
+                investigatingTimerCounter -= Time.deltaTime;
+                if (investigatingTimerCounter <= 0) 
+                {
+                    ResetInvestigatingVariables();
+                    yield return StartCoroutine(ChasePlayer());
+                }
+            }
+            else 
+            {
+                outOfSightTimeCounter -= Time.deltaTime;
+                if (outOfSightTimeCounter <= 0) 
+                {
+                    ResetInvestigatingVariables();
+                    yield return StartCoroutine(FollowPath());
+                }
+            }
+            yield return null;
+        }
+    }
+
+    void ResetInvestigatingVariables() 
+    {
+        investigatingTimerCounter = investigatingTime;
+        outOfSightTimeCounter = outOfSightTime;
+    }
+
     IEnumerator ChasePlayer() 
     {
         navMeshAgent.speed = chaseSpeed;
+        navMeshAgent.isStopped = false;
         navMeshAgent.destination = player.position;
         FindObjectOfType<MusicManager>().SwitchToChase();
         monsterAnimationSound.SwitchToChase();
