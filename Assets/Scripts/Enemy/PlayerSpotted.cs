@@ -8,9 +8,7 @@ public class PlayerSpotted : MonoBehaviour
     public float rayRange = 12f;
     public float spotAngle = 40f;
     public float musicalStabResetTime = 60f;
-    public GameObject musicalStabSound;
     public LayerMask obstacleMask;
-    public UnityEvent enemySpotted;
     float musicalStabResetTimeCounter = 0;
     Transform player;
 
@@ -36,7 +34,7 @@ public class PlayerSpotted : MonoBehaviour
                 {
                     if (musicalStabResetTimeCounter <= 0)
                     {
-                        enemySpotted.Invoke();
+                        GetComponent<MonsterAnimationAndSound>().MonsterSpottedStab();
                     }
                     musicalStabResetTimeCounter = musicalStabResetTime;
                 }
@@ -47,11 +45,6 @@ public class PlayerSpotted : MonoBehaviour
         {
             musicalStabResetTimeCounter -= Time.deltaTime;
         }
-    }
-
-    public void SpottedStab() 
-    {
-        Instantiate(musicalStabSound, transform.position, Quaternion.identity);
     }
 
     void OnDrawGizmos()

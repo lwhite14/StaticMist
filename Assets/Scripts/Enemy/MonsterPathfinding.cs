@@ -144,6 +144,7 @@ public class MonsterPathfinding : MonoBehaviour
     IEnumerator Investigating() 
     {
         navMeshAgent.isStopped = true;
+        monsterAnimationSound.PlayerSpottedStab();
 
         while (true) 
         {

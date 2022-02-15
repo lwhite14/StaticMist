@@ -7,9 +7,14 @@ public class MonsterAnimationAndSound : MonoBehaviour
     Animator anim;
     AudioSource audioSource;
 
+    [Header("Monster Sound Clips")]
     public AudioClip passiveSound;
     public AudioClip chaseSound;
     public AudioClip deathSound;
+
+    [Header("Musical Stabs")]
+    public GameObject monsterSpottedStab;
+    public GameObject playerSpottedStab;
 
     void Start()
     {
@@ -59,5 +64,15 @@ public class MonsterAnimationAndSound : MonoBehaviour
         audioSource.clip = deathSound;
         audioSource.Play();
         audioSource.loop = false;
+    }
+
+    public void MonsterSpottedStab()
+    {
+        Instantiate(monsterSpottedStab, transform.position, Quaternion.identity);
+    }
+
+    public void PlayerSpottedStab() 
+    {
+        Instantiate(playerSpottedStab, transform.position, Quaternion.identity);
     }
 }
