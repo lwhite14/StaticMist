@@ -132,12 +132,10 @@ public class MonsterPathfinding : MonoBehaviour
             {
                 targetWaypointIndex = (targetWaypointIndex + 1) % waypoints.Length;
                 targetWaypoint = waypoints[targetWaypointIndex];
-
-
-                if (CanSeePlayer() && !isDead)
-                {
-                    yield return StartCoroutine(Investigating());
-                }
+            }
+            if (CanSeePlayer() && !isDead)
+            {
+                yield return StartCoroutine(Investigating());
             }
             yield return null;
         }

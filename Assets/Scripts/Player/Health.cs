@@ -81,7 +81,7 @@ public class Health : MonoBehaviour
         SendDataToAnalytics(monsterType);
         onDeath.Invoke();
         GameManager.instance.OnDeath();
-        if (FindObjectOfType<Viewmodel>().gameObject != null)
+        if (FindObjectOfType<Viewmodel>() != null)
         {
             Destroy(FindObjectOfType<Viewmodel>().gameObject);
         }
