@@ -12,6 +12,7 @@ public class InventoryUI : MonoBehaviour
     public Button reloadButton;
     public Text nameText;
     public Text descriptionText;
+    public MapDisplayer mapDisplayer;
     GameObject viewedItem = null;
     Animator anim;
     bool isOn = false;
@@ -94,6 +95,11 @@ public class InventoryUI : MonoBehaviour
         FindObjectOfType<CoroutineHelper>().HelperStopCoroutine();
         descriptionText.text = "";
         examineButton.interactable = false;
+    }
+
+    public void ViewMap(Sprite map) 
+    {
+        mapDisplayer.GetComponent<MapDisplayer>().ViewMap(map);
     }
 
     public GameObject GetViewedItem() 
