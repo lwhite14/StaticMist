@@ -102,6 +102,11 @@ public class InventoryUI : MonoBehaviour
         mapDisplayer.GetComponent<MapDisplayer>().ViewMap(map);
     }
 
+    public bool GetIsOn() 
+    {
+        return isOn;
+    }
+
     public GameObject GetViewedItem() 
     { 
         return viewedItem; 
