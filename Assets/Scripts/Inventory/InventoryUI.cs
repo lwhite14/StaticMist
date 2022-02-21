@@ -95,6 +95,7 @@ public class InventoryUI : MonoBehaviour
         FindObjectOfType<CoroutineHelper>().HelperStopCoroutine();
         descriptionText.text = "";
         examineButton.interactable = false;
+        mapDisplayer.Exit();
     }
 
     public void ViewMap(Sprite map) 
