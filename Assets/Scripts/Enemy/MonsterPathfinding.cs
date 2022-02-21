@@ -31,6 +31,7 @@ public class MonsterPathfinding : MonoBehaviour
     [Header("Investigating Variables")]
     public float investigatingTime = 2.5f;
     public float outOfSightTime = 3.5f;
+    public float rotationSmoothing = 5f;
 
     NavMeshAgent navMeshAgent;
     MonsterAnimationAndSound monsterAnimationSound;
@@ -148,9 +149,13 @@ public class MonsterPathfinding : MonoBehaviour
 
         while (true) 
         {
+            Quaternion rotation = Quaternion.LookRotation(player.position - transform.position);
+            transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * rotationSmoothing);
+
             if (CanSeePlayer())
             {
                 investigatingTimerCounter -= Time.deltaTime;
+
                 if (investigatingTimerCounter <= 0) 
                 {
                     ResetInvestigatingVariables();
