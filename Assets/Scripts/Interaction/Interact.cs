@@ -39,7 +39,10 @@ public class Interact : MonoBehaviour
         bool hit = Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), rayRange);
         if (!hit)
         {
-            FindObjectOfType<DialogueManager>().EndDialogue();
+            if (FindObjectOfType<DialogueManager>() != null)
+            {
+                FindObjectOfType<DialogueManager>().EndDialogue();
+            }
         }
     }
 }
