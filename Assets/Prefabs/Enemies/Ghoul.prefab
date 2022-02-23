@@ -2660,6 +2660,8 @@ MonoBehaviour:
     m_Bits: 64
   notVisibleTime: 3.2
   chaseSpeed: 6
+  investigatingTime: 2.5
+  outOfSightTime: 3.5
 --- !u!114 &6117697170515415819
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2688,28 +2690,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d0d63bbda356b94288f9ad6d29cfc8b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rayRange: 20
+  rayRange: 26
   spotAngle: 40
   musicalStabResetTime: 60
-  musicalStabSound: {fileID: 6699714942986620224, guid: 64e8e42ad39da4646b66ba08c3d58772, type: 3}
   obstacleMask:
     serializedVersion: 2
     m_Bits: 64
-  enemySpotted:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 6117697170515415818}
-        m_TargetAssemblyTypeName: PlayerSpotted, Assembly-CSharp
-        m_MethodName: SpottedStab
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &6117697170515415813
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2724,3 +2710,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   passiveSound: {fileID: 8300000, guid: 9ab7570a02c74164c91d4f2623097f47, type: 3}
   chaseSound: {fileID: 8300000, guid: b3926d0acba8c224ea054da6ee83a47d, type: 3}
+  deathSound: {fileID: 8300000, guid: f244ac517f6710d4284e998cad312453, type: 3}
+  monsterSpottedStab: {fileID: 6699714942986620224, guid: 64e8e42ad39da4646b66ba08c3d58772, type: 3}
+  playerSpottedStab: {fileID: 3904844609477990937, guid: a46bd8228d5715d4589106994dcce404, type: 3}

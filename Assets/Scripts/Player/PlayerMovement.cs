@@ -187,14 +187,14 @@ public class PlayerMovement : MonoBehaviour
                 {
                     if ((x + 0.05) > newX)
                     {
-                        x = newX;
+                        SetX(newX);
                     }
                 }
                 if (x > newX)
                 {
                     if ((x - 0.05) < newX)
                     {
-                        x = newX;
+                        SetX(newX);
                     }
                 }
             }
@@ -212,14 +212,14 @@ public class PlayerMovement : MonoBehaviour
                 {
                     if ((z + 0.05) > newZ)
                     {
-                        z = newZ;
+                        SetZ(newZ);
                     }
                 }
                 if (z > newZ)
                 {
                     if ((z - 0.05) < newZ)
                     {
-                        z = newZ;
+                        SetZ(newZ);
                     }
                 }
             }

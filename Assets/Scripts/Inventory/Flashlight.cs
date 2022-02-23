@@ -37,10 +37,18 @@ public class Flashlight : MonoBehaviour, IItem
         }
         else 
         {
-            Destroy(GameObject.FindWithTag("Viewmodel"));
-            Instantiate(zippingUpSound, transform.position, Quaternion.identity);
-            FindObjectOfType<CoroutineHelper>().HelperStopCoroutine();
-            FindObjectOfType<CoroutineHelper>().HelperStartExamining("I BEST PUT THIS AWAY...");
+            if (viewmodel.GetComponent<Viewmodel>().itemName == displayName)
+            {
+                Destroy(GameObject.FindWithTag("Viewmodel"));
+                Instantiate(zippingUpSound, transform.position, Quaternion.identity);
+                FindObjectOfType<CoroutineHelper>().HelperStopCoroutine();
+                FindObjectOfType<CoroutineHelper>().HelperStartExamining("I BEST PUT THIS AWAY...");
+            }
+            else
+            {
+                FindObjectOfType<CoroutineHelper>().HelperStopCoroutine();
+                FindObjectOfType<CoroutineHelper>().HelperStartExamining("NEED TO PUT AWAY MY " + viewmodel.GetComponent<Viewmodel>().itemName + " FIRST ...");
+            }
         }
     }
 

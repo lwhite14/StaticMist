@@ -28,6 +28,11 @@ public class MonsterPathfinding : MonoBehaviour
     public float notVisibleTime = 2f;
     public float chaseSpeed = 6f;
 
+    [Header("Investigating Variables")]
+    public float investigatingTime = 2.5f;
+    public float outOfSightTime = 3.5f;
+    public float rotationSmoothing = 5f;
+
     NavMeshAgent navMeshAgent;
     MonsterAnimationAndSound monsterAnimationSound;
     Transform player;
@@ -36,9 +41,12 @@ public class MonsterPathfinding : MonoBehaviour
     Vector3 lastPosition;
     bool isChasing = false;
     bool isDead = false;
-    bool isCalled = false;
     float notVisibleTimeCounter;
     float speed = 0f;
+    float investigatingTimerCounter;
+    float outOfSightTimeCounter;
+    int targetWaypointIndex;
+    Vector3 targetWaypoint;
 
     void Start()
     {
@@ -50,51 +58,22 @@ public class MonsterPathfinding : MonoBehaviour
         monsterAnimationSound = GetComponent<MonsterAnimationAndSound>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
         notVisibleTimeCounter = notVisibleTime;
+        investigatingTimerCounter = investigatingTime;
+        outOfSightTimeCounter = outOfSightTime;
 
         waypoints = new Vector3[pathHolder.childCount];
-        for (int i = 0; i < waypoints.Length; i++) 
+        for (int i = 0; i < waypoints.Length; i++)
         {
             waypoints[i] = pathHolder.GetChild(i).position;
             waypoints[i] = new Vector3(waypoints[i].x, transform.position.y, waypoints[i].z);
         }
         startWaypoint = waypoints[0];
 
-        StartCoroutine(FollowPath());
+        StartCoroutine(InitFollowPath());
     }
 
     void Update()
     {
-        if (CanSeePlayer() && !isDead)
-        {
-            StopAllCoroutines();
-            isChasing = true;
-            navMeshAgent.speed = chaseSpeed;
-            if (!isCalled) // Makes sure 'playerSpotted' is only invoked once.
-            {
-                FindObjectOfType<MusicManager>().SwitchToChase();
-                monsterAnimationSound.SwitchToChase();
-                isCalled = true;
-            }
-        }
-
-        if (isChasing) 
-        {
-            navMeshAgent.destination = player.position;
-
-            if (CanSeePlayer())
-            {
-                notVisibleTimeCounter = notVisibleTime;
-            }
-            else 
-            {
-                notVisibleTimeCounter -= Time.deltaTime;
-                if (notVisibleTimeCounter <= 0) 
-                {
-                    StartCoroutine(WaitForTime());
-                }
-            }
-        }
-
         UpdateSpeed();
     }
 
@@ -105,15 +84,15 @@ public class MonsterPathfinding : MonoBehaviour
         monsterAnimationSound.SetSpeed(speed);
     }
 
-    public bool CanSeePlayer() 
+    public bool CanSeePlayer()
     {
-        if (Vector3.Distance(transform.position, player.position) < viewDistanceLong) 
+        if (Vector3.Distance(transform.position, player.position) < viewDistanceLong)
         {
             Vector3 dirToPlayer = (player.position - transform.position).normalized;
             float angleBetweenGuardAndPlayer = Vector3.Angle(transform.forward, dirToPlayer);
-            if (angleBetweenGuardAndPlayer < spotAngleLong / 2f) 
+            if (angleBetweenGuardAndPlayer < spotAngleLong / 2f)
             {
-                if (!Physics.Linecast(transform.position, player.position, viewMask)) 
+                if (!Physics.Linecast(transform.position, player.position, viewMask))
                 {
                     return true;
                 }
@@ -135,11 +114,17 @@ public class MonsterPathfinding : MonoBehaviour
         return false;
     }
 
-    IEnumerator FollowPath() 
+    IEnumerator InitFollowPath()
     {
         transform.position = waypoints[0];
-        int targetWaypointIndex = 1;
-        Vector3 targetWaypoint = waypoints[targetWaypointIndex];
+        targetWaypointIndex = 1;
+        targetWaypoint = waypoints[targetWaypointIndex];
+        yield return StartCoroutine(FollowPath());
+    }
+
+    IEnumerator FollowPath()
+    {
+        navMeshAgent.isStopped = false;
 
         while (true)
         {
@@ -149,19 +134,89 @@ public class MonsterPathfinding : MonoBehaviour
                 targetWaypointIndex = (targetWaypointIndex + 1) % waypoints.Length;
                 targetWaypoint = waypoints[targetWaypointIndex];
             }
+            if (CanSeePlayer() && !isDead)
+            {
+                yield return StartCoroutine(Investigating());
+            }
+            yield return null;
+        }
+    }
+
+    IEnumerator Investigating() 
+    {
+        navMeshAgent.isStopped = true;
+        monsterAnimationSound.PlayerSpottedStab();
+
+        while (true) 
+        {
+            Quaternion rotation = Quaternion.LookRotation(player.position - transform.position);
+            transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * rotationSmoothing);
+
+            if (CanSeePlayer())
+            {
+                investigatingTimerCounter -= Time.deltaTime;
+
+                if (investigatingTimerCounter <= 0) 
+                {
+                    ResetInvestigatingVariables();
+                    yield return StartCoroutine(ChasePlayer());
+                }
+            }
+            else 
+            {
+                outOfSightTimeCounter -= Time.deltaTime;
+                if (outOfSightTimeCounter <= 0) 
+                {
+                    ResetInvestigatingVariables();
+                    yield return StartCoroutine(FollowPath());
+                }
+            }
+            yield return null;
+        }
+    }
+
+    void ResetInvestigatingVariables() 
+    {
+        investigatingTimerCounter = investigatingTime;
+        outOfSightTimeCounter = outOfSightTime;
+    }
+
+    IEnumerator ChasePlayer() 
+    {
+        navMeshAgent.speed = chaseSpeed;
+        navMeshAgent.isStopped = false;
+        navMeshAgent.destination = player.position;
+        FindObjectOfType<MusicManager>().SwitchToChase();
+        monsterAnimationSound.SwitchToChase();
+        isChasing = true;
+
+        while (true)
+        {
+            navMeshAgent.destination = player.position;
+            if (CanSeePlayer())
+            {
+                notVisibleTimeCounter = notVisibleTime;
+            }
+            else
+            {
+                notVisibleTimeCounter -= Time.deltaTime;
+                if (notVisibleTimeCounter <= 0)
+                {
+                    isChasing = false;
+                    yield return StartCoroutine(WaitForTime());
+                }
+            }
             yield return null;
         }
     }
 
     IEnumerator WaitForTime()
     {
-        isChasing = false;
         notVisibleTimeCounter = notVisibleTime;
         navMeshAgent.isStopped = true;
         monsterAnimationSound.SwitchToPassive();
         yield return new WaitForSeconds(afterChaseWaitTime);
         FindObjectOfType<MusicManager>().SwitchToTense();
-        isCalled = false; // Resets 'icCalled' so that Unity event is only called once in update.
         yield return StartCoroutine(ReturnToPatrol());
     }
 
@@ -183,7 +238,7 @@ public class MonsterPathfinding : MonoBehaviour
                 {
                     if (!navMeshAgent.hasPath || navMeshAgent.velocity.sqrMagnitude == 0f)
                     {
-                        yield return StartCoroutine(FollowPath());
+                        yield return StartCoroutine(InitFollowPath());
                     }
                 }
             }

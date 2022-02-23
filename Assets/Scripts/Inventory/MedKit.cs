@@ -8,12 +8,12 @@ public class MedKit : MonoBehaviour, IItem
 {
     string displayName = "MED KIT";
     string description = "THIS SHOULD PATCH ME UP IF I GET HURT."; 
-    int InventorySpace = -1;
     bool canUse = true;
     bool canEquip = false;
     bool canReload = false;
 
     public GameObject healSound;
+    public float healValue = 2.0f;
 
     public void Use() 
     {
@@ -22,7 +22,7 @@ public class MedKit : MonoBehaviour, IItem
 
         if (maxHealth != currentHealth)
         {
-            FindObjectOfType<Health>().Heal(2.0f);
+            FindObjectOfType<Health>().Heal(healValue);
             FindObjectOfType<PlayerInventory>().inventory.RemoveItem(this);
             FindObjectOfType<PlayerInventory>().RefreshUI();
             Instantiate(healSound);
@@ -69,11 +69,6 @@ public class MedKit : MonoBehaviour, IItem
     public string GetDescription()
     {
         return description;
-    }
-
-    public int GetInventorySpace()
-    {
-        return InventorySpace;
     }
 
     void SendDataToAnalytics() 

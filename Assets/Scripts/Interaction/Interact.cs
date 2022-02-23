@@ -13,7 +13,10 @@ public class Interact : MonoBehaviour
 
     public void InteractInput() 
     {
-        CastInteractRay();
+        if (!FindObjectOfType<InventoryUI>().GetIsOn())
+        {
+            CastInteractRay();
+        }
     }
 
     void CastInteractRay()
@@ -36,7 +39,10 @@ public class Interact : MonoBehaviour
         bool hit = Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), rayRange);
         if (!hit)
         {
-            FindObjectOfType<DialogueManager>().EndDialogue();
+            if (FindObjectOfType<DialogueManager>() != null)
+            {
+                FindObjectOfType<DialogueManager>().EndDialogue();
+            }
         }
     }
 }

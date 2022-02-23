@@ -33,7 +33,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        SetUp();
+        GameInformationSetUp();
     }
 
     public void ExitGame()
@@ -104,7 +104,10 @@ public class GameManager : MonoBehaviour
         GameInformation.instance.Items = new List<IItem>();
         foreach (IItem item in FindObjectOfType<PlayerInventory>().inventory.GetAllItems())
         {
-            GameInformation.instance.Items.Add(item);
+            if (!(item is Map))
+            {
+                GameInformation.instance.Items.Add(item);
+            }
         }
         GameInformation.instance.Health = FindObjectOfType<Health>().GetHealth();
         
@@ -117,7 +120,7 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(nextLevelName, LoadSceneMode.Single);
     }
 
-    void SetUp()
+    void GameInformationSetUp()
     {
         if (FindObjectOfType<GameInformation>() == null)
         {
