@@ -15,6 +15,7 @@ public class MonsterPathfinding : MonoBehaviour
     public Transform[] pathHolder;
     public float patrolSpeed = 5;
     public float buffer = 0.05f;
+    public float stopChance = 0.25f;
 
     [Header("Sight Variables/Objects")]
     public float spotAngleLong = 80f;
@@ -83,8 +84,6 @@ public class MonsterPathfinding : MonoBehaviour
         System.Random rnd = new System.Random();
         int randIndex = rnd.Next(0, pathHolder.Length);
 
-        Debug.Log("Index = " + randIndex);
-
         waypoints = new Vector3[pathHolder[randIndex].childCount];
         for (int i = 0; i < waypoints.Length; i++)
         {
@@ -92,6 +91,17 @@ public class MonsterPathfinding : MonoBehaviour
             waypoints[i] = new Vector3(waypoints[i].x, transform.position.y, waypoints[i].z);
         }
         startWaypoint = waypoints[0];
+    }
+
+    bool IsRandomStop() 
+    {
+        System.Random random = new System.Random();
+        double val = random.NextDouble();
+        if ((float)val < stopChance) 
+        {
+            return true;
+        }
+        return false;
     }
 
     public bool CanSeePlayer()
@@ -147,6 +157,10 @@ public class MonsterPathfinding : MonoBehaviour
                 }
                 targetWaypointIndex = (targetWaypointIndex + 1) % waypoints.Length;
                 targetWaypoint = waypoints[targetWaypointIndex];
+                if (IsRandomStop())
+                {
+                    yield return StartCoroutine(RandomStop());
+                }
             }
             if (CanSeePlayer() && !isDead)
             {
@@ -154,6 +168,17 @@ public class MonsterPathfinding : MonoBehaviour
             }
             yield return null;
         }
+    }
+
+    IEnumerator RandomStop() 
+    {
+        navMeshAgent.isStopped = true;
+        System.Random random = new System.Random();
+        double stopTime = (random.NextDouble() * (3.0 - 0.6) + 0.6);
+
+        yield return new WaitForSeconds((float)stopTime);
+        navMeshAgent.isStopped = false;
+        yield return StartCoroutine(FollowPath());
     }
 
     IEnumerator Investigating() 
