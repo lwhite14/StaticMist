@@ -12,7 +12,7 @@ public class MonsterPathfinding : MonoBehaviour
     public Monster monsterInformation = new Monster();
 
     [Header("Patrol Variables/Objects")]
-    public Transform pathHolder;
+    public Transform[] pathHolder;
     public float patrolSpeed = 5;
     public float buffer = 0.05f;
 
@@ -61,14 +61,8 @@ public class MonsterPathfinding : MonoBehaviour
         investigatingTimerCounter = investigatingTime;
         outOfSightTimeCounter = outOfSightTime;
 
-        waypoints = new Vector3[pathHolder.childCount];
-        for (int i = 0; i < waypoints.Length; i++)
-        {
-            waypoints[i] = pathHolder.GetChild(i).position;
-            waypoints[i] = new Vector3(waypoints[i].x, transform.position.y, waypoints[i].z);
-        }
-        startWaypoint = waypoints[0];
-
+        RandomPath();
+        
         StartCoroutine(InitFollowPath());
     }
 
@@ -82,6 +76,22 @@ public class MonsterPathfinding : MonoBehaviour
         speed = Mathf.Lerp(speed, (transform.position - lastPosition).magnitude / Time.deltaTime, 0.75f);
         lastPosition = transform.position;
         monsterAnimationSound.SetSpeed(speed);
+    }
+
+    void RandomPath() 
+    {
+        System.Random rnd = new System.Random();
+        int randIndex = rnd.Next(0, pathHolder.Length);
+
+        Debug.Log("Index = " + randIndex);
+
+        waypoints = new Vector3[pathHolder[randIndex].childCount];
+        for (int i = 0; i < waypoints.Length; i++)
+        {
+            waypoints[i] = pathHolder[randIndex].GetChild(i).position;
+            waypoints[i] = new Vector3(waypoints[i].x, transform.position.y, waypoints[i].z);
+        }
+        startWaypoint = waypoints[0];
     }
 
     public bool CanSeePlayer()
@@ -131,6 +141,10 @@ public class MonsterPathfinding : MonoBehaviour
             navMeshAgent.destination = targetWaypoint;
             if (Vector3.Distance(transform.position, targetWaypoint) <= buffer)
             {
+                if (((targetWaypointIndex + 1) % waypoints.Length) == 0) 
+                {
+                    RandomPath();
+                }
                 targetWaypointIndex = (targetWaypointIndex + 1) % waypoints.Length;
                 targetWaypoint = waypoints[targetWaypointIndex];
             }
@@ -292,15 +306,18 @@ public class MonsterPathfinding : MonoBehaviour
     {
         try
         {
-            Vector3 startPos = pathHolder.GetChild(0).position;
-            Vector3 prevPos = startPos;
-            foreach (Transform waypoint in pathHolder)
+            foreach (Transform singlePathHolder in pathHolder)
             {
-                Gizmos.DrawSphere(waypoint.position, 0.3f);
-                Gizmos.DrawLine(prevPos, waypoint.position);
-                prevPos = waypoint.position;
+                Vector3 startPos = singlePathHolder.GetChild(0).position;
+                Vector3 prevPos = startPos;
+                foreach (Transform waypoint in singlePathHolder)
+                {
+                    Gizmos.DrawSphere(waypoint.position, 0.3f);
+                    Gizmos.DrawLine(prevPos, waypoint.position);
+                    prevPos = waypoint.position;
+                }
+                Gizmos.DrawLine(prevPos, startPos);
             }
-            Gizmos.DrawLine(prevPos, startPos);
 
             Gizmos.color = Color.red;
             Gizmos.DrawRay(transform.position, transform.forward * viewDistanceLong);
