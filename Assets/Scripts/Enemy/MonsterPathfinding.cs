@@ -181,7 +181,7 @@ public class MonsterPathfinding : MonoBehaviour
         while (timer < (float)stopTime)
         {
             timer = timer + Time.deltaTime;
-            if (CanSeePlayer())
+            if (CanSeePlayer() && !isDead)
             {
                 yield return StartCoroutine(Investigating());
             }
@@ -202,7 +202,7 @@ public class MonsterPathfinding : MonoBehaviour
             Quaternion rotation = Quaternion.LookRotation(player.position - transform.position);
             transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * rotationSmoothing);
 
-            if (CanSeePlayer())
+            if (CanSeePlayer() && !isDead)
             {
                 investigatingTimerCounter -= Time.deltaTime;
 
@@ -243,7 +243,7 @@ public class MonsterPathfinding : MonoBehaviour
         while (true)
         {
             navMeshAgent.destination = player.position;
-            if (CanSeePlayer())
+            if (CanSeePlayer() && !isDead)
             {
                 notVisibleTimeCounter = notVisibleTime;
             }
