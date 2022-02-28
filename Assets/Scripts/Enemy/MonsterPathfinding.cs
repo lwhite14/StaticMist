@@ -172,7 +172,6 @@ public class MonsterPathfinding : MonoBehaviour
 
     IEnumerator RandomStop() 
     {
-        Debug.Log("RandomStop() called");
         navMeshAgent.isStopped = true;
         System.Random random = new System.Random();
         double stopTime = (random.NextDouble() * (3.0 - 0.6) + 0.6);

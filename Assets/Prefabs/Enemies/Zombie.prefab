@@ -1602,8 +1602,8 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 0.75
-  MaxDistance: 500
+  MinDistance: 0.25
+  MaxDistance: 60
   Pan2D: 0
   rolloffMode: 0
   BypassEffects: 0
@@ -1694,6 +1694,7 @@ MonoBehaviour:
   pathHolder: []
   patrolSpeed: 5
   buffer: 1.6
+  stopChance: 0.25
   spotAngleLong: 80
   viewDistanceLong: 12
   spotAngleShort: 180

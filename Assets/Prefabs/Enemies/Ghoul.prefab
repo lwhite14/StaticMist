@@ -2558,8 +2558,8 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 0.75
-  MaxDistance: 500
+  MinDistance: 0.25
+  MaxDistance: 50
   Pan2D: 0
   rolloffMode: 0
   BypassEffects: 0
@@ -2647,9 +2647,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   monsterName: Ghoul
-  pathHolder: {fileID: 0}
+  pathHolder:
+  - {fileID: 0}
   patrolSpeed: 2
   buffer: 1.6
+  stopChance: 0.25
   spotAngleLong: 80
   viewDistanceLong: 12
   spotAngleShort: 180
@@ -2662,6 +2664,7 @@ MonoBehaviour:
   chaseSpeed: 6
   investigatingTime: 2.5
   outOfSightTime: 3.5
+  rotationSmoothing: 5
 --- !u!114 &6117697170515415819
 MonoBehaviour:
   m_ObjectHideFlags: 0
