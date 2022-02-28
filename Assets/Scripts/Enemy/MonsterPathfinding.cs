@@ -231,7 +231,7 @@ public class MonsterPathfinding : MonoBehaviour
         outOfSightTimeCounter = outOfSightTime;
     }
 
-    IEnumerator ChasePlayer() 
+    public IEnumerator ChasePlayer() 
     {
         navMeshAgent.speed = chaseSpeed;
         navMeshAgent.isStopped = false;
@@ -304,7 +304,7 @@ public class MonsterPathfinding : MonoBehaviour
                     }
                 }
             }
-            if (CanSeePlayer())
+            if (CanSeePlayer() && !isDead)
             {
                 yield return StartCoroutine(Investigating());
             }

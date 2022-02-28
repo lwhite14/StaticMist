@@ -14,6 +14,8 @@ public class MonsterHealth : MonoBehaviour
     public void TakeDamage(float damage) 
     {
         health -= damage;
+        GetComponent<MonsterPathfinding>().StopAllCoroutines();
+        GetComponent<MonsterPathfinding>().StartCoroutine(GetComponent<MonsterPathfinding>().ChasePlayer());
         if (health <= 0) 
         {
             health = 0;
@@ -33,10 +35,5 @@ public class MonsterHealth : MonoBehaviour
 
         GetComponent<NavMeshAgent>().isStopped = true;
         GetComponent<CapsuleCollider>().enabled = false;
-    }
-
-    void SendDataToAnalytics()
-    {
-
     }
 }

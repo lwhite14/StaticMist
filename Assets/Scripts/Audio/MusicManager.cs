@@ -9,7 +9,8 @@ public class MusicManager : MonoBehaviour
     public AudioClip goalMusic;
     AudioSource audioSource;
 
-    int chaseCounter = 0;
+    bool tenseIsPlaying = false;
+    bool chaseIsPlaying = false;
 
     void Start()
     {
@@ -20,20 +21,35 @@ public class MusicManager : MonoBehaviour
 
     public void SwitchToTense() 
     {
-        chaseCounter--;
-        if (chaseCounter == 0)
+        MonsterPathfinding[] monsters = FindObjectsOfType<MonsterPathfinding>();
+        bool stillBeingChased = false;
+        foreach (MonsterPathfinding monster in monsters) 
         {
+            if (monster.GetIsChasing()) 
+            {
+                stillBeingChased = true;
+            }
+        }
+
+        if (!tenseIsPlaying && !stillBeingChased)
+        {
+            chaseIsPlaying = false;
+            tenseIsPlaying = true;
+
             audioSource.clip = tenseMusic;
             audioSource.loop = true;
             audioSource.Play();
         }
+        
     }
 
     public void SwitchToChase()
     {
-        chaseCounter++;
-        if (chaseCounter == 1)
+        if (!chaseIsPlaying)
         {
+            chaseIsPlaying = true;
+            tenseIsPlaying = false;
+
             audioSource.clip = chaseMusic;
             audioSource.loop = true;
             audioSource.Play();
