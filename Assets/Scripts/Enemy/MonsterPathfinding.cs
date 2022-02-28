@@ -172,11 +172,23 @@ public class MonsterPathfinding : MonoBehaviour
 
     IEnumerator RandomStop() 
     {
+        Debug.Log("RandomStop() called");
         navMeshAgent.isStopped = true;
         System.Random random = new System.Random();
         double stopTime = (random.NextDouble() * (3.0 - 0.6) + 0.6);
 
-        yield return new WaitForSeconds((float)stopTime);
+        //yield return new WaitForSeconds((float)stopTime);
+        float timer = 0;
+        while (timer < (float)stopTime)
+        {
+            timer = timer + Time.deltaTime;
+            if (CanSeePlayer())
+            {
+                yield return StartCoroutine(Investigating());
+            }
+            yield return null;
+        }
+
         navMeshAgent.isStopped = false;
         yield return StartCoroutine(FollowPath());
     }
@@ -254,7 +266,19 @@ public class MonsterPathfinding : MonoBehaviour
         notVisibleTimeCounter = notVisibleTime;
         navMeshAgent.isStopped = true;
         monsterAnimationSound.SwitchToPassive();
-        yield return new WaitForSeconds(afterChaseWaitTime);
+
+        //yield return new WaitForSeconds(afterChaseWaitTime);
+        float timer = 0;
+        while (timer < afterChaseWaitTime) 
+        {
+            timer = timer + Time.deltaTime;
+            if (CanSeePlayer())
+            {
+                yield return StartCoroutine(ChasePlayer());
+            }
+            yield return null;
+        }
+
         FindObjectOfType<MusicManager>().SwitchToTense();
         yield return StartCoroutine(ReturnToPatrol());
     }
@@ -280,6 +304,10 @@ public class MonsterPathfinding : MonoBehaviour
                         yield return StartCoroutine(InitFollowPath());
                     }
                 }
+            }
+            if (CanSeePlayer())
+            {
+                yield return StartCoroutine(Investigating());
             }
             yield return null;
         }     
