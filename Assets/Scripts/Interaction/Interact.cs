@@ -36,7 +36,6 @@ public class Interact : MonoBehaviour
         if (hit)
         {
             GameObject hitObject = hitInfo.transform.gameObject;
-            Debug.Log(hitObject.name);
             try
             {
                 hitObject.GetComponent<IInteractable>().Interact();
