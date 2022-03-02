@@ -25,6 +25,7 @@ public class PSX : MonoBehaviour
     public void TurnOnTVUI(bool isOn)
     {
         this.isOn = isOn;
+        GameInformation.instance.TVUI = isOn;
         gameObject.transform.GetChild(0).gameObject.SetActive(isOn);
         if (isOn)
         {

@@ -20,7 +20,7 @@ RenderSettings:
   m_FogDensity: 0.05
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
-  m_AmbientSkyColor: {r: 0.05, g: 0.05, b: 0.05, a: 1}
+  m_AmbientSkyColor: {r: 0.08, g: 0.08, b: 0.08, a: 1}
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
   m_AmbientIntensity: 1
@@ -2414,17 +2414,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7a83d82f6b9918f4e8962b9a867297fa, type: 3}
---- !u!114 &117695268 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4518023452643912054, guid: 7a83d82f6b9918f4e8962b9a867297fa, type: 3}
-  m_PrefabInstance: {fileID: 117695267}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 07114f186d20fc74d9d8f699d20c17fd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!43 &134852788
 Mesh:
   m_ObjectHideFlags: 0
@@ -36138,10 +36127,6 @@ PrefabInstance:
       propertyPath: m_AnchorMin.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 9151252160699879655, guid: 6f7b48bc4692b4a4fa23a3ce7ec793fd, type: 3}
-      propertyPath: mouseLook
-      value: 
-      objectReference: {fileID: 117695268}
     - target: {fileID: 9151252160699879656, guid: 6f7b48bc4692b4a4fa23a3ce7ec793fd, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -36212,7 +36197,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9151252160699879656, guid: 6f7b48bc4692b4a4fa23a3ce7ec793fd, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -470
+      value: -520
       objectReference: {fileID: 0}
     - target: {fileID: 9151252160699879656, guid: 6f7b48bc4692b4a4fa23a3ce7ec793fd, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
