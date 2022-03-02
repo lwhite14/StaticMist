@@ -5,6 +5,12 @@ using UnityEngine;
 public class Interact : MonoBehaviour
 {
     public float rayRange = 4f;
+    Camera playerCamera;
+
+    void Start()
+    {
+        playerCamera = GameObject.Find("Main Camera").GetComponent<Camera>();
+    }
 
     void Update()
     {
@@ -22,10 +28,15 @@ public class Interact : MonoBehaviour
     void CastInteractRay()
     {
         RaycastHit hitInfo = new RaycastHit();
-        bool hit = Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hitInfo, rayRange);
+
+        Vector3 fwd = playerCamera.transform.TransformDirection(Vector3.forward);
+        Debug.DrawRay(playerCamera.transform.position, fwd * 50, Color.green);
+        bool hit = Physics.Raycast(playerCamera.transform.position, fwd, out hitInfo, 50);
+
         if (hit)
         {
             GameObject hitObject = hitInfo.transform.gameObject;
+            Debug.Log(hitObject.name);
             try
             {
                 hitObject.GetComponent<IInteractable>().Interact();
@@ -36,7 +47,7 @@ public class Interact : MonoBehaviour
 
     void CastDialogueRays()
     {
-        bool hit = Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), rayRange);
+        bool hit = Physics.Raycast(playerCamera.ScreenPointToRay(Input.mousePosition), rayRange);
         if (!hit)
         {
             if (FindObjectOfType<DialogueManager>() != null)
