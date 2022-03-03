@@ -30,8 +30,8 @@ public class Interact : MonoBehaviour
         RaycastHit hitInfo = new RaycastHit();
 
         Vector3 fwd = playerCamera.transform.TransformDirection(Vector3.forward);
-        Debug.DrawRay(playerCamera.transform.position, fwd * 50, Color.green);
-        bool hit = Physics.Raycast(playerCamera.transform.position, fwd, out hitInfo, 50);
+        Debug.DrawRay(playerCamera.transform.position, fwd * rayRange, Color.green);
+        bool hit = Physics.Raycast(playerCamera.transform.position, fwd, out hitInfo, rayRange);
 
         if (hit)
         {
@@ -46,7 +46,8 @@ public class Interact : MonoBehaviour
 
     void CastDialogueRays()
     {
-        bool hit = Physics.Raycast(playerCamera.ScreenPointToRay(Input.mousePosition), rayRange);
+        Vector3 fwd = playerCamera.transform.TransformDirection(Vector3.forward);
+        bool hit = Physics.Raycast(playerCamera.transform.position, fwd, rayRange);
         if (!hit)
         {
             if (FindObjectOfType<DialogueManager>() != null)
