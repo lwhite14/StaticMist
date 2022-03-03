@@ -10,13 +10,13 @@ public class DialogueTrigger : MonoBehaviour
 
     public void TriggerDialogue()
     {
-        FindObjectOfType<DialogueManager>().StartDialogue(dialogue, this);
+        DialogueManager.instance.StartDialogue(dialogue, this);
     }
     // Dialgoue manager runs the dialogue. 
 
     public void TriggerNextSentence() 
     {
-        FindObjectOfType<DialogueManager>().DisplayNextSentence();
+        DialogueManager.instance.DisplayNextSentence();
     }
     // Dialgoue manager runs the next line of dialogue. 
 

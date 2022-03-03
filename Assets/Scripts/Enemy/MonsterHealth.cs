@@ -29,7 +29,7 @@ public class MonsterHealth : MonoBehaviour
 
         GetComponent<MonsterAnimationAndSound>().PlayDeath();
         GetComponent<MonsterAnimationAndSound>().SwitchToDeath();
-        FindObjectOfType<MusicManager>().SwitchToTense();
+        MusicManager.instance.SwitchToTense();
 
         GetComponent<MonsterAttack>().enabled = false;
         GetComponent<MonsterPathfinding>().enabled = false;

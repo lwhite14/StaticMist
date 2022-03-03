@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class MusicManager : MonoBehaviour
 {
+    public static MusicManager instance = null;
+
     public AudioClip tenseMusic;
     public AudioClip chaseMusic;
     public AudioClip goalMusic;
@@ -11,6 +13,18 @@ public class MusicManager : MonoBehaviour
 
     bool tenseIsPlaying = false;
     bool chaseIsPlaying = false;
+
+    void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else if (instance != this)
+        {
+            Destroy(gameObject);
+        }
+    }
 
     void Start()
     {

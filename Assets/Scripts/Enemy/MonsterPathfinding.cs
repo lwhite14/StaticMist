@@ -236,7 +236,7 @@ public class MonsterPathfinding : MonoBehaviour
         navMeshAgent.speed = chaseSpeed;
         navMeshAgent.isStopped = false;
         navMeshAgent.destination = player.position;
-        FindObjectOfType<MusicManager>().SwitchToChase();
+        MusicManager.instance.SwitchToChase();
         monsterAnimationSound.SwitchToChase();
         isChasing = true;
 
@@ -278,7 +278,7 @@ public class MonsterPathfinding : MonoBehaviour
             yield return null;
         }
 
-        FindObjectOfType<MusicManager>().SwitchToTense();
+        MusicManager.instance.SwitchToTense();
         yield return StartCoroutine(ReturnToPatrol());
     }
 

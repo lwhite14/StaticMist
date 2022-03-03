@@ -96,7 +96,7 @@ public class GameManager : MonoBehaviour
         FindObjectOfType<MouseLook>().SetCursorMode(false);
         FindObjectOfType<MouseLook>().SetIsInMenu(true);
         FindObjectOfType<PlayerMovement>().SetIsInMenu(true);
-        FindObjectOfType<MusicManager>().SwitchToGoal();
+        MusicManager.instance.SwitchToGoal();
         FindObjectOfType<InventoryUI>().SetCanUse(false);
 
         SendDataToAnalytics();
