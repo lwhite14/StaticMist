@@ -1691,7 +1691,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   monsterName: Zombie
-  pathHolder: []
+  pathHolder:
+  - {fileID: 0}
   patrolSpeed: 5
   buffer: 1.6
   stopChance: 0.25
@@ -1699,6 +1700,7 @@ MonoBehaviour:
   viewDistanceLong: 12
   spotAngleShort: 180
   viewDistanceShort: 6
+  viewDistanceVeryShort: 2.5
   afterChaseWaitTime: 4
   viewMask:
     serializedVersion: 2

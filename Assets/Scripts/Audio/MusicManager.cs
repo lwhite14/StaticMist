@@ -29,8 +29,7 @@ public class MusicManager : MonoBehaviour
     void Start()
     {
         audioSource = GetComponent<AudioSource>();
-        audioSource.clip = tenseMusic;
-        audioSource.Play();
+        SwitchToTense();
     }
 
     public void SwitchToTense() 
@@ -44,6 +43,8 @@ public class MusicManager : MonoBehaviour
                 stillBeingChased = true;
             }
         }
+        Debug.Log("stillBeingChase: '" + stillBeingChased + "'");
+        Debug.Log("tenseIsPlaying: '" + tenseIsPlaying + "'");
 
         if (!tenseIsPlaying && !stillBeingChased)
         {

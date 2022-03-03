@@ -14,8 +14,6 @@ public class MonsterHealth : MonoBehaviour
     public void TakeDamage(float damage) 
     {
         health -= damage;
-        GetComponent<MonsterPathfinding>().StopAllCoroutines();
-        GetComponent<MonsterPathfinding>().StartCoroutine(GetComponent<MonsterPathfinding>().ChasePlayer());
         if (health <= 0) 
         {
             health = 0;
@@ -26,6 +24,7 @@ public class MonsterHealth : MonoBehaviour
     void Die() 
     {
         GetComponent<MonsterPathfinding>().StopAllCoroutines();
+        GetComponent<MonsterPathfinding>().SetIsChasing(false);
 
         GetComponent<MonsterAnimationAndSound>().PlayDeath();
         GetComponent<MonsterAnimationAndSound>().SwitchToDeath();

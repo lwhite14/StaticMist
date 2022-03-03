@@ -22,6 +22,7 @@ public class MonsterPathfinding : MonoBehaviour
     public float viewDistanceLong;
     public float spotAngleShort = 180f;
     public float viewDistanceShort;
+    public float viewDistanceVeryShort;
     public float afterChaseWaitTime = 4f;
     public LayerMask viewMask;
 
@@ -134,6 +135,18 @@ public class MonsterPathfinding : MonoBehaviour
         return false;
     }
 
+    public bool CanSeePlayerClose() 
+    {
+        if (Vector3.Distance(transform.position, player.position) < viewDistanceVeryShort)
+        {
+            if (!Physics.Linecast(transform.position, player.position, viewMask))
+            {
+                return true;
+            }     
+        }
+        return false;
+    }
+
     IEnumerator InitFollowPath()
     {
         transform.position = waypoints[0];
@@ -162,6 +175,10 @@ public class MonsterPathfinding : MonoBehaviour
                     yield return StartCoroutine(RandomStop());
                 }
             }
+            if (CanSeePlayerClose() && !isDead)
+            {
+                yield return StartCoroutine(ChasePlayer());
+            }
             if (CanSeePlayer() && !isDead)
             {
                 yield return StartCoroutine(Investigating());
@@ -181,6 +198,10 @@ public class MonsterPathfinding : MonoBehaviour
         while (timer < (float)stopTime)
         {
             timer = timer + Time.deltaTime;
+            if (CanSeePlayerClose() && !isDead)
+            {
+                yield return StartCoroutine(ChasePlayer());
+            }
             if (CanSeePlayer() && !isDead)
             {
                 yield return StartCoroutine(Investigating());
@@ -220,6 +241,11 @@ public class MonsterPathfinding : MonoBehaviour
                     ResetInvestigatingVariables();
                     yield return StartCoroutine(FollowPath());
                 }
+            }
+            if (CanSeePlayerClose() && !isDead)
+            {
+                ResetInvestigatingVariables();
+                yield return StartCoroutine(ChasePlayer());
             }
             yield return null;
         }
@@ -271,7 +297,7 @@ public class MonsterPathfinding : MonoBehaviour
         while (timer < afterChaseWaitTime) 
         {
             timer = timer + Time.deltaTime;
-            if (CanSeePlayer())
+            if (CanSeePlayer() && !isDead)
             {
                 yield return StartCoroutine(ChasePlayer());
             }
@@ -304,6 +330,10 @@ public class MonsterPathfinding : MonoBehaviour
                     }
                 }
             }
+            if (CanSeePlayerClose() && !isDead)
+            {
+                yield return StartCoroutine(ChasePlayer());
+            }
             if (CanSeePlayer() && !isDead)
             {
                 yield return StartCoroutine(Investigating());
@@ -325,6 +355,11 @@ public class MonsterPathfinding : MonoBehaviour
     public bool GetIsChasing() 
     {
         return isChasing;
+    }
+
+    public void SetIsChasing(bool isChasing)
+    {
+        this.isChasing = isChasing;
     }
 
     public float GetSpeed()
@@ -389,6 +424,16 @@ public class MonsterPathfinding : MonoBehaviour
             Vector3 rightRayDirectionShort = rightRayRotationShort * transform.forward;
             Gizmos.DrawRay(transform.position, leftRayDirectionShort * viewDistanceShort);
             Gizmos.DrawRay(transform.position, rightRayDirectionShort * viewDistanceShort);
+
+
+            Gizmos.color = Color.cyan;
+
+            Quaternion leftRayRotationVeryShort = Quaternion.AngleAxis(-(360 / 2.0f), Vector3.up);
+            Quaternion rightRayRotationVeryShort = Quaternion.AngleAxis((360 / 2.0f), Vector3.up);
+            Vector3 leftRayDirectionVeryShort = leftRayRotationVeryShort * transform.forward;
+            Vector3 rightRayDirectionVeryShort = rightRayRotationVeryShort * transform.forward;
+            Gizmos.DrawRay(transform.position, leftRayDirectionVeryShort * viewDistanceVeryShort);
+            Gizmos.DrawRay(transform.position, rightRayDirectionVeryShort * viewDistanceVeryShort);
         }
         catch 
         {
