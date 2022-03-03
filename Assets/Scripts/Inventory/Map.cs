@@ -10,7 +10,6 @@ public class Map : MonoBehaviour, IItem
     string description = "I MIGHT BE ABLE TO FIND SOME HIDDEN SPOTS IN THIS MAP.";
     bool canUse = true;
     bool canEquip = false;
-    bool canReload = false;
 
     Sprite map;
 
@@ -26,15 +25,8 @@ public class Map : MonoBehaviour, IItem
         FindObjectOfType<CoroutineHelper>().HelperStartExamining(description);
     }
 
-    public void Equip()
-    {
+    public void Equip() { }
 
-    }
-
-    public void Reload()
-    {
-
-    }
 
     public GameObject GetInvIcon()
     {
@@ -49,11 +41,6 @@ public class Map : MonoBehaviour, IItem
     public bool GetCanEquip()
     {
         return canEquip;
-    }
-
-    public bool GetCanReload()
-    {
-        return canReload;
     }
 
     public string GetName()
