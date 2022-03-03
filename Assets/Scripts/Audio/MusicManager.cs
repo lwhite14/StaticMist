@@ -43,8 +43,6 @@ public class MusicManager : MonoBehaviour
                 stillBeingChased = true;
             }
         }
-        Debug.Log("stillBeingChase: '" + stillBeingChased + "'");
-        Debug.Log("tenseIsPlaying: '" + tenseIsPlaying + "'");
 
         if (!tenseIsPlaying && !stillBeingChased)
         {
