@@ -15,10 +15,11 @@ public class PSX : MonoBehaviour
             {
                 TurnOnTVUI(false);
             }
-            else 
+            else
             {
                 TurnOnTVUI(true);
             }
+            
         }
     }
 
