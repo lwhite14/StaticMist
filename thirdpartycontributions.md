@@ -19,3 +19,4 @@
  - PixelMush, [Pixel Font](https://assetstore.unity.com/packages/2d/fonts/pixel-font-tripfive-64734)
  - Mixamo, [Model Animations](https://www.mixamo.com/)
  - textures.com, [Textures](https://www.textures.com/library)
+ - Codrin-Mihail, [PSX Shaders](https://github.com/Kodrin/URP-PSX)
