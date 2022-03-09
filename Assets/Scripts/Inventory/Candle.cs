@@ -10,7 +10,6 @@ public class Candle : MonoBehaviour, IItem
     string description = "WILL HELP ME SEE... CASTS A SHORTER, BUT WIDER LIGHT.";
     bool canUse = false;
     bool canEquip = true;
-    bool canReload = false;
 
     public GameObject candle;
     public GameObject rummageSound;
@@ -51,9 +50,6 @@ public class Candle : MonoBehaviour, IItem
             }
         }
     }
-
-    public void Reload() { }
-
     public GameObject GetInvIcon()
     {
         return gameObject;
@@ -67,11 +63,6 @@ public class Candle : MonoBehaviour, IItem
     public bool GetCanEquip()
     {
         return canEquip;
-    }
-
-    public bool GetCanReload()
-    {
-        return canReload;
     }
 
     public string GetName()

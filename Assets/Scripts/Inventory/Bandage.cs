@@ -10,7 +10,6 @@ public class Bandage : MonoBehaviour, IItem
     string description = "THIS SHOULD COVER ONE OF MY WOUNDS.";
     bool canUse = true;
     bool canEquip = false;
-    bool canReload = false;
 
     public GameObject healSound;
     public float healValue = 1.0f;
@@ -39,8 +38,6 @@ public class Bandage : MonoBehaviour, IItem
 
     public void Equip() { }
 
-    public void Reload() { }
-
     public GameObject GetInvIcon()
     {
         return gameObject;
@@ -54,11 +51,6 @@ public class Bandage : MonoBehaviour, IItem
     public bool GetCanEquip()
     {
         return canEquip;
-    }
-
-    public bool GetCanReload()
-    {
-        return canReload;
     }
 
     public string GetName()

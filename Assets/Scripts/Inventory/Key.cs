@@ -10,7 +10,6 @@ public class Key : MonoBehaviour, IItem
     string description = "THIS SHOULD OPEN THE GATE TO GET AWAY FROM THIS PLACE...";
     bool canUse = false;
     bool canEquip = false;
-    bool canReload = false;
 
     public void Use()
     {
@@ -22,15 +21,8 @@ public class Key : MonoBehaviour, IItem
         FindObjectOfType<CoroutineHelper>().HelperStartExamining(description);
     }
 
-    public void Equip() 
-    {
-    
-    }
+    public void Equip() { }
 
-    public void Reload() 
-    { 
-    
-    }
 
     public GameObject GetInvIcon() 
     {
@@ -45,11 +37,6 @@ public class Key : MonoBehaviour, IItem
     public bool GetCanEquip() 
     { 
         return canEquip; 
-    }
-
-    public bool GetCanReload() 
-    { 
-        return canReload; 
     }
 
     public string GetName() 

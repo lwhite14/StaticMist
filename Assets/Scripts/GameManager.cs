@@ -96,7 +96,7 @@ public class GameManager : MonoBehaviour
         FindObjectOfType<MouseLook>().SetCursorMode(false);
         FindObjectOfType<MouseLook>().SetIsInMenu(true);
         FindObjectOfType<PlayerMovement>().SetIsInMenu(true);
-        FindObjectOfType<MusicManager>().SwitchToGoal();
+        MusicManager.instance.SwitchToGoal();
         FindObjectOfType<InventoryUI>().SetCanUse(false);
 
         SendDataToAnalytics();
@@ -136,6 +136,7 @@ public class GameManager : MonoBehaviour
         ControlsTab controlsTab = FindObjectOfType<ControlsTab>();
         PlayerInventory playerInventory = FindObjectOfType<PlayerInventory>();
         Health health = FindObjectOfType<Health>();
+        PSX psx = FindObjectOfType<PSX>();
         if (controlsTab != null)
         {
             controlsTab.SetOn(GameInformation.instance.Instructions);
@@ -149,6 +150,10 @@ public class GameManager : MonoBehaviour
         if (health != null)
         {
             health.InitSetHealth(GameInformation.instance.Health);
+        }
+        if (psx != null) 
+        {
+            psx.TurnOnTVUI(GameInformation.instance.TVUI);
         }
     }
 

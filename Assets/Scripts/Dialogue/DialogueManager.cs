@@ -5,17 +5,34 @@ using UnityEngine.UI;
 
 public class DialogueManager : MonoBehaviour
 {
-    public Text nameText;
-    public Text dialogueText;
-    public Animator animator;
+    public static DialogueManager instance = null;
+
     public float textScrollTime = 0.1f;
 
     DialogueTrigger dialogueTrigger;
     Queue<string> sentences;
+    Text nameText;
+    Text dialogueText;
+    Animator animator;
+
+    void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else if (instance != this)
+        {
+            Destroy(gameObject);
+        }
+    }
 
     void Start()
     {
         sentences = new Queue<string>();
+        nameText = GameObject.Find("Name").GetComponent<Text>();
+        dialogueText = GameObject.Find("Dialogue").GetComponent<Text>();
+        animator = GameObject.Find("DialogueBox").GetComponent<Animator>();
     }
 
     public void StartDialogue(Dialogue dialogue, DialogueTrigger usedDialogueTrigger) 

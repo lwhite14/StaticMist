@@ -10,7 +10,6 @@ public class Flashlight : MonoBehaviour, IItem
     string description = "A FLASHLIGHT... TO HELP ME SEE...";
     bool canUse = false;
     bool canEquip = true;
-    bool canReload = false;
 
     public GameObject flashlight;
     public GameObject rummageSound;
@@ -51,9 +50,6 @@ public class Flashlight : MonoBehaviour, IItem
             }
         }
     }
-
-    public void Reload() { }
-
     public GameObject GetInvIcon()
     {
         return gameObject;
@@ -67,11 +63,6 @@ public class Flashlight : MonoBehaviour, IItem
     public bool GetCanEquip()
     {
         return canEquip;
-    }
-
-    public bool GetCanReload()
-    {
-        return canReload;
     }
 
     public string GetName()

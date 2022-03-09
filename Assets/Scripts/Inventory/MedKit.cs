@@ -10,7 +10,6 @@ public class MedKit : MonoBehaviour, IItem
     string description = "THIS SHOULD PATCH ME UP IF I GET HURT."; 
     bool canUse = true;
     bool canEquip = false;
-    bool canReload = false;
 
     public GameObject healSound;
     public float healValue = 2.0f;
@@ -39,8 +38,6 @@ public class MedKit : MonoBehaviour, IItem
 
     public void Equip() { }
 
-    public void Reload() { }
-
     public GameObject GetInvIcon()
     {
         return gameObject;
@@ -54,11 +51,6 @@ public class MedKit : MonoBehaviour, IItem
     public bool GetCanEquip()
     {
         return canEquip;
-    }
-
-    public bool GetCanReload()
-    {
-        return canReload;
     }
 
     public string GetName()

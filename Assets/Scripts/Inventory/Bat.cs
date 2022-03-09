@@ -10,7 +10,6 @@ public class Bat : MonoBehaviour, IItem
     string description = "IF I NEED TO DEFEND MYSELF AGAINST THOSE MONSTERS...";
     bool canUse = false;
     bool canEquip = true;
-    bool canReload = false;
 
     public GameObject bat;
     public GameObject rummageSound;
@@ -52,8 +51,6 @@ public class Bat : MonoBehaviour, IItem
         }
     }
 
-    public void Reload() { }
-
     public GameObject GetInvIcon()
     {
         return gameObject;
@@ -67,11 +64,6 @@ public class Bat : MonoBehaviour, IItem
     public bool GetCanEquip()
     {
         return canEquip;
-    }
-
-    public bool GetCanReload()
-    {
-        return canReload;
     }
 
     public string GetName()

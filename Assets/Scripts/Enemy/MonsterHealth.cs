@@ -23,20 +23,19 @@ public class MonsterHealth : MonoBehaviour
 
     void Die() 
     {
+        GetComponent<MonsterPathfinding>().StopAllCoroutines();
+        GetComponent<MonsterPathfinding>().SetIsChasing(false);
+
         GetComponent<MonsterAnimationAndSound>().PlayDeath();
         GetComponent<MonsterAnimationAndSound>().SwitchToDeath();
-        FindObjectOfType<MusicManager>().SwitchToTense();
+        MusicManager.instance.SwitchToTense();
 
         GetComponent<MonsterAttack>().enabled = false;
         GetComponent<MonsterPathfinding>().enabled = false;
         GetComponent<PlayerSpotted>().enabled = false;
 
         GetComponent<NavMeshAgent>().isStopped = true;
+        GetComponent<NavMeshAgent>().enabled = false;
         GetComponent<CapsuleCollider>().enabled = false;
-    }
-
-    void SendDataToAnalytics()
-    {
-
     }
 }

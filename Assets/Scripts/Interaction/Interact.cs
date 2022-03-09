@@ -5,10 +5,18 @@ using UnityEngine;
 public class Interact : MonoBehaviour
 {
     public float rayRange = 4f;
+    Camera playerCamera;
+    Animator crossHairAnimator;
+
+    void Start()
+    {
+        playerCamera = GameObject.Find("Main Camera").GetComponent<Camera>();
+        crossHairAnimator = GameObject.Find("Crosshair").GetComponent<Animator>();
+    }
 
     void Update()
     {
-        CastDialogueRays();
+        UpdateRays();
     }
 
     public void InteractInput() 
@@ -22,7 +30,11 @@ public class Interact : MonoBehaviour
     void CastInteractRay()
     {
         RaycastHit hitInfo = new RaycastHit();
-        bool hit = Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hitInfo, rayRange);
+
+        Vector3 fwd = playerCamera.transform.TransformDirection(Vector3.forward);
+        Debug.DrawRay(playerCamera.transform.position, fwd * rayRange, Color.green);
+        bool hit = Physics.Raycast(playerCamera.transform.position, fwd, out hitInfo, rayRange);
+
         if (hit)
         {
             GameObject hitObject = hitInfo.transform.gameObject;
@@ -34,15 +46,27 @@ public class Interact : MonoBehaviour
         }
     }
 
-    void CastDialogueRays()
+    void UpdateRays()
     {
-        bool hit = Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), rayRange);
-        if (!hit)
+        RaycastHit hitInfo = new RaycastHit();
+
+        Vector3 fwd = playerCamera.transform.TransformDirection(Vector3.forward);
+        bool hit = Physics.Raycast(playerCamera.transform.position, fwd, out hitInfo, rayRange);
+        if (hit)
         {
-            if (FindObjectOfType<DialogueManager>() != null)
+            GameObject hitObject = hitInfo.transform.gameObject;
+            if (hitObject.GetComponent<IInteractable>() != null)
             {
-                FindObjectOfType<DialogueManager>().EndDialogue();
+                crossHairAnimator.SetBool("isOpen", true);
             }
+        }
+        else 
+        {
+            if (DialogueManager.instance != null)
+            {
+                DialogueManager.instance.EndDialogue();
+            }
+            crossHairAnimator.SetBool("isOpen", false);
         }
     }
 }

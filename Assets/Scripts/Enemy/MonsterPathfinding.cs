@@ -12,15 +12,17 @@ public class MonsterPathfinding : MonoBehaviour
     public Monster monsterInformation = new Monster();
 
     [Header("Patrol Variables/Objects")]
-    public Transform pathHolder;
+    public Transform[] pathHolder;
     public float patrolSpeed = 5;
     public float buffer = 0.05f;
+    public float stopChance = 0.25f;
 
     [Header("Sight Variables/Objects")]
     public float spotAngleLong = 80f;
     public float viewDistanceLong;
     public float spotAngleShort = 180f;
     public float viewDistanceShort;
+    public float viewDistanceVeryShort;
     public float afterChaseWaitTime = 4f;
     public LayerMask viewMask;
 
@@ -61,14 +63,8 @@ public class MonsterPathfinding : MonoBehaviour
         investigatingTimerCounter = investigatingTime;
         outOfSightTimeCounter = outOfSightTime;
 
-        waypoints = new Vector3[pathHolder.childCount];
-        for (int i = 0; i < waypoints.Length; i++)
-        {
-            waypoints[i] = pathHolder.GetChild(i).position;
-            waypoints[i] = new Vector3(waypoints[i].x, transform.position.y, waypoints[i].z);
-        }
-        startWaypoint = waypoints[0];
-
+        RandomPath();
+        
         StartCoroutine(InitFollowPath());
     }
 
@@ -82,6 +78,31 @@ public class MonsterPathfinding : MonoBehaviour
         speed = Mathf.Lerp(speed, (transform.position - lastPosition).magnitude / Time.deltaTime, 0.75f);
         lastPosition = transform.position;
         monsterAnimationSound.SetSpeed(speed);
+    }
+
+    void RandomPath() 
+    {
+        System.Random rnd = new System.Random();
+        int randIndex = rnd.Next(0, pathHolder.Length);
+
+        waypoints = new Vector3[pathHolder[randIndex].childCount];
+        for (int i = 0; i < waypoints.Length; i++)
+        {
+            waypoints[i] = pathHolder[randIndex].GetChild(i).position;
+            waypoints[i] = new Vector3(waypoints[i].x, transform.position.y, waypoints[i].z);
+        }
+        startWaypoint = waypoints[0];
+    }
+
+    bool IsRandomStop() 
+    {
+        System.Random random = new System.Random();
+        double val = random.NextDouble();
+        if ((float)val < stopChance) 
+        {
+            return true;
+        }
+        return false;
     }
 
     public bool CanSeePlayer()
@@ -114,6 +135,18 @@ public class MonsterPathfinding : MonoBehaviour
         return false;
     }
 
+    public bool CanSeePlayerClose() 
+    {
+        if (Vector3.Distance(transform.position, player.position) < viewDistanceVeryShort)
+        {
+            if (!Physics.Linecast(transform.position, player.position, viewMask))
+            {
+                return true;
+            }     
+        }
+        return false;
+    }
+
     IEnumerator InitFollowPath()
     {
         transform.position = waypoints[0];
@@ -131,8 +164,20 @@ public class MonsterPathfinding : MonoBehaviour
             navMeshAgent.destination = targetWaypoint;
             if (Vector3.Distance(transform.position, targetWaypoint) <= buffer)
             {
+                if (((targetWaypointIndex + 1) % waypoints.Length) == 0) 
+                {
+                    RandomPath();
+                }
                 targetWaypointIndex = (targetWaypointIndex + 1) % waypoints.Length;
                 targetWaypoint = waypoints[targetWaypointIndex];
+                if (IsRandomStop())
+                {
+                    yield return StartCoroutine(RandomStop());
+                }
+            }
+            if (CanSeePlayerClose() && !isDead)
+            {
+                yield return StartCoroutine(ChasePlayer());
             }
             if (CanSeePlayer() && !isDead)
             {
@@ -140,6 +185,32 @@ public class MonsterPathfinding : MonoBehaviour
             }
             yield return null;
         }
+    }
+
+    IEnumerator RandomStop() 
+    {
+        navMeshAgent.isStopped = true;
+        System.Random random = new System.Random();
+        double stopTime = (random.NextDouble() * (3.0 - 0.6) + 0.6);
+
+        //yield return new WaitForSeconds((float)stopTime);
+        float timer = 0;
+        while (timer < (float)stopTime)
+        {
+            timer = timer + Time.deltaTime;
+            if (CanSeePlayerClose() && !isDead)
+            {
+                yield return StartCoroutine(ChasePlayer());
+            }
+            if (CanSeePlayer() && !isDead)
+            {
+                yield return StartCoroutine(Investigating());
+            }
+            yield return null;
+        }
+
+        navMeshAgent.isStopped = false;
+        yield return StartCoroutine(FollowPath());
     }
 
     IEnumerator Investigating() 
@@ -152,7 +223,7 @@ public class MonsterPathfinding : MonoBehaviour
             Quaternion rotation = Quaternion.LookRotation(player.position - transform.position);
             transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * rotationSmoothing);
 
-            if (CanSeePlayer())
+            if (CanSeePlayer() && !isDead)
             {
                 investigatingTimerCounter -= Time.deltaTime;
 
@@ -171,6 +242,11 @@ public class MonsterPathfinding : MonoBehaviour
                     yield return StartCoroutine(FollowPath());
                 }
             }
+            if (CanSeePlayerClose() && !isDead)
+            {
+                ResetInvestigatingVariables();
+                yield return StartCoroutine(ChasePlayer());
+            }
             yield return null;
         }
     }
@@ -181,19 +257,19 @@ public class MonsterPathfinding : MonoBehaviour
         outOfSightTimeCounter = outOfSightTime;
     }
 
-    IEnumerator ChasePlayer() 
+    public IEnumerator ChasePlayer() 
     {
         navMeshAgent.speed = chaseSpeed;
         navMeshAgent.isStopped = false;
         navMeshAgent.destination = player.position;
-        FindObjectOfType<MusicManager>().SwitchToChase();
+        MusicManager.instance.SwitchToChase();
         monsterAnimationSound.SwitchToChase();
         isChasing = true;
 
         while (true)
         {
             navMeshAgent.destination = player.position;
-            if (CanSeePlayer())
+            if (CanSeePlayer() && !isDead)
             {
                 notVisibleTimeCounter = notVisibleTime;
             }
@@ -215,8 +291,20 @@ public class MonsterPathfinding : MonoBehaviour
         notVisibleTimeCounter = notVisibleTime;
         navMeshAgent.isStopped = true;
         monsterAnimationSound.SwitchToPassive();
-        yield return new WaitForSeconds(afterChaseWaitTime);
-        FindObjectOfType<MusicManager>().SwitchToTense();
+
+        //yield return new WaitForSeconds(afterChaseWaitTime);
+        float timer = 0;
+        while (timer < afterChaseWaitTime) 
+        {
+            timer = timer + Time.deltaTime;
+            if (CanSeePlayer() && !isDead)
+            {
+                yield return StartCoroutine(ChasePlayer());
+            }
+            yield return null;
+        }
+
+        MusicManager.instance.SwitchToTense();
         yield return StartCoroutine(ReturnToPatrol());
     }
 
@@ -242,6 +330,14 @@ public class MonsterPathfinding : MonoBehaviour
                     }
                 }
             }
+            if (CanSeePlayerClose() && !isDead)
+            {
+                yield return StartCoroutine(ChasePlayer());
+            }
+            if (CanSeePlayer() && !isDead)
+            {
+                yield return StartCoroutine(Investigating());
+            }
             yield return null;
         }     
     }
@@ -259,6 +355,11 @@ public class MonsterPathfinding : MonoBehaviour
     public bool GetIsChasing() 
     {
         return isChasing;
+    }
+
+    public void SetIsChasing(bool isChasing)
+    {
+        this.isChasing = isChasing;
     }
 
     public float GetSpeed()
@@ -292,15 +393,18 @@ public class MonsterPathfinding : MonoBehaviour
     {
         try
         {
-            Vector3 startPos = pathHolder.GetChild(0).position;
-            Vector3 prevPos = startPos;
-            foreach (Transform waypoint in pathHolder)
+            foreach (Transform singlePathHolder in pathHolder)
             {
-                Gizmos.DrawSphere(waypoint.position, 0.3f);
-                Gizmos.DrawLine(prevPos, waypoint.position);
-                prevPos = waypoint.position;
+                Vector3 startPos = singlePathHolder.GetChild(0).position;
+                Vector3 prevPos = startPos;
+                foreach (Transform waypoint in singlePathHolder)
+                {
+                    Gizmos.DrawSphere(waypoint.position, 0.3f);
+                    Gizmos.DrawLine(prevPos, waypoint.position);
+                    prevPos = waypoint.position;
+                }
+                Gizmos.DrawLine(prevPos, startPos);
             }
-            Gizmos.DrawLine(prevPos, startPos);
 
             Gizmos.color = Color.red;
             Gizmos.DrawRay(transform.position, transform.forward * viewDistanceLong);
@@ -320,6 +424,16 @@ public class MonsterPathfinding : MonoBehaviour
             Vector3 rightRayDirectionShort = rightRayRotationShort * transform.forward;
             Gizmos.DrawRay(transform.position, leftRayDirectionShort * viewDistanceShort);
             Gizmos.DrawRay(transform.position, rightRayDirectionShort * viewDistanceShort);
+
+
+            Gizmos.color = Color.cyan;
+
+            Quaternion leftRayRotationVeryShort = Quaternion.AngleAxis(-(360 / 2.0f), Vector3.up);
+            Quaternion rightRayRotationVeryShort = Quaternion.AngleAxis((360 / 2.0f), Vector3.up);
+            Vector3 leftRayDirectionVeryShort = leftRayRotationVeryShort * transform.forward;
+            Vector3 rightRayDirectionVeryShort = rightRayRotationVeryShort * transform.forward;
+            Gizmos.DrawRay(transform.position, leftRayDirectionVeryShort * viewDistanceVeryShort);
+            Gizmos.DrawRay(transform.position, rightRayDirectionVeryShort * viewDistanceVeryShort);
         }
         catch 
         {
