@@ -48,7 +48,9 @@ public class GameManager : MonoBehaviour
 
     public void ReturnToMenu() 
     {
-        SceneManager.LoadScene("Menu", LoadSceneMode.Single);
+        //SceneManager.LoadScene("Menu", LoadSceneMode.Single);
+        LoadSceneData.sceneToLoad = "Menu";
+        SceneManager.LoadScene("Loading");
     }
 
     public void RestartLevel()    
@@ -56,11 +58,15 @@ public class GameManager : MonoBehaviour
         if (levelException == null || levelException == "")
         {
             string currentLevelName = "Level" + level;
-            SceneManager.LoadScene(currentLevelName, LoadSceneMode.Single);
+            //SceneManager.LoadScene(currentLevelName, LoadSceneMode.Single);
+            LoadSceneData.sceneToLoad = currentLevelName;
+            SceneManager.LoadScene("Loading");
         }
         else 
         {
-            SceneManager.LoadScene(levelException, LoadSceneMode.Single);
+            //SceneManager.LoadScene(levelException, LoadSceneMode.Single);
+            LoadSceneData.sceneToLoad = levelException;
+            SceneManager.LoadScene("Loading");
         }
     }
 
@@ -117,7 +123,9 @@ public class GameManager : MonoBehaviour
     {
         int nextLevel = level + 1;
         string nextLevelName = "Level" + nextLevel;
-        SceneManager.LoadScene(nextLevelName, LoadSceneMode.Single);
+        //SceneManager.LoadScene(nextLevelName, LoadSceneMode.Single);
+        LoadSceneData.sceneToLoad = nextLevelName;
+        SceneManager.LoadScene("Loading");
     }
 
     void GameInformationSetUp()
