@@ -64,6 +64,7 @@ public class SettingsMenu : MonoBehaviour
         if (GameManager.instance.level != 0)
         {
             Cursor.lockState = CursorLockMode.Locked;
+            FindObjectOfType<InventoryUI>().SetCanUse(true);
         }
     }
 
@@ -73,6 +74,7 @@ public class SettingsMenu : MonoBehaviour
         if (GameManager.instance.level != 0)
         {
             Time.timeScale = 0.0f;
+            FindObjectOfType<InventoryUI>().SetCanUse(false);
         }
         paused = true;
         Cursor.lockState = CursorLockMode.None;
