@@ -144,15 +144,8 @@ public class GameManager : MonoBehaviour
             GameInformation.instance.Items = new List<IItem>();
         }
 
-        ControlsTab controlsTab = FindObjectOfType<ControlsTab>();
         PlayerInventory playerInventory = FindObjectOfType<PlayerInventory>();
         Health health = FindObjectOfType<Health>();
-        PSX psx = FindObjectOfType<PSX>();
-        if (controlsTab != null)
-        {
-            controlsTab.SetOn(GameInformation.instance.Instructions);
-            controlsTab.SetSens(GameInformation.instance.Sensitivity);
-        }
         if (playerInventory != null)
         {
             playerInventory.inventory.SetAllItems(GameInformation.instance.Items);
@@ -161,10 +154,6 @@ public class GameManager : MonoBehaviour
         if (health != null)
         {
             health.InitSetHealth(GameInformation.instance.Health);
-        }
-        if (psx != null) 
-        {
-            psx.TurnOnTVUI(GameInformation.instance.TVUI);
         }
     }
 

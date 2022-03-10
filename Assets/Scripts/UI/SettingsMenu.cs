@@ -13,8 +13,10 @@ public class SettingsMenu : MonoBehaviour
     public Dropdown resolutionDropdown;
     public Slider volumeSlider;
     public Slider brightnessSlider;
+    public Slider sensitivitySlider;
     public Toggle fullscreenToggle;
 
+    float sensitivty = 5.0f;
     float currentVolume = 0.0f;
     float currentBrightness = 0.0f;
     Resolution[] resolutions;
@@ -103,6 +105,12 @@ public class SettingsMenu : MonoBehaviour
         Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
     }
 
+    public void SetSensitivty(float newSens) 
+    {
+        sensitivty = newSens;
+        FindObjectOfType<MouseLook>().SetMouseSensitivity((sensitivty + 1) * 5);
+    }
+
     public void ExitGame()
     {
         SaveSettings();
@@ -115,6 +123,7 @@ public class SettingsMenu : MonoBehaviour
         PlayerPrefs.SetInt("FullscreenPreference", Convert.ToInt32(Screen.fullScreen));
         PlayerPrefs.SetFloat("VolumePreference", currentVolume);
         PlayerPrefs.SetFloat("BrightnessPreference", currentBrightness);
+        PlayerPrefs.SetFloat("SensitivityPreference", sensitivty);
     }
 
     public void LoadSettings(int currentResolutionIndex)
@@ -137,21 +146,9 @@ public class SettingsMenu : MonoBehaviour
             Screen.fullScreen = true;
             fullscreenToggle.isOn = Screen.fullScreen;
         }
-        if (PlayerPrefs.HasKey("VolumePreference"))
-        {
-            volumeSlider.value = PlayerPrefs.GetFloat("VolumePreference");
-        }
-        else
-        {
-            volumeSlider.value = PlayerPrefs.GetFloat("VolumePreference");
-        }
-        if (PlayerPrefs.HasKey("BrightnessPreference"))
-        {
-            brightnessSlider.value = PlayerPrefs.GetFloat("BrightnessPreference");
-        }
-        else 
-        {
-            brightnessSlider.value = PlayerPrefs.GetFloat("BrightnessPreference");
-        }
+
+        volumeSlider.value = PlayerPrefs.GetFloat("VolumePreference");
+        brightnessSlider.value = PlayerPrefs.GetFloat("BrightnessPreference");   
+        sensitivitySlider.value = PlayerPrefs.GetFloat("SensitivityPreference");
     }
 }

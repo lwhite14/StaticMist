@@ -57,7 +57,6 @@ public class ControlsTab : MonoBehaviour
             anim = GetComponent<Animator>();
         }
         anim.SetBool("isOn", status);
-        GameInformation.instance.Instructions = status;
     }
 
     public void SensitivityDown()
@@ -67,7 +66,6 @@ public class ControlsTab : MonoBehaviour
         {
             sens = 0;
         }
-        GameInformation.instance.Sensitivity = sens;
         sensSlider.value = sens;
         mouseLook.SetMouseSensitivity((sens + 1) * 5);
     }
@@ -79,7 +77,6 @@ public class ControlsTab : MonoBehaviour
         {
             sens = 5;
         }
-        GameInformation.instance.Sensitivity = sens;
         sensSlider.value = sens;
         mouseLook.SetMouseSensitivity((sens + 1) * 5);
     }
@@ -87,7 +84,6 @@ public class ControlsTab : MonoBehaviour
     public void SetSens(float newSens) 
     {
         sens = newSens;
-        GameInformation.instance.Sensitivity = sens;
         if (mouseLook == null) 
         {
             mouseLook = FindObjectOfType<MouseLook>();
