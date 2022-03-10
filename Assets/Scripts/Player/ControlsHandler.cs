@@ -23,16 +23,6 @@ public class ControlsHandler : MonoBehaviour
         controls = new MasterControls();
     }
 
-    void Start()
-    {
-        mouseLook = GetComponentInChildren<MouseLook>();
-        playerMovement = GetComponent<PlayerMovement>();
-        playerSprinting = GetComponent<PlayerSprinting>();
-        playerCrouching = GetComponent<PlayerCrouching>();
-        interact = GetComponent<Interact>();
-        inventoryUI = FindObjectOfType<InventoryUI>();
-    }
-
     void OnEnable()
     {
         look = controls.Player.Look;
@@ -54,8 +44,8 @@ public class ControlsHandler : MonoBehaviour
         controls.Player.Action.started += Action;
         controls.Player.Action.Enable();
 
-        controls.UI.Exit.performed += Exit;
-        controls.UI.Exit.Enable();
+        controls.UI.Start.performed += Menu;
+        controls.UI.Start.Enable();
         controls.UI.Inventory.performed += Inventory;
         controls.UI.Inventory.Enable();
         
@@ -72,33 +62,33 @@ public class ControlsHandler : MonoBehaviour
         controls.Player.Crouch.Disable();
         controls.Player.Interact.Disable();
 
-        controls.UI.Exit.Disable();
+        controls.UI.Start.Disable();
         controls.UI.Inventory.Disable();
     }
 
     void Jump(InputAction.CallbackContext obj)
     {
-        playerMovement.JumpInput();
+        GetComponent<PlayerMovement>().JumpInput();
     }
 
     void SprintOn(InputAction.CallbackContext obj) 
     {
-        playerSprinting.SprintInput(true);
+        GetComponent<PlayerSprinting>().SprintInput(true);
     }
 
     void SprintOff(InputAction.CallbackContext obj) 
     {
-        playerSprinting.SprintInput(false);
+        GetComponent<PlayerSprinting>().SprintInput(false);
     }
 
     void Crouch(InputAction.CallbackContext obj)
     {
-        playerCrouching.CrouchInput();
+        GetComponent<PlayerCrouching>().CrouchInput();
     }
 
     void Interact(InputAction.CallbackContext obj) 
     {
-        interact.InteractInput();
+        GetComponent<Interact>().InteractInput();
     }
 
     void Action(InputAction.CallbackContext obj)
@@ -110,22 +100,22 @@ public class ControlsHandler : MonoBehaviour
         }
     }
 
-    void Exit(InputAction.CallbackContext obj)
+    void Menu(InputAction.CallbackContext obj)
     {
-        GameManager.instance.ExitGame();
+        FindObjectOfType<SettingsMenu>().SettingsInput();
     }
 
     void Inventory(InputAction.CallbackContext obj)
     {
-        inventoryUI.InventoryInput();
+        FindObjectOfType<InventoryUI>().InventoryInput();
     }
 
     void Update()
     {
-        playerMovement.MovementSlideX(lateral.ReadValue<float>());
-        playerMovement.MovementSlideZ(forwardBackward.ReadValue<float>());
-        mouseLook.SetMouseX(look.ReadValue<Vector2>().x);
-        mouseLook.SetMouseY(look.ReadValue<Vector2>().y);
+        GetComponent<PlayerMovement>().MovementSlideX(lateral.ReadValue<float>());
+        GetComponent<PlayerMovement>().MovementSlideZ(forwardBackward.ReadValue<float>());
+        GetComponentInChildren<MouseLook>().SetMouseX(look.ReadValue<Vector2>().x);
+        GetComponentInChildren<MouseLook>().SetMouseY(look.ReadValue<Vector2>().y);
     }
 
 }

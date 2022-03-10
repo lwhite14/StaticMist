@@ -49,12 +49,14 @@ public class GameManager : MonoBehaviour
     public void ReturnToMenu() 
     {
         //SceneManager.LoadScene("Menu", LoadSceneMode.Single);
+        FindObjectOfType<SettingsMenu>().SaveSettings();
         LoadSceneData.sceneToLoad = "Menu";
         SceneManager.LoadScene("Loading");
     }
 
     public void RestartLevel()    
     {
+        FindObjectOfType<SettingsMenu>().SaveSettings();
         if (levelException == null || levelException == "")
         {
             string currentLevelName = "Level" + level;
@@ -121,6 +123,7 @@ public class GameManager : MonoBehaviour
 
     public void NextLevel()
     {
+        FindObjectOfType<SettingsMenu>().SaveSettings();
         int nextLevel = level + 1;
         string nextLevelName = "Level" + nextLevel;
         //SceneManager.LoadScene(nextLevelName, LoadSceneMode.Single);

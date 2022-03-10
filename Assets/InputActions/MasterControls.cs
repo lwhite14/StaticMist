@@ -289,7 +289,7 @@ public class @MasterControls : IInputActionCollection, IDisposable
             ""id"": ""c0b1ed28-0b22-4c8d-8288-d88853095749"",
             ""actions"": [
                 {
-                    ""name"": ""Exit"",
+                    ""name"": ""Start"",
                     ""type"": ""Button"",
                     ""id"": ""b24af804-cef4-4050-95a4-7b2aeb2c211f"",
                     ""expectedControlType"": ""Button"",
@@ -313,7 +313,7 @@ public class @MasterControls : IInputActionCollection, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard"",
-                    ""action"": ""Exit"",
+                    ""action"": ""Start"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -379,7 +379,7 @@ public class @MasterControls : IInputActionCollection, IDisposable
         m_Player_Action = m_Player.FindAction("Action", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
-        m_UI_Exit = m_UI.FindAction("Exit", throwIfNotFound: true);
+        m_UI_Start = m_UI.FindAction("Start", throwIfNotFound: true);
         m_UI_Inventory = m_UI.FindAction("Inventory", throwIfNotFound: true);
     }
 
@@ -519,13 +519,13 @@ public class @MasterControls : IInputActionCollection, IDisposable
     // UI
     private readonly InputActionMap m_UI;
     private IUIActions m_UIActionsCallbackInterface;
-    private readonly InputAction m_UI_Exit;
+    private readonly InputAction m_UI_Start;
     private readonly InputAction m_UI_Inventory;
     public struct UIActions
     {
         private @MasterControls m_Wrapper;
         public UIActions(@MasterControls wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Exit => m_Wrapper.m_UI_Exit;
+        public InputAction @Start => m_Wrapper.m_UI_Start;
         public InputAction @Inventory => m_Wrapper.m_UI_Inventory;
         public InputActionMap Get() { return m_Wrapper.m_UI; }
         public void Enable() { Get().Enable(); }
@@ -536,9 +536,9 @@ public class @MasterControls : IInputActionCollection, IDisposable
         {
             if (m_Wrapper.m_UIActionsCallbackInterface != null)
             {
-                @Exit.started -= m_Wrapper.m_UIActionsCallbackInterface.OnExit;
-                @Exit.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnExit;
-                @Exit.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnExit;
+                @Start.started -= m_Wrapper.m_UIActionsCallbackInterface.OnStart;
+                @Start.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnStart;
+                @Start.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnStart;
                 @Inventory.started -= m_Wrapper.m_UIActionsCallbackInterface.OnInventory;
                 @Inventory.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnInventory;
                 @Inventory.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnInventory;
@@ -546,9 +546,9 @@ public class @MasterControls : IInputActionCollection, IDisposable
             m_Wrapper.m_UIActionsCallbackInterface = instance;
             if (instance != null)
             {
-                @Exit.started += instance.OnExit;
-                @Exit.performed += instance.OnExit;
-                @Exit.canceled += instance.OnExit;
+                @Start.started += instance.OnStart;
+                @Start.performed += instance.OnStart;
+                @Start.canceled += instance.OnStart;
                 @Inventory.started += instance.OnInventory;
                 @Inventory.performed += instance.OnInventory;
                 @Inventory.canceled += instance.OnInventory;
@@ -596,7 +596,7 @@ public class @MasterControls : IInputActionCollection, IDisposable
     }
     public interface IUIActions
     {
-        void OnExit(InputAction.CallbackContext context);
+        void OnStart(InputAction.CallbackContext context);
         void OnInventory(InputAction.CallbackContext context);
     }
 }
