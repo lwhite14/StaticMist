@@ -20,7 +20,23 @@ public class ControlsTab : MonoBehaviour
         anim = GetComponent<Animator>();
     }
 
-    public void InstructionsInput()
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.F1)) 
+        {
+            InstructionsInput();
+        }
+        if (Input.GetKeyDown(KeyCode.LeftBracket)) 
+        {
+            SensitivityDown();
+        }        
+        if (Input.GetKeyDown(KeyCode.RightBracket)) 
+        {
+            SensitivityUp();
+        }
+    }
+
+    void InstructionsInput()
     {
         if (isOn)
         {

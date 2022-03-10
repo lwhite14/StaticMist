@@ -56,12 +56,6 @@ public class ControlsHandler : MonoBehaviour
 
         controls.UI.Exit.performed += Exit;
         controls.UI.Exit.Enable();
-        controls.UI.Instructions.performed += Instructions;
-        controls.UI.Instructions.Enable();
-        controls.UI.SensUp.performed += SensUp;
-        controls.UI.SensUp.Enable();
-        controls.UI.SensDown.performed += SensDown;
-        controls.UI.SensDown.Enable();
         controls.UI.Inventory.performed += Inventory;
         controls.UI.Inventory.Enable();
         
@@ -79,9 +73,6 @@ public class ControlsHandler : MonoBehaviour
         controls.Player.Interact.Disable();
 
         controls.UI.Exit.Disable();
-        controls.UI.Instructions.Disable();
-        controls.UI.SensUp.Disable();
-        controls.UI.SensDown.Disable();
         controls.UI.Inventory.Disable();
     }
 
@@ -122,21 +113,6 @@ public class ControlsHandler : MonoBehaviour
     void Exit(InputAction.CallbackContext obj)
     {
         GameManager.instance.ExitGame();
-    }
-
-    void Instructions(InputAction.CallbackContext obj)
-    {
-        FindObjectOfType<ControlsTab>().InstructionsInput();
-    }
-
-    void SensUp(InputAction.CallbackContext obj)
-    {
-        FindObjectOfType<ControlsTab>().SensitivityUp();
-    }
-
-    void SensDown(InputAction.CallbackContext obj)
-    {
-        FindObjectOfType<ControlsTab>().SensitivityDown();
     }
 
     void Inventory(InputAction.CallbackContext obj)

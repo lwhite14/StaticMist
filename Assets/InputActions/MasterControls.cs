@@ -289,33 +289,9 @@ public class @MasterControls : IInputActionCollection, IDisposable
             ""id"": ""c0b1ed28-0b22-4c8d-8288-d88853095749"",
             ""actions"": [
                 {
-                    ""name"": ""Instructions"",
-                    ""type"": ""Button"",
-                    ""id"": ""24cb90bd-493e-4c8c-8dfb-6e36061fa5ec"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """"
-                },
-                {
                     ""name"": ""Exit"",
                     ""type"": ""Button"",
                     ""id"": ""b24af804-cef4-4050-95a4-7b2aeb2c211f"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """"
-                },
-                {
-                    ""name"": ""SensUp"",
-                    ""type"": ""Button"",
-                    ""id"": ""f28ce724-a556-4186-8e87-681a1a69ab3b"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """"
-                },
-                {
-                    ""name"": ""SensDown"",
-                    ""type"": ""Button"",
-                    ""id"": ""9a2b3899-5c5e-4456-81ee-80c277b31cce"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
@@ -332,45 +308,12 @@ public class @MasterControls : IInputActionCollection, IDisposable
             ""bindings"": [
                 {
                     ""name"": """",
-                    ""id"": ""19bef19f-a246-4ce4-b460-fa4b14c9a97d"",
-                    ""path"": ""<Keyboard>/f1"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard"",
-                    ""action"": ""Instructions"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""78baab8a-ae30-4913-9849-50510e6c3bfe"",
                     ""path"": ""<Keyboard>/escape"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard"",
                     ""action"": ""Exit"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""2988610b-9123-4c01-ad19-377bc45a1bec"",
-                    ""path"": ""<Keyboard>/rightBracket"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard"",
-                    ""action"": ""SensUp"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""f1f87deb-8b2a-4e25-8175-adf978d1474e"",
-                    ""path"": ""<Keyboard>/leftBracket"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard"",
-                    ""action"": ""SensDown"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -436,10 +379,7 @@ public class @MasterControls : IInputActionCollection, IDisposable
         m_Player_Action = m_Player.FindAction("Action", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
-        m_UI_Instructions = m_UI.FindAction("Instructions", throwIfNotFound: true);
         m_UI_Exit = m_UI.FindAction("Exit", throwIfNotFound: true);
-        m_UI_SensUp = m_UI.FindAction("SensUp", throwIfNotFound: true);
-        m_UI_SensDown = m_UI.FindAction("SensDown", throwIfNotFound: true);
         m_UI_Inventory = m_UI.FindAction("Inventory", throwIfNotFound: true);
     }
 
@@ -579,19 +519,13 @@ public class @MasterControls : IInputActionCollection, IDisposable
     // UI
     private readonly InputActionMap m_UI;
     private IUIActions m_UIActionsCallbackInterface;
-    private readonly InputAction m_UI_Instructions;
     private readonly InputAction m_UI_Exit;
-    private readonly InputAction m_UI_SensUp;
-    private readonly InputAction m_UI_SensDown;
     private readonly InputAction m_UI_Inventory;
     public struct UIActions
     {
         private @MasterControls m_Wrapper;
         public UIActions(@MasterControls wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Instructions => m_Wrapper.m_UI_Instructions;
         public InputAction @Exit => m_Wrapper.m_UI_Exit;
-        public InputAction @SensUp => m_Wrapper.m_UI_SensUp;
-        public InputAction @SensDown => m_Wrapper.m_UI_SensDown;
         public InputAction @Inventory => m_Wrapper.m_UI_Inventory;
         public InputActionMap Get() { return m_Wrapper.m_UI; }
         public void Enable() { Get().Enable(); }
@@ -602,18 +536,9 @@ public class @MasterControls : IInputActionCollection, IDisposable
         {
             if (m_Wrapper.m_UIActionsCallbackInterface != null)
             {
-                @Instructions.started -= m_Wrapper.m_UIActionsCallbackInterface.OnInstructions;
-                @Instructions.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnInstructions;
-                @Instructions.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnInstructions;
                 @Exit.started -= m_Wrapper.m_UIActionsCallbackInterface.OnExit;
                 @Exit.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnExit;
                 @Exit.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnExit;
-                @SensUp.started -= m_Wrapper.m_UIActionsCallbackInterface.OnSensUp;
-                @SensUp.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnSensUp;
-                @SensUp.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnSensUp;
-                @SensDown.started -= m_Wrapper.m_UIActionsCallbackInterface.OnSensDown;
-                @SensDown.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnSensDown;
-                @SensDown.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnSensDown;
                 @Inventory.started -= m_Wrapper.m_UIActionsCallbackInterface.OnInventory;
                 @Inventory.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnInventory;
                 @Inventory.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnInventory;
@@ -621,18 +546,9 @@ public class @MasterControls : IInputActionCollection, IDisposable
             m_Wrapper.m_UIActionsCallbackInterface = instance;
             if (instance != null)
             {
-                @Instructions.started += instance.OnInstructions;
-                @Instructions.performed += instance.OnInstructions;
-                @Instructions.canceled += instance.OnInstructions;
                 @Exit.started += instance.OnExit;
                 @Exit.performed += instance.OnExit;
                 @Exit.canceled += instance.OnExit;
-                @SensUp.started += instance.OnSensUp;
-                @SensUp.performed += instance.OnSensUp;
-                @SensUp.canceled += instance.OnSensUp;
-                @SensDown.started += instance.OnSensDown;
-                @SensDown.performed += instance.OnSensDown;
-                @SensDown.canceled += instance.OnSensDown;
                 @Inventory.started += instance.OnInventory;
                 @Inventory.performed += instance.OnInventory;
                 @Inventory.canceled += instance.OnInventory;
@@ -680,10 +596,7 @@ public class @MasterControls : IInputActionCollection, IDisposable
     }
     public interface IUIActions
     {
-        void OnInstructions(InputAction.CallbackContext context);
         void OnExit(InputAction.CallbackContext context);
-        void OnSensUp(InputAction.CallbackContext context);
-        void OnSensDown(InputAction.CallbackContext context);
         void OnInventory(InputAction.CallbackContext context);
     }
 }
