@@ -109,4 +109,9 @@ public class RebindUI : MonoBehaviour
         InputManager.ResetBinding(actionName, bindingIndex);
         UpdateUI();
     }
+
+    public string GetActionName() 
+    {
+        return actionName;
+    }
 }

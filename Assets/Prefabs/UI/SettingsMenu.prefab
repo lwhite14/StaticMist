@@ -545,6 +545,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bindingsMenu: {fileID: 2514237864841567605}
+  rebindings:
+  - {fileID: 2134243642341164845}
+  - {fileID: 1564890329588064135}
+  - {fileID: 6558336870372479086}
+  - {fileID: 8365507116731532846}
   audioMixer: {fileID: 24100000, guid: 565043e579be11c4da9f55126f49ee6f, type: 2}
   resolutionDropdown: {fileID: 2006224661607957572}
   volumeSlider: {fileID: 1722666866191476422}
@@ -4323,7 +4328,7 @@ MonoBehaviour:
     m_Path: <Keyboard>/leftShift
     m_Interactions: 
     m_Processors: 
-    m_Groups: Keyboard
+    m_Groups: Keyboard + Mouse
     m_Action: Sprint
     m_Flags: 0
   actionText: {fileID: 2774760555592041888}
@@ -6028,7 +6033,7 @@ MonoBehaviour:
     m_Path: <Keyboard>/space
     m_Interactions: 
     m_Processors: 
-    m_Groups: Keyboard
+    m_Groups: Keyboard + Mouse
     m_Action: Jump
     m_Flags: 0
   actionText: {fileID: 4172040790773511032}

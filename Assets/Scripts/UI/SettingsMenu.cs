@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.UI;
@@ -9,8 +10,11 @@ public class SettingsMenu : MonoBehaviour
 {
     public static bool paused = false;
 
+    [Header("Rebinding Objects")]
     public GameObject bindingsMenu;
+    public RebindUI[] rebindings;
 
+    [Header("Other")]
     public AudioMixer audioMixer;
     public Dropdown resolutionDropdown;
     public Slider volumeSlider;
@@ -30,17 +34,18 @@ public class SettingsMenu : MonoBehaviour
 
         resolutionDropdown.ClearOptions();
         List<string> options = new List<string>();
-        resolutions = Screen.resolutions;
+        int currentRefreshRate = Screen.currentResolution.refreshRate;
+        resolutions = Screen.resolutions.Where(resolution => resolution.refreshRate == currentRefreshRate).ToArray();
         int currentResolutionIndex = 0;
 
         for (int i = 0; i < resolutions.Length; i++)
         {
-            string option = resolutions[i].width + " x " + resolutions[i].height +  ", " + resolutions[i].refreshRate + "Hz";
+            string option = resolutions[i].width + " x " + resolutions[i].height;
             options.Add(option);
             if (resolutions[i].width == Screen.currentResolution.width && resolutions[i].height == Screen.currentResolution.height)
             {
                 currentResolutionIndex = i;
-            }
+            }        
         }
 
         resolutionDropdown.AddOptions(options);
@@ -167,5 +172,10 @@ public class SettingsMenu : MonoBehaviour
         volumeSlider.value = PlayerPrefs.GetFloat("VolumePreference");
         brightnessSlider.value = PlayerPrefs.GetFloat("BrightnessPreference");   
         sensitivitySlider.value = PlayerPrefs.GetFloat("SensitivityPreference");
+
+        foreach (RebindUI rebinding in rebindings)
+        {
+            InputManager.LoadBindingOverride(rebinding.GetActionName());
+        }
     }
 }
