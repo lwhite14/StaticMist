@@ -229,6 +229,17 @@ public class @MasterControls : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""37fd3191-87f2-408f-b1cc-55bd877e665c"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""PS4 Controller"",
+                    ""action"": ""Jump"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""2c0e5144-99b2-49e1-a41b-e26823760886"",
                     ""path"": ""<Keyboard>/leftShift"",
                     ""interactions"": """",

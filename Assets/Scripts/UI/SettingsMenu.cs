@@ -9,6 +9,8 @@ public class SettingsMenu : MonoBehaviour
 {
     public static bool paused = false;
 
+    public GameObject bindingsMenu;
+
     public AudioMixer audioMixer;
     public Dropdown resolutionDropdown;
     public Slider volumeSlider;
@@ -60,6 +62,7 @@ public class SettingsMenu : MonoBehaviour
 
     void Resume() 
     {
+        bindingsMenu.SetActive(false);
         toggle.SetActive(false);
         Time.timeScale = 1.0f;
         paused = false;
@@ -109,6 +112,18 @@ public class SettingsMenu : MonoBehaviour
     {
         sensitivty = newSens;
         FindObjectOfType<MouseLook>().SetMouseSensitivity((sensitivty + 1) * 5);
+    }
+
+    public void BindingsMenu() 
+    {
+        if (bindingsMenu.activeSelf)
+        {
+            bindingsMenu.SetActive(false);
+        }
+        else
+        {
+            bindingsMenu.SetActive(true);
+        }
     }
 
     public void ExitGame()

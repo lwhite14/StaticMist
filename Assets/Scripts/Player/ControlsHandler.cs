@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class ControlsHandler : MonoBehaviour
 {
@@ -11,20 +12,19 @@ public class ControlsHandler : MonoBehaviour
     InputAction forwardBackward;
     InputAction lateral;
 
-    MouseLook mouseLook;
-    PlayerMovement playerMovement;
-    PlayerSprinting playerSprinting;
-    PlayerCrouching playerCrouching;
-    Interact interact;
-    InventoryUI inventoryUI;
 
-    void Awake()
-    {
-        controls = new MasterControls();
-    }
+    //void Awake()
+    //{
+    //    if (controls == null)
+    //    {
+    //        controls = new MasterControls();
+    //    }
+    //}
 
     void OnEnable()
     {
+        controls = InputManager.inputActions;
+
         look = controls.Player.Look;
         look.Enable();
         forwardBackward = controls.Player.Walk_ForwardBackwards;
@@ -68,54 +68,76 @@ public class ControlsHandler : MonoBehaviour
 
     void Jump(InputAction.CallbackContext obj)
     {
-        GetComponent<PlayerMovement>().JumpInput();
+        if (GetComponent<PlayerMovement>() != null)
+        {
+            GetComponent<PlayerMovement>().JumpInput();
+        }
     }
 
     void SprintOn(InputAction.CallbackContext obj) 
     {
-        GetComponent<PlayerSprinting>().SprintInput(true);
+        if (GetComponent<PlayerSprinting>() != null)
+        {
+            GetComponent<PlayerSprinting>().SprintInput(true);
+        }
     }
 
-    void SprintOff(InputAction.CallbackContext obj) 
+    void SprintOff(InputAction.CallbackContext obj)
     {
-        GetComponent<PlayerSprinting>().SprintInput(false);
+        if (GetComponent<PlayerSprinting>() != null)
+        {
+            GetComponent<PlayerSprinting>().SprintInput(false);
+        }
     }
 
     void Crouch(InputAction.CallbackContext obj)
     {
-        GetComponent<PlayerCrouching>().CrouchInput();
+        if (GetComponent<PlayerCrouching>() != null)
+        {
+            GetComponent<PlayerCrouching>().CrouchInput();
+        }
     }
 
     void Interact(InputAction.CallbackContext obj) 
     {
-        GetComponent<Interact>().InteractInput();
+        if (GetComponent<Interact>() != null)
+        {
+            GetComponent<Interact>().InteractInput();
+        }
     }
 
     void Action(InputAction.CallbackContext obj)
     {
-        Attack attack = FindObjectOfType<Attack>();
-        if (attack != null) 
+        if (FindObjectOfType<Attack>() != null) 
         {
-            attack.Strike();
+            FindObjectOfType<Attack>().Strike();
         }
     }
 
     void Menu(InputAction.CallbackContext obj)
     {
-        FindObjectOfType<SettingsMenu>().SettingsInput();
+        if (FindObjectOfType<SettingsMenu>() != null)
+        {
+            FindObjectOfType<SettingsMenu>().SettingsInput();
+        }
     }
 
     void Inventory(InputAction.CallbackContext obj)
     {
-        FindObjectOfType<InventoryUI>().InventoryInput();
+        if (FindObjectOfType<InventoryUI>() != null)
+        {
+            FindObjectOfType<InventoryUI>().InventoryInput();
+        }
     }
 
     void Update()
     {
-        GetComponent<PlayerMovement>().MovementSlideX(lateral.ReadValue<float>());
-        GetComponent<PlayerMovement>().MovementSlideZ(forwardBackward.ReadValue<float>());
-        GetComponentInChildren<MouseLook>().SetMouseX(look.ReadValue<Vector2>().x);
-        GetComponentInChildren<MouseLook>().SetMouseY(look.ReadValue<Vector2>().y);
-    }
+        PlayerMovement playerMovement = FindObjectOfType<PlayerMovement>();
+        MouseLook mouseLook = FindObjectOfType<MouseLook>();
 
+        playerMovement.MovementSlideX(lateral.ReadValue<float>());
+        playerMovement.MovementSlideZ(forwardBackward.ReadValue<float>());
+        mouseLook.SetMouseX(look.ReadValue<Vector2>().x);
+        mouseLook.SetMouseY(look.ReadValue<Vector2>().y);
+    }
 }
