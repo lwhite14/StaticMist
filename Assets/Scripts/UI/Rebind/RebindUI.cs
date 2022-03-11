@@ -38,18 +38,22 @@ public class RebindUI : MonoBehaviour
         rebindButton.onClick.AddListener(() => DoRebind());
         resetButton.onClick.AddListener(() => ResetBinding());
 
+
         if (inputActionReference != null) 
         {
+            InputManager.LoadBindingOverride(actionName);
             GetBindingInfo();
             UpdateUI();
         }
 
         InputManager.rebindComplete += UpdateUI;
+        InputManager.rebindCancelled += UpdateUI;
     }
 
     void OnDisable()
     {
         InputManager.rebindComplete -= UpdateUI;
+        InputManager.rebindCancelled -= UpdateUI;
     }
 
     void OnValidate()
@@ -97,11 +101,12 @@ public class RebindUI : MonoBehaviour
 
     void DoRebind() 
     {
-        InputManager.StartRebind(actionName, bindingIndex, rebindText);
+        InputManager.StartRebind(actionName, bindingIndex, rebindText, excludeMouse);
     }
 
     void ResetBinding() 
     {
-    
+        InputManager.ResetBinding(actionName, bindingIndex);
+        UpdateUI();
     }
 }

@@ -111,7 +111,10 @@ public class SettingsMenu : MonoBehaviour
     public void SetSensitivty(float newSens) 
     {
         sensitivty = newSens;
-        FindObjectOfType<MouseLook>().SetMouseSensitivity((sensitivty + 1) * 5);
+        if (FindObjectOfType<MouseLook>() != null)
+        {
+            FindObjectOfType<MouseLook>().SetMouseSensitivity((sensitivty + 1) * 5);
+        }
     }
 
     public void BindingsMenu() 
