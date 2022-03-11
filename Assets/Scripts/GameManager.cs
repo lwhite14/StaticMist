@@ -38,6 +38,7 @@ public class GameManager : MonoBehaviour
 
     public void ExitGame()
     {
+        FindObjectOfType<SettingsMenu>().SaveSettings();
         Application.Quit();
     }
 
