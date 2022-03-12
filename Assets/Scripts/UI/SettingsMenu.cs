@@ -175,7 +175,12 @@ public class SettingsMenu : MonoBehaviour
 
         foreach (RebindUI rebinding in rebindings)
         {
-            InputManager.LoadBindingOverride(rebinding.GetActionName());
+            if (rebinding.GetInputActionReference() != null) 
+            { 
+                rebinding.GetBindingInfo();
+                InputManager.LoadBindingOverride(rebinding.GetActionName());
+                rebinding.UpdateUI();
+            }
         }
     }
 }
