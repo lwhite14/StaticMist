@@ -12,19 +12,14 @@ public class ControlsHandler : MonoBehaviour
     InputAction forwardBackward;
     InputAction lateral;
 
-
-    //void Awake()
-    //{
-    //    if (controls == null)
-    //    {
-    //        controls = new MasterControls();
-    //    }
-    //}
-
     void OnEnable()
     {
         controls = InputManager.inputActions;
+        AssignEvents();
+    }
 
+    void AssignEvents() 
+    {
         look = controls.Player.Look;
         look.Enable();
         forwardBackward = controls.Player.Walk_ForwardBackwards;
@@ -48,27 +43,41 @@ public class ControlsHandler : MonoBehaviour
         controls.UI.Start.Enable();
         controls.UI.Inventory.performed += Inventory;
         controls.UI.Inventory.Enable();
-        
-
     }
 
     void OnDisable()
     {
+        DeallocateEvents();
+    }
+
+    public void DeallocateEvents() 
+    {
         look.Disable();
         forwardBackward.Disable();
         lateral.Disable();
-        controls.Player.Sprint.Disable();
-        controls.Player.Jump.Disable();
-        controls.Player.Crouch.Disable();
-        controls.Player.Interact.Disable();
 
+        controls.Player.Jump.performed -= Jump;
+        controls.Player.Jump.Disable();
+        controls.Player.Sprint.performed -= SprintOn;
+        controls.Player.Sprint.canceled -= SprintOff;
+        controls.Player.Sprint.Disable();
+        controls.Player.Crouch.performed -= Crouch;
+        controls.Player.Crouch.Disable();
+        controls.Player.Interact.started -= Interact;
+        controls.Player.Interact.Disable();
+        controls.Player.Action.started -= Action;
+        controls.Player.Action.Disable();
+
+        controls.UI.Start.performed -= Menu;
         controls.UI.Start.Disable();
+        controls.UI.Inventory.performed -= Inventory;
         controls.UI.Inventory.Disable();
     }
 
     void Jump(InputAction.CallbackContext obj)
     {
         if (GetComponent<PlayerMovement>() != null)
+
         {
             GetComponent<PlayerMovement>().JumpInput();
         }

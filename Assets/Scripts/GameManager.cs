@@ -36,6 +36,17 @@ public class GameManager : MonoBehaviour
         GameInformationSetUp();
     }
 
+    void Update()
+    {
+        if (Debug.isDebugBuild)
+        {
+            if (Input.GetKeyDown(KeyCode.F1))
+            {
+                Cursor.lockState = CursorLockMode.None;
+            }
+        }
+    }
+
     public void ExitGame()
     {
         FindObjectOfType<SettingsMenu>().SaveSettings();
@@ -51,6 +62,7 @@ public class GameManager : MonoBehaviour
     {
         //SceneManager.LoadScene("Menu", LoadSceneMode.Single);
         FindObjectOfType<SettingsMenu>().SaveSettings();
+        FindObjectOfType<ControlsHandler>().DeallocateEvents();
         LoadSceneData.sceneToLoad = "Menu";
         SceneManager.LoadScene("Loading");
     }
@@ -58,6 +70,7 @@ public class GameManager : MonoBehaviour
     public void RestartLevel()    
     {
         FindObjectOfType<SettingsMenu>().SaveSettings();
+        FindObjectOfType<ControlsHandler>().DeallocateEvents();
         if (levelException == null || levelException == "")
         {
             string currentLevelName = "Level" + level;
@@ -125,6 +138,7 @@ public class GameManager : MonoBehaviour
     public void NextLevel()
     {
         FindObjectOfType<SettingsMenu>().SaveSettings();
+        FindObjectOfType<ControlsHandler>().DeallocateEvents();
         int nextLevel = level + 1;
         string nextLevelName = "Level" + nextLevel;
         //SceneManager.LoadScene(nextLevelName, LoadSceneMode.Single);
