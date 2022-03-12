@@ -21,10 +21,12 @@ public class SettingsMenu : MonoBehaviour
     public Slider brightnessSlider;
     public Slider sensitivitySlider;
     public Toggle fullscreenToggle;
+    public Toggle tvEffectToggle;
 
     float sensitivty = 5.0f;
     float currentVolume = 0.0f;
     float currentBrightness = 0.0f;
+    bool isTVEffect = true;
     Resolution[] resolutions;
     GameObject toggle;
 
@@ -122,6 +124,12 @@ public class SettingsMenu : MonoBehaviour
         }
     }
 
+    public void SetTVEffect(bool newIsTVEffect) 
+    {
+        isTVEffect = newIsTVEffect;
+        FindObjectOfType<PSX>().TurnOnTVUI(isTVEffect);
+    }
+
     public void BindingsMenu() 
     {
         if (bindingsMenu.activeSelf)
@@ -146,6 +154,7 @@ public class SettingsMenu : MonoBehaviour
         PlayerPrefs.SetFloat("VolumePreference", currentVolume);
         PlayerPrefs.SetFloat("BrightnessPreference", currentBrightness);
         PlayerPrefs.SetFloat("SensitivityPreference", sensitivty);
+        PlayerPrefs.SetInt("TVEffectPreference", Convert.ToInt32(isTVEffect));
     }
 
     public void LoadSettings(int currentResolutionIndex)
@@ -167,6 +176,18 @@ public class SettingsMenu : MonoBehaviour
         {
             Screen.fullScreen = true;
             fullscreenToggle.isOn = Screen.fullScreen;
+        }
+        if (PlayerPrefs.HasKey("TVEffectPreference"))
+        {
+            isTVEffect = Convert.ToBoolean(PlayerPrefs.GetInt("TVEffectPreference"));
+            FindObjectOfType<PSX>().TurnOnTVUI(isTVEffect);
+            tvEffectToggle.isOn = isTVEffect;
+        }
+        else 
+        {
+            isTVEffect = true;
+            FindObjectOfType<PSX>().TurnOnTVUI(isTVEffect);
+            tvEffectToggle.isOn = isTVEffect;
         }
 
         volumeSlider.value = PlayerPrefs.GetFloat("VolumePreference");
