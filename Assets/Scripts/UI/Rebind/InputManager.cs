@@ -32,9 +32,9 @@ public class InputManager : MonoBehaviour
         if (action.bindings[bindingIndex].isComposite)
         {
             var firstPartIndex = bindingIndex + 1;
-            if (firstPartIndex < action.bindings.Count && action.bindings[firstPartIndex].isComposite)
+            if (firstPartIndex < action.bindings.Count && action.bindings[firstPartIndex].isPartOfComposite)
             {
-                DoRebind(action, bindingIndex, statusText, true, excludeMouse);
+                DoRebind(action, firstPartIndex, statusText, true, excludeMouse);
             }
         }
         else
@@ -64,7 +64,7 @@ public class InputManager : MonoBehaviour
             if (allCompositeParts)
             {
                 var nextBindingIndex = bindingIndex + 1;
-                if (nextBindingIndex < actionToRebind.bindings.Count && actionToRebind.bindings[nextBindingIndex].isComposite)
+                if (nextBindingIndex < actionToRebind.bindings.Count && actionToRebind.bindings[nextBindingIndex].isPartOfComposite)
                 {
                     DoRebind(actionToRebind, nextBindingIndex, statusText, allCompositeParts, excludeMouse);
                 }
@@ -124,7 +124,9 @@ public class InputManager : MonoBehaviour
         for (int i = 0; i < action.bindings.Count; i++)
         {
             if (!string.IsNullOrEmpty(PlayerPrefs.GetString(action.actionMap + action.name + i)))
+            {
                 action.ApplyBindingOverride(i, PlayerPrefs.GetString(action.actionMap + action.name + i));
+            }
         }
     }
 
@@ -134,14 +136,16 @@ public class InputManager : MonoBehaviour
 
         if (action == null || action.bindings.Count <= bindingIndex)
         {
-            Debug.LogWarning("Could not find action or binding");
+            Debug.Log("Could not find action or binding");
             return;
         }
 
         if (action.bindings[bindingIndex].isComposite)
         {
             for (int i = bindingIndex; i < action.bindings.Count && action.bindings[i].isComposite; i++)
+            {
                 action.RemoveBindingOverride(i);
+            }
         }
         else
         {
