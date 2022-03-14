@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PopUp : MonoBehaviour
 {
+    public float onScreenTime = 5.0f;
     bool isTriggered = false;
 
     private void OnTriggerEnter(Collider other)
@@ -22,7 +23,7 @@ public class PopUp : MonoBehaviour
         {
             isTriggered = true;
             GetComponent<DialogueTrigger>().TriggerDialogue();
-            yield return new WaitForSeconds(5.0f);
+            yield return new WaitForSeconds(onScreenTime);
             GetComponent<DialogueTrigger>().TriggerNextSentence();
             yield return null;
         }

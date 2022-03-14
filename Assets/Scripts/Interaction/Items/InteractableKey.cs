@@ -7,11 +7,18 @@ public class InteractableKey : MonoBehaviour, IInteractable
 {
     public Key key;
     public GameObject pickUpSound;
+    public bool isTutorial = false;
 
     public void Interact() 
     {
         FindObjectOfType<PlayerInventory>().Add(key);
         PickUpSound();
+        if (isTutorial) 
+        {
+            DialogueManager.instance.EndDialogue();
+            StopAllCoroutines();
+            StartCoroutine(TutorialKey());
+        }
         SendDataToAnalytics();
         Destroy(gameObject);
     }
@@ -19,6 +26,14 @@ public class InteractableKey : MonoBehaviour, IInteractable
     void PickUpSound() 
     {
         Instantiate(pickUpSound, transform.position, Quaternion.identity);
+    }
+
+    IEnumerator TutorialKey()
+    {
+        GetComponent<DialogueTrigger>().TriggerDialogue();
+        yield return new WaitForSeconds(5.0f);
+        GetComponent<DialogueTrigger>().TriggerNextSentence();
+        yield return null; 
     }
 
     void SendDataToAnalytics() 

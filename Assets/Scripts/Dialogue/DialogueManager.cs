@@ -37,8 +37,6 @@ public class DialogueManager : MonoBehaviour
 
     public void StartDialogue(Dialogue dialogue, DialogueTrigger usedDialogueTrigger) 
     {
-        Debug.Log("StartDialogue");
-
         dialogueTrigger = usedDialogueTrigger;
         dialogueTrigger.SetIsTriggered(true);
 
@@ -59,7 +57,6 @@ public class DialogueManager : MonoBehaviour
 
     public void DisplayNextSentence() 
     {
-        Debug.Log("DisplayNextSentence");
         if (sentences.Count == 0) 
         {
             EndDialogue();
@@ -74,7 +71,6 @@ public class DialogueManager : MonoBehaviour
 
     IEnumerator TypeSentence(string sentence) 
     {
-        Debug.Log("TypeSentence");
         dialogueText.text = "";
         foreach (char letter in sentence.ToCharArray()) 
         {
@@ -86,7 +82,6 @@ public class DialogueManager : MonoBehaviour
 
     public void EndDialogue() 
     {
-        Debug.Log("EndDialogue");
         animator.SetBool("isOpen", false);
         if (dialogueTrigger != null)
         {
