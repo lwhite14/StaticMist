@@ -15,6 +15,8 @@ public class SettingsMenu : MonoBehaviour
     public RebindUI[] rebindings;
 
     [Header("Other")]
+    public GameObject pauseSound;
+    public GameObject unpauseSound;
     public AudioMixer audioMixer;
     public Dropdown resolutionDropdown;
     public Slider volumeSlider;
@@ -78,6 +80,8 @@ public class SettingsMenu : MonoBehaviour
             Cursor.lockState = CursorLockMode.Locked;
             FindObjectOfType<InventoryUI>().SetCanUse(true);
         }
+        MusicManager.instance.Unpause();
+        Instantiate(unpauseSound, new Vector3(0, 0, 0), Quaternion.identity);
     }
 
     void Pause() 
@@ -90,6 +94,8 @@ public class SettingsMenu : MonoBehaviour
         }
         paused = true;
         Cursor.lockState = CursorLockMode.None;
+        MusicManager.instance.Pause();
+        Instantiate(pauseSound, new Vector3(0, 0, 0), Quaternion.identity);
     }
 
     public void SetVolume(float volume)

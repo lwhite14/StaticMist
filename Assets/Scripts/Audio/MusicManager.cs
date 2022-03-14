@@ -76,4 +76,22 @@ public class MusicManager : MonoBehaviour
         audioSource.Play();
     }
 
+    public void Pause() 
+    {
+        AudioSource[] sources = FindObjectsOfType<AudioSource>();
+        foreach (AudioSource source in sources)
+        {
+            source.Pause();
+        }
+    }
+
+    public void Unpause() 
+    {
+        AudioSource[] sources = FindObjectsOfType<AudioSource>();
+        foreach (AudioSource source in sources)
+        {
+            source.UnPause();
+        }
+    }
+
 }
