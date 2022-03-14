@@ -12,7 +12,10 @@ public class PopUp : MonoBehaviour
         if (other.tag == "Player") 
         {
             DialogueManager.instance.EndDialogue();
-            StopAllCoroutines();
+            foreach (PopUp popUp in FindObjectsOfType<PopUp>())
+            {
+                popUp.StopAllCoroutines();
+            }
             StartCoroutine(Triggered());
         }
     }
