@@ -62,10 +62,6 @@ public class Interact : MonoBehaviour
         }
         else 
         {
-            if (DialogueManager.instance != null)
-            {
-                DialogueManager.instance.EndDialogue();
-            }
             crossHairAnimator.SetBool("isOpen", false);
         }
     }
