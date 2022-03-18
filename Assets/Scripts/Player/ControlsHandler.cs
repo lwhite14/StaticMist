@@ -145,6 +145,7 @@ public class ControlsHandler : MonoBehaviour
         MouseLook mouseLook = FindObjectOfType<MouseLook>();
 
         playerMovement.MovementSlideX(lateral.ReadValue<float>());
+        Debug.Log("lateral movement velocity: " + lateral.ReadValue<float>());
         playerMovement.MovementSlideZ(forwardBackward.ReadValue<float>());
         mouseLook.SetMouseX(look.ReadValue<Vector2>().x);
         mouseLook.SetMouseY(look.ReadValue<Vector2>().y);
