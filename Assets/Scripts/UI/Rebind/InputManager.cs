@@ -15,7 +15,7 @@ public class InputManager : MonoBehaviour
 
     void Awake()
     {
-        if (inputActions == null) 
+        if (inputActions == null)
         {
             inputActions = new MasterControls();
         }
@@ -83,6 +83,7 @@ public class InputManager : MonoBehaviour
         });
 
         rebind.WithCancelingThrough("<Keyboard>/escape");
+        rebind.WithCancelingThrough("<Gamepad>/options");
 
         if (excludeMouse) 
         {

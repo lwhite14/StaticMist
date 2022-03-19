@@ -22,6 +22,7 @@ public class InventoryUI : MonoBehaviour
     void Start()
     {
         anim = GetComponent<Animator>();
+        canUse = true;
     }
 
     public void InventoryInput() 

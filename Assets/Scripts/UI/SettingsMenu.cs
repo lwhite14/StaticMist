@@ -12,12 +12,14 @@ public class SettingsMenu : MonoBehaviour
     public static bool paused { get; set; } = false;
 
     [Header("Rebinding Objects")]
-    public GameObject bindingsMenuToggle;
+    public GameObject keyboardBindingsMenuToggle;
+    public GameObject controllerBindingsMenuToggle;
     public RebindUI[] rebindings;
 
     [Header("Selected UI Elements")]
     public GameObject settingsResumeGame;
-    public GameObject bindingsBack;
+    public GameObject keyboardBindingsBack;
+    public GameObject controllerBindingsBack;
 
     [Header("Other")]
     public GameObject fullToggle;
@@ -76,7 +78,8 @@ public class SettingsMenu : MonoBehaviour
     void Resume() 
     {
         fullToggle.SetActive(false);
-        bindingsMenuToggle.SetActive(false);
+        keyboardBindingsMenuToggle.SetActive(false);
+        controllerBindingsMenuToggle.SetActive(false);
         settingsMenuToggle.SetActive(false);
         paused = false;
 
@@ -101,7 +104,8 @@ public class SettingsMenu : MonoBehaviour
     void Pause() 
     {
         fullToggle.SetActive(true);
-        bindingsMenuToggle.SetActive(false);
+        keyboardBindingsMenuToggle.SetActive(false);
+        controllerBindingsMenuToggle.SetActive(false);
         settingsMenuToggle.SetActive(true);
         paused = true;
 
@@ -157,21 +161,39 @@ public class SettingsMenu : MonoBehaviour
         FindObjectOfType<PSX>().TurnOnTVUI(isTVEffect);
     }
 
-    public void BindingsMenu() 
+    public void KeyboardBindingsMenu() 
     {
-        if (bindingsMenuToggle.activeSelf)
+        if (keyboardBindingsMenuToggle.activeSelf)
         {
-            bindingsMenuToggle.SetActive(false);
+            keyboardBindingsMenuToggle.SetActive(false);
             settingsMenuToggle.SetActive(true);
             EventSystem.current.SetSelectedGameObject(null);
             EventSystem.current.SetSelectedGameObject(settingsResumeGame);
         }
         else
         {
-            bindingsMenuToggle.SetActive(true);
+            keyboardBindingsMenuToggle.SetActive(true);
             settingsMenuToggle.SetActive(false);
             EventSystem.current.SetSelectedGameObject(null);
-            EventSystem.current.SetSelectedGameObject(bindingsBack);
+            EventSystem.current.SetSelectedGameObject(keyboardBindingsBack);
+        }
+    }
+
+    public void ControllerBindingsMenu()
+    {
+        if (controllerBindingsMenuToggle.activeSelf)
+        {
+            controllerBindingsMenuToggle.SetActive(false);
+            settingsMenuToggle.SetActive(true);
+            EventSystem.current.SetSelectedGameObject(null);
+            EventSystem.current.SetSelectedGameObject(settingsResumeGame);
+        }
+        else
+        {
+            controllerBindingsMenuToggle.SetActive(true);
+            settingsMenuToggle.SetActive(false);
+            EventSystem.current.SetSelectedGameObject(null);
+            EventSystem.current.SetSelectedGameObject(controllerBindingsBack);
         }
     }
 
