@@ -83,7 +83,6 @@ public class InputManager : MonoBehaviour
         });
 
         rebind.WithCancelingThrough("<Keyboard>/escape");
-        rebind.WithCancelingThrough("<Gamepad>/options");
 
         if (excludeMouse) 
         {

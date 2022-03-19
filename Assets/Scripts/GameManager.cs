@@ -50,6 +50,7 @@ public class GameManager : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.F1))
             {
                 Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
             }
         }
     }
