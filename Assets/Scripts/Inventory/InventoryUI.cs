@@ -18,11 +18,13 @@ public class InventoryUI : MonoBehaviour
     public MapDisplayer mapDisplayer;
     GameObject viewedItem = null;
     Animator anim;
+    GameObject crosshair;
 
     void Start()
     {
         anim = GetComponent<Animator>();
         canUse = true;
+        crosshair = GameObject.Find("Crosshair");
     }
 
     public void InventoryInput() 
@@ -45,6 +47,8 @@ public class InventoryUI : MonoBehaviour
                     }
                 }
 
+                crosshair.SetActive(false);
+
                 EventSystem.current.SetSelectedGameObject(null);
                 EventSystem.current.SetSelectedGameObject(GameObject.Find("ItemSpot1").transform.GetChild(0).gameObject);
             }
@@ -63,6 +67,8 @@ public class InventoryUI : MonoBehaviour
                         selectableUI.interactable = false;
                     }
                 }
+
+                crosshair.SetActive(true);
 
                 EventSystem.current.SetSelectedGameObject(null);
             }

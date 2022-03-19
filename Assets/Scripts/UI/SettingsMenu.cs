@@ -39,6 +39,7 @@ public class SettingsMenu : MonoBehaviour
     float currentBrightness = 0.0f;
     bool isTVEffect = true;
     Resolution[] resolutions;
+    GameObject crosshair;
 
     void Start()
     {
@@ -61,6 +62,11 @@ public class SettingsMenu : MonoBehaviour
         resolutionDropdown.AddOptions(options);
         resolutionDropdown.RefreshShownValue();
         LoadSettings(currentResolutionIndex);
+
+        if (GameObject.Find("Crosshair") != null) 
+        {
+            crosshair = GameObject.Find("Crosshair");
+        }
     }
 
     public void SettingsInput() 
@@ -93,6 +99,13 @@ public class SettingsMenu : MonoBehaviour
             InventoryUI.canUse = true;
             MusicManager.instance.Unpause();
             Instantiate(unpauseSound, new Vector3(0, 0, 0), Quaternion.identity);
+            if (!InventoryUI.isOn)
+            {
+                if (crosshair != null)
+                {
+                    crosshair.SetActive(true);
+                }
+            }
         }
         else 
         {
@@ -117,6 +130,13 @@ public class SettingsMenu : MonoBehaviour
             InventoryUI.canUse = false;
             MusicManager.instance.Pause();
             Instantiate(pauseSound, new Vector3(0, 0, 0), Quaternion.identity);
+            if (crosshair != null)
+            {
+                if (crosshair.activeSelf == true)
+                {
+                    GameObject.Find("Crosshair").SetActive(false);
+                }
+            }
         }
 
         EventSystem.current.SetSelectedGameObject(null);
