@@ -86,7 +86,8 @@ public class SettingsMenu : MonoBehaviour
         {
             Time.timeScale = 1.0f;
             Cursor.lockState = CursorLockMode.Locked;
-            FindObjectOfType<InventoryUI>().SetCanUse(true);
+            //FindObjectOfType<InventoryUI>().SetCanUse(true);
+            InventoryUI.canUse = true;
             MusicManager.instance.Unpause();
             Instantiate(unpauseSound, new Vector3(0, 0, 0), Quaternion.identity);
         }
@@ -108,7 +109,8 @@ public class SettingsMenu : MonoBehaviour
         {
             Time.timeScale = 0.0f;
             Cursor.lockState = CursorLockMode.None;
-            FindObjectOfType<InventoryUI>().SetCanUse(false);
+            //FindObjectOfType<InventoryUI>().SetCanUse(false);
+            InventoryUI.canUse = false;
             MusicManager.instance.Pause();
             Instantiate(pauseSound, new Vector3(0, 0, 0), Quaternion.identity);
         }

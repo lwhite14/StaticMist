@@ -108,7 +108,8 @@ public class GameManager : MonoBehaviour
             monster.StopAllCoroutines();
             monster.StartCoroutine(monster.ReturnToPatrol());
         }
-        FindObjectOfType<InventoryUI>().SetCanUse(false);
+        //FindObjectOfType<InventoryUI>().SetCanUse(false);
+        InventoryUI.canUse = false;
     }
 
     public void Goal()
@@ -130,7 +131,8 @@ public class GameManager : MonoBehaviour
         FindObjectOfType<MouseLook>().SetIsInMenu(true);
         FindObjectOfType<PlayerMovement>().SetIsInMenu(true);
         MusicManager.instance.SwitchToGoal();
-        FindObjectOfType<InventoryUI>().SetCanUse(false);
+        //FindObjectOfType<InventoryUI>().SetCanUse(false);
+        InventoryUI.canUse = false;
 
         SendDataToAnalytics();
 

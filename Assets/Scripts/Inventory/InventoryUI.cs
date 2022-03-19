@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class InventoryUI : MonoBehaviour
 {
+    public static bool canUse = true;
+
     public GameObject[] itemSlots = new GameObject[16];
     public Button useButton;
     public Button examineButton;
@@ -15,7 +17,6 @@ public class InventoryUI : MonoBehaviour
     GameObject viewedItem = null;
     Animator anim;
     bool isOn = false;
-    bool canUse = true;
 
     void Start()
     {
