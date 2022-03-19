@@ -13,12 +13,7 @@ public class InteractableKey : MonoBehaviour, IInteractable
     {
         FindObjectOfType<PlayerInventory>().Add(key);
         PickUpSound();
-        if (isTutorial) 
-        {
-            DialogueManager.instance.EndDialogue();
-            StopAllCoroutines();
-            StartCoroutine(TutorialKey());
-        }
+        TutorialDialogue();
         SendDataToAnalytics();
         Destroy(gameObject);
     }
@@ -28,8 +23,23 @@ public class InteractableKey : MonoBehaviour, IInteractable
         Instantiate(pickUpSound, transform.position, Quaternion.identity);
     }
 
+    void TutorialDialogue() 
+    {
+        if (isTutorial)
+        {
+            DialogueManager.instance.EndDialogue();
+            foreach (PopUp popUp in FindObjectsOfType<PopUp>())
+            {
+                popUp.StopAllCoroutines();
+            }
+            StopAllCoroutines();
+            StartCoroutine(TutorialKey());
+        }
+    }
+
     IEnumerator TutorialKey()
     {
+
         GetComponent<DialogueTrigger>().TriggerDialogue();
         yield return new WaitForSeconds(5.0f);
         GetComponent<DialogueTrigger>().TriggerNextSentence();

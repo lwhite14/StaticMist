@@ -11,7 +11,7 @@ public class DialogueManager : MonoBehaviour
 
     DialogueTrigger dialogueTrigger;
     Queue<string> sentences;
-    Text nameText;
+    //Text nameText;
     Text dialogueText;
     Animator animator;
 
@@ -30,7 +30,7 @@ public class DialogueManager : MonoBehaviour
     void Start()
     {
         sentences = new Queue<string>();
-        nameText = GameObject.Find("Name").GetComponent<Text>();
+        //nameText = GameObject.Find("Name").GetComponent<Text>();
         dialogueText = GameObject.Find("Dialogue").GetComponent<Text>();
         animator = GameObject.Find("DialogueBox").GetComponent<Animator>();
     }
@@ -42,7 +42,7 @@ public class DialogueManager : MonoBehaviour
 
         animator.SetBool("isOpen", true);
 
-        nameText.text = dialogue.name;
+        //nameText.text = dialogue.name;
 
         sentences.Clear();
 

@@ -35,6 +35,8 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         GameInformationSetUp();
+        GameObject.Find("Canvas").GetComponent<Canvas>().planeDistance = 0.05f;
+        CursorMode();
         if (level == 0) 
         {
             EventSystem.current.SetSelectedGameObject(GameObject.Find("SettingsButton"));
@@ -127,7 +129,7 @@ public class GameManager : MonoBehaviour
         {
             Instantiate(gameCompleteUIPanel, GameObject.Find("WinLoseConditionTarget").transform);
         }
-        FindObjectOfType<MouseLook>().SetCursorMode(false);
+        //FindObjectOfType<MouseLook>().SetCursorMode(false);
         FindObjectOfType<MouseLook>().SetIsInMenu(true);
         FindObjectOfType<PlayerMovement>().SetIsInMenu(true);
         MusicManager.instance.SwitchToGoal();
@@ -185,6 +187,18 @@ public class GameManager : MonoBehaviour
         if (health != null)
         {
             health.InitSetHealth(GameInformation.instance.Health);
+        }
+    }
+
+    void CursorMode() 
+    {
+        if (Cursor.lockState != CursorLockMode.Locked)
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+        }
+        if (Cursor.visible == true)
+        {
+            Cursor.visible = false;
         }
     }
 

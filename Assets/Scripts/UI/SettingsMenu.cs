@@ -88,7 +88,7 @@ public class SettingsMenu : MonoBehaviour
         if (GameManager.instance.level != 0)
         {
             Time.timeScale = 1.0f;
-            Cursor.lockState = CursorLockMode.Locked;
+            //Cursor.lockState = CursorLockMode.Locked;
             //FindObjectOfType<InventoryUI>().SetCanUse(true);
             InventoryUI.canUse = true;
             MusicManager.instance.Unpause();
@@ -112,7 +112,7 @@ public class SettingsMenu : MonoBehaviour
         if (GameManager.instance.level != 0)
         {
             Time.timeScale = 0.0f;
-            Cursor.lockState = CursorLockMode.None;
+            //Cursor.lockState = CursorLockMode.None;
             //FindObjectOfType<InventoryUI>().SetCanUse(false);
             InventoryUI.canUse = false;
             MusicManager.instance.Pause();
