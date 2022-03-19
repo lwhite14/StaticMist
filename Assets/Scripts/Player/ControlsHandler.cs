@@ -77,9 +77,11 @@ public class ControlsHandler : MonoBehaviour
     void Jump(InputAction.CallbackContext obj)
     {
         if (GetComponent<PlayerMovement>() != null)
-
         {
-            GetComponent<PlayerMovement>().JumpInput();
+            if (!SettingsMenu.paused)
+            {
+                GetComponent<PlayerMovement>().JumpInput();
+            }
         }
     }
 
@@ -87,7 +89,10 @@ public class ControlsHandler : MonoBehaviour
     {
         if (GetComponent<PlayerSprinting>() != null)
         {
-            GetComponent<PlayerSprinting>().SprintInput(true);
+            if (!SettingsMenu.paused)
+            {
+                GetComponent<PlayerSprinting>().SprintInput(true);
+            }
         }
     }
 
@@ -95,7 +100,10 @@ public class ControlsHandler : MonoBehaviour
     {
         if (GetComponent<PlayerSprinting>() != null)
         {
-            GetComponent<PlayerSprinting>().SprintInput(false);
+            if (!SettingsMenu.paused)
+            {
+                GetComponent<PlayerSprinting>().SprintInput(false);
+            }
         }
     }
 
@@ -103,7 +111,10 @@ public class ControlsHandler : MonoBehaviour
     {
         if (GetComponent<PlayerCrouching>() != null)
         {
-            GetComponent<PlayerCrouching>().CrouchInput();
+            if (!SettingsMenu.paused)
+            {
+                GetComponent<PlayerCrouching>().CrouchInput();
+            }
         }
     }
 
@@ -111,7 +122,10 @@ public class ControlsHandler : MonoBehaviour
     {
         if (GetComponent<Interact>() != null)
         {
-            GetComponent<Interact>().InteractInput();
+            if (!SettingsMenu.paused)
+            {
+                GetComponent<Interact>().InteractInput();
+            }
         }
     }
 
@@ -119,7 +133,10 @@ public class ControlsHandler : MonoBehaviour
     {
         if (FindObjectOfType<Attack>() != null) 
         {
-            FindObjectOfType<Attack>().Strike();
+            if (!SettingsMenu.paused)
+            {
+                FindObjectOfType<Attack>().Strike();
+            }
         }
     }
 
@@ -135,7 +152,10 @@ public class ControlsHandler : MonoBehaviour
     {
         if (FindObjectOfType<InventoryUI>() != null)
         {
-            FindObjectOfType<InventoryUI>().InventoryInput();
+            if (!SettingsMenu.paused)
+            {
+                FindObjectOfType<InventoryUI>().InventoryInput();
+            }
         }
     }
 
@@ -145,7 +165,6 @@ public class ControlsHandler : MonoBehaviour
         MouseLook mouseLook = FindObjectOfType<MouseLook>();
 
         playerMovement.MovementSlideX(lateral.ReadValue<float>());
-        Debug.Log("lateral movement velocity: " + lateral.ReadValue<float>());
         playerMovement.MovementSlideZ(forwardBackward.ReadValue<float>());
         mouseLook.SetMouseX(look.ReadValue<Vector2>().x);
         mouseLook.SetMouseY(look.ReadValue<Vector2>().y);

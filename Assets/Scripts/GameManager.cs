@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.Services.Analytics;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.EventSystems;
 
 public class GameManager : MonoBehaviour
 {
@@ -34,6 +35,10 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         GameInformationSetUp();
+        if (level == 0) 
+        {
+            EventSystem.current.SetSelectedGameObject(GameObject.Find("SettingsButton"));
+        }
     }
 
     void Update()

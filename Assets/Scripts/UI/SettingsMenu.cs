@@ -5,16 +5,23 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class SettingsMenu : MonoBehaviour
 {
     public static bool paused = false;
 
     [Header("Rebinding Objects")]
-    public GameObject bindingsMenu;
+    public GameObject bindingsMenuToggle;
     public RebindUI[] rebindings;
 
+    [Header("Selected UI Elements")]
+    public GameObject settingsResumeGame;
+    public GameObject bindingsBack;
+
     [Header("Other")]
+    public GameObject fullToggle;
+    public GameObject settingsMenuToggle;
     public GameObject pauseSound;
     public GameObject unpauseSound;
     public AudioMixer audioMixer;
@@ -30,12 +37,9 @@ public class SettingsMenu : MonoBehaviour
     float currentBrightness = 0.0f;
     bool isTVEffect = true;
     Resolution[] resolutions;
-    GameObject toggle;
 
     void Start()
     {
-        toggle = transform.GetChild(0).gameObject;
-
         resolutionDropdown.ClearOptions();
         List<string> options = new List<string>();
         int currentRefreshRate = Screen.currentResolution.refreshRate;
@@ -71,31 +75,46 @@ public class SettingsMenu : MonoBehaviour
 
     void Resume() 
     {
-        bindingsMenu.SetActive(false);
-        toggle.SetActive(false);
-        Time.timeScale = 1.0f;
+        fullToggle.SetActive(false);
+        bindingsMenuToggle.SetActive(false);
+        settingsMenuToggle.SetActive(false);
         paused = false;
+
+        EventSystem.current.SetSelectedGameObject(null);
+
         if (GameManager.instance.level != 0)
         {
+            Time.timeScale = 1.0f;
             Cursor.lockState = CursorLockMode.Locked;
             FindObjectOfType<InventoryUI>().SetCanUse(true);
+            MusicManager.instance.Unpause();
+            Instantiate(unpauseSound, new Vector3(0, 0, 0), Quaternion.identity);
         }
-        MusicManager.instance.Unpause();
-        Instantiate(unpauseSound, new Vector3(0, 0, 0), Quaternion.identity);
+        else 
+        {
+            EventSystem.current.SetSelectedGameObject(GameObject.Find("SettingsButton"));
+        }
+
     }
 
     void Pause() 
     {
-        toggle.SetActive(true);
+        fullToggle.SetActive(true);
+        bindingsMenuToggle.SetActive(false);
+        settingsMenuToggle.SetActive(true);
+        paused = true;
+
         if (GameManager.instance.level != 0)
         {
             Time.timeScale = 0.0f;
+            Cursor.lockState = CursorLockMode.None;
             FindObjectOfType<InventoryUI>().SetCanUse(false);
+            MusicManager.instance.Pause();
+            Instantiate(pauseSound, new Vector3(0, 0, 0), Quaternion.identity);
         }
-        paused = true;
-        Cursor.lockState = CursorLockMode.None;
-        MusicManager.instance.Pause();
-        Instantiate(pauseSound, new Vector3(0, 0, 0), Quaternion.identity);
+
+        EventSystem.current.SetSelectedGameObject(null);
+        EventSystem.current.SetSelectedGameObject(settingsResumeGame);
     }
 
     public void SetVolume(float volume)
@@ -138,13 +157,19 @@ public class SettingsMenu : MonoBehaviour
 
     public void BindingsMenu() 
     {
-        if (bindingsMenu.activeSelf)
+        if (bindingsMenuToggle.activeSelf)
         {
-            bindingsMenu.SetActive(false);
+            bindingsMenuToggle.SetActive(false);
+            settingsMenuToggle.SetActive(true);
+            EventSystem.current.SetSelectedGameObject(null);
+            EventSystem.current.SetSelectedGameObject(settingsResumeGame);
         }
         else
         {
-            bindingsMenu.SetActive(true);
+            bindingsMenuToggle.SetActive(true);
+            settingsMenuToggle.SetActive(false);
+            EventSystem.current.SetSelectedGameObject(null);
+            EventSystem.current.SetSelectedGameObject(bindingsBack);
         }
     }
 
