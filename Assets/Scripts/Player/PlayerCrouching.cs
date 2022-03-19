@@ -60,7 +60,7 @@ public class PlayerCrouching : MonoBehaviour
 
     public void CrouchInput() 
     {
-        if (!isDead)
+        if (!isDead && !InventoryUI.isOn)
         {
             if (isCrouching && !CheckHeadClear())
             {

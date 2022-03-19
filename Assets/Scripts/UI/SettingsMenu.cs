@@ -9,7 +9,7 @@ using UnityEngine.EventSystems;
 
 public class SettingsMenu : MonoBehaviour
 {
-    public static bool paused = false;
+    public static bool paused { get; set; } = false;
 
     [Header("Rebinding Objects")]
     public GameObject bindingsMenuToggle;

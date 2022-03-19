@@ -21,7 +21,7 @@ public class Interact : MonoBehaviour
 
     public void InteractInput() 
     {
-        if (!FindObjectOfType<InventoryUI>().GetIsOn())
+        if (!InventoryUI.isOn)
         {
             CastInteractRay();
         }

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class MapDisplayer : MonoBehaviour
 {
@@ -13,10 +14,16 @@ public class MapDisplayer : MonoBehaviour
     {
         mapImage.sprite = map;
         tab.SetActive(true);
+
+        EventSystem.current.SetSelectedGameObject(null);
+        EventSystem.current.SetSelectedGameObject(GameObject.Find("ExitButton"));
     }
 
     public void Exit() 
     {
         tab.SetActive(false);
+
+        EventSystem.current.SetSelectedGameObject(null);
+        EventSystem.current.SetSelectedGameObject(GameObject.Find("ItemSpot1").transform.GetChild(0).gameObject);
     }
 }

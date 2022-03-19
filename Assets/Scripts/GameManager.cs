@@ -50,6 +50,7 @@ public class GameManager : MonoBehaviour
                 Cursor.lockState = CursorLockMode.None;
             }
         }
+        Debug.Log(EventSystem.current);
     }
 
     public void ExitGame()
