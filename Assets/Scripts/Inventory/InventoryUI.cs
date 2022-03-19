@@ -36,6 +36,14 @@ public class InventoryUI : MonoBehaviour
                 FindObjectOfType<PlayerMovement>().SetIsInMenu(true);
                 isOn = true;
 
+                foreach (Selectable selectableUI in Selectable.allSelectablesArray)
+                {
+                    if (selectableUI.gameObject.tag == "Inventory")
+                    {
+                        selectableUI.interactable = true;
+                    }
+                }
+
                 EventSystem.current.SetSelectedGameObject(null);
                 EventSystem.current.SetSelectedGameObject(GameObject.Find("ItemSpot1").transform.GetChild(0).gameObject);
             }
@@ -46,6 +54,14 @@ public class InventoryUI : MonoBehaviour
                 FindObjectOfType<MouseLook>().SetIsInMenu(false);
                 FindObjectOfType<PlayerMovement>().SetIsInMenu(false);
                 isOn = false;
+
+                foreach (Selectable selectableUI in Selectable.allSelectablesArray)
+                {
+                    if (selectableUI.gameObject.tag == "Inventory") 
+                    {
+                        selectableUI.interactable = false;
+                    }
+                }
 
                 EventSystem.current.SetSelectedGameObject(null);
             }
