@@ -35,7 +35,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         GameInformationSetUp();
-        GameObject.Find("Canvas").GetComponent<Canvas>().planeDistance = 0.05f;
+        //GameObject.Find("Canvas").GetComponent<Canvas>().planeDistance = 0.05f;
         CursorMode();
         if (level == 0) 
         {

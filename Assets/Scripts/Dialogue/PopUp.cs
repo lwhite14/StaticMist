@@ -11,24 +11,24 @@ public class PopUp : MonoBehaviour
     {
         if (other.tag == "Player") 
         {
-            DialogueManager.instance.EndDialogue();
-            foreach (PopUp popUp in FindObjectsOfType<PopUp>())
+            if (!isTriggered)
             {
-                popUp.StopAllCoroutines();
+                DialogueManager.instance.EndDialogue();
+                foreach (PopUp popUp in FindObjectsOfType<PopUp>())
+                {
+                    popUp.StopAllCoroutines();
+                }
+                StartCoroutine(Triggered());
             }
-            StartCoroutine(Triggered());
         }
     }
 
     IEnumerator Triggered()
     {
-        if (!isTriggered)
-        {
-            isTriggered = true;
-            GetComponent<DialogueTrigger>().TriggerDialogue();
-            yield return new WaitForSeconds(onScreenTime);
-            GetComponent<DialogueTrigger>().TriggerNextSentence();
-            yield return null;
-        }
+        isTriggered = true;
+        GetComponent<DialogueTrigger>().TriggerDialogue();
+        yield return new WaitForSeconds(onScreenTime);
+        GetComponent<DialogueTrigger>().TriggerNextSentence();
+        yield return null;        
     }
 }
