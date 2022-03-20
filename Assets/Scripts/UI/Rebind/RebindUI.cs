@@ -96,7 +96,6 @@ public class RebindUI : MonoBehaviour
 
     void DoRebind() 
     {
-        Debug.LogError(actionName);
         InputManager.StartRebind(actionName, bindingIndex, rebindText, excludeMouse);
     }
 

@@ -2458,7 +2458,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh261728
+  m_Name: pb_Mesh36054
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -2770,7 +2770,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh261694
+  m_Name: pb_Mesh36020
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -2996,7 +2996,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh262058
+  m_Name: pb_Mesh36402
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -3166,6 +3166,7 @@ GameObject:
   - component: {fileID: 425203249}
   - component: {fileID: 425203248}
   - component: {fileID: 425203247}
+  - component: {fileID: 425203250}
   m_Layer: 5
   m_Name: SettingsButton
   m_TagString: Untagged
@@ -3190,8 +3191,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 220, y: 45}
+  m_AnchoredPosition: {x: 0, y: -10}
+  m_SizeDelta: {x: 270, y: 120}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &425203247
 MonoBehaviour:
@@ -3212,7 +3213,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 980124676}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
+  m_Transition: 2
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 1, g: 1, b: 1, a: 1}
@@ -3223,8 +3224,8 @@ MonoBehaviour:
     m_FadeDuration: 0.1
   m_SpriteState:
     m_HighlightedSprite: {fileID: 0}
-    m_PressedSprite: {fileID: 0}
-    m_SelectedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 21300000, guid: 443e2b862a958e340a9c5dd85af845d3, type: 3}
+    m_SelectedSprite: {fileID: 21300000, guid: 443e2b862a958e340a9c5dd85af845d3, type: 3}
     m_DisabledSprite: {fileID: 0}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
@@ -3269,7 +3270,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 21300000, guid: 9089e22dbf808434ea296c52b363afe5, type: 3}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -3287,6 +3288,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 425203245}
   m_CullTransparentMesh: 1
+--- !u!114 &425203250
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 425203245}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee4f15ed0f0fae54d87557f3410a9ff5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selectedSound: {fileID: 3994529949202296459, guid: 343ab6ede7f9d2c4781236931f48961b, type: 3}
 --- !u!1001 &445418581
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3369,6 +3383,7 @@ GameObject:
   - component: {fileID: 473264438}
   - component: {fileID: 473264437}
   - component: {fileID: 473264436}
+  - component: {fileID: 473264439}
   m_Layer: 5
   m_Name: PlayButton
   m_TagString: Untagged
@@ -3393,8 +3408,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 60}
-  m_SizeDelta: {x: 200, y: 45}
+  m_AnchoredPosition: {x: 0, y: 50}
+  m_SizeDelta: {x: 240, y: 120}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &473264436
 MonoBehaviour:
@@ -3415,7 +3430,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 425203247}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
+  m_Transition: 2
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 1, g: 1, b: 1, a: 1}
@@ -3426,8 +3441,8 @@ MonoBehaviour:
     m_FadeDuration: 0.1
   m_SpriteState:
     m_HighlightedSprite: {fileID: 0}
-    m_PressedSprite: {fileID: 0}
-    m_SelectedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 21300000, guid: 443e2b862a958e340a9c5dd85af845d3, type: 3}
+    m_SelectedSprite: {fileID: 21300000, guid: 443e2b862a958e340a9c5dd85af845d3, type: 3}
     m_DisabledSprite: {fileID: 0}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
@@ -3472,7 +3487,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 21300000, guid: 9089e22dbf808434ea296c52b363afe5, type: 3}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -3490,6 +3505,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 473264434}
   m_CullTransparentMesh: 1
+--- !u!114 &473264439
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 473264434}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee4f15ed0f0fae54d87557f3410a9ff5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selectedSound: {fileID: 3994529949202296459, guid: 343ab6ede7f9d2c4781236931f48961b, type: 3}
 --- !u!1001 &474419973
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3586,7 +3614,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 8}
+  m_AnchoredPosition: {x: -10, y: 8}
   m_SizeDelta: {x: 30, y: 8}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &478100767
@@ -3602,7 +3630,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -4103,7 +4131,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh261766
+  m_Name: pb_Mesh36096
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -5654,7 +5682,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh261840
+  m_Name: pb_Mesh36180
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -5818,7 +5846,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh262000
+  m_Name: pb_Mesh36344
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -6068,7 +6096,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh261916
+  m_Name: pb_Mesh36260
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -6310,7 +6338,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh261752
+  m_Name: pb_Mesh36078
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -6542,6 +6570,7 @@ GameObject:
   - component: {fileID: 980124678}
   - component: {fileID: 980124677}
   - component: {fileID: 980124676}
+  - component: {fileID: 980124679}
   m_Layer: 5
   m_Name: QuitButton
   m_TagString: Untagged
@@ -6566,8 +6595,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -60}
-  m_SizeDelta: {x: 180, y: 45}
+  m_AnchoredPosition: {x: 0, y: -70}
+  m_SizeDelta: {x: 240, y: 120}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &980124676
 MonoBehaviour:
@@ -6588,7 +6617,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
+  m_Transition: 2
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 1, g: 1, b: 1, a: 1}
@@ -6599,8 +6628,8 @@ MonoBehaviour:
     m_FadeDuration: 0.1
   m_SpriteState:
     m_HighlightedSprite: {fileID: 0}
-    m_PressedSprite: {fileID: 0}
-    m_SelectedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 21300000, guid: 443e2b862a958e340a9c5dd85af845d3, type: 3}
+    m_SelectedSprite: {fileID: 21300000, guid: 443e2b862a958e340a9c5dd85af845d3, type: 3}
     m_DisabledSprite: {fileID: 0}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
@@ -6645,7 +6674,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 21300000, guid: 9089e22dbf808434ea296c52b363afe5, type: 3}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -6663,13 +6692,26 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 980124674}
   m_CullTransparentMesh: 1
+--- !u!114 &980124679
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 980124674}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee4f15ed0f0fae54d87557f3410a9ff5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selectedSound: {fileID: 3994529949202296459, guid: 343ab6ede7f9d2c4781236931f48961b, type: 3}
 --- !u!43 &1002963521
 Mesh:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh262096
+  m_Name: pb_Mesh36446
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -6833,7 +6875,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh262014
+  m_Name: pb_Mesh36358
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -8317,7 +8359,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh261864
+  m_Name: pb_Mesh36204
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -8787,8 +8829,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -155}
-  m_SizeDelta: {x: 120, y: 120}
+  m_AnchoredPosition: {x: 0, y: -165}
+  m_SizeDelta: {x: 80, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1555440270
 MonoBehaviour:
@@ -9359,7 +9401,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 8}
+  m_AnchoredPosition: {x: -10, y: 8}
   m_SizeDelta: {x: 30, y: 8}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1795087732
@@ -9375,7 +9417,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -10250,7 +10292,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh262150
+  m_Name: pb_Mesh36508
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -10715,7 +10757,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 8}
+  m_AnchoredPosition: {x: -10, y: 8}
   m_SizeDelta: {x: 40, y: 8}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2026904422
@@ -10731,7 +10773,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
