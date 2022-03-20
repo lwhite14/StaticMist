@@ -48,9 +48,6 @@ public class InventoryUI : MonoBehaviour
                 }
 
                 crosshair.SetActive(false);
-
-                EventSystem.current.SetSelectedGameObject(null);
-                EventSystem.current.SetSelectedGameObject(GameObject.Find("ItemSpot1").transform.GetChild(0).gameObject);
             }
             else
             {
@@ -69,10 +66,19 @@ public class InventoryUI : MonoBehaviour
                 }
 
                 crosshair.SetActive(true);
-
-                EventSystem.current.SetSelectedGameObject(null);
             }
         }
+    }
+
+    public void SetEventSystemToNull() 
+    {
+        EventSystem.current.SetSelectedGameObject(null);
+    }
+
+    public void SetEventSystemToFirstItem()
+    {
+        EventSystem.current.SetSelectedGameObject(null);
+        EventSystem.current.SetSelectedGameObject(GameObject.Find("ItemSpot1").transform.GetChild(0).gameObject);
     }
 
     public void RefreshUI(List<IItem> items)
