@@ -53,6 +53,7 @@ public class GameManager : MonoBehaviour
                 Cursor.visible = true;
             }
         }
+        Debug.Log(EventSystem.current);
     }
 
     public void ExitGame()
