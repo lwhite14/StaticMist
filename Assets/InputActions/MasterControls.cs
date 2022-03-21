@@ -101,7 +101,7 @@ public class @MasterControls : IInputActionCollection, IDisposable
                     ""path"": ""<Keyboard>/s"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Keyboard"",
+                    ""groups"": ""Keyboard + Mouse"",
                     ""action"": ""Walk_ForwardBackwards"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -112,14 +112,14 @@ public class @MasterControls : IInputActionCollection, IDisposable
                     ""path"": ""<Keyboard>/w"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Keyboard"",
+                    ""groups"": ""Keyboard + Mouse"",
                     ""action"": ""Walk_ForwardBackwards"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
                 {
-                    ""name"": ""UpDownArrow"",
-                    ""id"": ""d1a72873-8b76-42a9-ac18-2dc66627f97e"",
+                    ""name"": ""ForwardBackward"",
+                    ""id"": ""365cf067-ac1d-4f77-9c75-5561bda9f83e"",
                     ""path"": ""1DAxis"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -130,22 +130,22 @@ public class @MasterControls : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": ""negative"",
-                    ""id"": ""f04f13ea-f129-4a96-b4de-a3199e41b150"",
-                    ""path"": ""<Keyboard>/downArrow"",
+                    ""id"": ""302499d1-f302-47f8-a618-f8eb387bfd60"",
+                    ""path"": ""<Gamepad>/leftStick/down"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Keyboard"",
+                    ""groups"": ""Controller"",
                     ""action"": ""Walk_ForwardBackwards"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
                 {
                     ""name"": ""positive"",
-                    ""id"": ""b7bffd79-885c-4fbb-ad40-fa76af9891cf"",
-                    ""path"": ""<Keyboard>/upArrow"",
+                    ""id"": ""ac0f0540-596d-4d57-8d8f-7d660dca1567"",
+                    ""path"": ""<Gamepad>/leftStick/up"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Keyboard"",
+                    ""groups"": ""Controller"",
                     ""action"": ""Walk_ForwardBackwards"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -167,7 +167,7 @@ public class @MasterControls : IInputActionCollection, IDisposable
                     ""path"": ""<Keyboard>/a"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Keyboard"",
+                    ""groups"": ""Keyboard + Mouse"",
                     ""action"": ""Walk_Laterally"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -178,17 +178,17 @@ public class @MasterControls : IInputActionCollection, IDisposable
                     ""path"": ""<Keyboard>/d"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Keyboard"",
+                    ""groups"": ""Keyboard + Mouse"",
                     ""action"": ""Walk_Laterally"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
                 {
-                    ""name"": ""LeftRightArrow"",
-                    ""id"": ""31429540-35b1-41cc-866a-d5f40eb8ce96"",
+                    ""name"": ""LeftRight"",
+                    ""id"": ""a9894412-fa1b-4beb-a7d9-c8fab63c7891"",
                     ""path"": ""1DAxis"",
                     ""interactions"": """",
-                    ""processors"": """",
+                    ""processors"": ""AxisDeadzone"",
                     ""groups"": """",
                     ""action"": ""Walk_Laterally"",
                     ""isComposite"": true,
@@ -196,22 +196,22 @@ public class @MasterControls : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": ""negative"",
-                    ""id"": ""b92e5cdb-3121-43b0-afcf-b6ccd0b9eb87"",
-                    ""path"": ""<Keyboard>/leftArrow"",
+                    ""id"": ""a0e17622-73ad-4588-8389-ba9b141f0d56"",
+                    ""path"": ""<Gamepad>/leftStick/left"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Keyboard"",
+                    ""groups"": """",
                     ""action"": ""Walk_Laterally"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
                 {
                     ""name"": ""positive"",
-                    ""id"": ""bae21fd4-9924-40ed-bf2c-dcdbc8e7bd0f"",
-                    ""path"": ""<Keyboard>/rightArrow"",
+                    ""id"": ""62830fcd-d2d4-4eef-a873-39bbb36b51f4"",
+                    ""path"": ""<Gamepad>/leftStick/right"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Keyboard"",
+                    ""groups"": """",
                     ""action"": ""Walk_Laterally"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -222,7 +222,18 @@ public class @MasterControls : IInputActionCollection, IDisposable
                     ""path"": ""<Keyboard>/space"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Keyboard"",
+                    ""groups"": ""Keyboard + Mouse"",
+                    ""action"": ""Jump"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""37fd3191-87f2-408f-b1cc-55bd877e665c"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Controller"",
                     ""action"": ""Jump"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -233,7 +244,18 @@ public class @MasterControls : IInputActionCollection, IDisposable
                     ""path"": ""<Keyboard>/leftShift"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Keyboard"",
+                    ""groups"": ""Keyboard + Mouse"",
+                    ""action"": ""Sprint"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""fc94d5f5-a7b0-444f-89c0-0d12e6c105eb"",
+                    ""path"": ""<Gamepad>/leftStickPress"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Controller"",
                     ""action"": ""Sprint"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -244,7 +266,18 @@ public class @MasterControls : IInputActionCollection, IDisposable
                     ""path"": ""<Keyboard>/leftCtrl"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Keyboard"",
+                    ""groups"": ""Keyboard + Mouse"",
+                    ""action"": ""Crouch"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a3e65b7c-bc5e-4580-95e5-363146f7f2de"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Controller"",
                     ""action"": ""Crouch"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -255,7 +288,18 @@ public class @MasterControls : IInputActionCollection, IDisposable
                     ""path"": ""<Keyboard>/e"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Keyboard"",
+                    ""groups"": ""Keyboard + Mouse"",
+                    ""action"": ""Interact"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""aba16056-4721-44be-b95b-372bc6bd4133"",
+                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Controller"",
                     ""action"": ""Interact"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -266,7 +310,18 @@ public class @MasterControls : IInputActionCollection, IDisposable
                     ""path"": ""<Mouse>/delta"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Keyboard"",
+                    ""groups"": ""Keyboard + Mouse"",
+                    ""action"": ""Look"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d33d218f-4a06-471b-959b-0d9833a81f6c"",
+                    ""path"": ""<Gamepad>/rightStick"",
+                    ""interactions"": """",
+                    ""processors"": ""ScaleVector2(x=8,y=8)"",
+                    ""groups"": ""Controller"",
                     ""action"": ""Look"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -277,7 +332,18 @@ public class @MasterControls : IInputActionCollection, IDisposable
                     ""path"": ""<Mouse>/leftButton"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Keyboard"",
+                    ""groups"": ""Keyboard + Mouse"",
+                    ""action"": ""Action"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c3e5d814-6e88-40d9-ac73-6ad750f53c91"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Controller"",
                     ""action"": ""Action"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -289,33 +355,9 @@ public class @MasterControls : IInputActionCollection, IDisposable
             ""id"": ""c0b1ed28-0b22-4c8d-8288-d88853095749"",
             ""actions"": [
                 {
-                    ""name"": ""Instructions"",
-                    ""type"": ""Button"",
-                    ""id"": ""24cb90bd-493e-4c8c-8dfb-6e36061fa5ec"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """"
-                },
-                {
-                    ""name"": ""Exit"",
+                    ""name"": ""Start"",
                     ""type"": ""Button"",
                     ""id"": ""b24af804-cef4-4050-95a4-7b2aeb2c211f"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """"
-                },
-                {
-                    ""name"": ""SensUp"",
-                    ""type"": ""Button"",
-                    ""id"": ""f28ce724-a556-4186-8e87-681a1a69ab3b"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """"
-                },
-                {
-                    ""name"": ""SensDown"",
-                    ""type"": ""Button"",
-                    ""id"": ""9a2b3899-5c5e-4456-81ee-80c277b31cce"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
@@ -332,45 +374,23 @@ public class @MasterControls : IInputActionCollection, IDisposable
             ""bindings"": [
                 {
                     ""name"": """",
-                    ""id"": ""19bef19f-a246-4ce4-b460-fa4b14c9a97d"",
-                    ""path"": ""<Keyboard>/f1"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard"",
-                    ""action"": ""Instructions"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""78baab8a-ae30-4913-9849-50510e6c3bfe"",
                     ""path"": ""<Keyboard>/escape"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Keyboard"",
-                    ""action"": ""Exit"",
+                    ""groups"": ""Keyboard + Mouse"",
+                    ""action"": ""Start"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
-                    ""id"": ""2988610b-9123-4c01-ad19-377bc45a1bec"",
-                    ""path"": ""<Keyboard>/rightBracket"",
+                    ""id"": ""24fd25a0-2746-4c1d-bae4-84be3bcdd991"",
+                    ""path"": ""<Gamepad>/start"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Keyboard"",
-                    ""action"": ""SensUp"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""f1f87deb-8b2a-4e25-8175-adf978d1474e"",
-                    ""path"": ""<Keyboard>/leftBracket"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard"",
-                    ""action"": ""SensDown"",
+                    ""groups"": ""Controller"",
+                    ""action"": ""Start"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -380,7 +400,18 @@ public class @MasterControls : IInputActionCollection, IDisposable
                     ""path"": ""<Keyboard>/tab"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Keyboard + Mouse"",
+                    ""action"": ""Inventory"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""576abb17-efd8-4885-90f5-56ba0b4bfdf2"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Controller"",
                     ""action"": ""Inventory"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -390,34 +421,33 @@ public class @MasterControls : IInputActionCollection, IDisposable
     ],
     ""controlSchemes"": [
         {
-            ""name"": ""Keyboard"",
-            ""bindingGroup"": ""Keyboard"",
+            ""name"": ""Keyboard + Mouse"",
+            ""bindingGroup"": ""Keyboard + Mouse"",
             ""devices"": [
                 {
                     ""devicePath"": ""<Keyboard>"",
                     ""isOptional"": false,
                     ""isOR"": false
-                }
-            ]
-        },
-        {
-            ""name"": ""PS4 Controller"",
-            ""bindingGroup"": ""PS4 Controller"",
-            ""devices"": [
+                },
                 {
-                    ""devicePath"": ""<DualShockGamepad>"",
+                    ""devicePath"": ""<Mouse>"",
                     ""isOptional"": false,
                     ""isOR"": false
                 }
             ]
         },
         {
-            ""name"": ""Xbox Controller"",
-            ""bindingGroup"": ""Xbox Controller"",
+            ""name"": ""Controller"",
+            ""bindingGroup"": ""Controller"",
             ""devices"": [
                 {
+                    ""devicePath"": ""<DualShockGamepad>"",
+                    ""isOptional"": true,
+                    ""isOR"": false
+                },
+                {
                     ""devicePath"": ""<XInputController>"",
-                    ""isOptional"": false,
+                    ""isOptional"": true,
                     ""isOR"": false
                 }
             ]
@@ -436,10 +466,7 @@ public class @MasterControls : IInputActionCollection, IDisposable
         m_Player_Action = m_Player.FindAction("Action", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
-        m_UI_Instructions = m_UI.FindAction("Instructions", throwIfNotFound: true);
-        m_UI_Exit = m_UI.FindAction("Exit", throwIfNotFound: true);
-        m_UI_SensUp = m_UI.FindAction("SensUp", throwIfNotFound: true);
-        m_UI_SensDown = m_UI.FindAction("SensDown", throwIfNotFound: true);
+        m_UI_Start = m_UI.FindAction("Start", throwIfNotFound: true);
         m_UI_Inventory = m_UI.FindAction("Inventory", throwIfNotFound: true);
     }
 
@@ -579,19 +606,13 @@ public class @MasterControls : IInputActionCollection, IDisposable
     // UI
     private readonly InputActionMap m_UI;
     private IUIActions m_UIActionsCallbackInterface;
-    private readonly InputAction m_UI_Instructions;
-    private readonly InputAction m_UI_Exit;
-    private readonly InputAction m_UI_SensUp;
-    private readonly InputAction m_UI_SensDown;
+    private readonly InputAction m_UI_Start;
     private readonly InputAction m_UI_Inventory;
     public struct UIActions
     {
         private @MasterControls m_Wrapper;
         public UIActions(@MasterControls wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Instructions => m_Wrapper.m_UI_Instructions;
-        public InputAction @Exit => m_Wrapper.m_UI_Exit;
-        public InputAction @SensUp => m_Wrapper.m_UI_SensUp;
-        public InputAction @SensDown => m_Wrapper.m_UI_SensDown;
+        public InputAction @Start => m_Wrapper.m_UI_Start;
         public InputAction @Inventory => m_Wrapper.m_UI_Inventory;
         public InputActionMap Get() { return m_Wrapper.m_UI; }
         public void Enable() { Get().Enable(); }
@@ -602,18 +623,9 @@ public class @MasterControls : IInputActionCollection, IDisposable
         {
             if (m_Wrapper.m_UIActionsCallbackInterface != null)
             {
-                @Instructions.started -= m_Wrapper.m_UIActionsCallbackInterface.OnInstructions;
-                @Instructions.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnInstructions;
-                @Instructions.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnInstructions;
-                @Exit.started -= m_Wrapper.m_UIActionsCallbackInterface.OnExit;
-                @Exit.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnExit;
-                @Exit.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnExit;
-                @SensUp.started -= m_Wrapper.m_UIActionsCallbackInterface.OnSensUp;
-                @SensUp.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnSensUp;
-                @SensUp.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnSensUp;
-                @SensDown.started -= m_Wrapper.m_UIActionsCallbackInterface.OnSensDown;
-                @SensDown.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnSensDown;
-                @SensDown.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnSensDown;
+                @Start.started -= m_Wrapper.m_UIActionsCallbackInterface.OnStart;
+                @Start.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnStart;
+                @Start.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnStart;
                 @Inventory.started -= m_Wrapper.m_UIActionsCallbackInterface.OnInventory;
                 @Inventory.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnInventory;
                 @Inventory.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnInventory;
@@ -621,18 +633,9 @@ public class @MasterControls : IInputActionCollection, IDisposable
             m_Wrapper.m_UIActionsCallbackInterface = instance;
             if (instance != null)
             {
-                @Instructions.started += instance.OnInstructions;
-                @Instructions.performed += instance.OnInstructions;
-                @Instructions.canceled += instance.OnInstructions;
-                @Exit.started += instance.OnExit;
-                @Exit.performed += instance.OnExit;
-                @Exit.canceled += instance.OnExit;
-                @SensUp.started += instance.OnSensUp;
-                @SensUp.performed += instance.OnSensUp;
-                @SensUp.canceled += instance.OnSensUp;
-                @SensDown.started += instance.OnSensDown;
-                @SensDown.performed += instance.OnSensDown;
-                @SensDown.canceled += instance.OnSensDown;
+                @Start.started += instance.OnStart;
+                @Start.performed += instance.OnStart;
+                @Start.canceled += instance.OnStart;
                 @Inventory.started += instance.OnInventory;
                 @Inventory.performed += instance.OnInventory;
                 @Inventory.canceled += instance.OnInventory;
@@ -640,31 +643,22 @@ public class @MasterControls : IInputActionCollection, IDisposable
         }
     }
     public UIActions @UI => new UIActions(this);
-    private int m_KeyboardSchemeIndex = -1;
-    public InputControlScheme KeyboardScheme
+    private int m_KeyboardMouseSchemeIndex = -1;
+    public InputControlScheme KeyboardMouseScheme
     {
         get
         {
-            if (m_KeyboardSchemeIndex == -1) m_KeyboardSchemeIndex = asset.FindControlSchemeIndex("Keyboard");
-            return asset.controlSchemes[m_KeyboardSchemeIndex];
+            if (m_KeyboardMouseSchemeIndex == -1) m_KeyboardMouseSchemeIndex = asset.FindControlSchemeIndex("Keyboard + Mouse");
+            return asset.controlSchemes[m_KeyboardMouseSchemeIndex];
         }
     }
-    private int m_PS4ControllerSchemeIndex = -1;
-    public InputControlScheme PS4ControllerScheme
+    private int m_ControllerSchemeIndex = -1;
+    public InputControlScheme ControllerScheme
     {
         get
         {
-            if (m_PS4ControllerSchemeIndex == -1) m_PS4ControllerSchemeIndex = asset.FindControlSchemeIndex("PS4 Controller");
-            return asset.controlSchemes[m_PS4ControllerSchemeIndex];
-        }
-    }
-    private int m_XboxControllerSchemeIndex = -1;
-    public InputControlScheme XboxControllerScheme
-    {
-        get
-        {
-            if (m_XboxControllerSchemeIndex == -1) m_XboxControllerSchemeIndex = asset.FindControlSchemeIndex("Xbox Controller");
-            return asset.controlSchemes[m_XboxControllerSchemeIndex];
+            if (m_ControllerSchemeIndex == -1) m_ControllerSchemeIndex = asset.FindControlSchemeIndex("Controller");
+            return asset.controlSchemes[m_ControllerSchemeIndex];
         }
     }
     public interface IPlayerActions
@@ -680,10 +674,7 @@ public class @MasterControls : IInputActionCollection, IDisposable
     }
     public interface IUIActions
     {
-        void OnInstructions(InputAction.CallbackContext context);
-        void OnExit(InputAction.CallbackContext context);
-        void OnSensUp(InputAction.CallbackContext context);
-        void OnSensDown(InputAction.CallbackContext context);
+        void OnStart(InputAction.CallbackContext context);
         void OnInventory(InputAction.CallbackContext context);
     }
 }

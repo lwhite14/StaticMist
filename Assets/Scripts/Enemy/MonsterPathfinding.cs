@@ -75,9 +75,15 @@ public class MonsterPathfinding : MonoBehaviour
 
     void UpdateSpeed()
     {
-        speed = Mathf.Lerp(speed, (transform.position - lastPosition).magnitude / Time.deltaTime, 0.75f);
-        lastPosition = transform.position;
-        monsterAnimationSound.SetSpeed(speed);
+        if (!SettingsMenu.paused)
+        {
+            if (Time.deltaTime > 0)
+            {
+                speed = Mathf.Lerp(speed, (transform.position - lastPosition).magnitude / Time.deltaTime, 0.75f);
+                lastPosition = transform.position;
+                monsterAnimationSound.SetSpeed(speed);
+            }
+        }
     }
 
     void RandomPath() 

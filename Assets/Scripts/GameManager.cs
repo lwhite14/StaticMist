@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.Services.Analytics;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.EventSystems;
 
 public class GameManager : MonoBehaviour
 {
@@ -34,10 +35,30 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         GameInformationSetUp();
+        //GameObject.Find("Canvas").GetComponent<Canvas>().planeDistance = 0.05f;
+        CursorMode();
+        if (level == 0) 
+        {
+            EventSystem.current.SetSelectedGameObject(GameObject.Find("SettingsButton"));
+        }
+    }
+
+    void Update()
+    {
+        if (Debug.isDebugBuild)
+        {
+            if (Input.GetKeyDown(KeyCode.F1))
+            {
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
+            }
+        }
+        Debug.Log(EventSystem.current);
     }
 
     public void ExitGame()
     {
+        FindObjectOfType<SettingsMenu>().SaveSettings();
         Application.Quit();
     }
 
@@ -48,19 +69,35 @@ public class GameManager : MonoBehaviour
 
     public void ReturnToMenu() 
     {
-        SceneManager.LoadScene("Menu", LoadSceneMode.Single);
+        //SceneManager.LoadScene("Menu", LoadSceneMode.Single);
+        FindObjectOfType<SettingsMenu>().SaveSettings();
+        if (FindObjectOfType<ControlsHandler>() != null)
+        {
+            FindObjectOfType<ControlsHandler>().DeallocateEvents();
+        }
+        LoadSceneData.sceneToLoad = "Menu";
+        SceneManager.LoadScene("Loading");
     }
 
     public void RestartLevel()    
     {
+        FindObjectOfType<SettingsMenu>().SaveSettings();
+        if (FindObjectOfType<ControlsHandler>() != null)
+        {
+            FindObjectOfType<ControlsHandler>().DeallocateEvents();
+        }
         if (levelException == null || levelException == "")
         {
             string currentLevelName = "Level" + level;
-            SceneManager.LoadScene(currentLevelName, LoadSceneMode.Single);
+            //SceneManager.LoadScene(currentLevelName, LoadSceneMode.Single);
+            LoadSceneData.sceneToLoad = currentLevelName;
+            SceneManager.LoadScene("Loading");
         }
         else 
         {
-            SceneManager.LoadScene(levelException, LoadSceneMode.Single);
+            //SceneManager.LoadScene(levelException, LoadSceneMode.Single);
+            LoadSceneData.sceneToLoad = levelException;
+            SceneManager.LoadScene("Loading");
         }
     }
 
@@ -75,7 +112,12 @@ public class GameManager : MonoBehaviour
             monster.StopAllCoroutines();
             monster.StartCoroutine(monster.ReturnToPatrol());
         }
-        FindObjectOfType<InventoryUI>().SetCanUse(false);
+        if (FindObjectOfType<Viewmodel>() != null)
+        {
+            Destroy(FindObjectOfType<Viewmodel>().gameObject);
+        }
+        //FindObjectOfType<InventoryUI>().SetCanUse(false);
+        InventoryUI.canUse = false;
     }
 
     public void Goal()
@@ -93,11 +135,16 @@ public class GameManager : MonoBehaviour
         {
             Instantiate(gameCompleteUIPanel, GameObject.Find("WinLoseConditionTarget").transform);
         }
-        FindObjectOfType<MouseLook>().SetCursorMode(false);
+        if (FindObjectOfType<Viewmodel>() != null)
+        {
+            Destroy(FindObjectOfType<Viewmodel>().gameObject);
+        }
+        //FindObjectOfType<MouseLook>().SetCursorMode(false);
         FindObjectOfType<MouseLook>().SetIsInMenu(true);
         FindObjectOfType<PlayerMovement>().SetIsInMenu(true);
         MusicManager.instance.SwitchToGoal();
-        FindObjectOfType<InventoryUI>().SetCanUse(false);
+        //FindObjectOfType<InventoryUI>().SetCanUse(false);
+        InventoryUI.canUse = false;
 
         SendDataToAnalytics();
 
@@ -115,9 +162,16 @@ public class GameManager : MonoBehaviour
 
     public void NextLevel()
     {
+        FindObjectOfType<SettingsMenu>().SaveSettings();
+        if (FindObjectOfType<ControlsHandler>() != null)
+        {
+            FindObjectOfType<ControlsHandler>().DeallocateEvents();
+        }
         int nextLevel = level + 1;
         string nextLevelName = "Level" + nextLevel;
-        SceneManager.LoadScene(nextLevelName, LoadSceneMode.Single);
+        //SceneManager.LoadScene(nextLevelName, LoadSceneMode.Single);
+        LoadSceneData.sceneToLoad = nextLevelName;
+        SceneManager.LoadScene("Loading");
     }
 
     void GameInformationSetUp()
@@ -133,15 +187,8 @@ public class GameManager : MonoBehaviour
             GameInformation.instance.Items = new List<IItem>();
         }
 
-        ControlsTab controlsTab = FindObjectOfType<ControlsTab>();
         PlayerInventory playerInventory = FindObjectOfType<PlayerInventory>();
         Health health = FindObjectOfType<Health>();
-        PSX psx = FindObjectOfType<PSX>();
-        if (controlsTab != null)
-        {
-            controlsTab.SetOn(GameInformation.instance.Instructions);
-            controlsTab.SetSens(GameInformation.instance.Sensitivity);
-        }
         if (playerInventory != null)
         {
             playerInventory.inventory.SetAllItems(GameInformation.instance.Items);
@@ -151,9 +198,17 @@ public class GameManager : MonoBehaviour
         {
             health.InitSetHealth(GameInformation.instance.Health);
         }
-        if (psx != null) 
+    }
+
+    void CursorMode() 
+    {
+        if (Cursor.lockState != CursorLockMode.Locked)
         {
-            psx.TurnOnTVUI(GameInformation.instance.TVUI);
+            Cursor.lockState = CursorLockMode.Locked;
+        }
+        if (Cursor.visible == true)
+        {
+            Cursor.visible = false;
         }
     }
 

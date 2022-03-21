@@ -27,6 +27,7 @@ public class DoorGoal : MonoBehaviour, IInteractable
         if (!hasKey)
         {
             DialogueManager.instance.EndDialogue();
+            PopUp.StopAllPopUps();
             StopAllCoroutines();
             StartCoroutine(NoKeyDialgoue());
         }

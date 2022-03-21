@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class ControlsHandler : MonoBehaviour
 {
@@ -11,29 +12,13 @@ public class ControlsHandler : MonoBehaviour
     InputAction forwardBackward;
     InputAction lateral;
 
-    MouseLook mouseLook;
-    PlayerMovement playerMovement;
-    PlayerSprinting playerSprinting;
-    PlayerCrouching playerCrouching;
-    Interact interact;
-    InventoryUI inventoryUI;
-
-    void Awake()
-    {
-        controls = new MasterControls();
-    }
-
-    void Start()
-    {
-        mouseLook = GetComponentInChildren<MouseLook>();
-        playerMovement = GetComponent<PlayerMovement>();
-        playerSprinting = GetComponent<PlayerSprinting>();
-        playerCrouching = GetComponent<PlayerCrouching>();
-        interact = GetComponent<Interact>();
-        inventoryUI = FindObjectOfType<InventoryUI>();
-    }
-
     void OnEnable()
+    {
+        controls = InputManager.inputActions;
+        AssignEvents();
+    }
+
+    void AssignEvents() 
     {
         look = controls.Player.Look;
         look.Enable();
@@ -54,102 +39,134 @@ public class ControlsHandler : MonoBehaviour
         controls.Player.Action.started += Action;
         controls.Player.Action.Enable();
 
-        controls.UI.Exit.performed += Exit;
-        controls.UI.Exit.Enable();
-        controls.UI.Instructions.performed += Instructions;
-        controls.UI.Instructions.Enable();
-        controls.UI.SensUp.performed += SensUp;
-        controls.UI.SensUp.Enable();
-        controls.UI.SensDown.performed += SensDown;
-        controls.UI.SensDown.Enable();
+        controls.UI.Start.performed += Menu;
+        controls.UI.Start.Enable();
         controls.UI.Inventory.performed += Inventory;
         controls.UI.Inventory.Enable();
-        
-
     }
 
     void OnDisable()
     {
+        DeallocateEvents();
+    }
+
+    public void DeallocateEvents() 
+    {
         look.Disable();
         forwardBackward.Disable();
         lateral.Disable();
-        controls.Player.Sprint.Disable();
-        controls.Player.Jump.Disable();
-        controls.Player.Crouch.Disable();
-        controls.Player.Interact.Disable();
 
-        controls.UI.Exit.Disable();
-        controls.UI.Instructions.Disable();
-        controls.UI.SensUp.Disable();
-        controls.UI.SensDown.Disable();
+        controls.Player.Jump.performed -= Jump;
+        controls.Player.Jump.Disable();
+        controls.Player.Sprint.performed -= SprintOn;
+        controls.Player.Sprint.canceled -= SprintOff;
+        controls.Player.Sprint.Disable();
+        controls.Player.Crouch.performed -= Crouch;
+        controls.Player.Crouch.Disable();
+        controls.Player.Interact.started -= Interact;
+        controls.Player.Interact.Disable();
+        controls.Player.Action.started -= Action;
+        controls.Player.Action.Disable();
+
+        controls.UI.Start.performed -= Menu;
+        controls.UI.Start.Disable();
+        controls.UI.Inventory.performed -= Inventory;
         controls.UI.Inventory.Disable();
     }
 
     void Jump(InputAction.CallbackContext obj)
     {
-        playerMovement.JumpInput();
+        if (GetComponent<PlayerMovement>() != null)
+        {
+            if (!SettingsMenu.paused)
+            {
+                GetComponent<PlayerMovement>().JumpInput();
+            }
+        }
     }
 
     void SprintOn(InputAction.CallbackContext obj) 
     {
-        playerSprinting.SprintInput(true);
+        if (GetComponent<PlayerSprinting>() != null)
+        {
+            if (!SettingsMenu.paused)
+            {
+                GetComponent<PlayerSprinting>().SprintInput(true);
+            }
+        }
     }
 
-    void SprintOff(InputAction.CallbackContext obj) 
+    void SprintOff(InputAction.CallbackContext obj)
     {
-        playerSprinting.SprintInput(false);
+        if (GetComponent<PlayerSprinting>() != null)
+        {
+            if (!SettingsMenu.paused)
+            {
+                GetComponent<PlayerSprinting>().SprintInput(false);
+            }
+        }
     }
 
     void Crouch(InputAction.CallbackContext obj)
     {
-        playerCrouching.CrouchInput();
+        if (GetComponent<PlayerCrouching>() != null)
+        {
+            if (!SettingsMenu.paused)
+            {
+                GetComponent<PlayerCrouching>().CrouchInput();
+            }
+        }
     }
 
     void Interact(InputAction.CallbackContext obj) 
     {
-        interact.InteractInput();
+        if (GetComponent<Interact>() != null)
+        {
+            if (!SettingsMenu.paused)
+            {
+                GetComponent<Interact>().InteractInput();
+            }
+        }
     }
 
     void Action(InputAction.CallbackContext obj)
     {
-        Attack attack = FindObjectOfType<Attack>();
-        if (attack != null) 
+        if (FindObjectOfType<Attack>() != null) 
         {
-            attack.Strike();
+            if (!SettingsMenu.paused)
+            {
+                FindObjectOfType<Attack>().Strike();
+            }
         }
     }
 
-    void Exit(InputAction.CallbackContext obj)
+    void Menu(InputAction.CallbackContext obj)
     {
-        GameManager.instance.ExitGame();
-    }
-
-    void Instructions(InputAction.CallbackContext obj)
-    {
-        FindObjectOfType<ControlsTab>().InstructionsInput();
-    }
-
-    void SensUp(InputAction.CallbackContext obj)
-    {
-        FindObjectOfType<ControlsTab>().SensitivityUp();
-    }
-
-    void SensDown(InputAction.CallbackContext obj)
-    {
-        FindObjectOfType<ControlsTab>().SensitivityDown();
+        if (FindObjectOfType<SettingsMenu>() != null)
+        {
+            FindObjectOfType<SettingsMenu>().SettingsInput();
+        }
     }
 
     void Inventory(InputAction.CallbackContext obj)
     {
-        inventoryUI.InventoryInput();
+        if (FindObjectOfType<InventoryUI>() != null)
+        {
+            if (!SettingsMenu.paused)
+            {
+                FindObjectOfType<InventoryUI>().InventoryInput();
+            }
+        }
     }
 
     void Update()
     {
+        PlayerMovement playerMovement = FindObjectOfType<PlayerMovement>();
+        MouseLook mouseLook = FindObjectOfType<MouseLook>();
+
         playerMovement.MovementSlideX(lateral.ReadValue<float>());
         playerMovement.MovementSlideZ(forwardBackward.ReadValue<float>());
         mouseLook.SetMouseX(look.ReadValue<Vector2>().x);
         mouseLook.SetMouseY(look.ReadValue<Vector2>().y);
     }
-
 }

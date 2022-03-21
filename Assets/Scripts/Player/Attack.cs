@@ -19,7 +19,7 @@ public class Attack : MonoBehaviour
 
     public void Strike() 
     {
-        if (!FindObjectOfType<Health>().isDead && !FindObjectOfType<InventoryUI>().GetIsOn()) 
+        if (!FindObjectOfType<Health>().isDead && !InventoryUI.isOn) 
         {
             anim.Play("BatAttack");
         }

@@ -2,9 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class InventoryUI : MonoBehaviour
 {
+    public static bool canUse { get; set; } = true;
+    public static bool isOn { get; set; } = false;
+
     public GameObject[] itemSlots = new GameObject[16];
     public Button useButton;
     public Button examineButton;
@@ -14,12 +18,13 @@ public class InventoryUI : MonoBehaviour
     public MapDisplayer mapDisplayer;
     GameObject viewedItem = null;
     Animator anim;
-    bool isOn = false;
-    bool canUse = true;
+    GameObject crosshair;
 
     void Start()
     {
         anim = GetComponent<Animator>();
+        canUse = true;
+        crosshair = GameObject.Find("Crosshair");
     }
 
     public void InventoryInput() 
@@ -29,20 +34,51 @@ public class InventoryUI : MonoBehaviour
             if (!isOn)
             {
                 anim.SetBool("isOn", true);
-                FindObjectOfType<MouseLook>().SetCursorMode(false);
+                //FindObjectOfType<MouseLook>().SetCursorMode(false);
                 FindObjectOfType<MouseLook>().SetIsInMenu(true);
                 FindObjectOfType<PlayerMovement>().SetIsInMenu(true);
                 isOn = true;
+
+                foreach (Selectable selectableUI in Selectable.allSelectablesArray)
+                {
+                    if (selectableUI.gameObject.tag == "Inventory")
+                    {
+                        selectableUI.interactable = true;
+                    }
+                }
+
+                crosshair.SetActive(false);
             }
             else
             {
                 anim.SetBool("isOn", false);
-                FindObjectOfType<MouseLook>().SetCursorMode(true);
+                //FindObjectOfType<MouseLook>().SetCursorMode(true);
                 FindObjectOfType<MouseLook>().SetIsInMenu(false);
                 FindObjectOfType<PlayerMovement>().SetIsInMenu(false);
                 isOn = false;
+
+                foreach (Selectable selectableUI in Selectable.allSelectablesArray)
+                {
+                    if (selectableUI.gameObject.tag == "Inventory") 
+                    {
+                        selectableUI.interactable = false;
+                    }
+                }
+
+                crosshair.SetActive(true);
             }
         }
+    }
+
+    public void SetEventSystemToNull() 
+    {
+        EventSystem.current.SetSelectedGameObject(null);
+    }
+
+    public void SetEventSystemToFirstItem()
+    {
+        EventSystem.current.SetSelectedGameObject(null);
+        EventSystem.current.SetSelectedGameObject(GameObject.Find("ItemSpot1").transform.GetChild(0).gameObject);
     }
 
     public void RefreshUI(List<IItem> items)
@@ -59,11 +95,6 @@ public class InventoryUI : MonoBehaviour
             }
             itemSlots[i].GetComponent<ItemSlot>().Refresh();
         }
-    }
-
-    public void SetCanUse(bool newCanUse) 
-    {
-        canUse = newCanUse;
     }
 
     public void SetViewedItem(GameObject newViewedItem) 
@@ -98,11 +129,6 @@ public class InventoryUI : MonoBehaviour
     public void ViewMap(Sprite map) 
     {
         mapDisplayer.GetComponent<MapDisplayer>().ViewMap(map);
-    }
-
-    public bool GetIsOn() 
-    {
-        return isOn;
     }
 
     public GameObject GetViewedItem() 

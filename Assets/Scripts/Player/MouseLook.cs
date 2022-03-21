@@ -12,11 +12,6 @@ public class MouseLook : MonoBehaviour
     bool isDead = false;
     bool isInMenu = false;
 
-    void Start()
-    {
-        SetCursorMode(true);
-    }
-
     void Update()
     {
         if (!isDead && !isInMenu)
@@ -38,22 +33,6 @@ public class MouseLook : MonoBehaviour
     public void OnDeath(bool newIsDead) 
     {
         isDead = newIsDead;
-        if (newIsDead) 
-        {
-            SetCursorMode(false);
-        }
-    }
-
-    public void SetCursorMode(bool lockedMode) 
-    {
-        if (lockedMode) 
-        {
-            Cursor.lockState = CursorLockMode.Locked;
-        }
-        else
-        {
-            Cursor.lockState = CursorLockMode.None;
-        }
     }
 
     public void SetMouseX(float newX) 
