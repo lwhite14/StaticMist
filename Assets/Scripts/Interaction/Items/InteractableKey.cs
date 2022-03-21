@@ -28,10 +28,7 @@ public class InteractableKey : MonoBehaviour, IInteractable
         if (isTutorial)
         {
             DialogueManager.instance.EndDialogue();
-            foreach (PopUp popUp in FindObjectsOfType<PopUp>())
-            {
-                popUp.StopAllCoroutines();
-            }
+            PopUp.StopAllPopUps();
             StopAllCoroutines();
             StartCoroutine(TutorialKey());
         }

@@ -75,9 +75,12 @@ public class SettingsMenu : MonoBehaviour
         {
             Resume();
         }
-        else 
+        else
         {
-            Pause();
+            if (FindObjectOfType<LevelCompletePanel>() == null && FindObjectOfType<YouDiedPanel>() == null)
+            {
+                Pause();
+            }
         }
     }
 

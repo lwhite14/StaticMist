@@ -14,10 +14,7 @@ public class PopUp : MonoBehaviour
             if (!isTriggered)
             {
                 DialogueManager.instance.EndDialogue();
-                foreach (PopUp popUp in FindObjectsOfType<PopUp>())
-                {
-                    popUp.StopAllCoroutines();
-                }
+                PopUp.StopAllPopUps();
                 StartCoroutine(Triggered());
             }
         }
@@ -30,5 +27,13 @@ public class PopUp : MonoBehaviour
         yield return new WaitForSeconds(onScreenTime);
         GetComponent<DialogueTrigger>().TriggerNextSentence();
         yield return null;        
+    }
+
+    public static void StopAllPopUps() 
+    {
+        foreach (PopUp popUp in FindObjectsOfType<PopUp>())
+        {
+            popUp.StopAllCoroutines();
+        }
     }
 }

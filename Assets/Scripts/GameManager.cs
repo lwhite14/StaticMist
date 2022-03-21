@@ -112,6 +112,10 @@ public class GameManager : MonoBehaviour
             monster.StopAllCoroutines();
             monster.StartCoroutine(monster.ReturnToPatrol());
         }
+        if (FindObjectOfType<Viewmodel>() != null)
+        {
+            Destroy(FindObjectOfType<Viewmodel>().gameObject);
+        }
         //FindObjectOfType<InventoryUI>().SetCanUse(false);
         InventoryUI.canUse = false;
     }
@@ -130,6 +134,10 @@ public class GameManager : MonoBehaviour
         else
         {
             Instantiate(gameCompleteUIPanel, GameObject.Find("WinLoseConditionTarget").transform);
+        }
+        if (FindObjectOfType<Viewmodel>() != null)
+        {
+            Destroy(FindObjectOfType<Viewmodel>().gameObject);
         }
         //FindObjectOfType<MouseLook>().SetCursorMode(false);
         FindObjectOfType<MouseLook>().SetIsInMenu(true);
