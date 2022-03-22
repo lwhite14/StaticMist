@@ -16,10 +16,15 @@ public class PlayerMovement : MonoBehaviour
     public float groundDistance = 0.4f;
     public LayerMask groundMask;
 
+    // Head Bob Variables
+    float defaultYPos = 0;
+    float timer;
+
     CharacterController controller;
     JumpCoolDownSlider jumpCoolDownSlider;
     PlayerCrouching playerCrouching;
 
+    Camera playerCamera;
     Vector3 velocity;
     Vector3 move;
     bool previousGrounded = true;
@@ -27,6 +32,8 @@ public class PlayerMovement : MonoBehaviour
     bool isDead = false;
     bool isInMenu = false;
     float speed;
+    float bobSpeed;
+    float bobAmount;
     float x = 0;
     float z = 0;
     float jumpCoolDownCounter;
@@ -40,7 +47,10 @@ public class PlayerMovement : MonoBehaviour
 
         jumpCoolDownCounter = jumpCoolDown;
         jumpCoolDownSlider.SetMaxValue(jumpCoolDown);
-        
+
+
+        playerCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
+        defaultYPos = playerCamera.transform.localPosition.y;
     }
 
     void Update()
@@ -49,6 +59,7 @@ public class PlayerMovement : MonoBehaviour
         JumpCoolDown();
         Move();
         Fall();
+        HandleHeadBob();
     }
 
     void Ground()
@@ -116,6 +127,24 @@ public class PlayerMovement : MonoBehaviour
         controller.Move(velocity * Time.deltaTime);
     }
 
+    void HandleHeadBob() 
+    {
+        if (!CheckGrounded()) 
+        {
+            return;
+        }
+
+        if (Mathf.Abs(move.x) > 0.1 || Mathf.Abs(move.z) > 0.1) 
+        {
+            timer += Time.deltaTime * bobSpeed;
+            playerCamera.transform.localPosition = new Vector3(
+                playerCamera.transform.localPosition.x,
+                defaultYPos + Mathf.Sin(timer) * bobAmount,
+                playerCamera.transform.localPosition.z
+            );
+        }
+    }
+
     public void JumpInput() 
     {
         Jump();
@@ -131,7 +160,7 @@ public class PlayerMovement : MonoBehaviour
 
     public bool CheckGrounded()
     {
-        if (groundCheck)
+        if (groundCheck != null)
         {
             return Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
         }
@@ -168,6 +197,12 @@ public class PlayerMovement : MonoBehaviour
     public void ChangeSpeed(float newSpeed) 
     {
         speed = newSpeed;
+    }
+
+    public void ChangeBob(float newBobAmount, float newBobSpeed) 
+    {
+        bobAmount = newBobAmount;
+        bobSpeed = newBobSpeed;
     }
 
     public void OnDeath(bool newIsDead) 

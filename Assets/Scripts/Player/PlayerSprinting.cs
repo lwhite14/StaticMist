@@ -5,15 +5,29 @@ using UnityEngine;
 public class PlayerSprinting : MonoBehaviour
 {
     [Header("Adjustable Variables")]
-    public float crouchingSpeed = 3f;
-    public float walkingSpeed = 5f;
-    public float runningSpeed = 10f;
-    public float normalFov = 70f;
-    public float runningFov = 80f;
-    [Range(10f, 400f)]public float fovChangeSpeed = 100f;
     public float runningMeter = 8f;
     public float fatiguedCooldown = 2f;
     public float runningMeterFillSpeed = 4f;
+
+    [Header("FOV")]
+    public float normalFov = 70f;
+    public float runningFov = 80f;
+    [Range(10f, 400f)] public float fovChangeSpeed = 100f;
+
+    [Header("Speeds")]
+    public float crouchingSpeed = 3f;
+    public float walkingSpeed = 5f;
+    public float runningSpeed = 10f;
+
+    [Header("Head Bob Amounts")]
+    public float crouchBobSpeed = 8f;
+    public float crouchBobAmount = 0.25f;
+
+    public float walkBobSpeed = 14f;
+    public float walkBobAmount = 0.5f;
+
+    public float runningBobSpeed = 18f;
+    public float runningBobAmount = 1f;
 
     RunSlider runSlider;
     Camera cam;
@@ -36,6 +50,7 @@ public class PlayerSprinting : MonoBehaviour
         footsteps = GetComponent<Footsteps>();
 
         playerMovement.ChangeSpeed(walkingSpeed);
+        playerMovement.ChangeBob(walkBobAmount, walkBobSpeed);
         runningMeterCounter = runningMeter;
         runSlider.SetMaxValue(runningMeter);
         fatiguedCooldownCounter = fatiguedCooldown;
@@ -108,6 +123,7 @@ public class PlayerSprinting : MonoBehaviour
     void ChangeSpeedToHigh() 
     {
         playerMovement.ChangeSpeed(runningSpeed);
+        playerMovement.ChangeBob(runningBobAmount, runningBobSpeed);
         ChangeFovToHigh();
         if (footsteps != null)
         {
@@ -123,10 +139,12 @@ public class PlayerSprinting : MonoBehaviour
         if (playerCrouching.GetIsCrouching())
         {
             playerMovement.ChangeSpeed(crouchingSpeed);
+            playerMovement.ChangeBob(crouchBobAmount, crouchBobSpeed);
         }
         else
         {
             playerMovement.ChangeSpeed(walkingSpeed);
+            playerMovement.ChangeBob(walkBobAmount, walkBobSpeed);
         }
         if (footsteps != null)
         {

@@ -67,7 +67,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294966911
+    m_Bits: 4294966903
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 8400000, guid: 6845078c2a2ed364eb7451ba805d3a1c, type: 2}
   m_TargetDisplay: 0
@@ -443,15 +443,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1368da087a46e04eb337a043a9fc6b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  crouchingSpeed: 2.5
-  walkingSpeed: 4
-  runningSpeed: 8
-  normalFov: 70
-  runningFov: 85
-  fovChangeSpeed: 55
   runningMeter: 6
   fatiguedCooldown: 6
   runningMeterFillSpeed: 1.25
+  normalFov: 70
+  runningFov: 85
+  fovChangeSpeed: 55
+  crouchingSpeed: 2.5
+  walkingSpeed: 4
+  runningSpeed: 8
+  crouchBobSpeed: 5
+  crouchBobAmount: 0.025
+  walkBobSpeed: 8
+  walkBobAmount: 0.05
+  runningBobSpeed: 12
+  runningBobAmount: 0.1
 --- !u!114 &4518023453328408848
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -620,7 +626,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4518023453475582072}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: GFX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -713,7 +719,7 @@ GameObject:
   - component: {fileID: 4518023454592536281}
   - component: {fileID: 4518023454592536283}
   - component: {fileID: 4518023454592536280}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Cylinder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
