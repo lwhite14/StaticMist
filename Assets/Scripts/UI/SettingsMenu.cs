@@ -137,7 +137,7 @@ public class SettingsMenu : MonoBehaviour
             {
                 if (crosshair.activeSelf == true)
                 {
-                    GameObject.Find("Crosshair").SetActive(false);
+                    crosshair.SetActive(false);
                 }
             }
         }

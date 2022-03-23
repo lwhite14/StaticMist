@@ -20,6 +20,8 @@ public class GameManager : MonoBehaviour
     public bool isLastLevel = false;
     public string levelException;
 
+    GameObject crosshair;
+
     void Awake()
     {
         if (instance == null)
@@ -41,6 +43,10 @@ public class GameManager : MonoBehaviour
         {
             EventSystem.current.SetSelectedGameObject(GameObject.Find("SettingsButton"));
         }
+        if (GameObject.Find("Crosshair") != null)
+        {
+            crosshair = GameObject.Find("Crosshair");
+        }
     }
 
     void Update()
@@ -53,7 +59,6 @@ public class GameManager : MonoBehaviour
                 Cursor.visible = true;
             }
         }
-        Debug.Log(EventSystem.current);
     }
 
     public void ExitGame()
@@ -116,6 +121,10 @@ public class GameManager : MonoBehaviour
         {
             Destroy(FindObjectOfType<Viewmodel>().gameObject);
         }
+        if (crosshair.activeSelf)
+        {
+            crosshair.SetActive(false);
+        }
         //FindObjectOfType<InventoryUI>().SetCanUse(false);
         InventoryUI.canUse = false;
     }
@@ -144,6 +153,10 @@ public class GameManager : MonoBehaviour
         FindObjectOfType<PlayerMovement>().SetIsInMenu(true);
         MusicManager.instance.SwitchToGoal();
         //FindObjectOfType<InventoryUI>().SetCanUse(false);
+        if (crosshair.activeSelf)
+        {
+            crosshair.SetActive(false);
+        }
         InventoryUI.canUse = false;
 
         SendDataToAnalytics();
