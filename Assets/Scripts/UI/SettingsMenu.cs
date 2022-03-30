@@ -92,7 +92,14 @@ public class SettingsMenu : MonoBehaviour
         settingsMenuToggle.SetActive(false);
         paused = false;
 
-        EventSystem.current.SetSelectedGameObject(null);
+        if (InventoryUI.isOn)
+        {
+            EventSystem.current.SetSelectedGameObject(GameObject.Find("ItemSpot1").transform.GetChild(0).gameObject);
+        }
+        else 
+        {
+            EventSystem.current.SetSelectedGameObject(null);
+        }
 
         if (GameManager.instance.level != 0)
         {

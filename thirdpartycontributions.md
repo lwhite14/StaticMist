@@ -13,8 +13,7 @@
 , [Baseball Bat](https://www.turbosquid.com/3d-models/bat-ball-3d-model-1482565)
 , [Bandage](https://www.turbosquid.com/3d-models/3d-items-bandage-battery-1532240)
 , [Candle](https://www.turbosquid.com/3d-models/3d-candle-1430052#)
- - Dmitriy Dryzhak, [Ghoul](https://assetstore.unity.com/packages/3d/characters/ghoul-zombie-114531)
- - Pxltiger, [Zombie](https://assetstore.unity.com/packages/3d/characters/humanoids/zombie-30232)
+ - 255 pixel studios, [Enemies](https://assetstore.unity.com/packages/3d/characters/creatures/polygon-zombie-pack-81953)
 ## Everything Else
  - PixelMush, [Pixel Font](https://assetstore.unity.com/packages/2d/fonts/pixel-font-tripfive-64734)
  - Mixamo, [Model Animations](https://www.mixamo.com/)
