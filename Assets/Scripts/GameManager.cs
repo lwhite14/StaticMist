@@ -119,7 +119,10 @@ public class GameManager : MonoBehaviour
         }
         if (FindObjectOfType<Viewmodel>() != null)
         {
-            Destroy(FindObjectOfType<Viewmodel>().gameObject);
+            if (FindObjectOfType<Viewmodel>().name == "BAT") 
+            {
+                Destroy(FindObjectOfType<Viewmodel>().gameObject);
+            }
         }
         if (crosshair.activeSelf)
         {
@@ -146,7 +149,10 @@ public class GameManager : MonoBehaviour
         }
         if (FindObjectOfType<Viewmodel>() != null)
         {
-            Destroy(FindObjectOfType<Viewmodel>().gameObject);
+            if (FindObjectOfType<Viewmodel>().name == "BAT")
+            {
+                Destroy(FindObjectOfType<Viewmodel>().gameObject);
+            }
         }
         //FindObjectOfType<MouseLook>().SetCursorMode(false);
         FindObjectOfType<MouseLook>().SetIsInMenu(true);

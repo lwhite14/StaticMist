@@ -12,8 +12,9 @@ public class InteractableMap : MonoBehaviour, IInteractable
 
     public void Interact()
     {
-        map.SetMapImage(mapImage);
-        FindObjectOfType<PlayerInventory>().Add(map);
+        Map tempMap = Instantiate(map);
+        tempMap.map = mapImage;
+        FindObjectOfType<PlayerInventory>().Add(tempMap);
         PickUpSound();
         SendDataToAnalytics();
         Destroy(gameObject);

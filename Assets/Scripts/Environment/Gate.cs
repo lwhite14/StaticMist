@@ -6,6 +6,7 @@ public class Gate : MonoBehaviour
 {
     public bool isGoal = false;
     public bool isLocked = false;
+    public string unlockCode = "";
     public GameObject squeekyDoorSound, unlockedSound;
     Animator anim;
     bool isOpen = false;
@@ -22,11 +23,21 @@ public class Gate : MonoBehaviour
         {
             if (!isLocked)
             {
-                ChangeOpenState();
+                if (isGoal)
+                {
+                    Goal();
+                }
+                else
+                {
+                    ChangeOpenState();
+                }
             }
-            else
+            else 
             {
-                CheckIfKey();
+                DialogueManager.instance.EndDialogue();
+                PopUp.StopAllPopUps();
+                StopAllCoroutines();
+                StartCoroutine(NoKeyDialgoue());
             }
         }
     }
@@ -61,36 +72,20 @@ public class Gate : MonoBehaviour
         SetCanInteract(true);
     }
 
-    void CheckIfKey()
+    public void CheckIfKey(Key key)
     {
-        bool hasKey = false;
-        PlayerInventory playerInventory = FindObjectOfType<PlayerInventory>();
-        foreach (IItem item in playerInventory.inventory.GetAllItems())
+        if (key.code == unlockCode)
         {
-            if (item is Key)
-            {
-                hasKey = true;
-                item.Use();
-                FindObjectOfType<PlayerInventory>().inventory.RemoveItem(item);
-                FindObjectOfType<PlayerInventory>().RefreshUI();
-                if (isGoal)
-                {
-                    Goal();
-                }
-                else
-                {
-                    isLocked = false;
-                    ChangeOpenState();
-                    Instantiate(unlockedSound, transform.GetChild(0).position, Quaternion.identity);
-                }
-            }
+            key.SendDataToAnalytics();
+            FindObjectOfType<PlayerInventory>().inventory.RemoveItem(key);
+            FindObjectOfType<PlayerInventory>().RefreshUI();
+            Instantiate(unlockedSound, transform.GetChild(0).position, Quaternion.identity);
+            isLocked = false;          
         }
-        if (!hasKey)
+        else 
         {
-            DialogueManager.instance.EndDialogue();
-            PopUp.StopAllPopUps();
-            StopAllCoroutines();
-            StartCoroutine(NoKeyDialgoue());
+            FindObjectOfType<CoroutineHelper>().HelperStopCoroutine();
+            FindObjectOfType<CoroutineHelper>().HelperStartExamining("THIS IS THE WRONG KEY...");
         }
     }
 

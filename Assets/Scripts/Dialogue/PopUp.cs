@@ -14,8 +14,12 @@ public class PopUp : MonoBehaviour
         {
             if (!isTriggered)
             {
+                foreach (Gate gate in FindObjectsOfType<Gate>()) 
+                {
+                    gate.StopAllCoroutines();
+                }
                 DialogueManager.instance.EndDialogue();
-                PopUp.StopAllPopUps();
+                StopAllPopUps();
                 StartCoroutine(Triggered());
             }
         }

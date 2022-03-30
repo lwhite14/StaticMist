@@ -9,6 +9,7 @@ public class MusicManager : MonoBehaviour
     public AudioClip tenseMusic;
     public AudioClip chaseMusic;
     public AudioClip goalMusic;
+    public AudioClip menuMusic;
     AudioSource audioSource;
 
     bool tenseIsPlaying = false;
@@ -29,7 +30,14 @@ public class MusicManager : MonoBehaviour
     void Start()
     {
         audioSource = GetComponent<AudioSource>();
-        SwitchToTense();
+        if (GameManager.instance.level == 0)
+        {
+            SwitchToMenu();
+        }
+        else 
+        {
+            SwitchToTense();
+        }
     }
 
     public void SwitchToTense() 
@@ -53,7 +61,7 @@ public class MusicManager : MonoBehaviour
             audioSource.loop = true;
             audioSource.Play();
         }
-        
+     
     }
 
     public void SwitchToChase()
@@ -73,6 +81,13 @@ public class MusicManager : MonoBehaviour
     {
         audioSource.clip = goalMusic;
         audioSource.loop = false;
+        audioSource.Play();
+    }
+
+    public void SwitchToMenu() 
+    {
+        audioSource.clip = menuMusic;
+        audioSource.loop = true;
         audioSource.Play();
     }
 

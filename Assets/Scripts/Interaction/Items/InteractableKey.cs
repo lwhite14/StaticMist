@@ -8,10 +8,13 @@ public class InteractableKey : MonoBehaviour, IInteractable
     public Key key;
     public GameObject pickUpSound;
     public bool isTutorial = false;
+    public string code = "";
 
     public void Interact() 
     {
-        FindObjectOfType<PlayerInventory>().Add(key);
+        Key tempKey = Instantiate(key);
+        tempKey.code = code;
+        FindObjectOfType<PlayerInventory>().Add(tempKey);
         PickUpSound();
         TutorialDialogue();
         SendDataToAnalytics();
