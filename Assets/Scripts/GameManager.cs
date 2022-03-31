@@ -59,7 +59,6 @@ public class GameManager : MonoBehaviour
                 Cursor.visible = true;
             }
         }
-        Debug.Log(Time.timeScale);
     }
 
     public void ExitGame()
