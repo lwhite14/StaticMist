@@ -153,6 +153,18 @@ public class SettingsMenu : MonoBehaviour
         EventSystem.current.SetSelectedGameObject(settingsResumeGame);
     }
 
+    public static void SetStartSettings() 
+    {
+        if (Time.timeScale == 0)
+        {
+            Time.timeScale = 1.0f;
+        }
+        if (SettingsMenu.paused == true)
+        {
+            SettingsMenu.paused = false;
+        }
+    } // Used for the beggining of scenes, when the game needs to be unpaused and time is at 1.
+
     public void SetVolume(float volume)
     {
         currentVolume = volume;
@@ -229,7 +241,7 @@ public class SettingsMenu : MonoBehaviour
 
     public void ExitGame()
     {
-        GameManager.instance.ExitGame();
+        StatePanel.instance.ReturnToMenu();
     }
 
     public void SaveSettings()

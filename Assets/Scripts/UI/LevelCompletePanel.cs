@@ -18,7 +18,7 @@ public class LevelCompletePanel : MonoBehaviour
 
     public void GameComplete()
     {
-        StatePanel.instance.FinishGame();
+        StatePanel.instance.ReturnToMenu();
         //Instantiate(endPanelGame, GameObject.Find("WinLoseConditionTarget").transform);
     }
 }

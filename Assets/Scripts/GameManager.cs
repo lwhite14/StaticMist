@@ -37,7 +37,6 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         GameInformationSetUp();
-        //GameObject.Find("Canvas").GetComponent<Canvas>().planeDistance = 0.05f;
         CursorMode();
         if (level == 0) 
         {
@@ -47,6 +46,7 @@ public class GameManager : MonoBehaviour
         {
             crosshair = GameObject.Find("Crosshair");
         }
+        SettingsMenu.SetStartSettings();
     }
 
     void Update()
@@ -59,6 +59,7 @@ public class GameManager : MonoBehaviour
                 Cursor.visible = true;
             }
         }
+        Debug.Log(Time.timeScale);
     }
 
     public void ExitGame()
