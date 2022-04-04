@@ -10,7 +10,7 @@ public class LightFlicker : MonoBehaviour
     public Material offMat;
     public int illuminatedMaterialIndex;
     public float flickerTime;
-    Light pointLight;
+    public Light pointLight;
 
     void Start()
     {
@@ -42,6 +42,15 @@ public class LightFlicker : MonoBehaviour
         pointLight.enabled = false;
         yield return new WaitForSeconds(flickerTime);
         yield return StartCoroutine(FlickerOn());
+    }
+
+    public void StopFlicker() 
+    {
+        StopAllCoroutines();
+        Material[] materials = lightMesh.materials;
+        materials[illuminatedMaterialIndex] = onMat;
+        lightMesh.materials = materials;
+        pointLight.enabled = true;
     }
 
 }

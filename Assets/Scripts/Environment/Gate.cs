@@ -79,6 +79,7 @@ public class Gate : MonoBehaviour
             key.SendDataToAnalytics();
             FindObjectOfType<PlayerInventory>().inventory.RemoveItem(key);
             FindObjectOfType<PlayerInventory>().RefreshUI();
+            FindObjectOfType<InventoryUI>().SetViewedItem(null);
             Instantiate(unlockedSound, transform.GetChild(0).position, Quaternion.identity);
             isLocked = false;          
         }

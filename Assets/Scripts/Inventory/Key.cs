@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Services.Analytics;
@@ -28,10 +29,11 @@ public class Key : MonoBehaviour, IItem
             {
                 hitObject.GetComponent<IKeyInteractable>().KeyUse(this);
             }
-            catch
+            catch (Exception ex)
             {
                 FindObjectOfType<CoroutineHelper>().HelperStopCoroutine();
                 FindObjectOfType<CoroutineHelper>().HelperStartExamining("THERE IS NO DOOR FOR ME TO UNLOCK...");
+                Debug.Log(ex);
             }
         }
         else 
