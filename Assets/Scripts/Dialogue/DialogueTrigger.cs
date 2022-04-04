@@ -25,4 +25,26 @@ public class DialogueTrigger : MonoBehaviour
         isTriggered = newIsTriggered;
     }
     // Changes the isTriggered value, useful if the player wants to skip the current line. 
+
+    public void StartPopUp() 
+    {
+        StartCoroutine(PopUp());
+    }
+
+    IEnumerator PopUp() 
+    {
+        TriggerDialogue();
+        yield return new WaitForSeconds(7.5f);
+        TriggerNextSentence();
+        yield return null;
+    }
+
+    public static void StopAllDialogue() 
+    {
+        foreach (DialogueTrigger trigger in FindObjectsOfType<DialogueTrigger>()) 
+        {
+            trigger.StopAllCoroutines();
+        }
+        DialogueManager.instance.EndDialogue();
+    }
 }

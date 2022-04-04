@@ -8,7 +8,7 @@ using UnityEngine.UI;
 public class Key : MonoBehaviour, IItem
 {
     string displayName = "KEY";
-    string description = "I CAN USE THIS TO OPEN A GATE. ";
+    string description = "I CAN USE THIS TO OPEN A SOMETHING UP. ";
     bool canUse = true;
     bool canEquip = false;
 

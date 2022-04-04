@@ -129,6 +129,7 @@ public class GameManager : MonoBehaviour
             crosshair.SetActive(false);
         }
         //FindObjectOfType<InventoryUI>().SetCanUse(false);
+        DialogueTrigger.StopAllDialogue();
         InventoryUI.canUse = false;
     }
 
@@ -163,6 +164,7 @@ public class GameManager : MonoBehaviour
         {
             crosshair.SetActive(false);
         }
+        DialogueTrigger.StopAllDialogue();
         InventoryUI.canUse = false;
 
         SendDataToAnalytics();

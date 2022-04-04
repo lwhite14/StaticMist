@@ -14,34 +14,18 @@ public class PopUp : MonoBehaviour
         {
             if (!isTriggered)
             {
-                foreach (Gate gate in FindObjectsOfType<Gate>()) 
-                {
-                    gate.StopAllCoroutines();
-                }
-                DialogueManager.instance.EndDialogue();
-                StopAllPopUps();
-                StartCoroutine(Triggered());
+                DialogueTrigger.StopAllDialogue();
+                Triggered();
             }
         }
     }
 
-    IEnumerator Triggered()
+    void Triggered()
     {
         if (showOnce)
         {
             isTriggered = true;
         }
-        GetComponent<DialogueTrigger>().TriggerDialogue();
-        yield return new WaitForSeconds(onScreenTime);
-        GetComponent<DialogueTrigger>().TriggerNextSentence();
-        yield return null;        
-    }
-
-    public static void StopAllPopUps() 
-    {
-        foreach (PopUp popUp in FindObjectsOfType<PopUp>())
-        {
-            popUp.StopAllCoroutines();
-        }
+        GetComponent<DialogueTrigger>().StartPopUp();
     }
 }

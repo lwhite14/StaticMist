@@ -25,10 +25,8 @@ public class ElectricalBox : MonoBehaviour
             }
             else
             {
-                DialogueManager.instance.EndDialogue();
-                PopUp.StopAllPopUps();
-                StopAllCoroutines();
-                StartCoroutine(NoKeyDialgoue());
+                DialogueTrigger.StopAllDialogue();
+                GetComponent<DialogueTrigger>().StartPopUp();
             }
         }
     }
@@ -66,14 +64,6 @@ public class ElectricalBox : MonoBehaviour
     {
         gate.isLocked = false;
         Instantiate(powerUpSound, transform.GetChild(0).position, Quaternion.identity);
-    }
-
-    IEnumerator NoKeyDialgoue()
-    {
-        GetComponent<DialogueTrigger>().TriggerDialogue();
-        yield return new WaitForSeconds(5.0f);
-        GetComponent<DialogueTrigger>().TriggerNextSentence();
-        yield return null;
     }
 
 }

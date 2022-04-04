@@ -30,20 +30,9 @@ public class InteractableKey : MonoBehaviour, IInteractable
     {
         if (isTutorial)
         {
-            DialogueManager.instance.EndDialogue();
-            PopUp.StopAllPopUps();
-            StopAllCoroutines();
-            StartCoroutine(TutorialKey());
+            DialogueTrigger.StopAllDialogue();
+            GetComponent<DialogueTrigger>().StartPopUp();
         }
-    }
-
-    IEnumerator TutorialKey()
-    {
-
-        GetComponent<DialogueTrigger>().TriggerDialogue();
-        yield return new WaitForSeconds(5.0f);
-        GetComponent<DialogueTrigger>().TriggerNextSentence();
-        yield return null; 
     }
 
     void SendDataToAnalytics() 

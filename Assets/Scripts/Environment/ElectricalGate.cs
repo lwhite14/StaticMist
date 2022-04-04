@@ -14,23 +14,13 @@ public class ElectricalGate : MonoBehaviour, IInteractable
         }
         else 
         {
-            DialogueManager.instance.EndDialogue();
-            PopUp.StopAllPopUps();
-            StopAllCoroutines();
-            StartCoroutine(LockedDialogue());
+            DialogueTrigger.StopAllDialogue();
+            GetComponent<DialogueTrigger>().StartPopUp();
         }
     }
 
     void Goal()
     {
         GameManager.instance.Goal();
-    }
-
-    IEnumerator LockedDialogue()
-    {
-        GetComponent<DialogueTrigger>().TriggerDialogue();
-        yield return new WaitForSeconds(5.0f);
-        GetComponent<DialogueTrigger>().TriggerNextSentence();
-        yield return null;
     }
 }

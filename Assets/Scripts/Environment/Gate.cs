@@ -34,10 +34,8 @@ public class Gate : MonoBehaviour
             }
             else 
             {
-                DialogueManager.instance.EndDialogue();
-                PopUp.StopAllPopUps();
-                StopAllCoroutines();
-                StartCoroutine(NoKeyDialgoue());
+                DialogueTrigger.StopAllDialogue();
+                GetComponent<DialogueTrigger>().StartPopUp();
             }
         }
     }
@@ -93,13 +91,5 @@ public class Gate : MonoBehaviour
     void Goal()
     {
         GameManager.instance.Goal();
-    }
-
-    IEnumerator NoKeyDialgoue() 
-    {
-        GetComponent<DialogueTrigger>().TriggerDialogue();
-        yield return new WaitForSeconds(5.0f);
-        GetComponent<DialogueTrigger>().TriggerNextSentence();
-        yield return null;
     }
 }
