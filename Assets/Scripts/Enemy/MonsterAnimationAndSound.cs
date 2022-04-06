@@ -20,8 +20,7 @@ public class MonsterAnimationAndSound : MonoBehaviour
     {
         anim = GetComponentInChildren<Animator>();
         audioSource = GetComponent<AudioSource>();
-        audioSource.clip = passiveSound;
-        RandomisePassiveSound();
+        SwitchToPassiveRandom();
     }
 
     public void SetSpeed(float newSpeed) 
@@ -39,28 +38,31 @@ public class MonsterAnimationAndSound : MonoBehaviour
         anim.Play("Death");
     }
 
-    void RandomisePassiveSound() 
+    void SwitchToPassiveRandom() 
     {
-        System.Random random = new System.Random();
-        double randomDouble = random.NextDouble() * (double)audioSource.clip.length;
-        audioSource.time = (float)randomDouble;
+        float randomTime = Random.Range(0.0f, 5.0f);
+        audioSource.clip = passiveSound;
+        audioSource.time = randomTime;
         audioSource.Play();
     }
 
     public void SwitchToPassive() 
     {
+        audioSource.time = 0.0f;
         audioSource.clip = passiveSound;
         audioSource.Play();
     }
 
     public void SwitchToChase()
     {
+        audioSource.time = 0.0f;
         audioSource.clip = chaseSound;
         audioSource.Play();
     }
 
     public void SwitchToDeath() 
     {
+        audioSource.time = 0.0f;
         audioSource.clip = deathSound;
         audioSource.Play();
         audioSource.loop = false;
