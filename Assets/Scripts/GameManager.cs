@@ -53,10 +53,15 @@ public class GameManager : MonoBehaviour
     {
         if (Debug.isDebugBuild)
         {
-            if (Input.GetKeyDown(KeyCode.F1))
+            if (Input.GetKeyDown(KeyCode.F1) && Cursor.lockState == CursorLockMode.Locked)
             {
                 Cursor.lockState = CursorLockMode.None;
                 Cursor.visible = true;
+            }
+            else if (Input.GetKeyDown(KeyCode.F1) && Cursor.lockState == CursorLockMode.None)
+            {
+                Cursor.lockState = CursorLockMode.Locked;
+                Cursor.visible = false;
             }
         }
     }
