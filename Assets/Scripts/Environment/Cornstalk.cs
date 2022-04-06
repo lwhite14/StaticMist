@@ -8,9 +8,9 @@ public class Cornstalk : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Player") 
-        {
+        if (other.tag == "Player" || other.tag == "Monster") 
+        {            
             Instantiate(leafRustleSound, transform.position, Quaternion.identity);
-        }
+        }        
     }
 }
