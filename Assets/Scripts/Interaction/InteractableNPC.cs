@@ -4,17 +4,18 @@ using UnityEngine;
 
 public class InteractableNPC : MonoBehaviour, IInteractable
 {
+    public DialogueTrigger dialogueTrigger;
+
     public void Interact()
     {
-        DialogueTrigger tempDialogueTrigger;
-        tempDialogueTrigger = GetComponent<DialogueTrigger>();
-        if (!tempDialogueTrigger.isTriggered)
+        if (!dialogueTrigger.GetIsTriggered())
         {
-            tempDialogueTrigger.TriggerDialogue();
+            DialogueTrigger.StopAllDialogue();
+            dialogueTrigger.TriggerDialogue();
         }
         else 
         {
-            tempDialogueTrigger.TriggerNextSentence();
+            dialogueTrigger.TriggerNextSentence();
         }
     }
     // Gets the dialogue trigger on this object and runs the dialogue if it hasn't been ran already.

@@ -170,7 +170,6 @@ GameObject:
   - component: {fileID: 1438303209952384910}
   - component: {fileID: 1438303209952384911}
   - component: {fileID: 1438303209952384896}
-  - component: {fileID: 1438303209952384897}
   m_Layer: 0
   m_Name: NPC1
   m_TagString: NPC
@@ -204,8 +203,8 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.3
-  m_Height: 1.6
+  m_Radius: 0.4
+  m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0.8, z: 0}
 --- !u!95 &1438303209952384910
@@ -242,7 +241,6 @@ MonoBehaviour:
   dialogue:
     name: 
     sentences: []
-  isTriggered: 0
 --- !u!114 &1438303209952384896
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -255,24 +253,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e61db3e11890544bbf2a3d4f349abad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1438303209952384897
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1438303209952384898}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a8adebf569f0f3a4689dec9b802e0f33, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  nextTarget: {fileID: 0}
-  waypoint: {fileID: 0}
-  imageAnim: {fileID: 0}
-  dialogueEnd:
-    m_PersistentCalls:
-      m_Calls: []
+  dialogueTrigger: {fileID: 1438303209952384911}
 --- !u!1 &1493202193292662967
 GameObject:
   m_ObjectHideFlags: 0
