@@ -11,6 +11,7 @@ public class InteractableNPC : MonoBehaviour, IInteractable
         if (!dialogueTrigger.GetIsTriggered())
         {
             DialogueTrigger.StopAllDialogue();
+            DialogueManager.instance.isTalkingNPC = true;
             dialogueTrigger.TriggerDialogue();
         }
         else 
