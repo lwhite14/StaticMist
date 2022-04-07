@@ -10,7 +10,7 @@ public class Cornstalk : MonoBehaviour
     {
         if (other.tag == "Player" || other.tag == "Monster") 
         {            
-            Instantiate(leafRustleSound, transform.position, Quaternion.identity);
+            Instantiate(leafRustleSound, transform);
         }        
     }
 }
