@@ -81,6 +81,7 @@ public class Candle : MonoBehaviour, IItem
     {
         if (GameObject.Find("NeedLightBlocker") != null)
         {
+            DialogueTrigger.StopAllDialogue();
             GameObject.Find("NeedLightBlocker").transform.GetChild(0).gameObject.SetActive(false);
         }
     }
