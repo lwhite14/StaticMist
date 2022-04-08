@@ -7,13 +7,21 @@ public class InteractableBat : MonoBehaviour, IInteractable
 {
     public Bat bat;
     public GameObject pickUpSound;
+    public DialogueTrigger tooManyItemsTrigger;
 
     public void Interact()
     {
-        FindObjectOfType<PlayerInventory>().Add(bat);
-        PickUpSound();
-        SendDataToAnalytics();
-        Destroy(gameObject);
+        FindObjectOfType<PlayerInventory>().Add(bat, out bool success);
+        if (success)
+        {
+            PickUpSound();
+            SendDataToAnalytics();
+            Destroy(gameObject);
+        }
+        else 
+        {
+            tooManyItemsTrigger.StartPopUp();
+        }
     }
 
     void PickUpSound()

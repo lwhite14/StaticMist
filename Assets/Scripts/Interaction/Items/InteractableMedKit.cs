@@ -7,13 +7,21 @@ public class InteractableMedKit : MonoBehaviour, IInteractable
 {
     public MedKit item;
     public GameObject pickUpSound;
+    public DialogueTrigger tooManyItemsTrigger;
 
     public void Interact() 
     {
-        FindObjectOfType<PlayerInventory>().Add(item);
-        PickUpSound();
-        SendDataToAnalytics();
-        Destroy(gameObject);
+        FindObjectOfType<PlayerInventory>().Add(item, out bool success);
+        if (success)
+        {
+            PickUpSound();
+            SendDataToAnalytics();
+            Destroy(gameObject);
+        }
+        else
+        {
+            tooManyItemsTrigger.StartPopUp();
+        }
     }
 
     void PickUpSound()

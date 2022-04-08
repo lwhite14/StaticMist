@@ -94,6 +94,7 @@ GameObject:
   - component: {fileID: 6822305746993189161}
   - component: {fileID: 6822305746993189163}
   - component: {fileID: 1697617109848800950}
+  - component: {fileID: -6254679055008171687}
   m_Layer: 0
   m_Name: BatWorld
   m_TagString: Untagged
@@ -143,6 +144,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bat: {fileID: 770023340996305534, guid: 4084a38076c1d70419ee6cb1558bed62, type: 3}
   pickUpSound: {fileID: 3696260262505083792, guid: 43e1bb3447d4b3a4bb28a965178189ab, type: 3}
+  tooManyItemsTrigger: {fileID: -6254679055008171687}
 --- !u!95 &1697617109848800950
 Animator:
   serializedVersion: 3
@@ -162,6 +164,22 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &-6254679055008171687
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6822305746993189160}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 023c49512b0b38b44bd3481900fccdd4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogue:
+    name: ME
+    sentences:
+    - I'VE GOT TOO MANY ITEMS ALREADY...
 --- !u!1 &7667424695988651095
 GameObject:
   m_ObjectHideFlags: 0

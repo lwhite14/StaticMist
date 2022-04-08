@@ -43,6 +43,7 @@ GameObject:
   - component: {fileID: 3249968736686671714}
   - component: {fileID: 3249968736686671713}
   - component: {fileID: 7221700616402151677}
+  - component: {fileID: 3295176571152449183}
   m_Layer: 0
   m_Name: FlashlightWorld
   m_TagString: Untagged
@@ -92,6 +93,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   flashlight: {fileID: 2706562674610509715, guid: a1f1e1dd3910deb4db466721eb43f115, type: 3}
   pickUpSound: {fileID: 3696260262505083792, guid: 43e1bb3447d4b3a4bb28a965178189ab, type: 3}
+  tooManyItemsTrigger: {fileID: 3295176571152449183}
 --- !u!95 &7221700616402151677
 Animator:
   serializedVersion: 3
@@ -111,6 +113,22 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &3295176571152449183
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3249968736686671715}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 023c49512b0b38b44bd3481900fccdd4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogue:
+    name: ME
+    sentences:
+    - I'VE GOT TOO MANY ITEMS ALREADY...
 --- !u!1 &3337304558488542714
 GameObject:
   m_ObjectHideFlags: 0

@@ -93,8 +93,9 @@ GameObject:
   - component: {fileID: 5742628397062915891}
   - component: {fileID: 5742628397062915894}
   - component: {fileID: 8833696784190471731}
-  - component: {fileID: 3716469411733498267}
   - component: {fileID: 473860047819679913}
+  - component: {fileID: 3716469411733498267}
+  - component: {fileID: 2844093346515716495}
   m_Layer: 0
   m_Name: ElectricalKetWorld
   m_TagString: Untagged
@@ -146,24 +147,8 @@ MonoBehaviour:
   pickUpSound: {fileID: 3696260262505083792, guid: 43e1bb3447d4b3a4bb28a965178189ab, type: 3}
   isTutorial: 0
   code: 
---- !u!114 &3716469411733498267
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5742628397062915895}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 023c49512b0b38b44bd3481900fccdd4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dialogue:
-    name: ME
-    sentences:
-    - I CAN USE THIS ON THE GATE OVER THERE WITH THE GREEN LIGHT... THEN MAYBE I
-      CAN GET AWAY FROM THIS PLACE...
-  isTriggered: 0
+  tutorialTrigger: {fileID: 3716469411733498267}
+  tooManyItemsTrigger: {fileID: 2844093346515716495}
 --- !u!95 &473860047819679913
 Animator:
   serializedVersion: 3
@@ -183,6 +168,39 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &3716469411733498267
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5742628397062915895}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 023c49512b0b38b44bd3481900fccdd4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogue:
+    name: ME
+    sentences:
+    - I CAN USE THIS ON THE GATE OVER THERE WITH THE GREEN LIGHT... THEN MAYBE I
+      CAN GET AWAY FROM THIS PLACE...
+--- !u!114 &2844093346515716495
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5742628397062915895}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 023c49512b0b38b44bd3481900fccdd4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogue:
+    name: ME
+    sentences:
+    - I'VE GOT TOO MANY ITEMS ALREADY...
 --- !u!1 &8895861421252088392
 GameObject:
   m_ObjectHideFlags: 0

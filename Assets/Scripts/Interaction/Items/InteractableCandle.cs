@@ -7,13 +7,21 @@ public class InteractableCandle : MonoBehaviour, IInteractable
 {
     public Candle candle;
     public GameObject pickUpSound;
+    public DialogueTrigger tooManyItemsTrigger;
 
     public void Interact()
     {
-        FindObjectOfType<PlayerInventory>().Add(candle);
-        PickUpSound();
-        SendDataToAnalytics();
-        Destroy(gameObject);
+        FindObjectOfType<PlayerInventory>().Add(candle, out bool success);
+        if (success)
+        {
+            PickUpSound();
+            SendDataToAnalytics();
+            Destroy(gameObject);
+        }
+        else
+        {
+            tooManyItemsTrigger.StartPopUp();
+        }
     }
 
     void PickUpSound()

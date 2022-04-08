@@ -6,9 +6,9 @@ public class PlayerInventory : MonoBehaviour
 {
     public Inventory inventory = new Inventory();
 
-    public void Add(IItem newItem)
+    public void Add(IItem newItem, out bool success)
     {
-        inventory.AddItem(newItem);
+        inventory.AddItem(newItem, out success);
         RefreshUI();
     }
 

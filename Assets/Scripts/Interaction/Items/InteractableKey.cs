@@ -8,17 +8,26 @@ public class InteractableKey : MonoBehaviour, IInteractable
     public Key key;
     public GameObject pickUpSound;
     public bool isTutorial = false;
-    public string code = "";
+    public string code = ""; 
+    public DialogueTrigger tutorialTrigger;
+    public DialogueTrigger tooManyItemsTrigger;
 
     public void Interact() 
     {
         Key tempKey = Instantiate(key);
         tempKey.code = code;
-        FindObjectOfType<PlayerInventory>().Add(tempKey);
-        PickUpSound();
-        TutorialDialogue();
-        SendDataToAnalytics();
-        Destroy(gameObject);
+        FindObjectOfType<PlayerInventory>().Add(tempKey, out bool success);
+        if (success)
+        {
+            PickUpSound();
+            TutorialDialogue();
+            SendDataToAnalytics();
+            Destroy(gameObject);
+        }
+        else
+        {
+            tooManyItemsTrigger.StartPopUp();
+        }
     }
 
     void PickUpSound() 
