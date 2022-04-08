@@ -59,10 +59,23 @@ public class Interact : MonoBehaviour
             {
                 crossHairAnimator.SetBool("isOpen", true);
             }
+            else 
+            {
+                IsNotAimingAtInteractable();
+            }
         }
         else 
         {
-            crossHairAnimator.SetBool("isOpen", false);
+            IsNotAimingAtInteractable();
         }
     }
+
+    void IsNotAimingAtInteractable() 
+    {
+        crossHairAnimator.SetBool("isOpen", false);
+        if (DialogueManager.instance.isTalkingNPC)
+        {
+            DialogueManager.instance.EndDialogue();
+        }
+    } // Executed when the player aims off an interactable object.
 }

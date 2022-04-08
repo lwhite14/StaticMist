@@ -19,6 +19,7 @@ public class Bat : MonoBehaviour, IItem
 
     public void Examine()
     {
+        FindObjectOfType<CoroutineHelper>().HelperStopCoroutine();
         FindObjectOfType<CoroutineHelper>().HelperStartExamining(description);
     }
 

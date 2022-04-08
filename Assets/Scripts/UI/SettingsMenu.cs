@@ -92,7 +92,14 @@ public class SettingsMenu : MonoBehaviour
         settingsMenuToggle.SetActive(false);
         paused = false;
 
-        EventSystem.current.SetSelectedGameObject(null);
+        if (InventoryUI.isOn)
+        {
+            EventSystem.current.SetSelectedGameObject(GameObject.Find("ItemSpot1").transform.GetChild(0).gameObject);
+        }
+        else 
+        {
+            EventSystem.current.SetSelectedGameObject(null);
+        }
 
         if (GameManager.instance.level != 0)
         {
@@ -137,7 +144,7 @@ public class SettingsMenu : MonoBehaviour
             {
                 if (crosshair.activeSelf == true)
                 {
-                    GameObject.Find("Crosshair").SetActive(false);
+                    crosshair.SetActive(false);
                 }
             }
         }
@@ -145,6 +152,18 @@ public class SettingsMenu : MonoBehaviour
         EventSystem.current.SetSelectedGameObject(null);
         EventSystem.current.SetSelectedGameObject(settingsResumeGame);
     }
+
+    public static void SetStartSettings() 
+    {
+        if (Time.timeScale == 0)
+        {
+            Time.timeScale = 1.0f;
+        }
+        if (SettingsMenu.paused == true)
+        {
+            SettingsMenu.paused = false;
+        }
+    } // Used for the beggining of scenes, when the game needs to be unpaused and time is at 1.
 
     public void SetVolume(float volume)
     {
@@ -222,7 +241,7 @@ public class SettingsMenu : MonoBehaviour
 
     public void ExitGame()
     {
-        GameManager.instance.ExitGame();
+        StatePanel.instance.ReturnToMenu();
     }
 
     public void SaveSettings()

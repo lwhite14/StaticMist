@@ -7,13 +7,21 @@ public class InteractableBandage : MonoBehaviour, IInteractable
 {
     public Bandage bandage;
     public GameObject pickUpSound;
+    public DialogueTrigger tooManyItemsTrigger;
 
     public void Interact()
     {
-        FindObjectOfType<PlayerInventory>().Add(bandage);
-        PickUpSound();
-        SendDataToAnalytics();
-        Destroy(gameObject);
+        FindObjectOfType<PlayerInventory>().Add(bandage, out bool success);
+        if (success)
+        {
+            PickUpSound();
+            SendDataToAnalytics();
+            Destroy(gameObject);
+        }
+        else
+        {
+            tooManyItemsTrigger.StartPopUp();
+        }
     }
 
     void PickUpSound()

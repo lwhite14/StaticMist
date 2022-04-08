@@ -125,6 +125,7 @@ GameObject:
   - component: {fileID: 7278136001403289136}
   - component: {fileID: 1125518574302246866}
   - component: {fileID: 3180584824277881263}
+  - component: {fileID: 8182502467734004703}
   m_Layer: 0
   m_Name: BandageWorld
   m_TagString: Untagged
@@ -174,6 +175,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bandage: {fileID: 6333170538139183130, guid: b4bccfd08278c4b449ab81b5b5535213, type: 3}
   pickUpSound: {fileID: 3696260262505083792, guid: 43e1bb3447d4b3a4bb28a965178189ab, type: 3}
+  tooManyItemsTrigger: {fileID: 8182502467734004703}
 --- !u!95 &3180584824277881263
 Animator:
   serializedVersion: 3
@@ -193,3 +195,19 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &8182502467734004703
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7278136001403289137}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 023c49512b0b38b44bd3481900fccdd4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogue:
+    name: ME
+    sentences:
+    - I'VE GOT TOO MANY ITEMS ALREADY...

@@ -270,6 +270,7 @@ public class MonsterPathfinding : MonoBehaviour
         navMeshAgent.destination = player.position;
         MusicManager.instance.SwitchToChase();
         monsterAnimationSound.SwitchToChase();
+        NPC.PlayerChased();
         isChasing = true;
 
         while (true)
@@ -311,6 +312,7 @@ public class MonsterPathfinding : MonoBehaviour
         }
 
         MusicManager.instance.SwitchToTense();
+        NPC.PlayerEscaped();
         yield return StartCoroutine(ReturnToPatrol());
     }
 

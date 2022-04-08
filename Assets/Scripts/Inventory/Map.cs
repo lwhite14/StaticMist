@@ -11,7 +11,7 @@ public class Map : MonoBehaviour, IItem
     bool canUse = true;
     bool canEquip = false;
 
-    Sprite map;
+    public Sprite map;
 
     public void Use()
     {
@@ -22,6 +22,7 @@ public class Map : MonoBehaviour, IItem
 
     public void Examine()
     {
+        FindObjectOfType<CoroutineHelper>().HelperStopCoroutine();
         FindObjectOfType<CoroutineHelper>().HelperStartExamining(description);
     }
 
@@ -50,11 +51,6 @@ public class Map : MonoBehaviour, IItem
     public string GetDescription()
     {
         return description;
-    }
-
-    public void SetMapImage(Sprite newMap) 
-    {
-        map = newMap;
     }
 
     void SendDataToAnalytics()

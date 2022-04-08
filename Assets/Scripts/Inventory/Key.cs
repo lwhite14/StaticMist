@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Services.Analytics;
@@ -7,18 +8,45 @@ using UnityEngine.UI;
 public class Key : MonoBehaviour, IItem
 {
     string displayName = "KEY";
-    string description = "THIS SHOULD OPEN THE GATE TO GET AWAY FROM THIS PLACE...";
-    bool canUse = false;
+    string description = "I CAN USE THIS TO OPEN SOMETHING UP. ";
+    bool canUse = true;
     bool canEquip = false;
+
+    public float rayRange = 4f;
+    public string code;
 
     public void Use()
     {
-        SendDataToAnalytics();
+        RaycastHit hitInfo = new RaycastHit();
+
+        Vector3 fwd = GameObject.Find("Main Camera").GetComponent<Camera>().transform.TransformDirection(Vector3.forward);
+        bool hit = Physics.Raycast(GameObject.Find("Main Camera").GetComponent<Camera>().transform.position, fwd, out hitInfo, rayRange);
+
+        if (hit)
+        {
+            GameObject hitObject = hitInfo.transform.gameObject;
+            try
+            {
+                hitObject.GetComponent<IKeyInteractable>().KeyUse(this);
+            }
+            catch (Exception ex)
+            {
+                FindObjectOfType<CoroutineHelper>().HelperStopCoroutine();
+                FindObjectOfType<CoroutineHelper>().HelperStartExamining("THERE IS NO DOOR FOR ME TO UNLOCK...");
+                Debug.Log(ex);
+            }
+        }
+        else 
+        {
+            FindObjectOfType<CoroutineHelper>().HelperStopCoroutine();
+            FindObjectOfType<CoroutineHelper>().HelperStartExamining("THERE IS NO DOOR FOR ME TO UNLOCK...");
+        }
     }
 
     public void Examine()
     {
-        FindObjectOfType<CoroutineHelper>().HelperStartExamining(description);
+        FindObjectOfType<CoroutineHelper>().HelperStopCoroutine();
+        FindObjectOfType<CoroutineHelper>().HelperStartExamining(description + "THE KEY IS ENGRAVED WITH '" + code + "'...");
     }
 
     public void Equip() { }
@@ -48,7 +76,7 @@ public class Key : MonoBehaviour, IItem
         return description;
     }
 
-    void SendDataToAnalytics() 
+    public void SendDataToAnalytics() 
     {
         if (InitServices.isRecording)
         {

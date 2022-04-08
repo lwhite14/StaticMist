@@ -125,6 +125,7 @@ GameObject:
   - component: {fileID: 8747757689415067173}
   - component: {fileID: 8747757689415067179}
   - component: {fileID: 3478133988492429754}
+  - component: {fileID: -3138699696813327005}
   m_Layer: 0
   m_Name: MedKitWorld
   m_TagString: Untagged
@@ -174,6 +175,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   item: {fileID: 5334581182459917551, guid: 9670efc133dc7114eb56aed48b1113d7, type: 3}
   pickUpSound: {fileID: 3696260262505083792, guid: 43e1bb3447d4b3a4bb28a965178189ab, type: 3}
+  tooManyItemsTrigger: {fileID: -3138699696813327005}
 --- !u!95 &3478133988492429754
 Animator:
   serializedVersion: 3
@@ -193,3 +195,19 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &-3138699696813327005
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8747757689415067172}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 023c49512b0b38b44bd3481900fccdd4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogue:
+    name: ME
+    sentences:
+    - I'VE GOT TOO MANY ITEMS ALREADY...

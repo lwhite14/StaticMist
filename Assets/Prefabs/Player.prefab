@@ -67,7 +67,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294966911
+    m_Bits: 4294966391
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 8400000, guid: 6845078c2a2ed364eb7451ba805d3a1c, type: 2}
   m_TargetDisplay: 0
@@ -196,7 +196,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 640
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -443,15 +443,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1368da087a46e04eb337a043a9fc6b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  crouchingSpeed: 2.5
-  walkingSpeed: 4
-  runningSpeed: 8
-  normalFov: 70
-  runningFov: 85
-  fovChangeSpeed: 55
   runningMeter: 6
   fatiguedCooldown: 6
   runningMeterFillSpeed: 1.25
+  normalFov: 70
+  runningFov: 85
+  fovChangeSpeed: 55
+  crouchingSpeed: 2.5
+  walkingSpeed: 4
+  runningSpeed: 8
+  crouchBobSpeed: 5
+  crouchBobAmount: 0.025
+  walkBobSpeed: 8
+  walkBobAmount: 0.05
+  runningBobSpeed: 12
+  runningBobAmount: 0.1
 --- !u!114 &4518023453328408848
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -503,30 +509,6 @@ MonoBehaviour:
   onDeath:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4518023453328408847}
-        m_TargetAssemblyTypeName: PlayerMovement, Assembly-CSharp
-        m_MethodName: OnDeath
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-      - m_Target: {fileID: 4518023452643912054}
-        m_TargetAssemblyTypeName: MouseLook, Assembly-CSharp
-        m_MethodName: OnDeath
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
       - m_Target: {fileID: 4518023453328408846}
         m_TargetAssemblyTypeName: Health, Assembly-CSharp
         m_MethodName: DeathSound
@@ -620,7 +602,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4518023453475582072}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: GFX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -713,7 +695,7 @@ GameObject:
   - component: {fileID: 4518023454592536281}
   - component: {fileID: 4518023454592536283}
   - component: {fileID: 4518023454592536280}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Cylinder
   m_TagString: Untagged
   m_Icon: {fileID: 0}

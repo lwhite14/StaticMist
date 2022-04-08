@@ -8,14 +8,26 @@ public class InteractableKey : MonoBehaviour, IInteractable
     public Key key;
     public GameObject pickUpSound;
     public bool isTutorial = false;
+    public string code = ""; 
+    public DialogueTrigger tutorialTrigger;
+    public DialogueTrigger tooManyItemsTrigger;
 
     public void Interact() 
     {
-        FindObjectOfType<PlayerInventory>().Add(key);
-        PickUpSound();
-        TutorialDialogue();
-        SendDataToAnalytics();
-        Destroy(gameObject);
+        Key tempKey = Instantiate(key);
+        tempKey.code = code;
+        FindObjectOfType<PlayerInventory>().Add(tempKey, out bool success);
+        if (success)
+        {
+            PickUpSound();
+            TutorialDialogue();
+            SendDataToAnalytics();
+            Destroy(gameObject);
+        }
+        else
+        {
+            tooManyItemsTrigger.StartPopUp();
+        }
     }
 
     void PickUpSound() 
@@ -27,20 +39,9 @@ public class InteractableKey : MonoBehaviour, IInteractable
     {
         if (isTutorial)
         {
-            DialogueManager.instance.EndDialogue();
-            PopUp.StopAllPopUps();
-            StopAllCoroutines();
-            StartCoroutine(TutorialKey());
+            DialogueTrigger.StopAllDialogue();
+            GetComponent<DialogueTrigger>().StartPopUp();
         }
-    }
-
-    IEnumerator TutorialKey()
-    {
-
-        GetComponent<DialogueTrigger>().TriggerDialogue();
-        yield return new WaitForSeconds(5.0f);
-        GetComponent<DialogueTrigger>().TriggerNextSentence();
-        yield return null; 
     }
 
     void SendDataToAnalytics() 

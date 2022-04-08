@@ -28,9 +28,9 @@ public class StatePanel : MonoBehaviour
         animator.Play("NextLevel");
     }
 
-    public void FinishGame()
+    public void ReturnToMenu()
     {
-        animator.Play("FinishGame");
+        animator.Play("ReturnToMenu");
     }
 
     public void RestartLevel()
@@ -43,7 +43,7 @@ public class StatePanel : MonoBehaviour
         GameManager.instance.NextLevel();
     } // Function animator triggers.
 
-    public void ManagerFinishGame() 
+    public void ManagerReturnToMenu() 
     {
         GameManager.instance.ReturnToMenu();
     } // Function animator triggers.

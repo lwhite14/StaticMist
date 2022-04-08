@@ -10,6 +10,7 @@ public class RunSlider : MonoBehaviour
     public Animator anim;
 
     public float cooldown = 4f;
+    bool canChange = true;
 
     public void SetMaxValue(float value)
     {
@@ -27,13 +28,25 @@ public class RunSlider : MonoBehaviour
 
     public void ChangeValue(float value)
     {
-        slider.value = value;
-        SetIsAppeared(true);
-        if (value >= slider.maxValue)
+        if (canChange)
         {
-            SetIsAppeared(false);
+            slider.value = value;
+            SetIsAppeared(true);
+            if (value >= slider.maxValue)
+            {
+                SetIsAppeared(false);
+            }
         }
     }
     // Changes raw value. 
     // Also manages the animation, if the run meter is full the animation state is changed. 
+
+    public void SetCanChange(bool newCanChange) 
+    {
+        canChange = newCanChange;
+        if (!canChange) 
+        {
+            SetIsAppeared(false);
+        }
+    }
 }

@@ -9,14 +9,23 @@ public class InteractableMap : MonoBehaviour, IInteractable
     public Map map;
     public Sprite mapImage;
     public GameObject pickUpSound;
+    public DialogueTrigger tooManyItemsTrigger;
 
     public void Interact()
     {
-        map.SetMapImage(mapImage);
-        FindObjectOfType<PlayerInventory>().Add(map);
-        PickUpSound();
-        SendDataToAnalytics();
-        Destroy(gameObject);
+        Map tempMap = Instantiate(map);
+        tempMap.map = mapImage;
+        FindObjectOfType<PlayerInventory>().Add(tempMap, out bool success);
+        if (success)
+        {
+            PickUpSound();
+            SendDataToAnalytics();
+            Destroy(gameObject);
+        }
+        else
+        {
+            tooManyItemsTrigger.StartPopUp();
+        }
     }
 
     void PickUpSound()

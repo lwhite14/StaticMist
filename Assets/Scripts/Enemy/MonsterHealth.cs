@@ -29,6 +29,7 @@ public class MonsterHealth : MonoBehaviour
         GetComponent<MonsterAnimationAndSound>().PlayDeath();
         GetComponent<MonsterAnimationAndSound>().SwitchToDeath();
         MusicManager.instance.SwitchToTense();
+        NPC.PlayerEscaped();
 
         GetComponent<MonsterAttack>().enabled = false;
         GetComponent<MonsterPathfinding>().enabled = false;

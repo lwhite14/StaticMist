@@ -8,11 +8,13 @@ public class DialogueManager : MonoBehaviour
     public static DialogueManager instance = null;
 
     public float textScrollTime = 0.1f;
+    public bool isTalkingNPC = false;
 
     DialogueTrigger dialogueTrigger;
     Queue<string> sentences;
-    //Text nameText;
+    Text nameText;
     Text dialogueText;
+    GameObject notification;
     Animator animator;
 
     void Awake()
@@ -30,19 +32,28 @@ public class DialogueManager : MonoBehaviour
     void Start()
     {
         sentences = new Queue<string>();
-        //nameText = GameObject.Find("Name").GetComponent<Text>();
-        dialogueText = GameObject.Find("Dialogue").GetComponent<Text>();
+        nameText = GameObject.Find("DialogueName").GetComponent<Text>();
+        dialogueText = GameObject.Find("DialogueText").GetComponent<Text>();
         animator = GameObject.Find("DialogueBox").GetComponent<Animator>();
+        notification = GameObject.Find("DialoguePressNext");
     }
 
     public void StartDialogue(Dialogue dialogue, DialogueTrigger usedDialogueTrigger) 
     {
         dialogueTrigger = usedDialogueTrigger;
         dialogueTrigger.SetIsTriggered(true);
+        if (isTalkingNPC)
+        {
+            notification.SetActive(true);
+        }
+        else 
+        {
+            notification.SetActive(false);
+        }
 
         animator.SetBool("isOpen", true);
 
-        //nameText.text = dialogue.name;
+        nameText.text = dialogue.name;
 
         sentences.Clear();
 
@@ -86,6 +97,10 @@ public class DialogueManager : MonoBehaviour
         if (dialogueTrigger != null)
         {
             dialogueTrigger.SetIsTriggered(false);
+        }
+        if (isTalkingNPC) 
+        {
+            isTalkingNPC = false;
         }
     }
     // Ends the dialogue.

@@ -19,6 +19,7 @@ public class Candle : MonoBehaviour, IItem
 
     public void Examine()
     {
+        FindObjectOfType<CoroutineHelper>().HelperStopCoroutine();
         FindObjectOfType<CoroutineHelper>().HelperStartExamining(description);
     }
 
@@ -32,6 +33,7 @@ public class Candle : MonoBehaviour, IItem
             FindObjectOfType<CoroutineHelper>().HelperStopCoroutine();
             FindObjectOfType<CoroutineHelper>().HelperStartExamining("IT WOULD BE BETTER IF I COULD SEE...");
 
+            RemoveBlockers();
             SendDataToAnalytics();
         }
         else
@@ -73,6 +75,15 @@ public class Candle : MonoBehaviour, IItem
     public string GetDescription()
     {
         return description;
+    }
+
+    void RemoveBlockers()
+    {
+        if (GameObject.Find("NeedLightBlocker") != null)
+        {
+            DialogueTrigger.StopAllDialogue();
+            GameObject.Find("NeedLightBlocker").transform.GetChild(0).gameObject.SetActive(false);
+        }
     }
 
     void SendDataToAnalytics()

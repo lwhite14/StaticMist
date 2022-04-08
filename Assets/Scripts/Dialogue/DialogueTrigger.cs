@@ -6,7 +6,7 @@ using UnityEngine.Events;
 public class DialogueTrigger : MonoBehaviour
 {
     public Dialogue dialogue;
-    [HideInInspector] public bool isTriggered = false;
+    bool isTriggered = false;
 
     public void TriggerDialogue()
     {
@@ -20,9 +20,36 @@ public class DialogueTrigger : MonoBehaviour
     }
     // Dialgoue manager runs the next line of dialogue. 
 
-    public void SetIsTriggered(bool newIsTriggered) 
+    public void StartPopUp() 
+    {
+        StartCoroutine(PopUp());
+    }
+
+    IEnumerator PopUp() 
+    {
+        TriggerDialogue();
+        yield return new WaitForSeconds(7.5f);
+        TriggerNextSentence();
+        yield return null;
+    }
+
+    public static void StopAllDialogue() 
+    {
+        foreach (DialogueTrigger trigger in FindObjectsOfType<DialogueTrigger>()) 
+        {
+            trigger.StopAllCoroutines();
+        }
+        DialogueManager.instance.EndDialogue();
+    }
+
+    public void SetIsTriggered(bool newIsTriggered)
     {
         isTriggered = newIsTriggered;
     }
     // Changes the isTriggered value, useful if the player wants to skip the current line. 
+
+    public bool GetIsTriggered() 
+    {
+        return isTriggered;
+    }
 }

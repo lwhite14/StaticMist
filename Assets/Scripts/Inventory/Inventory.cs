@@ -50,11 +50,16 @@ public class Inventory
         }
     }
 
-    public void AddItem(IItem newItem)
+    public void AddItem(IItem newItem, out bool success)
     {
         if (!(items.Count == 16))
         {
             items.Add(newItem);
+            success = true;
+        }
+        else 
+        {
+            success = false;
         }
     }
 

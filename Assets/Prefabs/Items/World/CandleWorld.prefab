@@ -43,6 +43,7 @@ GameObject:
   - component: {fileID: 2741525311165891472}
   - component: {fileID: 5859108560621810611}
   - component: {fileID: 8010018713816411151}
+  - component: {fileID: 6505063906763707287}
   m_Layer: 0
   m_Name: CandleWorld
   m_TagString: Untagged
@@ -92,6 +93,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   candle: {fileID: 6007690773342689947, guid: aaa066c34e4d5ab4983f67242f2638b3, type: 3}
   pickUpSound: {fileID: 3696260262505083792, guid: 43e1bb3447d4b3a4bb28a965178189ab, type: 3}
+  tooManyItemsTrigger: {fileID: 6505063906763707287}
 --- !u!95 &8010018713816411151
 Animator:
   serializedVersion: 3
@@ -111,6 +113,22 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &6505063906763707287
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2741525311165891473}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 023c49512b0b38b44bd3481900fccdd4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogue:
+    name: ME
+    sentences:
+    - I'VE GOT TOO MANY ITEMS ALREADY...
 --- !u!1 &3460815993932894260
 GameObject:
   m_ObjectHideFlags: 0

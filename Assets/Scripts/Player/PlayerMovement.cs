@@ -16,17 +16,23 @@ public class PlayerMovement : MonoBehaviour
     public float groundDistance = 0.4f;
     public LayerMask groundMask;
 
+    // Head Bob Variables
+    float defaultYPos = 0;
+    float timer;
+
     CharacterController controller;
     JumpCoolDownSlider jumpCoolDownSlider;
     PlayerCrouching playerCrouching;
 
+    Camera playerCamera;
     Vector3 velocity;
     Vector3 move;
     bool previousGrounded = true;
     bool hasLanded = false;
-    bool isDead = false;
-    bool isInMenu = false;
+    bool canMove = false;
     float speed;
+    float bobSpeed;
+    float bobAmount;
     float x = 0;
     float z = 0;
     float jumpCoolDownCounter;
@@ -40,7 +46,10 @@ public class PlayerMovement : MonoBehaviour
 
         jumpCoolDownCounter = jumpCoolDown;
         jumpCoolDownSlider.SetMaxValue(jumpCoolDown);
-        
+
+
+        playerCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
+        defaultYPos = playerCamera.transform.localPosition.y;
     }
 
     void Update()
@@ -49,6 +58,7 @@ public class PlayerMovement : MonoBehaviour
         JumpCoolDown();
         Move();
         Fall();
+        HandleHeadBob();
     }
 
     void Ground()
@@ -92,7 +102,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (CheckGrounded())
         {
-            if (hasLanded || isDead || isInMenu)
+            if (hasLanded || canMove)
             {
                 x = 0;
                 z = 0;
@@ -116,6 +126,24 @@ public class PlayerMovement : MonoBehaviour
         controller.Move(velocity * Time.deltaTime);
     }
 
+    void HandleHeadBob() 
+    {
+        if (!CheckGrounded()) 
+        {
+            return;
+        }
+
+        if (Mathf.Abs(move.x) > 0.1 || Mathf.Abs(move.z) > 0.1) 
+        {
+            timer += Time.deltaTime * bobSpeed;
+            playerCamera.transform.localPosition = new Vector3(
+                playerCamera.transform.localPosition.x,
+                defaultYPos + Mathf.Sin(timer) * bobAmount,
+                playerCamera.transform.localPosition.z
+            );
+        }
+    }
+
     public void JumpInput() 
     {
         Jump();
@@ -123,7 +151,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Jump() 
     {
-        if (CheckGrounded() && (CheckMovingForward() || CheckNotMoving()) && !hasLanded && !playerCrouching.GetIsCrouching() && !isDead && !isInMenu)
+        if (CheckGrounded() && (CheckMovingForward() || CheckNotMoving()) && !hasLanded && !playerCrouching.GetIsCrouching() && !canMove)
         {
             velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
         }
@@ -131,7 +159,7 @@ public class PlayerMovement : MonoBehaviour
 
     public bool CheckGrounded()
     {
-        if (groundCheck)
+        if (groundCheck != null)
         {
             return Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
         }
@@ -170,17 +198,17 @@ public class PlayerMovement : MonoBehaviour
         speed = newSpeed;
     }
 
-    public void OnDeath(bool newIsDead) 
+    public void ChangeBob(float newBobAmount, float newBobSpeed) 
     {
-        isDead = newIsDead;
-        playerCrouching.OnDeath(newIsDead);
+        bobAmount = newBobAmount;
+        bobSpeed = newBobSpeed;
     }
 
     public void MovementSlideX(float newX) 
     {
         if (CheckGrounded())
         {
-            if (!hasLanded && !isDead && !isInMenu)
+            if (!hasLanded && !canMove)
             {
                 x = Mathf.Lerp(x, newX, movementSliding * Time.deltaTime);
                 if (x < newX)
@@ -205,7 +233,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (CheckGrounded())
         {
-            if (!hasLanded && !isDead && !isInMenu)
+            if (!hasLanded && !canMove)
             {
                 z = Mathf.Lerp(z, newZ, movementSliding * Time.deltaTime);
                 if (z < newZ)
@@ -248,7 +276,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void SetIsInMenu(bool newIsInMenu) 
     {
-        isInMenu = newIsInMenu;
+        canMove = newIsInMenu;
     }
 
     public void WarpToPosition(Vector3 newPosition)

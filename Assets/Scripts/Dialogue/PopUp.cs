@@ -5,6 +5,7 @@ using UnityEngine;
 public class PopUp : MonoBehaviour
 {
     public float onScreenTime = 5.0f;
+    public bool showOnce = true;
     bool isTriggered = false;
 
     private void OnTriggerEnter(Collider other)
@@ -13,27 +14,18 @@ public class PopUp : MonoBehaviour
         {
             if (!isTriggered)
             {
-                DialogueManager.instance.EndDialogue();
-                PopUp.StopAllPopUps();
-                StartCoroutine(Triggered());
+                DialogueTrigger.StopAllDialogue();
+                Triggered();
             }
         }
     }
 
-    IEnumerator Triggered()
+    void Triggered()
     {
-        isTriggered = true;
-        GetComponent<DialogueTrigger>().TriggerDialogue();
-        yield return new WaitForSeconds(onScreenTime);
-        GetComponent<DialogueTrigger>().TriggerNextSentence();
-        yield return null;        
-    }
-
-    public static void StopAllPopUps() 
-    {
-        foreach (PopUp popUp in FindObjectsOfType<PopUp>())
+        if (showOnce)
         {
-            popUp.StopAllCoroutines();
+            isTriggered = true;
         }
+        GetComponent<DialogueTrigger>().StartPopUp();
     }
 }

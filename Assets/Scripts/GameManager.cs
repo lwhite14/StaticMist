@@ -20,6 +20,8 @@ public class GameManager : MonoBehaviour
     public bool isLastLevel = false;
     public string levelException;
 
+    GameObject crosshair;
+
     void Awake()
     {
         if (instance == null)
@@ -35,25 +37,33 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         GameInformationSetUp();
-        //GameObject.Find("Canvas").GetComponent<Canvas>().planeDistance = 0.05f;
         CursorMode();
         if (level == 0) 
         {
             EventSystem.current.SetSelectedGameObject(GameObject.Find("SettingsButton"));
         }
+        if (GameObject.Find("Crosshair") != null)
+        {
+            crosshair = GameObject.Find("Crosshair");
+        }
+        SettingsMenu.SetStartSettings();
     }
 
     void Update()
     {
         if (Debug.isDebugBuild)
         {
-            if (Input.GetKeyDown(KeyCode.F1))
+            if (Input.GetKeyDown(KeyCode.F1) && Cursor.lockState == CursorLockMode.Locked)
             {
                 Cursor.lockState = CursorLockMode.None;
                 Cursor.visible = true;
             }
+            else if (Input.GetKeyDown(KeyCode.F1) && Cursor.lockState == CursorLockMode.None)
+            {
+                Cursor.lockState = CursorLockMode.Locked;
+                Cursor.visible = false;
+            }
         }
-        Debug.Log(EventSystem.current);
     }
 
     public void ExitGame()
@@ -69,7 +79,6 @@ public class GameManager : MonoBehaviour
 
     public void ReturnToMenu() 
     {
-        //SceneManager.LoadScene("Menu", LoadSceneMode.Single);
         FindObjectOfType<SettingsMenu>().SaveSettings();
         if (FindObjectOfType<ControlsHandler>() != null)
         {
@@ -89,13 +98,11 @@ public class GameManager : MonoBehaviour
         if (levelException == null || levelException == "")
         {
             string currentLevelName = "Level" + level;
-            //SceneManager.LoadScene(currentLevelName, LoadSceneMode.Single);
             LoadSceneData.sceneToLoad = currentLevelName;
             SceneManager.LoadScene("Loading");
         }
         else 
         {
-            //SceneManager.LoadScene(levelException, LoadSceneMode.Single);
             LoadSceneData.sceneToLoad = levelException;
             SceneManager.LoadScene("Loading");
         }
@@ -114,9 +121,17 @@ public class GameManager : MonoBehaviour
         }
         if (FindObjectOfType<Viewmodel>() != null)
         {
-            Destroy(FindObjectOfType<Viewmodel>().gameObject);
+            Destroy(FindObjectOfType<Viewmodel>().gameObject);       
         }
-        //FindObjectOfType<InventoryUI>().SetCanUse(false);
+        FindObjectOfType<RunSlider>().SetCanChange(false);
+        FindObjectOfType<JumpCoolDownSlider>().SetCanChange(false);
+        FindObjectOfType<MouseLook>().SetIsInMenu(true);
+        FindObjectOfType<PlayerMovement>().SetIsInMenu(true);
+        if (crosshair.activeSelf)
+        {
+            crosshair.SetActive(false);
+        }
+        DialogueTrigger.StopAllDialogue();
         InventoryUI.canUse = false;
     }
 
@@ -137,13 +152,18 @@ public class GameManager : MonoBehaviour
         }
         if (FindObjectOfType<Viewmodel>() != null)
         {
-            Destroy(FindObjectOfType<Viewmodel>().gameObject);
+            Destroy(FindObjectOfType<Viewmodel>().gameObject);            
         }
-        //FindObjectOfType<MouseLook>().SetCursorMode(false);
+        FindObjectOfType<RunSlider>().SetCanChange(false);
+        FindObjectOfType<JumpCoolDownSlider>().SetCanChange(false);
         FindObjectOfType<MouseLook>().SetIsInMenu(true);
         FindObjectOfType<PlayerMovement>().SetIsInMenu(true);
         MusicManager.instance.SwitchToGoal();
-        //FindObjectOfType<InventoryUI>().SetCanUse(false);
+        if (crosshair.activeSelf)
+        {
+            crosshair.SetActive(false);
+        }
+        DialogueTrigger.StopAllDialogue();
         InventoryUI.canUse = false;
 
         SendDataToAnalytics();
@@ -169,7 +189,6 @@ public class GameManager : MonoBehaviour
         }
         int nextLevel = level + 1;
         string nextLevelName = "Level" + nextLevel;
-        //SceneManager.LoadScene(nextLevelName, LoadSceneMode.Single);
         LoadSceneData.sceneToLoad = nextLevelName;
         SceneManager.LoadScene("Loading");
     }

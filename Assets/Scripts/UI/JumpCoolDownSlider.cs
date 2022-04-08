@@ -9,6 +9,8 @@ public class JumpCoolDownSlider : MonoBehaviour
     public Image fill;
     public Animator anim;
 
+    bool canChange = true;
+
     public void SetMaxValue(float value) 
     {
         slider.maxValue = value;
@@ -17,14 +19,29 @@ public class JumpCoolDownSlider : MonoBehaviour
 
     public void SetSliding(bool isSliding)
     {
-        anim.SetBool("isSliding", isSliding);
+        if (canChange)
+        {
+            anim.SetBool("isSliding", isSliding);
+        }
     }
     // Changes animation state.
 
     public void ChangeValue(float value) 
     {
-        slider.value = value;
+        if (canChange)
+        {
+            slider.value = value;
+        }
     }
     // Changes raw value. 
+
+    public void SetCanChange(bool newCanChange)
+    {
+        canChange = newCanChange;
+        if (!canChange)
+        {
+            anim.SetBool("isSliding", false);
+        }
+    }
 
 }
