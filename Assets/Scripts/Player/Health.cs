@@ -11,7 +11,6 @@ public class Health : MonoBehaviour
     public GameObject deathSound;
     public GameObject deathFlash;
     public GameObject hurtFlash;
-    public UnityEvent onDeath;
     public float health = 4.0f;
     public float maxHealth = 4.0f; 
 
@@ -79,7 +78,8 @@ public class Health : MonoBehaviour
     {
         // At this point the player has died, and so I send an event to Unity Analytics.
         SendDataToAnalytics(monsterType);
-        onDeath.Invoke();
+        DeathSound();
+        PlayDeathFlash();
         GameManager.instance.OnDeath();
         isDead = true;
     }

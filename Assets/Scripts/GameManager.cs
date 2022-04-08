@@ -79,7 +79,6 @@ public class GameManager : MonoBehaviour
 
     public void ReturnToMenu() 
     {
-        //SceneManager.LoadScene("Menu", LoadSceneMode.Single);
         FindObjectOfType<SettingsMenu>().SaveSettings();
         if (FindObjectOfType<ControlsHandler>() != null)
         {
@@ -99,13 +98,11 @@ public class GameManager : MonoBehaviour
         if (levelException == null || levelException == "")
         {
             string currentLevelName = "Level" + level;
-            //SceneManager.LoadScene(currentLevelName, LoadSceneMode.Single);
             LoadSceneData.sceneToLoad = currentLevelName;
             SceneManager.LoadScene("Loading");
         }
         else 
         {
-            //SceneManager.LoadScene(levelException, LoadSceneMode.Single);
             LoadSceneData.sceneToLoad = levelException;
             SceneManager.LoadScene("Loading");
         }
@@ -124,16 +121,16 @@ public class GameManager : MonoBehaviour
         }
         if (FindObjectOfType<Viewmodel>() != null)
         {
-            if (FindObjectOfType<Viewmodel>().name == "BAT") 
-            {
-                Destroy(FindObjectOfType<Viewmodel>().gameObject);
-            }
+            Destroy(FindObjectOfType<Viewmodel>().gameObject);       
         }
+        FindObjectOfType<RunSlider>().SetCanChange(false);
+        FindObjectOfType<JumpCoolDownSlider>().SetCanChange(false);
+        FindObjectOfType<MouseLook>().SetIsInMenu(true);
+        FindObjectOfType<PlayerMovement>().SetIsInMenu(true);
         if (crosshair.activeSelf)
         {
             crosshair.SetActive(false);
         }
-        //FindObjectOfType<InventoryUI>().SetCanUse(false);
         DialogueTrigger.StopAllDialogue();
         InventoryUI.canUse = false;
     }
@@ -155,16 +152,13 @@ public class GameManager : MonoBehaviour
         }
         if (FindObjectOfType<Viewmodel>() != null)
         {
-            if (FindObjectOfType<Viewmodel>().name == "BAT")
-            {
-                Destroy(FindObjectOfType<Viewmodel>().gameObject);
-            }
+            Destroy(FindObjectOfType<Viewmodel>().gameObject);            
         }
-        //FindObjectOfType<MouseLook>().SetCursorMode(false);
+        FindObjectOfType<RunSlider>().SetCanChange(false);
+        FindObjectOfType<JumpCoolDownSlider>().SetCanChange(false);
         FindObjectOfType<MouseLook>().SetIsInMenu(true);
         FindObjectOfType<PlayerMovement>().SetIsInMenu(true);
         MusicManager.instance.SwitchToGoal();
-        //FindObjectOfType<InventoryUI>().SetCanUse(false);
         if (crosshair.activeSelf)
         {
             crosshair.SetActive(false);
@@ -195,7 +189,6 @@ public class GameManager : MonoBehaviour
         }
         int nextLevel = level + 1;
         string nextLevelName = "Level" + nextLevel;
-        //SceneManager.LoadScene(nextLevelName, LoadSceneMode.Single);
         LoadSceneData.sceneToLoad = nextLevelName;
         SceneManager.LoadScene("Loading");
     }

@@ -29,8 +29,7 @@ public class PlayerMovement : MonoBehaviour
     Vector3 move;
     bool previousGrounded = true;
     bool hasLanded = false;
-    bool isDead = false;
-    bool isInMenu = false;
+    bool canMove = false;
     float speed;
     float bobSpeed;
     float bobAmount;
@@ -103,7 +102,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (CheckGrounded())
         {
-            if (hasLanded || isDead || isInMenu)
+            if (hasLanded || canMove)
             {
                 x = 0;
                 z = 0;
@@ -152,7 +151,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Jump() 
     {
-        if (CheckGrounded() && (CheckMovingForward() || CheckNotMoving()) && !hasLanded && !playerCrouching.GetIsCrouching() && !isDead && !isInMenu)
+        if (CheckGrounded() && (CheckMovingForward() || CheckNotMoving()) && !hasLanded && !playerCrouching.GetIsCrouching() && !canMove)
         {
             velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
         }
@@ -205,17 +204,11 @@ public class PlayerMovement : MonoBehaviour
         bobSpeed = newBobSpeed;
     }
 
-    public void OnDeath(bool newIsDead) 
-    {
-        isDead = newIsDead;
-        playerCrouching.OnDeath(newIsDead);
-    }
-
     public void MovementSlideX(float newX) 
     {
         if (CheckGrounded())
         {
-            if (!hasLanded && !isDead && !isInMenu)
+            if (!hasLanded && !canMove)
             {
                 x = Mathf.Lerp(x, newX, movementSliding * Time.deltaTime);
                 if (x < newX)
@@ -240,7 +233,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (CheckGrounded())
         {
-            if (!hasLanded && !isDead && !isInMenu)
+            if (!hasLanded && !canMove)
             {
                 z = Mathf.Lerp(z, newZ, movementSliding * Time.deltaTime);
                 if (z < newZ)
@@ -283,7 +276,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void SetIsInMenu(bool newIsInMenu) 
     {
-        isInMenu = newIsInMenu;
+        canMove = newIsInMenu;
     }
 
     public void WarpToPosition(Vector3 newPosition)

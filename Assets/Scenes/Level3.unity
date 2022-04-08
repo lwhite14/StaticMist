@@ -37199,7 +37199,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1622806058
 Transform:
   m_ObjectHideFlags: 0
@@ -40052,6 +40052,91 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8929042826573134869, guid: 9631cfb8934941c4f95abc8fafbd3e78, type: 3}
   m_PrefabInstance: {fileID: 1733956919}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1737910174
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1574951104345281172, guid: ab698d920a2eafb4891768f641ac7802, type: 3}
+      propertyPath: dialogue.name
+      value: JOHNNY
+      objectReference: {fileID: 0}
+    - target: {fileID: 1574951104345281172, guid: ab698d920a2eafb4891768f641ac7802, type: 3}
+      propertyPath: dialogue.sentences.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1574951104345281172, guid: ab698d920a2eafb4891768f641ac7802, type: 3}
+      propertyPath: dialogue.sentences.Array.data[0]
+      value: DON'T COME CLOSE!
+      objectReference: {fileID: 0}
+    - target: {fileID: 1574951104345281172, guid: ab698d920a2eafb4891768f641ac7802, type: 3}
+      propertyPath: dialogue.sentences.Array.data[1]
+      value: OH IT'S JUST YOU ZARA...
+      objectReference: {fileID: 0}
+    - target: {fileID: 1574951104345281172, guid: ab698d920a2eafb4891768f641ac7802, type: 3}
+      propertyPath: dialogue.sentences.Array.data[2]
+      value: NO I HAVEN'T SEEN ANYONE COME THIS WAY.
+      objectReference: {fileID: 0}
+    - target: {fileID: 1574951104345281172, guid: ab698d920a2eafb4891768f641ac7802, type: 3}
+      propertyPath: dialogue.sentences.Array.data[3]
+      value: YOU'RE LOOKING FOR SOMEONE?
+      objectReference: {fileID: 0}
+    - target: {fileID: 1574951104345281172, guid: ab698d920a2eafb4891768f641ac7802, type: 3}
+      propertyPath: dialogue.sentences.Array.data[4]
+      value: IF THEY'VE BEEN GONE A WHILE THEN... WELL... I WISH YOU LUCK...
+      objectReference: {fileID: 0}
+    - target: {fileID: 1574951104345281177, guid: ab698d920a2eafb4891768f641ac7802, type: 3}
+      propertyPath: m_Name
+      value: NPCH
+      objectReference: {fileID: 0}
+    - target: {fileID: 2202410867044927523, guid: ab698d920a2eafb4891768f641ac7802, type: 3}
+      propertyPath: m_RootOrder
+      value: 19
+      objectReference: {fileID: 0}
+    - target: {fileID: 2202410867044927523, guid: ab698d920a2eafb4891768f641ac7802, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2202410867044927523, guid: ab698d920a2eafb4891768f641ac7802, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.038
+      objectReference: {fileID: 0}
+    - target: {fileID: 2202410867044927523, guid: ab698d920a2eafb4891768f641ac7802, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 16.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 2202410867044927523, guid: ab698d920a2eafb4891768f641ac7802, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: -0.40673646
+      objectReference: {fileID: 0}
+    - target: {fileID: 2202410867044927523, guid: ab698d920a2eafb4891768f641ac7802, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2202410867044927523, guid: ab698d920a2eafb4891768f641ac7802, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.91354555
+      objectReference: {fileID: 0}
+    - target: {fileID: 2202410867044927523, guid: ab698d920a2eafb4891768f641ac7802, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2202410867044927523, guid: ab698d920a2eafb4891768f641ac7802, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2202410867044927523, guid: ab698d920a2eafb4891768f641ac7802, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 228
+      objectReference: {fileID: 0}
+    - target: {fileID: 2202410867044927523, guid: ab698d920a2eafb4891768f641ac7802, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: ab698d920a2eafb4891768f641ac7802, type: 3}
 --- !u!43 &1747834782
 Mesh:
   m_ObjectHideFlags: 0
@@ -48108,6 +48193,14 @@ PrefabInstance:
     - target: {fileID: 4518023453328408844, guid: 7a83d82f6b9918f4e8962b9a867297fa, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4518023453328408846, guid: 7a83d82f6b9918f4e8962b9a867297fa, type: 3}
+      propertyPath: onDeath.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
+      value: PlayDeathFlash
+      objectReference: {fileID: 0}
+    - target: {fileID: 4518023453328408846, guid: 7a83d82f6b9918f4e8962b9a867297fa, type: 3}
+      propertyPath: onDeath.m_PersistentCalls.m_Calls.Array.data[2].m_TargetAssemblyTypeName
+      value: Health, Scripts
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7a83d82f6b9918f4e8962b9a867297fa, type: 3}
