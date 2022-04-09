@@ -67,7 +67,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294966391
+    m_Bits: 4294965367
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 8400000, guid: 6845078c2a2ed364eb7451ba805d3a1c, type: 2}
   m_TargetDisplay: 0
@@ -196,7 +196,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 640
+    m_Bits: 1664
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -228,9 +228,9 @@ MonoBehaviour:
   m_RendererIndex: -1
   m_VolumeLayerMask:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 0
   m_VolumeTrigger: {fileID: 0}
-  m_RenderPostProcessing: 1
+  m_RenderPostProcessing: 0
   m_Antialiasing: 0
   m_AntialiasingQuality: 2
   m_StopNaN: 0
@@ -506,33 +506,6 @@ MonoBehaviour:
   deathSound: {fileID: 242124223350886573, guid: 98ebab4c0817db0489951efdf984bee2, type: 3}
   deathFlash: {fileID: 6337739780713771725, guid: 068487c537ce3404eb912829056876d9, type: 3}
   hurtFlash: {fileID: 6031256301756062100, guid: a57f093643ca24949aeb5ffee380f7d5, type: 3}
-  onDeath:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 4518023453328408846}
-        m_TargetAssemblyTypeName: Health, Assembly-CSharp
-        m_MethodName: DeathSound
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-      - m_Target: {fileID: 4518023453328408846}
-        m_TargetAssemblyTypeName: Health, Scripts
-        m_MethodName: PlayDeathFlash
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
   health: 4
   maxHealth: 4
   isDead: 0
