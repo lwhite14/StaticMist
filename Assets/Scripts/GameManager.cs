@@ -4,6 +4,7 @@ using Unity.Services.Analytics;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
+using System;
 
 public class GameManager : MonoBehaviour
 {
@@ -74,7 +75,18 @@ public class GameManager : MonoBehaviour
 
     public void LoadFirstLevel() 
     {
-        StatePanel.instance.NextLevel();
+        StatePanel.instance.LoadTextCrawl();
+    }
+
+    public void LoadTextCrawl()
+    {
+        FindObjectOfType<SettingsMenu>().SaveSettings();
+        if (FindObjectOfType<ControlsHandler>() != null)
+        {
+            FindObjectOfType<ControlsHandler>().DeallocateEvents();
+        }
+        LoadSceneData.sceneToLoad = "TextCrawl";
+        SceneManager.LoadScene("Loading");
     }
 
     public void ReturnToMenu() 
@@ -106,6 +118,18 @@ public class GameManager : MonoBehaviour
             LoadSceneData.sceneToLoad = levelException;
             SceneManager.LoadScene("Loading");
         }
+    }
+    public void NextLevel()
+    {
+        FindObjectOfType<SettingsMenu>().SaveSettings();
+        if (FindObjectOfType<ControlsHandler>() != null)
+        {
+            FindObjectOfType<ControlsHandler>().DeallocateEvents();
+        }
+        int nextLevel = level + 1;
+        string nextLevelName = "Level" + nextLevel;
+        LoadSceneData.sceneToLoad = nextLevelName;
+        SceneManager.LoadScene("Loading");
     }
 
     public void OnDeath()
@@ -178,19 +202,6 @@ public class GameManager : MonoBehaviour
         }
         GameInformation.instance.Health = FindObjectOfType<Health>().GetHealth();
         
-    }
-
-    public void NextLevel()
-    {
-        FindObjectOfType<SettingsMenu>().SaveSettings();
-        if (FindObjectOfType<ControlsHandler>() != null)
-        {
-            FindObjectOfType<ControlsHandler>().DeallocateEvents();
-        }
-        int nextLevel = level + 1;
-        string nextLevelName = "Level" + nextLevel;
-        LoadSceneData.sceneToLoad = nextLevelName;
-        SceneManager.LoadScene("Loading");
     }
 
     void GameInformationSetUp()

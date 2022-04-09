@@ -38,6 +38,11 @@ public class StatePanel : MonoBehaviour
         animator.Play("RestartLevel");    
     }
 
+    public void LoadTextCrawl() 
+    {
+        animator.Play("TextCrawl");
+    }
+
     public void ManagerNextLevel() 
     {
         GameManager.instance.NextLevel();
@@ -52,4 +57,9 @@ public class StatePanel : MonoBehaviour
     {
         GameManager.instance.RestartLevel();
     } // Function animator triggers.
+
+    public void ManagerLoadTextCrawl() 
+    {
+        GameManager.instance.LoadTextCrawl();
+    }
 }
