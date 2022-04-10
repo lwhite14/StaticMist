@@ -279,6 +279,11 @@ public class PlayerMovement : MonoBehaviour
         canMove = newIsInMenu;
     }
 
+    public float GetSpeed() 
+    {
+        return speed;
+    }
+
     public void WarpToPosition(Vector3 newPosition)
     {
         controller.enabled = false;

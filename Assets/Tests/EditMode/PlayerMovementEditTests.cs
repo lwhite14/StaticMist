@@ -9,21 +9,29 @@ using UnityEngine.TestTools;
 [TestFixture]
 public class PlayerMovementEditTests
 {
+    GameObject player;
+    PlayerMovement playerMovement;
+    PlayerSprinting playerSprinting;
+    PlayerCrouching playerCrouching;
+
+    [SetUp]
+    public void SetUp()
+    {
+        player = new GameObject();
+        playerMovement = player.AddComponent<PlayerMovement>();
+        playerSprinting = player.AddComponent<PlayerSprinting>();
+        playerCrouching = player.AddComponent<PlayerCrouching>();
+    }
+
     [Test]
     public void PlayerMovement_Instantiation_ScriptExists()
     {
-        GameObject player = new GameObject();
-        PlayerMovement playerMovement = player.AddComponent<PlayerMovement>();
-
         Assert.NotNull(playerMovement);
     }
 
     [Test]
-    public void SetXSetZ_NewValues() 
+    public void SetXSetZ_NewValues()
     {
-        GameObject player = new GameObject();
-        PlayerMovement playerMovement = player.AddComponent<PlayerMovement>();
-
         Assert.AreEqual(0, playerMovement.GetX());
         Assert.AreEqual(0, playerMovement.GetZ());
         playerMovement.SetX(5);
@@ -33,14 +41,34 @@ public class PlayerMovementEditTests
     }
 
     [Test]
-    public void CheckNotMoving_StillAndMoving() 
+    public void CheckNotMoving_StillAndMoving()
     {
-        GameObject player = new GameObject();
-        PlayerMovement playerMovement = player.AddComponent<PlayerMovement>();
-
         Assert.AreEqual(true, playerMovement.CheckNotMoving());
         playerMovement.SetX(2);
         playerMovement.SetZ(2);
         Assert.AreEqual(false, playerMovement.CheckNotMoving());
     }
+
+    [Test]
+    public void ChangeSpeed()
+    {
+        float preSpeed = playerMovement.GetSpeed();
+        playerMovement.ChangeSpeed(10.0f);
+        float postSpeed = playerMovement.GetSpeed();
+
+        Assert.AreEqual(10.0f, postSpeed);
+        Assert.AreNotEqual(preSpeed, postSpeed);
+    }
+
+    [Test]
+    public void SprintInput_FalseAndTrue() 
+    {
+        playerSprinting.SprintInput(true);
+        Assert.AreEqual(playerSprinting.GetInputPressed(), true); 
+        playerSprinting.SprintInput(false);
+        Assert.AreEqual(playerSprinting.GetInputPressed(), false);
+    }
 }
+
+// The basic naming of a test comprises of three main parts:
+// [UnitOfWork_StateUnderTest_ExpectedBehavior]
