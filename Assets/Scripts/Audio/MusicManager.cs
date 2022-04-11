@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(AudioSource))]
 public class MusicManager : MonoBehaviour
 {
     public static MusicManager instance = null;
@@ -10,10 +11,15 @@ public class MusicManager : MonoBehaviour
     public AudioClip chaseMusic;
     public AudioClip goalMusic;
     public AudioClip menuMusic;
-    AudioSource audioSource;
 
-    bool tenseIsPlaying = false;
-    bool chaseIsPlaying = false;
+    [HideInInspector]
+    public AudioSource audioSource { get; set; }
+
+    [HideInInspector]
+    public bool tenseIsPlaying { get; set; } = false;
+
+    [HideInInspector]
+    public bool chaseIsPlaying { get; set; } = false;
 
     void Awake()
     {

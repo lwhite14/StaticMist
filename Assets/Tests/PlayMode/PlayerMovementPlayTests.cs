@@ -12,7 +12,7 @@ public class PlayerMovementPlayTests
     [SetUp]
     public void SetUp() 
     {
-        SceneManager.LoadScene("PlayerMovementTest");
+        SceneManager.LoadScene("Test_WithPlayer");
     }
 
     [UnityTest]

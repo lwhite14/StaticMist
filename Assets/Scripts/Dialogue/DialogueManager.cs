@@ -10,12 +10,12 @@ public class DialogueManager : MonoBehaviour
     public float textScrollTime = 0.1f;
     public bool isTalkingNPC = false;
 
-    DialogueTrigger dialogueTrigger;
-    Queue<string> sentences;
-    Text nameText;
-    Text dialogueText;
-    GameObject notification;
-    Animator animator;
+    public DialogueTrigger dialogueTrigger { get; private set; }
+    public Queue<string> sentences { get; private set; }
+    public Text nameText { get; private set; }
+    public Text dialogueText { get; private set; }
+    public GameObject notification { get; private set; }
+    public Animator animator { get; private set; }
 
     void Awake()
     {
