@@ -14,7 +14,7 @@ public class InteractionPlayTests
     [SetUp]
     public void SetUp()
     {
-        SceneManager.LoadScene("Test_InteractableCube");
+        SceneManager.LoadScene("Test_Interactables");
     }
 
     [UnityTest]

@@ -25,8 +25,11 @@ public class ElectricalBox : MonoBehaviour
             }
             else
             {
-                DialogueTrigger.StopAllDialogue();
-                GetComponent<DialogueTrigger>().StartPopUp();
+                if (Application.isPlaying)
+                {
+                    DialogueTrigger.StopAllDialogue();
+                    GetComponent<DialogueTrigger>().StartPopUp();
+                }
             }
         }
     }
@@ -35,23 +38,29 @@ public class ElectricalBox : MonoBehaviour
     {
         if (key.code == lockOneCode)
         {
-            key.SendDataToAnalytics();
+            if (Application.isPlaying)
+                key.SendDataToAnalytics();
             FindObjectOfType<PlayerInventory>().inventory.RemoveItem(key);
             FindObjectOfType<PlayerInventory>().RefreshUI();
-            FindObjectOfType<InventoryUI>().SetViewedItem(null);
+            if (Application.isPlaying)
+                FindObjectOfType<InventoryUI>().SetViewedItem(null);
             Instantiate(unlockedSound, transform.GetChild(0).position, Quaternion.identity);
             slotOneLocked = false;
-            lockOneFlicker.StopFlicker();
+            if (Application.isPlaying)
+                lockOneFlicker.StopFlicker();
         }
         else if (key.code == lockTwoCode) 
         {
-            key.SendDataToAnalytics();
+            if (Application.isPlaying)
+                key.SendDataToAnalytics();
             FindObjectOfType<PlayerInventory>().inventory.RemoveItem(key);
             FindObjectOfType<PlayerInventory>().RefreshUI();
-            FindObjectOfType<InventoryUI>().SetViewedItem(null);
+            if (Application.isPlaying)
+                FindObjectOfType<InventoryUI>().SetViewedItem(null);
             Instantiate(unlockedSound, transform.GetChild(0).position, Quaternion.identity);
             slotTwoLocked = false;
-            lockTwoFlicker.StopFlicker();
+            if (Application.isPlaying)
+                lockTwoFlicker.StopFlicker();
         }
         else
         {
