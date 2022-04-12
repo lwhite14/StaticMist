@@ -14,6 +14,9 @@ public class PlayerInventory : MonoBehaviour
 
     public void RefreshUI() 
     {
-        FindObjectOfType<InventoryUI>().RefreshUI(inventory.GetAllItems());
+        if (Application.isPlaying) 
+        {
+            FindObjectOfType<InventoryUI>().RefreshUI(inventory.GetAllItems());
+        }
     }
 }

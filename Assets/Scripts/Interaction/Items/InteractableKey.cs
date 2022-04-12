@@ -21,8 +21,14 @@ public class InteractableKey : MonoBehaviour, IInteractable
         {
             PickUpSound();
             TutorialDialogue();
-            SendDataToAnalytics();
-            Destroy(gameObject);
+            if (Application.isPlaying)
+            {
+                if (!Application.isEditor)
+                {
+                    SendDataToAnalytics();
+                }
+                Destroy(gameObject);
+            }
         }
         else
         {

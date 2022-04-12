@@ -15,8 +15,14 @@ public class InteractableBandage : MonoBehaviour, IInteractable
         if (success)
         {
             PickUpSound();
-            SendDataToAnalytics();
-            Destroy(gameObject);
+            if (Application.isPlaying)
+            {
+                if (!Application.isEditor)
+                {
+                    SendDataToAnalytics();
+                }
+                Destroy(gameObject);
+            }
         }
         else
         {
