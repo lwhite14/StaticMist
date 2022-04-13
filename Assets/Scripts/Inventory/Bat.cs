@@ -33,7 +33,10 @@ public class Bat : MonoBehaviour, IItem
             FindObjectOfType<CoroutineHelper>().HelperStopCoroutine();
             FindObjectOfType<CoroutineHelper>().HelperStartExamining("MIGHT BE SAFER TO KEEP THIS OUT...");
 
-            SendDataToAnalytics();
+            if (!Application.isEditor)
+            {
+                SendDataToAnalytics();
+            }
         }
         else
         {

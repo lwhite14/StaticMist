@@ -33,7 +33,10 @@ public class Flashlight : MonoBehaviour, IItem
             FindObjectOfType<CoroutineHelper>().HelperStopCoroutine();
             FindObjectOfType<CoroutineHelper>().HelperStartExamining("IT WOULD BE BETTER IF I COULD SEE...");
 
-            SendDataToAnalytics();
+            if (!Application.isEditor)
+            {
+                SendDataToAnalytics();
+            }
         }
         else 
         {

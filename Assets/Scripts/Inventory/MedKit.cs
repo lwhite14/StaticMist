@@ -27,7 +27,10 @@ public class MedKit : MonoBehaviour, IItem
             Instantiate(healSound);
             FindObjectOfType<InventoryUI>().ResetSelection();
 
-            SendDataToAnalytics();
+            if (!Application.isEditor)
+            {
+                SendDataToAnalytics();
+            }
         }
     }
 

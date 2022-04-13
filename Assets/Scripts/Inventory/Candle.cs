@@ -34,7 +34,10 @@ public class Candle : MonoBehaviour, IItem
             FindObjectOfType<CoroutineHelper>().HelperStartExamining("IT WOULD BE BETTER IF I COULD SEE...");
 
             RemoveBlockers();
-            SendDataToAnalytics();
+            if (!Application.isEditor)
+            {
+                SendDataToAnalytics();
+            }
         }
         else
         {

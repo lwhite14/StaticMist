@@ -17,7 +17,10 @@ public class Map : MonoBehaviour, IItem
     {
         FindObjectOfType<InventoryUI>().ViewMap(map);
 
-        SendDataToAnalytics();
+        if (!Application.isEditor)
+        {
+            SendDataToAnalytics();
+        }
     }
 
     public void Examine()

@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class CoroutineHelper : MonoBehaviour
 {
     public Text examineText;
-    bool runningRoutine = false;
+    public bool runningRoutine { get; private set; }  = false;
 
     public void HelperStartExamining(string sentence) 
     {
