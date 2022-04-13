@@ -34,10 +34,11 @@ public class SettingsMenu : MonoBehaviour
     public Toggle fullscreenToggle;
     public Toggle tvEffectToggle;
 
-    float sensitivty = 5.0f;
-    float currentVolume = 0.0f;
-    float currentBrightness = 0.0f;
-    bool isTVEffect = true;
+    public float sensitivty { get; private set; } = 5.0f;
+    public float currentVolume { get; private set; } = 0.0f;
+    public float currentBrightness { get; private set; } = 0.0f;
+    public bool isTVEffect { get; private set; } = true;
+    public bool isFullscreen { get; private set; } = true;
     Resolution[] resolutions;
     GameObject crosshair;
 
@@ -177,8 +178,9 @@ public class SettingsMenu : MonoBehaviour
         GameObject.Find("Directional Light").GetComponent<Light>().intensity = brightness;
     }
 
-    public void SetFullscreen(bool isFullscreen)
+    public void SetFullscreen(bool newIsFullscreen)
     {
+        isFullscreen = newIsFullscreen;
         Screen.fullScreen = isFullscreen;
     }
 
@@ -268,6 +270,7 @@ public class SettingsMenu : MonoBehaviour
         {
             Screen.fullScreen = Convert.ToBoolean(PlayerPrefs.GetInt("FullscreenPreference"));
             fullscreenToggle.isOn = Screen.fullScreen;
+            isFullscreen = isFullscreen;
         }
         else
         {

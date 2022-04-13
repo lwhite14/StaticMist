@@ -15,15 +15,21 @@ public class MapDisplayer : MonoBehaviour
         mapImage.sprite = map;
         tab.SetActive(true);
 
-        EventSystem.current.SetSelectedGameObject(null);
-        EventSystem.current.SetSelectedGameObject(GameObject.Find("ExitButton"));
+        if (Application.isPlaying)
+        {
+            EventSystem.current.SetSelectedGameObject(null);
+            EventSystem.current.SetSelectedGameObject(GameObject.Find("ExitButton"));
+        }
     }
 
     public void Exit() 
     {
         tab.SetActive(false);
 
-        EventSystem.current.SetSelectedGameObject(null);
-        EventSystem.current.SetSelectedGameObject(GameObject.Find("ItemSpot1").transform.GetChild(0).gameObject);
+        if (Application.isPlaying)
+        {
+            EventSystem.current.SetSelectedGameObject(null);
+            EventSystem.current.SetSelectedGameObject(GameObject.Find("ItemSpot1").transform.GetChild(0).gameObject);
+        }
     }
 }

@@ -16,7 +16,7 @@ public class InventoryUI : MonoBehaviour
     public Text nameText;
     public Text descriptionText;
     public MapDisplayer mapDisplayer;
-    GameObject viewedItem = null;
+    public GameObject viewedItem { get; private set; } = null;
     Animator anim;
     GameObject crosshair;
 

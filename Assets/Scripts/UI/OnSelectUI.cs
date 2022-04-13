@@ -5,9 +5,8 @@ using UnityEngine.EventSystems;
 
 public class OnSelectUI : MonoBehaviour, ISelectHandler
 {
-    static int counter = 0;
-    [SerializeField]
-    GameObject selectedSound;
+    public static int counter { get; private set; } = 0;
+    public GameObject selectedSound { set; get; }
 
     public void OnSelect(BaseEventData eventData)
     {

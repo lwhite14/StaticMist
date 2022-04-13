@@ -12,7 +12,7 @@ public class InteractableKey : MonoBehaviour, IInteractable
     public DialogueTrigger tutorialTrigger;
     public DialogueTrigger tooManyItemsTrigger;
 
-    public void Interact() 
+    public void Interact()
     {
         Key tempKey = Instantiate(key);
         tempKey.code = code;
