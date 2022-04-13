@@ -12,9 +12,12 @@ public class OnSelectUI : MonoBehaviour, ISelectHandler
     {
         if (counter > 0)
         {
-            Instantiate(selectedSound, new Vector3(0, 0, 0), Quaternion.identity);
+            if (selectedSound != null)
+            {
+                Instantiate(selectedSound, new Vector3(0, 0, 0), Quaternion.identity);
+            }
         }
-        else 
+        else
         {
             counter++;
         }

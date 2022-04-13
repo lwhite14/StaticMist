@@ -12,6 +12,8 @@ public class PlayerSpotted : MonoBehaviour
     float musicalStabResetTimeCounter = 0;
     Transform player;
 
+    public bool hasSpotted { get; private set; } = false;
+
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
@@ -35,6 +37,7 @@ public class PlayerSpotted : MonoBehaviour
                     if (musicalStabResetTimeCounter <= 0)
                     {
                         GetComponent<MonsterAnimationAndSound>().MonsterSpottedStab();
+                        hasSpotted = true;
                     }
                     musicalStabResetTimeCounter = musicalStabResetTime;
                 }
