@@ -2,15 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ElectricalGate : MonoBehaviour, IInteractable
+public class ElectricalGate : MonoBehaviour
 {
     public bool isLocked = true;
+    Animator anim;
 
-    public void Interact() 
+    private void Start()
+    {
+        anim = GetComponent<Animator>();
+    }
+
+    public void Interactation() 
     {
         if (!isLocked)
         {
-            Goal();
+            anim.Play("Open");
         }
         else 
         {
