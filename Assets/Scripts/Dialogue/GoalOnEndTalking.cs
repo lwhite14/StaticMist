@@ -12,7 +12,7 @@ public class GoalOnEndTalking : MonoBehaviour
         {
             Destroy(monster);
         }
-        Instantiate(gameCompleteUIPanel, GameObject.Find("WinLoseConditionTarget").transform);
+        Instantiate(gameCompleteUIPanel, GameObject.Find("WinLoseConditionTarget").transform);     
         if (FindObjectOfType<Viewmodel>() != null)
         {
             Destroy(FindObjectOfType<Viewmodel>().gameObject);
@@ -28,6 +28,8 @@ public class GoalOnEndTalking : MonoBehaviour
         }
         DialogueTrigger.StopAllDialogue();
         InventoryUI.canUse = false;
+
+        AnalyticsFunctions.LevelCompleted(GameManager.instance.level);
 
         GameInformation.instance.Items = new List<IItem>();
         foreach (IItem item in FindObjectOfType<PlayerInventory>().inventory.GetAllItems())
