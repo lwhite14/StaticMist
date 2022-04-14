@@ -97,11 +97,16 @@ public class DialogueManager : MonoBehaviour
         if (dialogueTrigger != null)
         {
             dialogueTrigger.SetIsTriggered(false);
+            if (dialogueTrigger.GetComponent<GoalOnEndTalking>() != null) 
+            {
+                dialogueTrigger.GetComponent<GoalOnEndTalking>().Goal();
+            }
         }
         if (isTalkingNPC) 
         {
             isTalkingNPC = false;
         }
+        dialogueTrigger = null;
     }
     // Ends the dialogue.
 

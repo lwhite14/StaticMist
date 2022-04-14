@@ -21,7 +21,7 @@ public class GameManager : MonoBehaviour
     public bool isLastLevel = false;
     public string levelException;
 
-    GameObject crosshair;
+    public GameObject crosshair { get; set; }
 
     void Awake()
     {
@@ -200,8 +200,7 @@ public class GameManager : MonoBehaviour
                 GameInformation.instance.Items.Add(item);
             }
         }
-        GameInformation.instance.Health = FindObjectOfType<Health>().GetHealth();
-        
+        GameInformation.instance.Health = FindObjectOfType<Health>().GetHealth(); 
     }
 
     void GameInformationSetUp()
