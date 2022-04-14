@@ -23,10 +23,7 @@ public class InteractableKey : MonoBehaviour, IInteractable
             TutorialDialogue();
             if (Application.isPlaying)
             {
-                if (!Application.isEditor)
-                {
-                    SendDataToAnalytics();
-                }
+                AnalyticsFunctions.ItemPickUp("Key");
                 Destroy(gameObject);
             }
         }
@@ -47,23 +44,6 @@ public class InteractableKey : MonoBehaviour, IInteractable
         {
             DialogueTrigger.StopAllDialogue();
             GetComponent<DialogueTrigger>().StartPopUp();
-        }
-    }
-
-    void SendDataToAnalytics() 
-    {
-        if (InitServices.isRecording)
-        {
-            Dictionary<string, object> parameters = new Dictionary<string, object>()
-            {
-                { "itemType", "Key" },
-            };
-            Events.CustomData("ItemPickUp", parameters);
-            Events.Flush();
-        }
-        else
-        {
-            Debug.Log("Sending Event: 'ItemPickUp' with: itemType = " + "Key");
         }
     }
 }

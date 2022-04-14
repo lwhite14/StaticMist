@@ -27,10 +27,7 @@ public class MedKit : MonoBehaviour, IItem
             Instantiate(healSound);
             FindObjectOfType<InventoryUI>().ResetSelection();
 
-            if (!Application.isEditor)
-            {
-                SendDataToAnalytics();
-            }
+            AnalyticsFunctions.ItemUtilise("MedKit");
         }
     }
 
@@ -65,22 +62,5 @@ public class MedKit : MonoBehaviour, IItem
     public string GetDescription()
     {
         return description;
-    }
-
-    void SendDataToAnalytics() 
-    {
-        if (InitServices.isRecording)
-        {
-            Dictionary<string, object> parameters = new Dictionary<string, object>()
-            {
-                { "itemType", "MedKit" },
-            };
-            Events.CustomData("ItemUtilise", parameters);
-            Events.Flush();
-        }
-        else
-        {
-            Debug.Log("Sending Event: 'ItemUtilise' with: itemType = " + "MedKit");
-        }
     }
 }

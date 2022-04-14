@@ -27,10 +27,7 @@ public class Bandage : MonoBehaviour, IItem
             Instantiate(healSound);
             FindObjectOfType<InventoryUI>().ResetSelection();
 
-            if (!Application.isEditor)
-            {
-                SendDataToAnalytics();
-            }
+            AnalyticsFunctions.ItemUtilise("Bandage");
         }
     }
 
@@ -65,22 +62,5 @@ public class Bandage : MonoBehaviour, IItem
     public string GetDescription()
     {
         return description;
-    }
-
-    void SendDataToAnalytics()
-    {
-        if (InitServices.isRecording)
-        {
-            Dictionary<string, object> parameters = new Dictionary<string, object>()
-            {
-                { "itemType", "Bandage" },
-            };
-            Events.CustomData("ItemUtilise", parameters);
-            Events.Flush();
-        }
-        else
-        {
-            Debug.Log("Sending Event: 'ItemUtilise' with: itemType = " + "MedKit");
-        }
     }
 }

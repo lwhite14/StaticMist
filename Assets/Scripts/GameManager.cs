@@ -190,7 +190,7 @@ public class GameManager : MonoBehaviour
         DialogueTrigger.StopAllDialogue();
         InventoryUI.canUse = false;
 
-        SendDataToAnalytics();
+        AnalyticsFunctions.LevelCompleted(level);
 
         GameInformation.instance.Items = new List<IItem>();
         foreach (IItem item in FindObjectOfType<PlayerInventory>().inventory.GetAllItems())
@@ -238,23 +238,6 @@ public class GameManager : MonoBehaviour
         if (Cursor.visible == true)
         {
             Cursor.visible = false;
-        }
-    }
-
-    void SendDataToAnalytics() 
-    {
-        if (InitServices.isRecording)
-        {
-            Dictionary<string, object> parameters = new Dictionary<string, object>()
-            {
-                { "userLevel", level }
-            };
-            Events.CustomData("LevelCompleted", parameters);
-            Events.Flush();
-        }
-        else
-        {
-            Debug.Log("Sending Event: 'LevelCompleted' with: Level = " + level.ToString());
         }
     }
 }

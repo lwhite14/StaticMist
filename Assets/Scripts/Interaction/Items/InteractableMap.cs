@@ -21,10 +21,7 @@ public class InteractableMap : MonoBehaviour, IInteractable
             PickUpSound();
             if (Application.isPlaying)
             {
-                if (!Application.isEditor)
-                {
-                    SendDataToAnalytics();
-                }
+                AnalyticsFunctions.ItemPickUp("Map");
                 Destroy(gameObject);
             }
         }
@@ -37,22 +34,5 @@ public class InteractableMap : MonoBehaviour, IInteractable
     void PickUpSound()
     {
         Instantiate(pickUpSound, transform.position, Quaternion.identity);
-    }
-
-    void SendDataToAnalytics()
-    {
-        if (InitServices.isRecording)
-        {
-            Dictionary<string, object> parameters = new Dictionary<string, object>()
-            {
-                { "itemType", "Map" },
-            };
-            Events.CustomData("ItemPickUp", parameters);
-            Events.Flush();
-        }
-        else
-        {
-            Debug.Log("Sending Event: 'ItemPickUp' with: itemType = " + "Map");
-        }
     }
 }

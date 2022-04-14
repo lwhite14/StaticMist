@@ -39,7 +39,7 @@ public class ElectricalBox : MonoBehaviour
         if (key.code == lockOneCode)
         {
             if (Application.isPlaying)
-                key.SendDataToAnalytics();
+                AnalyticsFunctions.ItemUtilise("Key");
             FindObjectOfType<PlayerInventory>().inventory.RemoveItem(key);
             FindObjectOfType<PlayerInventory>().RefreshUI();
             if (Application.isPlaying)
@@ -52,7 +52,7 @@ public class ElectricalBox : MonoBehaviour
         else if (key.code == lockTwoCode) 
         {
             if (Application.isPlaying)
-                key.SendDataToAnalytics();
+                AnalyticsFunctions.ItemUtilise("Key");
             FindObjectOfType<PlayerInventory>().inventory.RemoveItem(key);
             FindObjectOfType<PlayerInventory>().RefreshUI();
             if (Application.isPlaying)

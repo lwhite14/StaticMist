@@ -17,10 +17,7 @@ public class InteractableBandage : MonoBehaviour, IInteractable
             PickUpSound();
             if (Application.isPlaying)
             {
-                if (!Application.isEditor)
-                {
-                    SendDataToAnalytics();
-                }
+                AnalyticsFunctions.ItemPickUp("Bandage");
                 Destroy(gameObject);
             }
         }
@@ -33,22 +30,5 @@ public class InteractableBandage : MonoBehaviour, IInteractable
     void PickUpSound()
     {
         Instantiate(pickUpSound, transform.position, Quaternion.identity);
-    }
-
-    void SendDataToAnalytics()
-    {
-        if (InitServices.isRecording)
-        {
-            Dictionary<string, object> parameters = new Dictionary<string, object>()
-            {
-                { "itemType", "Bandage" },
-            };
-            Events.CustomData("ItemPickUp", parameters);
-            Events.Flush();
-        }
-        else
-        {
-            Debug.Log("Sending Event: 'ItemPickUp' with: itemType = " + "Bandage");
-        }
     }
 }

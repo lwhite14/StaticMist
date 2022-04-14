@@ -17,10 +17,7 @@ public class InteractableCandle : MonoBehaviour, IInteractable
             PickUpSound();
             if (Application.isPlaying)
             {
-                if (!Application.isEditor)
-                {
-                    SendDataToAnalytics();
-                }
+                AnalyticsFunctions.ItemPickUp("Candle");
                 Destroy(gameObject);
             }
         }
@@ -33,22 +30,5 @@ public class InteractableCandle : MonoBehaviour, IInteractable
     void PickUpSound()
     {
         Instantiate(pickUpSound, transform.position, Quaternion.identity);
-    }
-
-    void SendDataToAnalytics()
-    {
-        if (InitServices.isRecording)
-        {
-            Dictionary<string, object> parameters = new Dictionary<string, object>()
-            {
-                { "itemType", "Candle" },
-            };
-            Events.CustomData("ItemPickUp", parameters);
-            Events.Flush();
-        }
-        else
-        {
-            Debug.Log("Sending Event: 'ItemPickUp' with: itemType = " + "Flashlight");
-        }
     }
 }

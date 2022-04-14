@@ -77,8 +77,8 @@ public class Gate : MonoBehaviour
     {
         if (key.code == unlockCode)
         {
-            if (Application.isPlaying)  
-                key.SendDataToAnalytics();       
+            if (Application.isPlaying)
+                AnalyticsFunctions.ItemUtilise("Key");     
             FindObjectOfType<PlayerInventory>().inventory.RemoveItem(key);
             FindObjectOfType<PlayerInventory>().RefreshUI();
             if (Application.isPlaying)

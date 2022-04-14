@@ -7,11 +7,9 @@ using UnityEngine;
 
 class InitServices : MonoBehaviour
 {
-    public static bool isRecording = true;
-
     async void Awake()
     {
-        if (isRecording)
+        if (!Application.isEditor)
         {
             try
             {
