@@ -34,7 +34,7 @@ public class Candle : MonoBehaviour, IItem
             FindObjectOfType<CoroutineHelper>().HelperStartExamining("IT WOULD BE BETTER IF I COULD SEE...");
 
             RemoveBlockers();
-            SendDataToAnalytics();
+            AnalyticsFunctions.ItemUtilise("Candle");
         }
         else
         {
@@ -83,23 +83,6 @@ public class Candle : MonoBehaviour, IItem
         {
             DialogueTrigger.StopAllDialogue();
             GameObject.Find("NeedLightBlocker").transform.GetChild(0).gameObject.SetActive(false);
-        }
-    }
-
-    void SendDataToAnalytics()
-    {
-        if (InitServices.isRecording)
-        {
-            Dictionary<string, object> parameters = new Dictionary<string, object>()
-            {
-                { "itemType", "Candle" },
-            };
-            Events.CustomData("ItemUtilise", parameters);
-            Events.Flush();
-        }
-        else
-        {
-            Debug.Log("Sending Event: 'ItemUtilise' with: itemType = " + "Flashlight");
         }
     }
 }

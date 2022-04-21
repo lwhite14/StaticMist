@@ -35,7 +35,7 @@ public class PlayerSprinting : MonoBehaviour
     PlayerCrouching playerCrouching;
     Footsteps footsteps;
 
-    bool inputPressed = false;
+    bool inputPressed = false; 
     bool isRunning = false;
     bool runCounterDepleted = false;
     float runningMeterCounter;
@@ -53,7 +53,7 @@ public class PlayerSprinting : MonoBehaviour
         playerMovement.ChangeBob(walkBobAmount, walkBobSpeed);
         runningMeterCounter = runningMeter;
         runSlider.SetMaxValue(runningMeter);
-        fatiguedCooldownCounter = fatiguedCooldown;
+        fatiguedCooldownCounter = fatiguedCooldown; 
     }
     void Update()
     {
@@ -183,6 +183,11 @@ public class PlayerSprinting : MonoBehaviour
     public void SprintInput(bool newInputPressed) 
     {
         inputPressed = newInputPressed;
+    }
+
+    public bool GetInputPressed() 
+    {
+        return inputPressed;
     }
 
 }

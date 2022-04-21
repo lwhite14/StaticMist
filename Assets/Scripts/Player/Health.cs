@@ -77,7 +77,7 @@ public class Health : MonoBehaviour
     void Die(string monsterType) 
     {
         // At this point the player has died, and so I send an event to Unity Analytics.
-        SendDataToAnalytics(monsterType);
+        AnalyticsFunctions.Died(monsterType, GameManager.instance.level);
         DeathSound();
         PlayDeathFlash();
         GameManager.instance.OnDeath();
@@ -107,23 +107,5 @@ public class Health : MonoBehaviour
     public float GetMaxHealth()
     {
         return maxHealth;
-    }
-
-    void SendDataToAnalytics(string monsterType) 
-    {
-        if (InitServices.isRecording)
-        {
-            Dictionary<string, object> parameters = new Dictionary<string, object>()
-            {
-                { "Monster", monsterType },
-                { "userLevel", FindObjectOfType<GameManager>().level }
-            };
-            Events.CustomData("Died", parameters);
-            Events.Flush();
-        }
-        else
-        {
-            Debug.Log("Sending Event: 'Died' with: Monster = " + monsterType + ", and userLevel = " + FindObjectOfType<GameManager>().level.ToString());
-        }
     }
 }

@@ -30,7 +30,10 @@ public class ItemSlot : MonoBehaviour
 
     public void Select() 
     {
-        inventoryUI.SetViewedItem(currentItem);  
+        if (currentItem != null)
+        {
+            inventoryUI.SetViewedItem(currentItem);
+        }
     }
 
 

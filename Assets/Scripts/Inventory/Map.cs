@@ -17,7 +17,7 @@ public class Map : MonoBehaviour, IItem
     {
         FindObjectOfType<InventoryUI>().ViewMap(map);
 
-        SendDataToAnalytics();
+        AnalyticsFunctions.ItemUtilise("Map");
     }
 
     public void Examine()
@@ -51,22 +51,5 @@ public class Map : MonoBehaviour, IItem
     public string GetDescription()
     {
         return description;
-    }
-
-    void SendDataToAnalytics()
-    {
-        if (InitServices.isRecording)
-        {
-            Dictionary<string, object> parameters = new Dictionary<string, object>()
-            {
-                { "itemType", "Map" },
-            };
-            Events.CustomData("ItemUtilise", parameters);
-            Events.Flush();
-        }
-        else
-        {
-            Debug.Log("Sending Event: 'ItemUtilise' with: itemType = " + "Map");
-        }
     }
 }

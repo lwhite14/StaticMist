@@ -12,7 +12,7 @@ public class InteractableKey : MonoBehaviour, IInteractable
     public DialogueTrigger tutorialTrigger;
     public DialogueTrigger tooManyItemsTrigger;
 
-    public void Interact() 
+    public void Interact()
     {
         Key tempKey = Instantiate(key);
         tempKey.code = code;
@@ -21,8 +21,11 @@ public class InteractableKey : MonoBehaviour, IInteractable
         {
             PickUpSound();
             TutorialDialogue();
-            SendDataToAnalytics();
-            Destroy(gameObject);
+            if (Application.isPlaying)
+            {
+                AnalyticsFunctions.ItemPickUp("Key");
+                Destroy(gameObject);
+            }
         }
         else
         {
@@ -41,23 +44,6 @@ public class InteractableKey : MonoBehaviour, IInteractable
         {
             DialogueTrigger.StopAllDialogue();
             GetComponent<DialogueTrigger>().StartPopUp();
-        }
-    }
-
-    void SendDataToAnalytics() 
-    {
-        if (InitServices.isRecording)
-        {
-            Dictionary<string, object> parameters = new Dictionary<string, object>()
-            {
-                { "itemType", "Key" },
-            };
-            Events.CustomData("ItemPickUp", parameters);
-            Events.Flush();
-        }
-        else
-        {
-            Debug.Log("Sending Event: 'ItemPickUp' with: itemType = " + "Key");
         }
     }
 }

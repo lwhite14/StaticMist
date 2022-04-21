@@ -751,7 +751,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: 5d13ca83f0b6dd24b9b65f5d75c9ea43, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
-  m_ApplyRootMotion: 1
+  m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
@@ -2245,6 +2245,7 @@ GameObject:
   - component: {fileID: 5639088436617630339}
   - component: {fileID: 5639088436617630348}
   - component: {fileID: 956115862157314354}
+  - component: {fileID: 6307086075531049209}
   m_Layer: 0
   m_Name: NPCO
   m_TagString: NPC
@@ -2294,11 +2295,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dialogue:
-    name: JOHNNY
+    name: DUKE
     sentences:
-    - HELLO!
-    - I AM THE NEW AND IMPROVED NPC!
-    - YOU MAY CALL ME JOHNNY.
+    - ... ZARA?
+    - IS THAT YOU?
+    - OUCH! MY LEG HURTS SO BAD...
+    - LET'S GET OUT OF HERE...
+  popUpTime: 7.5
 --- !u!114 &5639088436617630348
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2326,3 +2329,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogueTrigger: {fileID: 5639088436617630339}
   anim: {fileID: 1709086242344011299}
+--- !u!114 &6307086075531049209
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5639088436617630350}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4847b91b47d73542bea4f4286cb9ad0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameCompleteUIPanel: {fileID: 0}

@@ -4,6 +4,7 @@ using Unity.Services.Analytics;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
+using System;
 
 public class GameManager : MonoBehaviour
 {
@@ -20,7 +21,7 @@ public class GameManager : MonoBehaviour
     public bool isLastLevel = false;
     public string levelException;
 
-    GameObject crosshair;
+    public GameObject crosshair { get; set; }
 
     void Awake()
     {
@@ -74,7 +75,18 @@ public class GameManager : MonoBehaviour
 
     public void LoadFirstLevel() 
     {
-        StatePanel.instance.NextLevel();
+        StatePanel.instance.LoadTextCrawl();
+    }
+
+    public void LoadTextCrawl()
+    {
+        FindObjectOfType<SettingsMenu>().SaveSettings();
+        if (FindObjectOfType<ControlsHandler>() != null)
+        {
+            FindObjectOfType<ControlsHandler>().DeallocateEvents();
+        }
+        LoadSceneData.sceneToLoad = "TextCrawl";
+        SceneManager.LoadScene("Loading");
     }
 
     public void ReturnToMenu() 
@@ -106,6 +118,18 @@ public class GameManager : MonoBehaviour
             LoadSceneData.sceneToLoad = levelException;
             SceneManager.LoadScene("Loading");
         }
+    }
+    public void NextLevel()
+    {
+        FindObjectOfType<SettingsMenu>().SaveSettings();
+        if (FindObjectOfType<ControlsHandler>() != null)
+        {
+            FindObjectOfType<ControlsHandler>().DeallocateEvents();
+        }
+        int nextLevel = level + 1;
+        string nextLevelName = "Level" + nextLevel;
+        LoadSceneData.sceneToLoad = nextLevelName;
+        SceneManager.LoadScene("Loading");
     }
 
     public void OnDeath()
@@ -166,7 +190,7 @@ public class GameManager : MonoBehaviour
         DialogueTrigger.StopAllDialogue();
         InventoryUI.canUse = false;
 
-        SendDataToAnalytics();
+        AnalyticsFunctions.LevelCompleted(level);
 
         GameInformation.instance.Items = new List<IItem>();
         foreach (IItem item in FindObjectOfType<PlayerInventory>().inventory.GetAllItems())
@@ -176,21 +200,7 @@ public class GameManager : MonoBehaviour
                 GameInformation.instance.Items.Add(item);
             }
         }
-        GameInformation.instance.Health = FindObjectOfType<Health>().GetHealth();
-        
-    }
-
-    public void NextLevel()
-    {
-        FindObjectOfType<SettingsMenu>().SaveSettings();
-        if (FindObjectOfType<ControlsHandler>() != null)
-        {
-            FindObjectOfType<ControlsHandler>().DeallocateEvents();
-        }
-        int nextLevel = level + 1;
-        string nextLevelName = "Level" + nextLevel;
-        LoadSceneData.sceneToLoad = nextLevelName;
-        SceneManager.LoadScene("Loading");
+        GameInformation.instance.Health = FindObjectOfType<Health>().GetHealth(); 
     }
 
     void GameInformationSetUp()
@@ -228,23 +238,6 @@ public class GameManager : MonoBehaviour
         if (Cursor.visible == true)
         {
             Cursor.visible = false;
-        }
-    }
-
-    void SendDataToAnalytics() 
-    {
-        if (InitServices.isRecording)
-        {
-            Dictionary<string, object> parameters = new Dictionary<string, object>()
-            {
-                { "userLevel", level }
-            };
-            Events.CustomData("LevelCompleted", parameters);
-            Events.Flush();
-        }
-        else
-        {
-            Debug.Log("Sending Event: 'LevelCompleted' with: Level = " + level.ToString());
         }
     }
 }

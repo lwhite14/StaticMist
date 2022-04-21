@@ -319,7 +319,7 @@ public class MonsterPathfinding : MonoBehaviour
     public IEnumerator ReturnToPatrol() 
     {
         // At this point the player has evaded the monster, and so I send an event to Unity Analytics.
-        SendDataToAnalytics();
+        AnalyticsFunctions.PlayerEscape(this);
 
         navMeshAgent.isStopped = false;
         navMeshAgent.destination = startWaypoint;
@@ -378,23 +378,6 @@ public class MonsterPathfinding : MonoBehaviour
     public void SetPathfindingOn(bool isOn) 
     {
         navMeshAgent.isStopped = isOn;
-    }
-
-    void SendDataToAnalytics() 
-    {
-        if (InitServices.isRecording)
-        {
-            Dictionary<string, object> parameters = new Dictionary<string, object>()
-            {
-                { "Monster", GetComponent<MonsterPathfinding>().monsterInformation.GetName() }
-            };
-            Events.CustomData("PlayerEscape", parameters);
-            Events.Flush();
-        }
-        else
-        {
-            Debug.Log("Sending Event: 'PlayerEscape' with: Monster = " + GetComponent<MonsterPathfinding>().monsterInformation.GetName());
-        }
     }
 
     void OnDrawGizmos()

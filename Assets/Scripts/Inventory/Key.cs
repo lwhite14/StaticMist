@@ -29,11 +29,10 @@ public class Key : MonoBehaviour, IItem
             {
                 hitObject.GetComponent<IKeyInteractable>().KeyUse(this);
             }
-            catch (Exception ex)
+            catch
             {
                 FindObjectOfType<CoroutineHelper>().HelperStopCoroutine();
                 FindObjectOfType<CoroutineHelper>().HelperStartExamining("THERE IS NO DOOR FOR ME TO UNLOCK...");
-                Debug.Log(ex);
             }
         }
         else 
@@ -74,22 +73,5 @@ public class Key : MonoBehaviour, IItem
     public string GetDescription() 
     {
         return description;
-    }
-
-    public void SendDataToAnalytics() 
-    {
-        if (InitServices.isRecording)
-        {
-            Dictionary<string, object> parameters = new Dictionary<string, object>()
-            {
-                { "itemType", "Key" },
-            };
-            Events.CustomData("ItemUtilise", parameters);
-            Events.Flush();
-        }
-        else
-        {
-            Debug.Log("Sending Event: 'ItemUtilise' with: itemType = " + "Key");
-        }
     }
 }

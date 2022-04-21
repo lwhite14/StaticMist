@@ -33,7 +33,7 @@ public class Bat : MonoBehaviour, IItem
             FindObjectOfType<CoroutineHelper>().HelperStopCoroutine();
             FindObjectOfType<CoroutineHelper>().HelperStartExamining("MIGHT BE SAFER TO KEEP THIS OUT...");
 
-            SendDataToAnalytics();
+            AnalyticsFunctions.ItemUtilise("Bat");
         }
         else
         {
@@ -75,22 +75,5 @@ public class Bat : MonoBehaviour, IItem
     public string GetDescription()
     {
         return description;
-    }
-
-    void SendDataToAnalytics()
-    {
-        if (InitServices.isRecording)
-        {
-            Dictionary<string, object> parameters = new Dictionary<string, object>()
-            {
-                { "itemType", "Bat" },
-            };
-            Events.CustomData("ItemUtilise", parameters);
-            Events.Flush();
-        }
-        else
-        {
-            Debug.Log("Sending Event: 'ItemUtilise' with: itemType = " + "Bat");
-        }
     }
 }

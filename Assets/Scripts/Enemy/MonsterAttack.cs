@@ -15,7 +15,7 @@ public class MonsterAttack : MonoBehaviour
     MonsterPathfinding monsterPathfinding;
     MonsterAnimationAndSound monsterAnimationSound;
 
-    bool standingAttack = false;
+    public bool standingAttack { get; private set; } = false;
 
     void Start()
     {

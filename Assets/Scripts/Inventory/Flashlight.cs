@@ -33,7 +33,7 @@ public class Flashlight : MonoBehaviour, IItem
             FindObjectOfType<CoroutineHelper>().HelperStopCoroutine();
             FindObjectOfType<CoroutineHelper>().HelperStartExamining("IT WOULD BE BETTER IF I COULD SEE...");
 
-            SendDataToAnalytics();
+            AnalyticsFunctions.ItemUtilise("Flashlight");
         }
         else 
         {
@@ -74,22 +74,5 @@ public class Flashlight : MonoBehaviour, IItem
     public string GetDescription()
     {
         return description;
-    }
-
-    void SendDataToAnalytics() 
-    {
-        if (InitServices.isRecording)
-        {
-            Dictionary<string, object> parameters = new Dictionary<string, object>()
-            {
-                { "itemType", "Flashlight" },
-            };
-            Events.CustomData("ItemUtilise", parameters);
-            Events.Flush();
-        }
-        else
-        {
-            Debug.Log("Sending Event: 'ItemUtilise' with: itemType = " + "Flashlight");
-        }
     }
 }

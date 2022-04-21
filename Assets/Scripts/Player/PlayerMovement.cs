@@ -29,7 +29,7 @@ public class PlayerMovement : MonoBehaviour
     Vector3 move;
     bool previousGrounded = true;
     bool hasLanded = false;
-    bool canMove = false;
+    public bool cantMove { get; private set; } = false;
     float speed;
     float bobSpeed;
     float bobAmount;
@@ -102,7 +102,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (CheckGrounded())
         {
-            if (hasLanded || canMove)
+            if (hasLanded || cantMove)
             {
                 x = 0;
                 z = 0;
@@ -151,7 +151,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Jump() 
     {
-        if (CheckGrounded() && (CheckMovingForward() || CheckNotMoving()) && !hasLanded && !playerCrouching.GetIsCrouching() && !canMove)
+        if (CheckGrounded() && (CheckMovingForward() || CheckNotMoving()) && !hasLanded && !playerCrouching.GetIsCrouching() && !cantMove)
         {
             velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
         }
@@ -208,7 +208,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (CheckGrounded())
         {
-            if (!hasLanded && !canMove)
+            if (!hasLanded && !cantMove)
             {
                 x = Mathf.Lerp(x, newX, movementSliding * Time.deltaTime);
                 if (x < newX)
@@ -233,7 +233,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (CheckGrounded())
         {
-            if (!hasLanded && !canMove)
+            if (!hasLanded && !cantMove)
             {
                 z = Mathf.Lerp(z, newZ, movementSliding * Time.deltaTime);
                 if (z < newZ)
@@ -276,7 +276,12 @@ public class PlayerMovement : MonoBehaviour
 
     public void SetIsInMenu(bool newIsInMenu) 
     {
-        canMove = newIsInMenu;
+        cantMove = newIsInMenu;
+    }
+
+    public float GetSpeed() 
+    {
+        return speed;
     }
 
     public void WarpToPosition(Vector3 newPosition)

@@ -60,7 +60,7 @@ public class PlayerCrouching : MonoBehaviour
 
     public void CrouchInput() 
     {
-        if (!isDead && !InventoryUI.isOn)
+        if (!isDead && !InventoryUI.isOn && !GetComponent<PlayerMovement>().cantMove)
         {
             if (isCrouching && !CheckHeadClear())
             {

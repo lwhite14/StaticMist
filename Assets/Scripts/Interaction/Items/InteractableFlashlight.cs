@@ -15,8 +15,11 @@ public class InteractableFlashlight : MonoBehaviour, IInteractable
         if (success)
         {
             PickUpSound();
-            SendDataToAnalytics();
-            Destroy(gameObject);
+            if (Application.isPlaying)
+            {
+                AnalyticsFunctions.ItemPickUp("Flashlight");
+                Destroy(gameObject);
+            }
         }
         else
         {
@@ -27,22 +30,5 @@ public class InteractableFlashlight : MonoBehaviour, IInteractable
     void PickUpSound()
     {
         Instantiate(pickUpSound, transform.position, Quaternion.identity);
-    }
-
-    void SendDataToAnalytics()
-    {
-        if (InitServices.isRecording)
-        {
-            Dictionary<string, object> parameters = new Dictionary<string, object>()
-            {
-                { "itemType", "Flashlight" },
-            };
-            Events.CustomData("ItemPickUp", parameters);
-            Events.Flush();
-        }
-        else
-        {
-            Debug.Log("Sending Event: 'ItemPickUp' with: itemType = " + "Flashlight");
-        }
     }
 }

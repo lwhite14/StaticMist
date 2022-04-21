@@ -9,7 +9,7 @@ public class Gate : MonoBehaviour
     public string unlockCode = "";
     public GameObject squeekyDoorSound, unlockedSound;
     Animator anim;
-    bool isOpen = false;
+    public bool isOpen { get; private set; } = false;
     bool canInteract = true;
 
     void Start() 
@@ -56,8 +56,11 @@ public class Gate : MonoBehaviour
 
     void Open(bool newOpen) 
     {
-        anim.SetBool("isOpen", newOpen);
-        Instantiate(squeekyDoorSound, transform.GetChild(0).position, Quaternion.identity);
+        if (Application.isPlaying)
+        {
+            anim.SetBool("isOpen", newOpen);
+            Instantiate(squeekyDoorSound, transform.GetChild(0).position, Quaternion.identity);
+        }
     }
 
     void SetCanInteract(bool newCanInteract) 
@@ -74,17 +77,22 @@ public class Gate : MonoBehaviour
     {
         if (key.code == unlockCode)
         {
-            key.SendDataToAnalytics();
+            if (Application.isPlaying)
+                AnalyticsFunctions.ItemUtilise("Key");     
             FindObjectOfType<PlayerInventory>().inventory.RemoveItem(key);
             FindObjectOfType<PlayerInventory>().RefreshUI();
-            FindObjectOfType<InventoryUI>().SetViewedItem(null);
+            if (Application.isPlaying)
+                FindObjectOfType<InventoryUI>().SetViewedItem(null);
             Instantiate(unlockedSound, transform.GetChild(0).position, Quaternion.identity);
             isLocked = false;          
         }
         else 
         {
-            FindObjectOfType<CoroutineHelper>().HelperStopCoroutine();
-            FindObjectOfType<CoroutineHelper>().HelperStartExamining("THIS IS THE WRONG KEY...");
+            if (Application.isPlaying)
+            {
+                FindObjectOfType<CoroutineHelper>().HelperStopCoroutine();
+                FindObjectOfType<CoroutineHelper>().HelperStartExamining("THIS IS THE WRONG KEY...");
+            }
         }
     }
 

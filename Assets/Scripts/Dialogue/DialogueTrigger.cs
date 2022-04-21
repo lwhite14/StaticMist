@@ -6,6 +6,7 @@ using UnityEngine.Events;
 public class DialogueTrigger : MonoBehaviour
 {
     public Dialogue dialogue;
+    public float popUpTime = 7.5f;
     bool isTriggered = false;
 
     public void TriggerDialogue()
@@ -28,7 +29,7 @@ public class DialogueTrigger : MonoBehaviour
     IEnumerator PopUp() 
     {
         TriggerDialogue();
-        yield return new WaitForSeconds(7.5f);
+        yield return new WaitForSeconds(popUpTime);
         TriggerNextSentence();
         yield return null;
     }
