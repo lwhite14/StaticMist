@@ -1834,14 +1834,6 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 216876494, guid: eb3ceeab0e239d343baa1e6a15ad20f3, type: 3}
-      propertyPath: m_Interactable
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 623735690, guid: eb3ceeab0e239d343baa1e6a15ad20f3, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 486394533479750220, guid: eb3ceeab0e239d343baa1e6a15ad20f3, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -1930,13 +1922,25 @@ PrefabInstance:
       propertyPath: m_Name
       value: SettingsMenu
       objectReference: {fileID: 0}
+    - target: {fileID: 1644482647237568191, guid: eb3ceeab0e239d343baa1e6a15ad20f3, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -330
+      objectReference: {fileID: 0}
+    - target: {fileID: 2233099917113981967, guid: eb3ceeab0e239d343baa1e6a15ad20f3, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2233099917113981967, guid: eb3ceeab0e239d343baa1e6a15ad20f3, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2233099917113981967, guid: eb3ceeab0e239d343baa1e6a15ad20f3, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3422405329050076738, guid: eb3ceeab0e239d343baa1e6a15ad20f3, type: 3}
       propertyPath: m_Text
       value: BACK
-      objectReference: {fileID: 0}
-    - target: {fileID: 3932308705166234788, guid: eb3ceeab0e239d343baa1e6a15ad20f3, type: 3}
-      propertyPath: m_MaxValue
-      value: 0.8
       objectReference: {fileID: 0}
     - target: {fileID: 4257703267960921893, guid: eb3ceeab0e239d343baa1e6a15ad20f3, type: 3}
       propertyPath: m_AnchorMax.y
@@ -1950,8 +1954,12 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5462311985506704555, guid: eb3ceeab0e239d343baa1e6a15ad20f3, type: 3}
-      propertyPath: m_IsActive
+    - target: {fileID: 4895129175713248177, guid: eb3ceeab0e239d343baa1e6a15ad20f3, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4895129175713248177, guid: eb3ceeab0e239d343baa1e6a15ad20f3, type: 3}
+      propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6708898565198689370, guid: eb3ceeab0e239d343baa1e6a15ad20f3, type: 3}
@@ -1966,9 +1974,9 @@ PrefabInstance:
       propertyPath: m_AnchorMin.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7044655224307003809, guid: eb3ceeab0e239d343baa1e6a15ad20f3, type: 3}
-      propertyPath: m_Name
-      value: BrightnesSlider
+    - target: {fileID: 6789328863263338418, guid: eb3ceeab0e239d343baa1e6a15ad20f3, type: 3}
+      propertyPath: m_Navigation.m_SelectOnDown
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 7371918043203808241, guid: eb3ceeab0e239d343baa1e6a15ad20f3, type: 3}
       propertyPath: m_AnchorMax.x
@@ -3332,6 +3340,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee4f15ed0f0fae54d87557f3410a9ff5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  selectedSound: {fileID: 3994529949202296459, guid: 343ab6ede7f9d2c4781236931f48961b, type: 3}
 --- !u!1001 &445418581
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3548,6 +3557,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee4f15ed0f0fae54d87557f3410a9ff5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  selectedSound: {fileID: 3994529949202296459, guid: 343ab6ede7f9d2c4781236931f48961b, type: 3}
 --- !u!1001 &474419973
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6694,6 +6704,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee4f15ed0f0fae54d87557f3410a9ff5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  selectedSound: {fileID: 3994529949202296459, guid: 343ab6ede7f9d2c4781236931f48961b, type: 3}
 --- !u!43 &1002963521
 Mesh:
   m_ObjectHideFlags: 0

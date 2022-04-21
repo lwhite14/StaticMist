@@ -6,7 +6,7 @@ using UnityEngine.EventSystems;
 public class OnSelectUI : MonoBehaviour, ISelectHandler
 {
     public static int counter { get; private set; } = 0;
-    public GameObject selectedSound { set; get; }
+    public GameObject selectedSound;
 
     public void OnSelect(BaseEventData eventData)
     {

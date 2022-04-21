@@ -28,14 +28,16 @@ public class SettingsMenu : MonoBehaviour
     public GameObject unpauseSound;
     public AudioMixer audioMixer;
     public Dropdown resolutionDropdown;
-    public Slider volumeSlider;
+    public Slider musicVolumeSlider;
+    public Slider sfxVolumeSlider;
     public Slider brightnessSlider;
     public Slider sensitivitySlider;
     public Toggle fullscreenToggle;
     public Toggle tvEffectToggle;
 
     public float sensitivty { get; private set; } = 5.0f;
-    public float currentVolume { get; private set; } = 0.0f;
+    public float currentMusicVolume { get; private set; } = 0.0f;
+    public float currentSFXVolume { get; private set; } = 0.0f;
     public float currentBrightness { get; private set; } = 0.0f;
     public bool isTVEffect { get; private set; } = true;
     public bool isFullscreen { get; private set; } = true;
@@ -166,10 +168,16 @@ public class SettingsMenu : MonoBehaviour
         }
     } // Used for the beggining of scenes, when the game needs to be unpaused and time is at 1.
 
-    public void SetVolume(float volume)
+    public void SetMusicVolume(float volume)
     {
-        currentVolume = volume;
-        audioMixer.SetFloat("Volume", volume);
+        currentMusicVolume = volume;
+        audioMixer.SetFloat("MusicVolume", volume);
+    }
+
+    public void SetSFXVolume(float volume) 
+    {
+        currentSFXVolume = volume;
+        audioMixer.SetFloat("SoundEffectsVolume", volume);
     }
 
     public void SetBrightness(float brightness) 
@@ -250,7 +258,8 @@ public class SettingsMenu : MonoBehaviour
     {
         PlayerPrefs.SetInt("ResolutionPreference", resolutionDropdown.value);
         PlayerPrefs.SetInt("FullscreenPreference", Convert.ToInt32(Screen.fullScreen));
-        PlayerPrefs.SetFloat("VolumePreference", currentVolume);
+        PlayerPrefs.SetFloat("MusicVolumePreference", currentMusicVolume);
+        PlayerPrefs.SetFloat("SFXVolumePreference", currentSFXVolume);
         PlayerPrefs.SetFloat("BrightnessPreference", currentBrightness);
         PlayerPrefs.SetFloat("SensitivityPreference", sensitivty);
         PlayerPrefs.SetInt("TVEffectPreference", Convert.ToInt32(isTVEffect));
@@ -290,9 +299,15 @@ public class SettingsMenu : MonoBehaviour
             tvEffectToggle.isOn = isTVEffect;
         }
 
-        volumeSlider.value = PlayerPrefs.GetFloat("VolumePreference");
+        musicVolumeSlider.value = PlayerPrefs.GetFloat("MusicVolumePreference");
+        sfxVolumeSlider.value = PlayerPrefs.GetFloat("SFXVolumePreference");
         brightnessSlider.value = PlayerPrefs.GetFloat("BrightnessPreference");   
         sensitivitySlider.value = PlayerPrefs.GetFloat("SensitivityPreference");
+
+        SetMusicVolume(musicVolumeSlider.value);
+        SetSFXVolume(sfxVolumeSlider.value);
+        SetBrightness(brightnessSlider.value);
+        SetSensitivty(sensitivitySlider.value);
 
         foreach (RebindUI rebinding in rebindings)
         {

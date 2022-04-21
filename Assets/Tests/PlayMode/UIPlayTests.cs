@@ -30,11 +30,20 @@ public class UIPlayTests
 
 
     [UnityTest]
-    public IEnumerator SettingsMenuSetVolume()
+    public IEnumerator SettingsMenuSetMusicVolume()
     {
         SettingsMenu settingsMenu = GameObject.FindObjectOfType<SettingsMenu>();
-        settingsMenu.SetVolume(0.7f);
-        Assert.That(settingsMenu.currentVolume == 0.7f);
+        settingsMenu.SetMusicVolume(0.7f);
+        Assert.That(settingsMenu.currentMusicVolume == 0.7f);
+        yield return null;
+    }
+
+    [UnityTest]
+    public IEnumerator SettingsMenuSetSFXVolume()
+    {
+        SettingsMenu settingsMenu = GameObject.FindObjectOfType<SettingsMenu>();
+        settingsMenu.SetSFXVolume(0.7f);
+        Assert.That(settingsMenu.currentSFXVolume == 0.7f);
         yield return null;
     }
 
