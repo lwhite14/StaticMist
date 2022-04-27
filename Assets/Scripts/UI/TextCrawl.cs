@@ -8,10 +8,10 @@ public class TextCrawl : MonoBehaviour
 {
     public float crawlSpeed;
     public RectTransform rectTransform;
+    public GameObject continueButton;
 
     void Start()
     {
-        EventSystem.current.SetSelectedGameObject(GameObject.Find("ContinueButton"));
         StartCoroutine(BottomToMiddle());
     }
 
@@ -27,6 +27,7 @@ public class TextCrawl : MonoBehaviour
 
     IEnumerator StayInMiddle()
     {
+        EventSystem.current.SetSelectedGameObject(continueButton);
         rectTransform.localPosition = new Vector3(0, 0, 0);
         yield return null;
     }
