@@ -556,6 +556,7 @@ GameObject:
   - component: {fileID: 1744544065}
   - component: {fileID: 1744544064}
   - component: {fileID: 1744544063}
+  - component: {fileID: 1744544067}
   m_Layer: 5
   m_Name: ContinueButton
   m_TagString: Untagged
@@ -617,10 +618,10 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 0}
     m_HighlightedColor: {r: 1, g: 1, b: 1, a: 0}
-    m_PressedColor: {r: 0.5019608, g: 0.5019608, b: 0.5019608, a: 1}
-    m_SelectedColor: {r: 0.5019608, g: 0.5019608, b: 0.5019608, a: 1}
+    m_PressedColor: {r: 1, g: 1, b: 1, a: 0}
+    m_SelectedColor: {r: 1, g: 1, b: 1, a: 0}
     m_DisabledColor: {r: 1, g: 0.5019608, b: 0.5019608, a: 0.2}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -690,6 +691,25 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1744544061}
   m_CullTransparentMesh: 1
+--- !u!95 &1744544067
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1744544061}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: b2868e6b43fb40b4c8dd158a0916c325, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1001 &1821485372
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1218,7 +1238,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3699101e4e316d4db62d68431af96a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  crawlSpeed: 200
+  crawlSpeed: 250
   rectTransform: {fileID: 2048115365}
   continueButton: {fileID: 1744544061}
 --- !u!1 &2111373507

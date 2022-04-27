@@ -9,9 +9,12 @@ public class TextCrawl : MonoBehaviour
     public float crawlSpeed;
     public RectTransform rectTransform;
     public GameObject continueButton;
+    Animator anim;
 
     void Start()
     {
+        anim = GameObject.Find("ContinueButton").GetComponent<Animator>();
+
         StartCoroutine(BottomToMiddle());
     }
 
@@ -28,6 +31,7 @@ public class TextCrawl : MonoBehaviour
     IEnumerator StayInMiddle()
     {
         EventSystem.current.SetSelectedGameObject(continueButton);
+        anim.SetBool("isAppear", true);
         rectTransform.localPosition = new Vector3(0, 0, 0);
         yield return null;
     }
@@ -50,6 +54,7 @@ public class TextCrawl : MonoBehaviour
 
     public void ContinueCrawl() 
     {
+        anim.SetBool("isAppear", false);
         StopAllCoroutines();
         StartCoroutine(ToTop());
     }
