@@ -4,12 +4,18 @@ using UnityEngine;
 
 public class ElectricalGate : MonoBehaviour
 {
-    public bool isLocked = true;
+    public bool isLocked { get; set; } = true;
     Animator anim;
+
+    public GameObject lockedPopUp;
+    public GameObject openedPopUp;
 
     private void Start()
     {
         anim = GetComponent<Animator>();
+
+        lockedPopUp.SetActive(true);
+        openedPopUp.SetActive(false);
     }
 
     public void Interactation() 
@@ -17,6 +23,7 @@ public class ElectricalGate : MonoBehaviour
         if (!isLocked)
         {
             anim.Play("Open");
+            openedPopUp.GetComponent<ItemPopUp>().promptOn = false;
         }
         else 
         {
@@ -28,5 +35,12 @@ public class ElectricalGate : MonoBehaviour
     void Goal()
     {
         GameManager.instance.Goal();
+    }
+
+    public void Unlock() 
+    {
+        isLocked = false;
+        lockedPopUp.SetActive(false);
+        openedPopUp.SetActive(true);
     }
 }

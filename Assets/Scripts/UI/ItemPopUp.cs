@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class ItemPopUp : MonoBehaviour
 {
+    public bool promptOn { get; set; } = true;
     public float appearDistance = 6.0f;
     Transform playerTransform;
     Camera mainCamera;
@@ -22,7 +23,7 @@ public class ItemPopUp : MonoBehaviour
 
     void Update()
     {
-        if (promptsOn)
+        if (promptsOn && promptOn)
         {
             transform.LookAt(transform.position + mainCamera.transform.rotation * Vector3.forward, mainCamera.transform.rotation * Vector3.up);
             float distanceBetween = Vector3.Distance(playerTransform.position, gameObject.transform.position);

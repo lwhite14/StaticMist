@@ -15,6 +15,15 @@ public class ElectricalBox : MonoBehaviour
     bool slotTwoLocked = true;
     bool canInteract = true;
 
+    public GameObject lockedPopUp;
+    public GameObject openedPopUp;
+
+    void Start() 
+    {
+        lockedPopUp.SetActive(true);
+        openedPopUp.SetActive(false);
+    }
+
     public void Interact() 
     {
         if (canInteract)
@@ -67,11 +76,17 @@ public class ElectricalBox : MonoBehaviour
             FindObjectOfType<CoroutineHelper>().HelperStopCoroutine();
             FindObjectOfType<CoroutineHelper>().HelperStartExamining("THIS IS THE WRONG KEY...");
         }
+
+        if (!slotOneLocked && !slotTwoLocked) 
+        {
+            lockedPopUp.SetActive(false);
+            openedPopUp.SetActive(true);
+        }
     }
 
     void TurnOn() 
     {
-        gate.isLocked = false;
+        gate.Unlock();
         Instantiate(powerUpSound, transform.GetChild(0).position, Quaternion.identity);
     }
 
