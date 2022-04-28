@@ -9,6 +9,8 @@ public class ItemPopUp : MonoBehaviour
     Camera mainCamera;
     Animator anim;
 
+    public static bool promptsOn { get; set; } = true;
+
     void Start()
     {
         playerTransform = GameObject.Find("Player").transform;
@@ -20,13 +22,20 @@ public class ItemPopUp : MonoBehaviour
 
     void Update()
     {
-        transform.LookAt(transform.position + mainCamera.transform.rotation * Vector3.forward, mainCamera.transform.rotation * Vector3.up);
-        float distanceBetween = Vector3.Distance(playerTransform.position, gameObject.transform.position);
-        if (distanceBetween <= appearDistance)
+        if (promptsOn)
         {
-            anim.SetBool("isAppear", true);
+            transform.LookAt(transform.position + mainCamera.transform.rotation * Vector3.forward, mainCamera.transform.rotation * Vector3.up);
+            float distanceBetween = Vector3.Distance(playerTransform.position, gameObject.transform.position);
+            if (distanceBetween <= appearDistance)
+            {
+                anim.SetBool("isAppear", true);
+            }
+            else if (anim.GetBool("isAppear") && distanceBetween > appearDistance)
+            {
+                anim.SetBool("isAppear", false);
+            }
         }
-        else if (anim.GetBool("isAppear") && distanceBetween > appearDistance) 
+        else 
         {
             anim.SetBool("isAppear", false);
         }

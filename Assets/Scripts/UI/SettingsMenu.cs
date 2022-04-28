@@ -34,12 +34,14 @@ public class SettingsMenu : MonoBehaviour
     public Slider sensitivitySlider;
     public Toggle fullscreenToggle;
     public Toggle tvEffectToggle;
+    public Toggle interactablePromptsToggle;
 
     public float sensitivty { get; private set; } = 5.0f;
     public float currentMusicVolume { get; private set; } = 0.0f;
     public float currentSFXVolume { get; private set; } = 0.0f;
     public float currentBrightness { get; private set; } = 0.0f;
     public bool isTVEffect { get; private set; } = true;
+    public bool interactablePrompts { get; private set; } = true;
     public bool isFullscreen { get; private set; } = true;
     Resolution[] resolutions;
     GameObject crosshair;
@@ -213,6 +215,12 @@ public class SettingsMenu : MonoBehaviour
         FindObjectOfType<PSX>().TurnOnTVUI(isTVEffect);
     }
 
+    public void SetInteractablePrompts(bool newInteractablePrompts)
+    {
+        interactablePrompts = newInteractablePrompts;
+        ItemPopUp.promptsOn = interactablePrompts;
+    }
+
     public void KeyboardBindingsMenu() 
     {
         if (keyboardBindingsMenuToggle.activeSelf)
@@ -263,6 +271,7 @@ public class SettingsMenu : MonoBehaviour
         PlayerPrefs.SetFloat("BrightnessPreference", currentBrightness);
         PlayerPrefs.SetFloat("SensitivityPreference", sensitivty);
         PlayerPrefs.SetInt("TVEffectPreference", Convert.ToInt32(isTVEffect));
+        PlayerPrefs.SetInt("InteractablePrompts", Convert.ToInt32(interactablePrompts));
     }
 
     public void LoadSettings(int currentResolutionIndex)
@@ -297,6 +306,18 @@ public class SettingsMenu : MonoBehaviour
             isTVEffect = true;
             FindObjectOfType<PSX>().TurnOnTVUI(isTVEffect);
             tvEffectToggle.isOn = isTVEffect;
+        }
+        if (PlayerPrefs.HasKey("InteractablePrompts"))
+        {
+            interactablePrompts = Convert.ToBoolean(PlayerPrefs.GetInt("InteractablePrompts"));
+            ItemPopUp.promptsOn = interactablePrompts;
+            interactablePromptsToggle.isOn = interactablePrompts;
+        }
+        else
+        {
+            interactablePrompts = true;
+            ItemPopUp.promptsOn = interactablePrompts;
+            interactablePromptsToggle.isOn = interactablePrompts;
         }
 
         musicVolumeSlider.value = PlayerPrefs.GetFloat("MusicVolumePreference");
