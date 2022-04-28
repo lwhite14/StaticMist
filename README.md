@@ -1,12 +1,12 @@
 # Static Mist
 Static Mist is a horror game with a PS1-esque art-style and aesthetic. Focussing on 'cat and mouse' gameplay that pits a mostly defenseless player against the Monster! Run and hide whilst completing puzzles and challenges to reach the end of the game. Explore many spooky environments, picking up and using various items along the way to avoid monsters and find a way out. Static Mist is a horror game with an emphasis on stealthily avoiding monsters and item management, scares come from the choices the player makes rather than jumpscares.
 
-![v0 8 0ss1](https://user-images.githubusercontent.com/55700734/158731074-e3b6bb3b-b222-4cca-a95f-15e960c39b45.png)
+![v1 0 0ss1](https://user-images.githubusercontent.com/55700734/165863352-bea75445-ab1a-4dc4-bb6f-7d00bc67c4db.png)
 
 ## Getting Started
 You can either play a build or download the source code and view within the Unity Editor. Builds are available from itch.io and from the releases tab this GitHub repository. 
 
-![v0 8 0ss2](https://user-images.githubusercontent.com/55700734/158731025-8fafca96-6b76-45bf-8286-70373596423d.png)
+![v1 0 0ss3](https://user-images.githubusercontent.com/55700734/165863322-d1b40e44-e61e-4f0b-95e9-d1aad95eedae.png)
 
 ## Source Code
 Follow the below instructions to get started with the Static Mist source code:
