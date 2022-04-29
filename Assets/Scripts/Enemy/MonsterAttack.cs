@@ -77,5 +77,4 @@ public class MonsterAttack : MonoBehaviour
     {
         Instantiate(stabSound, transform.position, Quaternion.identity);
     }
-
 }

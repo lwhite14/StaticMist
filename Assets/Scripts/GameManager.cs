@@ -47,6 +47,7 @@ public class GameManager : MonoBehaviour
         {
             crosshair = GameObject.Find("Crosshair");
         }
+        InventoryUI.isOn = false;
         SettingsMenu.SetStartSettings();
     }
 
