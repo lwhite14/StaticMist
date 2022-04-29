@@ -78,6 +78,7 @@ public class SettingsMenu : MonoBehaviour
     {
         if (paused)
         {
+            SaveSettings();
             Resume();
         }
         else
@@ -259,10 +260,11 @@ public class SettingsMenu : MonoBehaviour
 
     public void ExitGame()
     {
+        SaveSettings();
         StatePanel.instance.ReturnToMenu();
     }
 
-    public void SaveSettings()
+    void SaveSettings()
     {
         PlayerPrefs.SetInt("ResolutionPreference", resolutionDropdown.value);
         PlayerPrefs.SetInt("FullscreenPreference", Convert.ToInt32(Screen.fullScreen));

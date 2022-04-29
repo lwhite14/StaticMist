@@ -69,7 +69,6 @@ public class GameManager : MonoBehaviour
 
     public void ExitGame()
     {
-        FindObjectOfType<SettingsMenu>().SaveSettings();
         Application.Quit();
     }
 
@@ -80,7 +79,6 @@ public class GameManager : MonoBehaviour
 
     public void LoadTextCrawl()
     {
-        FindObjectOfType<SettingsMenu>().SaveSettings();
         if (FindObjectOfType<ControlsHandler>() != null)
         {
             FindObjectOfType<ControlsHandler>().DeallocateEvents();
@@ -91,7 +89,6 @@ public class GameManager : MonoBehaviour
 
     public void ReturnToMenu() 
     {
-        FindObjectOfType<SettingsMenu>().SaveSettings();
         if (FindObjectOfType<ControlsHandler>() != null)
         {
             FindObjectOfType<ControlsHandler>().DeallocateEvents();
@@ -102,7 +99,6 @@ public class GameManager : MonoBehaviour
 
     public void RestartLevel()    
     {
-        FindObjectOfType<SettingsMenu>().SaveSettings();
         if (FindObjectOfType<ControlsHandler>() != null)
         {
             FindObjectOfType<ControlsHandler>().DeallocateEvents();
@@ -121,7 +117,6 @@ public class GameManager : MonoBehaviour
     }
     public void NextLevel()
     {
-        FindObjectOfType<SettingsMenu>().SaveSettings();
         if (FindObjectOfType<ControlsHandler>() != null)
         {
             FindObjectOfType<ControlsHandler>().DeallocateEvents();
