@@ -39,7 +39,7 @@ public class SettingsMenu : MonoBehaviour
     public float sensitivty { get; private set; } = 5.0f;
     public float currentMusicVolume { get; private set; } = 0.0f;
     public float currentSFXVolume { get; private set; } = 0.0f;
-    public float currentBrightness { get; private set; } = 0.0f;
+    public float currentBrightness { get; private set; } = 0.08f;
     public bool isTVEffect { get; private set; } = true;
     public bool interactablePrompts { get; private set; } = true;
     public bool isFullscreen { get; private set; } = true;
@@ -284,6 +284,7 @@ public class SettingsMenu : MonoBehaviour
         {
             resolutionDropdown.value = currentResolutionIndex;
         }
+
         if (PlayerPrefs.HasKey("FullscreenPreference"))
         {
             Screen.fullScreen = Convert.ToBoolean(PlayerPrefs.GetInt("FullscreenPreference"));
@@ -295,6 +296,7 @@ public class SettingsMenu : MonoBehaviour
             Screen.fullScreen = true;
             fullscreenToggle.isOn = Screen.fullScreen;
         }
+
         if (PlayerPrefs.HasKey("TVEffectPreference"))
         {
             isTVEffect = Convert.ToBoolean(PlayerPrefs.GetInt("TVEffectPreference"));
@@ -307,6 +309,7 @@ public class SettingsMenu : MonoBehaviour
             FindObjectOfType<PSX>().TurnOnTVUI(isTVEffect);
             tvEffectToggle.isOn = isTVEffect;
         }
+
         if (PlayerPrefs.HasKey("InteractablePrompts"))
         {
             interactablePrompts = Convert.ToBoolean(PlayerPrefs.GetInt("InteractablePrompts"));
