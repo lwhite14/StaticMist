@@ -12,9 +12,21 @@ public class Gate : MonoBehaviour
     public bool isOpen { get; private set; } = false;
     bool canInteract = true;
 
+    public GameObject lockedPopUp;
+    public GameObject openedPopUp;
+
     void Start() 
     {
         anim = GetComponentInChildren<Animator>();
+
+        if (isLocked)
+        {
+            lockedPopUp.SetActive(true);
+        }
+        else 
+        {
+            openedPopUp.SetActive(true);
+        }
     }
 
     public void Interact() 
@@ -84,7 +96,10 @@ public class Gate : MonoBehaviour
             if (Application.isPlaying)
                 FindObjectOfType<InventoryUI>().SetViewedItem(null);
             Instantiate(unlockedSound, transform.GetChild(0).position, Quaternion.identity);
-            isLocked = false;          
+            isLocked = false;
+
+            lockedPopUp.SetActive(false);
+            openedPopUp.SetActive(true);
         }
         else 
         {

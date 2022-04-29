@@ -31,7 +31,7 @@ public class MonsterAttack : MonoBehaviour
 
     void CheckStrikingDistance() 
     {
-        if (monsterPathfinding.CanSeePlayer()) 
+        if (monsterPathfinding.CanSeePlayerClose()) 
         {
             if (!navMeshAgent.pathPending)
             {
@@ -77,5 +77,4 @@ public class MonsterAttack : MonoBehaviour
     {
         Instantiate(stabSound, transform.position, Quaternion.identity);
     }
-
 }

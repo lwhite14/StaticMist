@@ -2,21 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class TextCrawl : MonoBehaviour
 {
     public float crawlSpeed;
-    public float middleTime;
     public RectTransform rectTransform;
+    public GameObject continueButton;
+    Animator anim;
 
     void Start()
     {
-        StartCoroutine(BottomToMiddle());
-    }
+        anim = GameObject.Find("ContinueButton").GetComponent<Animator>();
 
-    void Update() 
-    {
-        //rectTransform.localPosition += Vector3.down * Time.deltaTime;
+        StartCoroutine(BottomToMiddle());
     }
 
     IEnumerator BottomToMiddle() 
@@ -31,12 +30,13 @@ public class TextCrawl : MonoBehaviour
 
     IEnumerator StayInMiddle()
     {
+        EventSystem.current.SetSelectedGameObject(continueButton);
+        anim.SetBool("isAppear", true);
         rectTransform.localPosition = new Vector3(0, 0, 0);
-        yield return new WaitForSeconds(middleTime);
-        yield return StartCoroutine(MiddleToTop());
+        yield return null;
     }
 
-    IEnumerator MiddleToTop()
+    IEnumerator ToTop()
     {
         while (rectTransform.localPosition.y < 1000)
         {
@@ -50,5 +50,12 @@ public class TextCrawl : MonoBehaviour
     void Continue() 
     {
         StatePanel.instance.NextLevel();
+    }
+
+    public void ContinueCrawl() 
+    {
+        anim.SetBool("isAppear", false);
+        StopAllCoroutines();
+        StartCoroutine(ToTop());
     }
 }

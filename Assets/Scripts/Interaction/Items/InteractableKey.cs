@@ -43,7 +43,8 @@ public class InteractableKey : MonoBehaviour, IInteractable
         if (isTutorial)
         {
             DialogueTrigger.StopAllDialogue();
-            GetComponent<DialogueTrigger>().StartPopUp();
+            DialogueTrigger tempTrigger = Instantiate(tutorialTrigger, transform.position, Quaternion.identity);
+            tempTrigger.StartPopUp();
         }
     }
 }
