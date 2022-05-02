@@ -114,6 +114,9 @@ public class InventoryUI : MonoBehaviour
             FindObjectOfType<CoroutineHelper>().HelperStopCoroutine();
             descriptionText.text = "";
             examineButton.interactable = true;
+
+            EventSystem.current.SetSelectedGameObject(null);
+            EventSystem.current.SetSelectedGameObject(GameObject.Find("ExamineButton"));
         }
         else 
         {
