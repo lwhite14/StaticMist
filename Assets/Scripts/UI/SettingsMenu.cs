@@ -109,18 +109,20 @@ public class SettingsMenu : MonoBehaviour
 
         if (GameManager.instance.level != 0)
         {
-            Time.timeScale = 1.0f;
-            //Cursor.lockState = CursorLockMode.Locked;
-            //FindObjectOfType<InventoryUI>().SetCanUse(true);
             InventoryUI.canUse = true;
-            MusicManager.instance.Unpause();
             Instantiate(unpauseSound, new Vector3(0, 0, 0), Quaternion.identity);
             if (!InventoryUI.isOn)
             {
+                Time.timeScale = 1.0f;
+                MusicManager.instance.Unpause();
                 if (crosshair != null)
                 {
                     crosshair.SetActive(true);
                 }
+            }
+            else 
+            {
+                MusicManager.instance.UnpauseWithoutMonsters();
             }
         }
         else 
@@ -141,8 +143,6 @@ public class SettingsMenu : MonoBehaviour
         if (GameManager.instance.level != 0)
         {
             Time.timeScale = 0.0f;
-            //Cursor.lockState = CursorLockMode.None;
-            //FindObjectOfType<InventoryUI>().SetCanUse(false);
             InventoryUI.canUse = false;
             MusicManager.instance.Pause();
             Instantiate(pauseSound, new Vector3(0, 0, 0), Quaternion.identity);

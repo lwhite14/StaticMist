@@ -28,7 +28,8 @@ public class Bat : MonoBehaviour, IItem
         GameObject viewmodel = GameObject.FindWithTag("Viewmodel");
         if (viewmodel == null)
         {
-            Instantiate(bat, GameObject.Find("ViewmodelTargetPos").transform.position, Quaternion.identity);
+            GameObject tempViewmodelObj = Instantiate(bat, GameObject.Find("ViewmodelTargetPos").transform.position, Quaternion.identity) as GameObject;
+            tempViewmodelObj.transform.rotation = GameObject.Find("Main Camera").transform.rotation;
             Instantiate(rummageSound, transform.position, Quaternion.identity);
             FindObjectOfType<CoroutineHelper>().HelperStopCoroutine();
             FindObjectOfType<CoroutineHelper>().HelperStartExamining("MIGHT BE SAFER TO KEEP THIS OUT...");

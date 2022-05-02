@@ -106,6 +106,18 @@ public class MusicManager : MonoBehaviour
         }
     }
 
+    public void PauseMonsterNoises()
+    {
+        AudioSource[] sources = FindObjectsOfType<AudioSource>();
+        foreach (AudioSource source in sources)
+        {
+            if (source.tag == "Monster")
+            {
+                source.Pause();
+            }
+        }
+    }
+
     public void Unpause() 
     {
         AudioSource[] sources = FindObjectsOfType<AudioSource>();
@@ -115,4 +127,15 @@ public class MusicManager : MonoBehaviour
         }
     }
 
+    public void UnpauseWithoutMonsters() 
+    {
+        AudioSource[] sources = FindObjectsOfType<AudioSource>();
+        foreach (AudioSource source in sources)
+        {
+            if (source.tag != "Monster")
+            {
+                source.UnPause();
+            }
+        }
+    }
 }
