@@ -28,7 +28,8 @@ public class Flashlight : MonoBehaviour, IItem
         GameObject viewmodel = GameObject.FindWithTag("Viewmodel");
         if (viewmodel == null)
         {
-            Instantiate(flashlight, GameObject.Find("ViewmodelTargetPos").transform.position, Quaternion.identity);
+            GameObject tempViewmodelObj = Instantiate(flashlight, GameObject.Find("ViewmodelTargetPos").transform.position, Quaternion.identity) as GameObject;
+            tempViewmodelObj.transform.rotation = GameObject.Find("Main Camera").transform.rotation;
             Instantiate(rummageSound, transform.position, Quaternion.identity);
             FindObjectOfType<CoroutineHelper>().HelperStopCoroutine();
             FindObjectOfType<CoroutineHelper>().HelperStartExamining("IT WOULD BE BETTER IF I COULD SEE...");

@@ -39,6 +39,9 @@ public class InventoryUI : MonoBehaviour
                 FindObjectOfType<PlayerMovement>().SetIsInMenu(true);
                 isOn = true;
 
+                Time.timeScale = 0.0f;
+                MusicManager.instance.PauseMonsterNoises();
+
                 foreach (Selectable selectableUI in Selectable.allSelectablesArray)
                 {
                     if (selectableUI.gameObject.tag == "Inventory")
@@ -56,6 +59,9 @@ public class InventoryUI : MonoBehaviour
                 FindObjectOfType<MouseLook>().SetIsInMenu(false);
                 FindObjectOfType<PlayerMovement>().SetIsInMenu(false);
                 isOn = false;
+
+                Time.timeScale = 1.0f;
+                MusicManager.instance.Unpause();
 
                 foreach (Selectable selectableUI in Selectable.allSelectablesArray)
                 {
@@ -108,6 +114,9 @@ public class InventoryUI : MonoBehaviour
             FindObjectOfType<CoroutineHelper>().HelperStopCoroutine();
             descriptionText.text = "";
             examineButton.interactable = true;
+
+            EventSystem.current.SetSelectedGameObject(null);
+            EventSystem.current.SetSelectedGameObject(GameObject.Find("ExamineButton"));
         }
         else 
         {

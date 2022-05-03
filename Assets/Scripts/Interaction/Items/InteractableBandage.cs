@@ -14,6 +14,7 @@ public class InteractableBandage : MonoBehaviour, IInteractable
         FindObjectOfType<PlayerInventory>().Add(bandage, out bool success);
         if (success)
         {
+            DialogueTrigger.StopAllDialogue();
             PickUpSound();
             if (Application.isPlaying)
             {

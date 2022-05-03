@@ -51,12 +51,12 @@ public class SettingsMenu : MonoBehaviour
         resolutionDropdown.ClearOptions();
         List<string> options = new List<string>();
         int currentRefreshRate = Screen.currentResolution.refreshRate;
-        resolutions = Screen.resolutions.Where(resolution => resolution.refreshRate == currentRefreshRate).ToArray();
+        resolutions = Screen.resolutions.Where(resolution => resolution.refreshRate < currentRefreshRate + 2 && resolution.refreshRate > currentRefreshRate - 2).ToArray();
         int currentResolutionIndex = 0;
 
         for (int i = 0; i < resolutions.Length; i++)
         {
-            string option = resolutions[i].width + " x " + resolutions[i].height;
+            string option = resolutions[i].width + " x " + resolutions[i].height + ": " + resolutions[i].refreshRate + "HZ";
             options.Add(option);
             if (resolutions[i].width == Screen.currentResolution.width && resolutions[i].height == Screen.currentResolution.height)
             {
@@ -109,18 +109,20 @@ public class SettingsMenu : MonoBehaviour
 
         if (GameManager.instance.level != 0)
         {
-            Time.timeScale = 1.0f;
-            //Cursor.lockState = CursorLockMode.Locked;
-            //FindObjectOfType<InventoryUI>().SetCanUse(true);
             InventoryUI.canUse = true;
-            MusicManager.instance.Unpause();
             Instantiate(unpauseSound, new Vector3(0, 0, 0), Quaternion.identity);
             if (!InventoryUI.isOn)
             {
+                Time.timeScale = 1.0f;
+                MusicManager.instance.Unpause();
                 if (crosshair != null)
                 {
                     crosshair.SetActive(true);
                 }
+            }
+            else 
+            {
+                MusicManager.instance.UnpauseWithoutMonsters();
             }
         }
         else 
@@ -141,8 +143,6 @@ public class SettingsMenu : MonoBehaviour
         if (GameManager.instance.level != 0)
         {
             Time.timeScale = 0.0f;
-            //Cursor.lockState = CursorLockMode.None;
-            //FindObjectOfType<InventoryUI>().SetCanUse(false);
             InventoryUI.canUse = false;
             MusicManager.instance.Pause();
             Instantiate(pauseSound, new Vector3(0, 0, 0), Quaternion.identity);

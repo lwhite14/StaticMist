@@ -30,9 +30,9 @@ public class CoroutineHelper : MonoBehaviour
         foreach (char letter in sentence.ToCharArray())
         {
             examineText.text += letter;
-            yield return new WaitForSeconds(0.05f);
+            yield return new WaitForSecondsRealtime(0.05f);
         }
-        yield return new WaitForSeconds(2.0f);
+        yield return new WaitForSecondsRealtime(2.0f);
         examineText.text = "";
 
         runningRoutine = false;

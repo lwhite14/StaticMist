@@ -12,12 +12,19 @@ public static class AnalyticsFunctions
     {
         if (!Application.isEditor)
         {
-            Dictionary<string, object> parameters = new Dictionary<string, object>()
+            try
             {
-                { "Monster", monsterPathfinding.monsterInformation.GetName() }
-            };
-            Events.CustomData("PlayerEscape", parameters);
-            Events.Flush();
+                Dictionary<string, object> parameters = new Dictionary<string, object>()
+                {
+                    { "Monster", monsterPathfinding.monsterInformation.GetName() }
+                };
+                Events.CustomData("PlayerEscape", parameters);
+                Events.Flush();
+            }
+            catch (ConsentCheckException e)
+            {
+                Debug.LogError(e);
+            }
         }
         else
         {
@@ -29,12 +36,19 @@ public static class AnalyticsFunctions
     {
         if (!Application.isEditor)
         {
-            Dictionary<string, object> parameters = new Dictionary<string, object>()
+            try
             {
-                { "userLevel", level }
-            };
-            Events.CustomData("LevelCompleted", parameters);
-            Events.Flush();
+                Dictionary<string, object> parameters = new Dictionary<string, object>()
+                {
+                    { "userLevel", level }
+                };
+                Events.CustomData("LevelCompleted", parameters);
+                Events.Flush();
+            }
+            catch (ConsentCheckException e)
+            {
+                Debug.LogError(e);
+            }
         }
         else
         {
@@ -46,13 +60,20 @@ public static class AnalyticsFunctions
     {
         if (!Application.isEditor)
         {
-            Dictionary<string, object> parameters = new Dictionary<string, object>()
+            try
             {
-                { "Monster", monsterType },
-                { "userLevel", level }
-            };
-            Events.CustomData("Died", parameters);
-            Events.Flush();
+                Dictionary<string, object> parameters = new Dictionary<string, object>()
+                {
+                    { "Monster", monsterType },
+                    { "userLevel", level }
+                };
+                Events.CustomData("Died", parameters);
+                Events.Flush();
+            }
+            catch (ConsentCheckException e)
+            {
+                Debug.LogError(e);
+            }
         }
         else
         {
@@ -64,12 +85,19 @@ public static class AnalyticsFunctions
     {
         if (!Application.isEditor)
         {
-            Dictionary<string, object> parameters = new Dictionary<string, object>()
+            try
             {
-                { "itemType", itemType },
-            };
-            Events.CustomData("ItemPickUp", parameters);
-            Events.Flush();
+                Dictionary<string, object> parameters = new Dictionary<string, object>()
+                {
+                    { "itemType", itemType },
+                };
+                Events.CustomData("ItemPickUp", parameters);
+                Events.Flush();
+            }
+            catch (ConsentCheckException e)
+            {
+                Debug.LogError(e);
+            }
         }
         else
         {
@@ -81,12 +109,19 @@ public static class AnalyticsFunctions
     {
         if (!Application.isEditor)
         {
-            Dictionary<string, object> parameters = new Dictionary<string, object>()
+            try
             {
-                { "itemType", itemType },
-            };
-            Events.CustomData("ItemUtilise", parameters);
-            Events.Flush();
+                Dictionary<string, object> parameters = new Dictionary<string, object>()
+                {
+                    { "itemType", itemType },
+                };
+                Events.CustomData("ItemUtilise", parameters);
+                Events.Flush();
+            }
+            catch (ConsentCheckException e)
+            {
+                Debug.LogError(e);
+            }
         }
         else
         {
