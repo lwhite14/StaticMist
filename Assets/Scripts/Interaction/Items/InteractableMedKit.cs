@@ -14,6 +14,7 @@ public class InteractableMedKit : MonoBehaviour, IInteractable
         FindObjectOfType<PlayerInventory>().Add(item, out bool success);
         if (success)
         {
+            DialogueTrigger.StopAllDialogue();
             PickUpSound();
             if (Application.isPlaying)
             {
