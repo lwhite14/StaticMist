@@ -14,10 +14,10 @@ public class InteractableBat : MonoBehaviour, IInteractable
         FindObjectOfType<PlayerInventory>().Add(bat, out bool success);
         if (success)
         {
-            DialogueTrigger.StopAllDialogue();
             PickUpSound();
             if (Application.isPlaying)
             {
+                DialogueTrigger.StopAllDialogue();
                 AnalyticsFunctions.ItemPickUp("Bat");
                 Destroy(gameObject);
             }

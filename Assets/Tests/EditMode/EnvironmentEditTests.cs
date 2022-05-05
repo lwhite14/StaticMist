@@ -22,6 +22,8 @@ public class EnvironmentEditTests
         GameObject gateObj = new GameObject();
         gate = gateObj.AddComponent<Gate>();
         gate.unlockedSound = new GameObject();
+        gate.lockedPopUp = new GameObject();
+        gate.openedPopUp = new GameObject();
         GameObject gateChild = new GameObject();
         gateChild.transform.parent = gateObj.transform;
 
@@ -29,7 +31,11 @@ public class EnvironmentEditTests
         electricalBox = electricalBoxObj.AddComponent<ElectricalBox>();
         electricalBox.unlockedSound = new GameObject();
         electricalBox.powerUpSound = new GameObject();
+        electricalBox.lockedPopUp = new GameObject();
+        electricalBox.openedPopUp = new GameObject();
         electricalBox.gate = new GameObject().AddComponent<ElectricalGate>();
+        electricalBox.gate.lockedPopUp = new GameObject();
+        electricalBox.gate.openedPopUp = new GameObject();
         electricalBoxObj.AddComponent<DialogueTrigger>();
         GameObject electricalBoxChild = new GameObject();
         electricalBoxChild.transform.parent = electricalBoxObj.transform;

@@ -18,10 +18,10 @@ public class InteractableMap : MonoBehaviour, IInteractable
         FindObjectOfType<PlayerInventory>().Add(tempMap, out bool success);
         if (success)
         {
-            DialogueTrigger.StopAllDialogue();
             PickUpSound();
             if (Application.isPlaying)
             {
+                DialogueTrigger.StopAllDialogue();
                 AnalyticsFunctions.ItemPickUp("Map");
                 Destroy(gameObject);
             }

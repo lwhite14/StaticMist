@@ -19,11 +19,11 @@ public class InteractableKey : MonoBehaviour, IInteractable
         FindObjectOfType<PlayerInventory>().Add(tempKey, out bool success);
         if (success)
         {
-            DialogueTrigger.StopAllDialogue();
             PickUpSound();
             TutorialDialogue();
             if (Application.isPlaying)
             {
+                DialogueTrigger.StopAllDialogue();
                 AnalyticsFunctions.ItemPickUp("Key");
                 Destroy(gameObject);
             }

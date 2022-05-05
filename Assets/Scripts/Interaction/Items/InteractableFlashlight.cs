@@ -14,10 +14,10 @@ public class InteractableFlashlight : MonoBehaviour, IInteractable
         FindObjectOfType<PlayerInventory>().Add(flashlight, out bool success);
         if (success)
         {
-            DialogueTrigger.StopAllDialogue();
             PickUpSound();
             if (Application.isPlaying)
             {
+                DialogueTrigger.StopAllDialogue();
                 AnalyticsFunctions.ItemPickUp("Flashlight");
                 Destroy(gameObject);
             }

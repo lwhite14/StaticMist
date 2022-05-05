@@ -14,10 +14,10 @@ public class InteractableCandle : MonoBehaviour, IInteractable
         FindObjectOfType<PlayerInventory>().Add(candle, out bool success);
         if (success)
         {
-            DialogueTrigger.StopAllDialogue();
             PickUpSound();
             if (Application.isPlaying)
             {
+                DialogueTrigger.StopAllDialogue();
                 AnalyticsFunctions.ItemPickUp("Candle");
                 Destroy(gameObject);
             }

@@ -51,7 +51,8 @@ public class UIPlayTests
     public IEnumerator SettingsMenuSetBrightness()
     {
         SettingsMenu settingsMenu = GameObject.FindObjectOfType<SettingsMenu>();
-        Assert.That(settingsMenu.currentBrightness == 0.0f);
+        float currentBrightness = settingsMenu.currentBrightness;
+        Assert.That(settingsMenu.currentBrightness == currentBrightness);
         settingsMenu.SetBrightness(0.7f);
         Assert.That(settingsMenu.currentBrightness == 0.7f);
         yield return null;
