@@ -16,7 +16,7 @@ Follow the below instructions to get started with the Static Mist source code:
  - Open Project in the Unity Editor.
 ## Download
  - [Download Source Code.](https://github.com/lwhite14/StaticMist/archive/master.zip)
- - [Download Build From Itch.io.](https://lwhite14.itch.io/static-mist)
+ - [Download Build From Itch.io.](https://tapir-island.itch.io/static-mist)
  - Or go to the releases tab and download both a build and the source code!
 #
 Made by Luke White!
