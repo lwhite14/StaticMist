@@ -20,13 +20,13 @@ public class InteractableKey : MonoBehaviour, IInteractable
         if (success)
         {
             PickUpSound();
-            TutorialDialogue();
             if (Application.isPlaying)
             {
                 DialogueTrigger.StopAllDialogue();
                 AnalyticsFunctions.ItemPickUp("Key");
                 Destroy(gameObject);
             }
+            TutorialDialogue();
         }
         else
         {
